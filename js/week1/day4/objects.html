@@ -1,2482 +1,2374 @@
-JavaScript Scope
-Scope = Visibility
-Scope determines the accessibility (visibility) of variables.
-
-JavaScript variables have 3 types of scope:
-
-Global scope
-Function scope
-Block scope
-Global Scope
-Variables declared Globally (outside any block or function) have Global Scope.
-
-Global variables can be accessed from anywhere in a JavaScript program.
-
-Variables declared with var, let and const are quite similar when declared outside a block.
-
-They all have Global Scope:
-
-var x = 1;    // Global scope
-
-let y = 2;    // Global scope
-
-const z = 3;  // Global scope
-Example
-A variable declared outside a function, becomes GLOBAL.
-
-let carName = "Volvo";
-// code here can use carName
-
-function myFunction() {
-// code here can also use carName
-}
-Global variables has Global Scope:
-
-All scripts and functions in the same web page can access a variable with global scope.
-
-Function Scope
-All JavaScript functions have their own scope.
-
-Variables defined inside a function are not accessible (visible) from outside the function.
-
-Variables declared with var, let and const are quite similar when declared inside a function.
-
-They all have Function Scope:
-
-function myFunction1() {
-  var carName = "Volvo";  // Function Scope
-}
-
-function myFunction2() {
-  let carName = "Volvo";  // Function Scope
-}
-
-function myFunction3() {
-  const carName = "Volvo";  // Function Scope
-}
-Example
-Variables declared within a JavaScript function, are LOCAL to the function:
-
-// code here can NOT use carName
-
-function myFunction() {
-  let carName = "Volvo";
-  // code here CAN use carName
-}
-
-// code here can NOT use carName
-Local Variables have Function Scope
-They can only be accessed from within the function
-No scripts or functions outside the function can access them
-Variables with the same name can be used outside the function
-Variables with the same name can be used in different functions
-Local variables are created when a function starts
-Local variables are deleted when the function is completed
-Arguments (parameters) work as local variables inside functions
-Block Scope
-Before ES6, JavaScript variables could only have Global Scope or Function Scope.
-
-ES6 introduced two important new JavaScript keywords: let and const.
-
-These two keywords provide Block Scope in JavaScript.
-
-Variables declared with let and const inside a code block are "block-scoped," meaning they are only accessible within that block.
-
-This helps prevent unintended variable overwrites and promotes better code organization:
-
-Example
-{
-  let x = 2;
-}
-// x can NOT be used here
-Variables declared with the var keyword can NOT have block scope.
-
-Variables declared with the var keyword, inside a { } block, can be accessed from outside the block.
-
-Example (Not Recommended)
-{
-  var x = 2;
-}
-// x CAN be used here
-REMOVE ADS
-
-Automatically Global
-If you assign a value to a variable that has not been declared, it will become a GLOBAL variable.
-
-This code example will declare a global variable carName, even if the value is assigned inside a function.
-
-Example
-myFunction();
-
-// code here can use carName
-
-function myFunction() {
-  carName = "Volvo";
-}
-Strict Mode
-All modern browsers support running JavaScript in "Strict Mode".
-
-In "Strict Mode", undeclared variables are not automatically global.
-
-Global Variables in HTML
-With JavaScript, the global scope is the JavaScript environment.
-
-In HTML, the global scope is the window object.
-
-Global variables defined with the var keyword belong to the window object:
-
-Example (Not Recommended)
-var carName = "Volvo";
-// code here can use window.carName
-Global variables defined with the let keyword do not belong to the window object:
-
-Example
-let carName = "Volvo";
-// code here can NOT use window.carName
-Warning
-Do NOT create global variables unless you intend to.
-
-Your global variables (or functions) can overwrite window variables (or functions).
-Any function, including the window object, can overwrite your global variables and functions.
-
-The Lifetime of JavaScript Variables
-The lifetime of a JavaScript variable starts when it is declared.
-
-Function (local) variables are deleted when the function is completed.
-
-In a web browser, global variables are deleted when you close the browser window (or tab).
-
-Exercise
-?
-Consider the following code:
-let x = 5;
-{
-  let x = 3;
-}
-alert(x);
-What will be the alerted result?
-
-
-5
-3
-
-JavaScript Code Blocks
-Curly Braces
-A code block or block statement is a group of statements enclosed within curly braces { }.
-
-Code blocks are important for controlling the flow of execution and defining variable scope within a JavaScript program.
-
-Code Blocks and Statements
-Code blocks allows for multiple statements to be treated as a single unit.
-
-The body of a JavaScript function is always enclosed within a code block:
-
-Example
-function myFunction() {
-  // This is a code block
-}
-
-Code blocks are essential for if statements:
-
-Example
-if (condition) {
-  // This is a code block
-} else {
-  // This is a code block
-}
-
-Code blocks are essential for loop statements:
-
-Example
-for (expression 1; expression 2; expression 3) {
-  // This is a code block
-}
-
-Example
-while (condition) {
-  // This is a code block
-}
-
-REMOVE ADS
-
-Defining Scope
-Variables declared with let and const inside a code block are "block-scoped," meaning they are only accessible within that specific block.
-
-This helps prevent unintended variable overwrites and promotes better code organization:
-
-Example
-{
-  let x = 10;
-  // x is accessible here
-}
-
-// x is not accessible here
-
-Standalone Blocks
-Code blocks can also exist independently without being attached to an if statement, a function or a loop.
-
-This can be used to create a scope for let and const variables.
-
-Example
-{
-  let x = 10;
-  let y = 100;
-  let areal = x * y;
-}
-This example above demonstrates how a standalone block can be used to limit the scope of variables.
-
-Encapsulation
-Variables inside the block are only available in the block.
-
-This prevents "polluting" the global scope, keeps the code clean, and reduces the risk of name collisions.
-
-Temporary Use
-If you only need variables for a calculation, a block lets you declare them, use them, and discard them.
-
-Organized Code
-You can group related variables and statements in their own scope to avoid accidental name conflict without forcing them into a function or an object.
-
-This improves readability and avoids accidental name conflictre-use of variable names outside the block.
-
-JavaScript Hoisting
-Hoisting is JavaScript's default behavior of moving declarations to the top.
-
-JavaScript Declarations are Hoisted
-In JavaScript, a variable can be declared after it has been used.
-
-In other words; a variable can be used before it has been declared.
-
-Example 1 gives the same result as Example 2:
-
-Example 1
-x = 5; // Assign 5 to x
-
-elem = document.getElementById("demo"); // Find an element
-elem.innerHTML = x;                     // Display x in the element
-
-var x; // Declare x
-Example 2
-var x; // Declare x
-x = 5; // Assign 5 to x
-
-elem = document.getElementById("demo"); // Find an element
-elem.innerHTML = x;                     // Display x in the element
-To understand this, you have to understand the term "hoisting".
-
-Hoisting is JavaScript's default behavior of moving all declarations to the top of the current scope (to the top of the current script or the current function).
-
-The let and const Keywords
-Variables defined with let and const are hoisted to the top of the block, but not initialized.
-
-Meaning: The block of code is aware of the variable, but it cannot be used until it has been declared.
-
-Using a let variable before it is declared will result in a ReferenceError.
-
-The variable is in a "temporal dead zone" from the start of the block until it is declared:
-
-Example
-This will result in a ReferenceError:
-carName = "Volvo";
-let carName;
-Using a const variable before it is declared, is a syntax error, so the code will simply not run.
-
-Example
-This code will not run.
-
-carName = "Volvo";
-const carName;
-Read more about let and const in JS Let / Const.
-
-REMOVE ADS
-
-JavaScript Initializations are Not Hoisted
-JavaScript only hoists declarations, not initializations.
-
-Example 1 does not give the same result as Example 2:
-
-Example 1
-var x = 5; // Initialize x
-var y = 7; // Initialize y
-
-elem = document.getElementById("demo"); // Find an element
-elem.innerHTML = x + " " + y;           // Display x and y
-Example 2
-var x = 5; // Initialize x
-
-elem = document.getElementById("demo"); // Find an element
-elem.innerHTML = x + " " + y;           // Display x and y
-
-var y = 7; // Initialize y
-Does it make sense that y is undefined in the last example?
-
-This is because only the declaration (var y), not the initialization (=7) is hoisted to the top.
-
-Because of hoisting, y has been declared before it is used, but because initializations are not hoisted, the value of y is undefined.
-
-Example 2 is the same as writing:
-
-Example
-var x = 5; // Initialize x
-var y;     // Declare y
-
-elem = document.getElementById("demo"); // Find an element
-elem.innerHTML = x + " " + y;           // Display x and y
-
-y = 7;    // Assign 7 to y
-Declare Your Variables At the Top !
-Hoisting is (to many developers) an unknown or overlooked behavior of JavaScript.
-
-If a developer doesn't understand hoisting, programs may contain bugs (errors).
-
-To avoid bugs, always declare all variables at the beginning of every scope.
-
-Since this is how JavaScript interprets the code, it is always a good rule.
-
-JavaScript in strict mode does not allow variables to be used if they are not declared.
-Study "use strict" in the next chapter.
-
-Exercise
-?
-Consider the following code:
-x = 5;
-alert(x);
-var x;
-What will be the alerted result?
-
-
-5
-undefined
-
-JavaScript var let and const
-Difference Between var, let and const
-The primary difference between var, let, and const lies in scoping mechanisms, reassignment rules, and how JavaScript handles them via hoisting.
-
-Scope	Redeclare	Reassign	Hoisted	NOTE
-var	No	Yes	Yes	Yes	Undefined
-let	Yes	No	Yes	Yes	Not initialized
-const	Yes	No	No	Yes	Not initialized
-Variables declared with var are hoisted but initialized with undefined.
-
-Variables declared with let and const are also hoisted, but not initialized.
-
-Using a let or const variable before it is declared will result in a ReferenceError.
-
-The time between the start of the block and the declaration is called the Temporal Dead Zone.
-
-What is Not Good?
-var does not have to be declared.
-
-var is hoisted.
-
-var binds to this.
-
-Modern JavaScript standards recommend avoiding var entirely to minimize unintentional bugs.
-
-Scope Rules
-var is function-scoped:
-If you declare a var variable inside a loop or an if block, it "leaks out" and is accessible anywhere outside the block.
-
-let and const are block-scoped:
-They are confined strictly to the nearest pair of curly braces {} (such as loops, functions, or conditional blocks).
-
-As a rule of thumb, you should use const by default, and only use let when you have to reassign the variable after initialization.
-
-You should avoid using var.
-
-Feature	var	let	const
-Scope	Function or global scope	Block-scope { }	Block-scope { }
-Reassignment	Can be updated	Can be updated	Cannot be updated
-Redeclaration	Can be redeclared	Cannot be redeclared	Cannot be redeclared
-Hoisting	Initialized as undefined	Hoisted, not initialized	Hoisted, not initialized
-What is Good?
-let and const have block scope.
-
-let and const can not be redeclared.
-
-let and const must be declared before use.
-
-let and const does not bind to this.
-
-let and const are not hoisted.
-
-Example
-if (true) {
-  var firstName = "John";
-  let lastName = "Doe";
-}
-
-let text1 = text2 = "unknown";
-
-if (typeof firstName !== "undefined") text1 = firstName;
-if (typeof lastName !== "undefined") text2 = lastName;
-Reassignment vs. Redeclaration
-var allows you to accidentally re-declare the exact same variable name in the same scope, silently overwriting earlier values.
-
-let can be updated/reassigned, but it throws an error if you attempt to re-declare it within the same scope.
-
-const is strictly read-only. It requires an initial value immediately upon declaration and cannot be reassigned later.
-
-Note on const objects:
-You cannot reassign a const variable with a completely new value, you can still change the properties of an object or array declared with const.
-
-Example
-// Create user object
-const user = { name: "Alice" };
-
-// This will work
-user.name = "Bob";
-let text = user.name + " ";
-
-// This will not work
-try {
-  user = { name: "Charlie" };
-  text += user.name;
-} catch(err) {
-  text += err;
-}
-Hoisting and the Temporal Dead Zone (TDZ)
-All variables are hoisted to the top of their scope by the JavaScript engine, but they are treated differently:
-
-var variables are hoisted and automatically assigned a default value of undefined. You can reference them before they are declared in the code without breaking the application.
-
-let and const are hoisted but remain completely uninitialized. The region of code from the start of the block until the line they are declared is called the Temporal Dead Zone. Accessing them here instantly crashes with a ReferenceError.
-
-Best Practice
-Developers should follow these guidelines for modern JavaScript (ES6 - 2015+):
-
-Always use const by default.
-It prevents accidental reassignments and makes your code more predictable.
-
-Only use let when:
-You know its value needs to change later (inside a loop or a mathematical counter).
-
-Never use var.
-Its unpredictable scoping and the redeclaration rules are known to cause bugs.
-
-
-
-JavaScript Use Strict
-The "use strict" Directive
-The "use strict" directive was new in ECMAScript version 5.
-
-It defines that JavaScript code should be executed in "strict mode".
-
-It is not a statement. It is a literal expression, ignored by earlier versions of JavaScript.
-
-The purpose of "use strict" is to indicate that the code should be executed in "strict mode".
-
-With strict mode, you can not, for example, use undeclared variables.
-
-Declaring Strict Mode
-Strict mode is declared by adding "use strict"; to the beginning of a script or a function.
-
-Declared at the beginning of a script, it has global scope (all code in the script will execute in strict mode):
-
-Example
-"use strict";
-x = 3.14;       // This will cause an error because x is not declared
-Example
-"use strict";
-myFunction();
-
-function myFunction() {
-  y = 3.14;   // This will also cause an error because y is not declared
-}
-Declared inside a function, it has local scope (only the code inside the function is in strict mode):
-
-x = 3.14;       // This will not cause an error.
-myFunction();
-
-function myFunction() {
-  "use strict";
-  y = 3.14;   // This will cause an error
-}
-
-REMOVE ADS
-
-The "use strict"; Syntax
-The syntax, for declaring strict mode, was designed to be compatible with older versions of JavaScript.
-
-Compiling a numeric literal (4 + 5;) or a string literal ("John Doe";) in a JavaScript program has no side effects. It simply compiles to a non existing variable and dies.
-
-So "use strict"; only matters to new compilers that "understand" the meaning of it.
-
-Why Strict Mode?
-Strict mode makes it easier to write "secure" JavaScript.
-
-Strict mode changes previously accepted "bad syntax" into real errors.
-
-As an example, in normal JavaScript, mistyping a variable name creates a new global variable. In strict mode, this will throw an error, making it impossible to accidentally create a global variable.
-
-In normal JavaScript, a developer will not receive any error feedback assigning values to non-writable properties.
-
-In strict mode, any assignment to a non-writable property, a getter-only property, a non-existing property, a non-existing variable, or a non-existing object, will throw an error.
-
-Not Allowed in Strict Mode
-Using a variable, without declaring it, is not allowed:
-
-"use strict";
-x = 3.14;                // This will cause an error
-
-Objects are variables too.
-
-Using an object, without declaring it, is not allowed:
-
-"use strict";
-x = {p1:10, p2:20};      // This will cause an error
-
-Deleting a variable (or object) is not allowed.
-
-"use strict";
-let x = 3.14;
-delete x;                // This will cause an error
-
-Deleting a function is not allowed.
-
-"use strict";
-function x(p1, p2) {};
-delete x;                // This will cause an error 
-
-Duplicating a parameter name is not allowed:
-
-"use strict";
-function x(p1, p1) {};   // This will cause an error
-
-Octal numeric literals are not allowed:
-
-"use strict";
-let x = 010;             // This will cause an error
-
-Octal escape characters are not allowed:
-
-"use strict";
-let x = "\010";            // This will cause an error
-
-Writing to a read-only property is not allowed:
-
-"use strict";
-const obj = {};
-Object.defineProperty(obj, "x", {value:0, writable:false});
-
-obj.x = 3.14;            // This will cause an error
-
-Writing to a get-only property is not allowed:
-
-"use strict";
-const obj = {get x() {return 0} };
-
-obj.x = 3.14;            // This will cause an error
-
-Deleting an undeletable property is not allowed:
-
-"use strict";
-delete Object.prototype; // This will cause an error
-
-The word eval cannot be used as a variable:
-
-"use strict";
-let eval = 3.14;         // This will cause an error
-
-The word arguments cannot be used as a variable:
-
-"use strict";
-let arguments = 3.14;    // This will cause an error
-
-The with statement is not allowed:
-
-"use strict";
-with (Math){x = cos(2)}; // This will cause an error
-
-For security reasons, eval() is not allowed to create variables in the scope from which it was called.
-
-In strict mode, a variable can not be used before it is declared:
-
-"use strict";
-eval ("x = 2");
-alert (x);      // This will cause an error
-
-In strict mode, eval() can not declare a variable using the var keyword:
-
-"use strict";
-eval ("var x = 2");
-alert (x);    // This will cause an error
-
-eval() can not declare a variable using the let keyword:
-
-eval ("let x = 2");
-alert (x);        // This will cause an error
-
-The this keyword in functions behaves differently in strict mode.
-
-The this keyword refers to the object that called the function.
-
-If the object is not specified, functions in strict mode will return undefined and functions in normal mode will return the global object (window):
-
-"use strict";
-function myFunction() {
-  alert(this); // will alert "undefined"
-}
-myFunction();
-
-Watch Out!
-The "use strict" directive is only recognized at the beginning of a script or a function.
-
-Exercise
-?
-How do we define that JavaScript code should be executed in 'strict mode'?
-
-
-"use strict";
-use strict;
-"strict mode";
-strict mode;
-
-
-
-
-
-
-JavaScript Arrays
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-An Array is an object type designed for storing data collections.
-
-Key characteristics of JavaScript arrays are:
-
-Elements: An array is a list of values, known as elements.
-
-Ordered: Array elements are ordered based on their index.
-
-Zero indexed: The first element is at index 0, the second at index 1, and so on.
-
-Dynamic size: Arrays can grow or shrink as elements are added or removed.
-
-Heterogeneous: Arrays can store elements of different data types (numbers, strings, objects and other arrays).
-
-Why Use Arrays?
-If you have a list of items (a list of car names, for example), storing the names in single variables could look like this:
-
-let car1 = "Saab";
-let car2 = "Volvo";
-let car3 = "BMW";
-However, what if you want to loop through the cars and find a specific one? And what if you had not 3 cars, but 300?
-
-The solution is an array!
-
-An array can hold many values under a single name, and you can access the values by referring to an index number.
-
-Creating an Array
-Using an array literal is the easiest way to create a JavaScript Array.
-
-Syntax:
-
-const array_name = [item1, item2, ...];      
-It is a common practice to declare arrays with the const keyword.
-
-Learn more about const with arrays in the chapter: JS Array Const.
-
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-Spaces and line breaks are not important. A declaration can span multiple lines:
-
-Example
-const cars = [
-  "Saab",
-  "Volvo",
-  "BMW"
-];
-You can also create an empty array, and provide elements later:
-
-Example
-const cars = [];
-cars[0]= "Saab";
-cars[1]= "Volvo";
-cars[2]= "BMW";
-Using the JavaScript Keyword new
-The following example also creates an Array, and assigns values to it:
-
-Example
-const cars = new Array("Saab", "Volvo", "BMW");
-The two examples above do exactly the same.
-
-For simplicity, readability and speed, you can most often use the array literal method.
-
-REMOVE ADS
-
-Accessing Array Elements
-You access an array element by referring to the index number:
-
-const cars = ["Saab", "Volvo", "BMW"];
-let car = cars[0];
-Note: Array indexes start with 0.
-
-[0] is the first element. [1] is the second element.
-
-Changing an Array Element
-This statement changes the value of the first element in cars:
-
-cars[0] = "Opel";
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-cars[0] = "Opel";
-Converting an Array to a String
-The JavaScript method toString() converts an array to a string of (comma separated) array values.
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-document.getElementById("demo").innerHTML = fruits.toString();
-Result:
-
-Banana,Orange,Apple,Mango
-Display an Array
-In JavaScript, the full array can be displayed by referring to the array name:
-
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-
-let text = cars;
-Display an Array using JSON
-The full array can also be displayed using JSON.stringify():
-
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-
-let text = JSON-stringify(cars);
-Arrays are Objects
-Arrays are a special type of objects. The typeof operator in JavaScript returns "object" for arrays.
-
-But, JavaScript arrays are best described as arrays.
-
-Arrays use numbers to access its "elements". In this example, person[0] returns John:
-
-Array:
-const person = ["John", "Doe", 46];
-Objects use names to access its "members". In this example, person.firstName returns John:
-
-Object:
-const person = {firstName:"John", lastName:"Doe", age:46};
-Array Elements Can Be Objects
-JavaScript variables can be objects. Arrays are special kinds of objects.
-
-Because of this, you can have variables of different types in the same Array.
-
-You can have objects in an Array. You can have functions in an Array. You can have arrays in an Array:
-
-myArray[0] = Date.now;
-myArray[1] = myFunction;
-myArray[2] = myCars;
-Array Properties and Methods
-The real strength of JavaScript arrays are the built-in array properties and methods:
-
-cars.length   // Returns the number of elements
-cars.sort()   // Sorts the array
-Array methods are covered in the next chapters.
-
-The length Property
-The length property of an array returns the length of an array (the number of array elements).
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let length = fruits.length;
-The length property is always one more than the highest array index.
-
-Accessing the First Array Element
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruit = fruits[0];
-Accessing the Last Array Element
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruit = fruits[fruits.length - 1];
-Looping Array Elements
-One way to loop through an array, is using a for loop:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fLen = fruits.length;
-
-let text = "<ul>";
-for (let i = 0; i < fLen; i++) {
-  text += "<li>" + fruits[i] + "</li>";
-}
-text += "</ul>";
-You can also use the Array.forEach() function:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-
-let text = "<ul>";
-fruits.forEach(myFunction);
-text += "</ul>";
-
-function myFunction(value) {
-  text += "<li>" + value + "</li>";
-}
-Adding Array Elements
-The easiest way to add a new element to an array is using the push() method:
-
-Example
-const fruits = ["Banana", "Orange", "Apple"];
-fruits.push("Lemon");  // Adds a new element (Lemon) to fruits
-New element can also be added to an array using the length property:
-
-Example
-const fruits = ["Banana", "Orange", "Apple"];
-fruits[fruits.length] = "Lemon";  // Adds "Lemon" to fruits
-WARNING !
-
-Adding elements with high indexes can create undefined "holes" in an array:
-
-Example
-const fruits = ["Banana", "Orange", "Apple"];
-fruits[6] = "Lemon";  // Creates undefined "holes" in fruits
-Associative Arrays
-Many programming languages support arrays with named indexes.
-
-Arrays with named indexes are called associative arrays (or hashes).
-
-JavaScript does not support arrays with named indexes.
-
-In JavaScript, arrays always use numbered indexes.  
-
-Example
-const person = [];
-person[0] = "John";
-person[1] = "Doe";
-person[2] = 46;
-person.length;    // Will return 3
-person[0];        // Will return "John"
-WARNING !!
-If you use named indexes, JavaScript will redefine the array to an object.
-
-After that, some array methods and properties will produce incorrect results.
-
- Example:
-const person = [];
-person["firstName"] = "John";
-person["lastName"] = "Doe";
-person["age"] = 46;
-person.length;     // Will return 0
-person[0];         // Will return undefined
-The Difference Between Arrays and Objects
-In JavaScript, arrays use numbered indexes.  
-
-In JavaScript, objects use named indexes.
-
-Arrays are a special kind of objects, with numbered indexes.
-
-When to Use Arrays. When to use Objects.
-JavaScript does not support associative arrays.
-You should use objects when you want the element names to be strings (text).
-You should use arrays when you want the element names to be numbers.
-JavaScript new Array()
-JavaScript has a built-in array constructor new Array().
-
-But you can safely use [] instead.
-
-These two different statements both create a new empty array named points:
-
-const points = new Array();
-const points = [];
-These two different statements both create a new array containing 6 numbers:
-
-const points = new Array(40, 100, 1, 5, 25, 10);
-const points = [40, 100, 1, 5, 25, 10];
-Learn More:
-JavaScript Array Constructor
-
-How to Recognize an Array
-A common question is: How do I know if a variable is an array?
-
-The problem is that the JavaScript operator typeof returns "object":
-
-const fruits = ["Banana", "Orange", "Apple"];
-let type = typeof fruits;
-The typeof operator returns object because a JavaScript array is an object.
-
-Solution 1:
-To solve this problem ECMAScript 5 (JavaScript 2009) defined a new method Array.isArray():
-
-Array.isArray(fruits);
-Solution 2:
-The instanceof operator returns true if an object is created by a given constructor:
-
-const fruits = ["Banana", "Orange", "Apple"];
-
-(fruits instanceof Array);
-Nested Arrays and Objects
-Values in objects can be arrays, and values in arrays can be objects:
-
-Example
-const myObj = {
-  name: "John",
-  age: 30,
-  cars: [
-    {name:"Ford", models:["Fiesta", "Focus", "Mustang"]},
-    {name:"BMW", models:["320", "X3", "X5"]},
-    {name:"Fiat", models:["500", "Panda"]}
-  ]
-}
-To access arrays inside arrays, use a for-in loop for each array:
-
-Example
-for (let i in myObj.cars) {
-  x += "<h1>" + myObj.cars[i].name + "</h1>";
-  for (let j in myObj.cars[i].models) {
-    x += myObj.cars[i].models[j];
-  }
-}
-Learn More:
-Array Methods
-
-Array Constructor
-
-Array Search Methods
-
-Array Sort Methods
-
-Array Iteration Methods
-
-Full JavaScript Array Reference
-
-Exercise
-?
-What is NOT a legal way to create an array??
-
-
-const fruits = ['Orange', 'Banana', 'Apple'];
-const fruits = new Array ('Orange', 'Banana', 'Apple');
-const fruits = ('Orange', 'Banana', 'Apple');
-
-
-The new Array() Constructor
-The new Array() constructor creates an Array object.
-
-Syntax
-new Array()
-new Array(number)
-new Array(element1, element2, ..., elementN)
-
-Array()
-Array(number)
-Array(element1, element2, ..., elementN)
-Examples
-new Array()
-new Array(3)
-new Array("3")
-new Array("Saab", "Volvo", "BMW")
-Array()
-Array(3)
-Array("3")
-Array("Saab", "Volvo", "BMW")
-Syntax	Description
-new Array()	Creates an empty array.
-new Array(x)	Creates an array with x empty spots.
-new Array(elem1)	Creates an array with one element.
-new Array(elem1,...,elemN)	Creates an array with multiple elements.
-The Difference? new Array() vs Array()
-The short answer is: there is no functional difference between new Array() and Array().
-
-Both commands do the exact same thing and create an array.
-
-Note
-The Array creator function is smart.
-
-It is programmed to check if you forgot the new keyword.
-
-If you leave it out, it adds it behind the scene.
-
-
-REMOVE ADS
-
-JavaScript new Array()
-JavaScript has a built-in array constructor new Array().
-
-But you can most often use [] instead.
-
-These two different statements both create a new empty array named points:
-
-const points = new Array();
-const points = [];
-These two different statements both create a new array containing 6 numbers:
-
-const points = new Array(40, 100, 1, 5, 25, 10);
-const points = [40, 100, 1, 5, 25, 10];
-The new keyword can produce some unexpected results:
-
-// Create an array with three elements:
-const points = new Array(40, 100, 1);
-// Create an array with two elements:
-const points = new Array(40, 100);
-// Create an array with one element ???
-const points = new Array(40);  
-A Common Error
-const points = [40];
-is not the same as:
-
-const points = new Array(40);
-// Create an array with one element:
-const points = [40];
-// Create an array with 40 undefined elements:
-const points = new Array(40);  
-Important Warning
-Use an array literal [ ] instead of the new Array() when possible.
-
-new Array(number) is a special dangerous case.
-
-new Array(3) creates an array with 3 empty elements; not an array containing the number 3.
-
-Using [ ] is faster to type, easier to read, and avoids the "single number trap":
-
-For example, [3] actually creates [3], not [null,null,null].
-
-Array Literal (Preferred)
-The recommended way to create an array is with an array literal:
-
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-Learn More:
-Array Tutorial
-
-Array Methods
-
-Array Search Methods
-
-Array Sort Methods
-
-Array Iteration Methods
-
-Full JavaScript Array Reference
-
-
-
-JavaScript Array Methods
-Basic Array Methods
-Array length
-Array toString()
-Array at()
-Array join()
-Array pop()
-Array push()
-Array shift()
-Array unshift()
-Array isArray()
-Array delete()
-Array concat()
-Array copyWithin()
-Array flat()
-Array slice()
-Array splice()
-Array toSpliced()
-Complete JavaScript Array Reference
-
-JavaScript Array length
-The length property returns the length (size) of an array:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-
-let size = fruits.length;
-The length property can also be used to set the length of an array:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-
-fruits.length = 2;
-JavaScript Array toString()
-The toString() method returns the elements of an array as a comma separated string.
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-
-let myList = fruits.toString();
-Every JavaScript object has a toString() method.
-
-The toString() method is used internally by JavaScript when an object needs to be displayed as a text (like in HTML), or when an object needs to be used as a string.
-
-JavaScript Array at()
-ES2022 introduced the array method at():
-
-Examples
-Get the third element of fruits using at():
-
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruit = fruits.at(2);
-Get the third element of fruits using []:
-
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruit = fruits[2];
-The at() method returns an indexed element from an array.
-
-The at() method returns the same as [].
-
-Browser Support
-at() is an ECMAScript 2022 feature.
-
-JavaScript 2022 is supported in all modern browsers since March 2022:
-
-Chrome
-92	Edge
-92	Firefox
-90	Safari
-15.4	Opera
-78
-Apr 2021	Jul 2021	Jul 2021	Mar 2022	Aug 2021
-Many languages allow negative bracket indexing like [-1] to access elements from the end of an object / array / string.
-
-This is not possible in JavaScript, because [] is used for accessing both arrays and objects. obj[-1] refers to the value of key -1, not to the last property of the object.
-
-The at() method was introduced in ES2022 to solve this problem.
-
-
-REMOVE ADS
-
-JavaScript Array join()
-The join() method also joins all array elements into a string.
-
-It behaves just like toString(), but in addition you can specify the separator:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-document.getElementById("demo").innerHTML = fruits.join(" * ");
-Result:
-
-Banana * Orange * Apple * Mango
-Popping and Pushing
-When you work with arrays, it is easy to remove elements and add new elements.
-
-This is what popping and pushing is:
-
-Popping items out of an array, or pushing items into an array.
-
-REMOVE ADS
-
-JavaScript Array pop()
-The pop() method removes the last element from an array:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.pop();
-The pop() method returns the value that was "popped out":
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruit = fruits.pop();
-JavaScript Array push()
-The push() method adds a new element to an array (at the end):
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.push("Kiwi");
-The push() method returns the new array length:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let length = fruits.push("Kiwi");
-Shifting Elements
-Shifting is equivalent to popping, but working on the first element instead of the last.
-
-JavaScript Array shift()
-The shift() method removes the first array element and "shifts" all other elements to a lower index.
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.shift();
-The shift() method returns the value that was "shifted out":
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-let fruit = fruits.shift();
-JavaScript Array unshift()
-The unshift() method adds a new element to an array (at the beginning), and "unshifts" older elements:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.unshift("Lemon");
-The unshift() method returns the new array length:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.unshift("Lemon");
-Changing Elements
-Array elements are accessed using their index number:
-
-Array indexes start with 0:
-
-[0] is the first array element
-[1] is the second
-[2] is the third ...
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits[0] = "Kiwi";
-JavaScript Array length
-The length property provides an easy way to append a new element to an array:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits[fruits.length] = "Kiwi";
-Array.isArray()
-ECMAScript 5 (JavaScript 2009) added the new method Array.isArray() to JavaScript:
-
-Example
-Array.isArray(fruits);
-JavaScript Array delete()
-Warning !
-Using delete() leaves undefined holes in the array.
-
-Use pop() or shift() instead.
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-delete fruits[0];
-Merging Arrays (Concatenating)
-In programming languages, concatenation means joining strings end-to-end.
-
-Concatenation "snow" and "ball" gives "snowball".
-
-Concatenating arrays means joining arrays end-to-end.
-
-JavaScript Array concat()
-The concat() method creates a new array by merging (concatenating) existing arrays:
-
-Example (Merging Two Arrays)
-const myGirls = ["Cecilie", "Lone"];
-const myBoys = ["Emil", "Tobias", "Linus"];
-
-const myChildren = myGirls.concat(myBoys);
-The concat() method does not change the existing arrays. It always returns a new array.
-
-The concat() method can take any number of array arguments.
-
-Example (Merging Three Arrays)
-const arr1 = ["Cecilie", "Lone"];
-const arr2 = ["Emil", "Tobias", "Linus"];
-const arr3 = ["Robin", "Morgan"];
-const myChildren = arr1.concat(arr2, arr3);
-The concat() method can also take strings as arguments:
-
-Example (Merging an Array with Values)
-const arr1 = ["Emil", "Tobias", "Linus"];
-const myChildren = arr1.concat("Peter"); 
-Array copyWithin()
-The copyWithin() method copies array elements to another position in an array:
-
-Examples
-Copy to index 2, all elements from index 0:
-
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.copyWithin(2, 0);
-Copy to index 2, the elements from index 0 to 2:
-
-const fruits = ["Banana", "Orange", "Apple", "Mango", "Kiwi"];
-fruits.copyWithin(2, 0, 2);
-The copyWithin() method overwrites the existing values.
-
-The copyWithin() method does not add items to the array.
-
-The copyWithin() method does not change the length of the array.
-
-Flattening an Array
-Flattening an array is the process of reducing the dimensionality of an array.
-
-Flattening is useful when you want to convert a multi-dimensional array into a one-dimensional array.
-
-JavaScript Array flat()
-ES2019 Introduced the Array flat() method.
-
-The flat() method creates a new array with sub-array elements concatenated to a specified depth.
-
-Example
-const myArr = [[1,2],[3,4],[5,6]];
-const newArr = myArr.flat();
-JavaScript Array flatMap()
-ES2019 added the Array flatMap() method to JavaScript.
-
-The flatMap() method first maps all elements of an array and then creates a new array by flattening the array.
-
-Example
-const myArr = [1, 2, 3, 4, 5, 6];
-const newArr = myArr.flatMap(x => [x, x * 10]);
-Splicing and Slicing Arrays
-The splice() method adds new items to an array.
-
-The slice() method slices out a piece of an array.
-
-JavaScript Array splice()
-The splice() method can be used to add new items to an array:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.splice(2, 0, "Lemon", "Kiwi");
-The first parameter (2) defines the position where new elements should be added (spliced in).
-
-The second parameter (0) defines how many elements should be removed.
-
-The rest of the parameters ("Lemon" , "Kiwi") define the new elements to be added.
-
-The splice() method returns an array with the deleted items:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.splice(2, 2, "Lemon", "Kiwi");
-Using splice() to Remove Elements
-With clever parameter setting, you can use splice() to remove elements without leaving "holes" in the array:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.splice(0, 1);
-The first parameter (0) defines the position where new elements should be added (spliced in).
-
-The second parameter (1) defines how many elements should be removed.
-
-The rest of the parameters are omitted. No new elements will be added.
-
-JavaScript Array toSpliced()
-ES2023 added the Array toSpliced() method as a safe way to splice an array without altering the original array.
-
-The difference between the new toSpliced() method and the old splice() method is that the new method creates a new array, keeping the original array unchanged, while the old method altered the original array.
-
-Example
-const months = ["Jan", "Feb", "Mar", "Apr"];
-const spliced = months.toSpliced(0, 1);
-JavaScript Array slice()
-The slice() method slices out a piece of an array into a new array:
-
-Example
-Slice out a part of an array starting from array element 1 ("Orange"):
-
-const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
-const citrus = fruits.slice(1);
-The slice() method creates a new array.
-
-The slice() method does not remove any elements from the source array.
-
-Example
-Slice out a part of an array starting from array element 3 ("Apple"):
-
-const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
-const citrus = fruits.slice(3);
-The slice() method can take two arguments like slice(1, 3).
-
-The method then selects elements from the start argument, and up to (but not including) the end argument.
-
-Example
-const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
-const citrus = fruits.slice(1, 3);
-If the end argument is omitted, like in the first examples, the slice() method slices out the rest of the array.
-
-Example
-const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
-const citrus = fruits.slice(2);
-Automatic toString()
-JavaScript automatically converts an array to a comma separated string when a primitive value is expected.
-
-This is always the case when you try to output an array.
-
-These two examples will produce the same result:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-document.getElementById("demo").innerHTML = fruits.toString();
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-document.getElementById("demo").innerHTML = fruits;
-All JavaScript objects have a toString() method.
-
-Searching Arrays
-Searching arrays are covered in the next chapter of this tutorial.
-
-Sorting Arrays
-Sorting arrays covers the methods used to sort arrays.
-
-Iterating Arrays
-Iterating arrays covers methods that operate on all array elements.
-
-E
-
-JavaScript Array Search
-Array Search Methods
-Array indexOf()
-Array lastIndexOf()
-Array includes()
-Array find()
-Array findIndex()
-Array findLast()
-Array findLastIndex()
-Complete JavaScript Array Reference
-
-JavaScript Array indexOf()
-The indexOf() method searches an array for an element value and returns its position.
-
-Note: The first item has position 0, the second item has position 1, and so on.
-
-Example
-Search an array for the item "Apple":
-
-const fruits = ["Apple", "Orange", "Apple", "Mango"];
-let position = fruits.indexOf("Apple") + 1;
-Syntax
-array.indexOf(item, start)
-item	Required. The item to search for.
-start	Optional. Where to start the search. Negative values will start at the given position counting from the end, and search to the end.
-Array.indexOf() returns -1 if the item is not found.
-
-If the item is present more than once, it returns the position of the first occurrence.
-
-JavaScript Array lastIndexOf()
-Array.lastIndexOf() is the same as Array.indexOf(), but returns the position of the last occurrence of the specified element.
-
-Example
-Search an array for the item "Apple":
-
-const fruits = ["Apple", "Orange", "Apple", "Mango"];
-let position = fruits.lastIndexOf("Apple") + 1;
-Syntax
-array.lastIndexOf(item, start)
-item	Required. The item to search for
-start	Optional. Where to start the search. Negative values will start at the given position counting from the end, and search to the beginning
-JavaScript Array includes()
-ECMAScript 2016 introduced Array.includes() to arrays. This allows us to check if an element is present in an array (including NaN, unlike indexOf).
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-
-fruits.includes("Mango"); // is true
-Syntax
-array.includes(search-item)
-Array.includes() allows to check for NaN values. Unlike Array.indexOf().
-
-REMOVE ADS
-
-JavaScript Array find()
-The find() method returns the value of the first array element that passes a test function.
-
-This example finds (returns the value of) the first element that is larger than 18:
-
-Example
-const numbers = [4, 9, 16, 25, 29];
-let first = numbers.find(myFunction);
-
-function myFunction(value, index, array) {
-  return value > 18;
-}
-Note that the function takes 3 arguments:
-
-The item value
-The item index
-The array itself
-JavaScript Array findIndex()
-The findIndex() method returns the index of the first array element that passes a test function.
-
-This example finds the index of the first element that is larger than 18:
-
-Example
-const numbers = [4, 9, 16, 25, 29];
-let first = numbers.findIndex(myFunction);
-
-function myFunction(value, index, array) {
-  return value > 18;
-}
-Note that the function takes 3 arguments:
-
-The item value
-The item index
-The array itself
-JavaScript Array findLast() Method
-ES2023 added the findLast() method that will start from the end of an array and return the value of the first element that satisfies a condition.
-
-Example
-const temp = [27, 28, 30, 40, 42, 35, 30];
-let high = temp.findLast(x => x > 40);
-Browser Support
-findLast() is an ECMAScript 2023 feature.
-
-JavaScript 2023 is supported in all modern browsers since July 2023:
-
-Chrome
-110	Edge
-110	Firefox
-115	Safari
-16.4	Opera
-96
-Feb 2023	Feb 2023	Jul 2023	Mar 2023	May 2023
-JavaScript Array findLastIndex() Method
-The findLastIndex() method finds the index of the last element that satisfies a condition.
-
-Example
-const temp = [27, 28, 30, 40, 42, 35, 30];
-let pos = temp.findLastIndex(x => x > 40);
-Browser Support
-findLastIndex() is an ECMAScript 2023 feature.
-
-JavaScript 2023 is supported in all modern browsers since July 2023:
-
-Chrome
-110	Edge
-110	Firefox
-115	Safari
-16.4	Opera
-96
-Feb 2023	Feb 2023	Jul 2023	Mar 2023	May 2023
-See Also:
-Array Tutorial
-
-Array Constructor
-
-Array Basic Methods
-
-Array Sort Methods
-
-Array Iteration Methods
-
-Array Reference
-
-Complete JavaScript Reference
-For a complete reference to all JavaScript properties and methods, with full descriptions and many examples, go to:
-
-W3Schools' Full JavaScript Reference.
-
-The reference inludes all JavaScript updates from 1999 to 2025.
-
-Exercise
-?
-Consider the following code:
-const fruits = ['Apple', 'Orange', 'Mango'];
-let x = fruits.indexOf('Orange');
-What will the result of x?
-
-
-0
-1
-true
-
-
-
-JavaScript Array Sort
-Alphabetic Sort
-Array sort()
-Array reverse()
-Array toSorted()
-Array toReversed()
-Sorting Objects
-Numeric Sort
-Numeric Sort
-Random Sort
-Math.min()
-Math.max()
-Home made Min()
-Home made Max()
-Complete JavaScript Array Reference
-
-Sorting an Array
-The sort() method sorts an array alphabetically:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.sort();
-Reversing an Array
-The reverse() method reverses the elements in an array:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.reverse();
-By combining sort() and reverse(), you can sort an array in descending order:
-
-Example
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.sort();
-fruits.reverse();
-JavaScript Array toSorted() Method
-ES2023 added the toSorted() method as a safe way to sort an array without altering the original array.
-
-The difference between toSorted() and sort() is that the first method creates a new array, keeping the original array unchanged, while the last method alters the original array.
-
-Example
-const months = ["Jan", "Feb", "Mar", "Apr"];
-const sorted = months.toSorted();
-JavaScript Array toReversed() Method
-ES2023 added the toReversed() method as a safe way to reverse an array without altering the original array.
-
-The difference between toReversed() and reverse() is that the first method creates a new array, keeping the original array unchanged, while the last method alters the original array.
-
-Example
-const months = ["Jan", "Feb", "Mar", "Apr"];
-const reversed = months.toReversed();
-REMOVE ADS
-
-Numeric Sort
-By default, the sort() function sorts values as strings.
-
-This works well for strings ("Apple" comes before "Banana").
-
-If numbers are sorted as strings, "25" is bigger than "100", because "2" is bigger than "1".
-
-Because of this, the sort() method will produce incorrect result when sorting numbers.
-
-You can fix this by providing a compare function:
-
-Example
-const points = [40, 100, 1, 5, 25, 10];
-points.sort(function(a, b){return a - b});
-Use the same trick to sort an array descending:
-
-Example
-const points = [40, 100, 1, 5, 25, 10];
-points.sort(function(a, b){return b - a});
-REMOVE ADS
-
-The Compare Function
-The purpose of the compare function is to define an alternative sort order.
-
-The compare function should return a negative, zero, or positive value, depending on the arguments:
-
-function(a, b){return a - b}
-When the sort() function compares two values, it sends the values to the compare function, and sorts the values according to the returned (negative, zero, positive) value.
-
-If the result is negative, a is sorted before b.
-
-If the result is positive, b is sorted before a.
-
-If the result is 0, no changes are done with the sort order of the two values.
-
-Example:
-
-The compare function compares all the values in the array, two values at a time (a, b).
-
-When comparing 40 and 100, the sort() method calls the compare function(40, 100).
-
-The function calculates 40 - 100 (a - b), and since the result is negative (-60),  the sort function will sort 40 as a value lower than 100.
-
-You can use this code snippet to experiment with numerically and alphabetically sorting:
-
-<button onclick="myFunction1()">Sort Alphabetically</button>
-<button onclick="myFunction2()">Sort Numerically</button>
-
-<p id="demo"></p>
-
-<script>
-const points = [40, 100, 1, 5, 25, 10];
-document.getElementById("demo").innerHTML = points;
-
-function myFunction1() {
-  points.sort();
-  document.getElementById("demo").innerHTML = points;
-}
-
-function myFunction2() {
-  points.sort(function(a, b){return a - b});
-  document.getElementById("demo").innerHTML = points;
-}
-</script>
-Sorting an Array in Random Order
-Using a sort function, like explained above, you can sort an numeric array in random order
-
-Example
-const points = [40, 100, 1, 5, 25, 10];
-points.sort(function(){return 0.5 - Math.random()});
-
-The Fisher Yates Method
-The points.sort() method in the example above is not accurate. It will favor some numbers over others.
-
-The most popular correct method, is called the Fisher Yates shuffle, and was introduced in data science as early as 1938!
-
-In JavaScript the method can be translated to this:
-
-Example
-const points = [40, 100, 1, 5, 25, 10];
-
-for (let i = points.length -1; i > 0; i--) {
-  let j = Math.floor(Math.random() * (i+1));
-  let k = points[i];
-  points[i] = points[j];
-  points[j] = k;
-}
-
-Find the Lowest (or Highest) Array Value
-There are no built-in functions for finding the max or min value in an array.
-
-To find the lowest or highest value you have 3 options:
-
-Sort the array and read the first or last element
-Use Math.min() or Math.max()
-Write a home made function
-Find Min or Max with sort()
-After you have sorted an array, you can use the index to obtain the highest and lowest values.
-
-Sort Ascending:
-Example
-const points = [40, 100, 1, 5, 25, 10];
-points.sort(function(a, b){return a - b});
-// now points[0] contains the lowest value
-// and points[points.length-1] contains the highest value
-Sort Descending:
-Example
-const points = [40, 100, 1, 5, 25, 10];
-points.sort(function(a, b){return b - a});
-// now points[0] contains the highest value
-// and points[points.length-1] contains the lowest value
-Sorting a whole array is a very inefficient method if you only want to find the highest (or lowest) value.
-
-Using Math.min() on an Array
-You can use Math.min.apply to find the lowest number in an array:
-
-Example
-function myArrayMin(arr) {
-  return Math.min.apply(null, arr);
-}
-
-Math.min.apply(null, [1, 2, 3]) is equivalent to Math.min(1, 2, 3).
-
-Using Math.max() on an Array
-You can use Math.max.apply to find the highest number in an array:
-
-Example
-function myArrayMax(arr) {
-  return Math.max.apply(null, arr);
-}
-
-Math.max.apply(null, [1, 2, 3]) is equivalent to Math.max(1, 2, 3).
-
-JavaScript Array Minimum Method
-There is no built-in function for finding the lowest value in a JavaScript array.
-
-The fastest code to find the lowest number is to use a home made method.
-
-This function loops through an array comparing each value with the lowest value found:
-
-Example (Find Min)
-function myArrayMin(arr) {
-  let len = arr.length;
-  let min = Infinity;
-  while (len--) {
-    if (arr[len] < min) {
-      min = arr[len];
-    }
-  }
-  return min;
-}
-
-JavaScript Array Maximum Method
-There is no built-in function for finding the highest value in a JavaScript array.
-
-The fastest code to find the highest number is to use a home made method.
-
-This function loops through an array comparing each value with the highest value found:
-
-Example (Find Max)
-function myArrayMax(arr) {
-  let len = arr.length;
-  let max = -Infinity;
-  while (len--) {
-    if (arr[len] > max) {
-      max = arr[len];
-    }
-  }
-  return max;
-}
-
-Sorting Object Arrays
-JavaScript arrays often contain objects:
-
-Example
-const cars = [
-  {type:"Volvo", year:2016},
-  {type:"Saab", year:2001},
-  {type:"BMW", year:2010}
-];
-Even if objects have properties of different data types, the sort() method can be used to sort the array.
-
-The solution is to write a compare function to compare the property values:
-
-Example
-cars.sort(function(a, b){return a.year - b.year});
-Comparing string properties is a little more complex:
-
-Example
-cars.sort(function(a, b){
-  let x = a.type.toLowerCase();
-  let y = b.type.toLowerCase();
-  if (x < y) {return -1;}
-  if (x > y) {return 1;}
-  return 0;
-});
-Stable Array sort()
-ES2019 revised the Array sort() method.
-
-Before 2019, the specification allowed unstable sorting algorithms such as QuickSort.
-
-After ES2019, browsers must use a stable sorting algorithm:
-
-When sorting elements on a value, the elements must keep their relative position to other elements with the same value.
-
-Example
-const myArr = [
-  {name:"X00",price:100 },
-  {name:"X01",price:100 },
-  {name:"X02",price:100 },
-  {name:"X03",price:100 },
-  {name:"X04",price:110 },
-  {name:"X05",price:110 },
-  {name:"X06",price:110 },
-  {name:"X07",price:110 }
-];
-In the example above, when sorting on price, the result is not allowed to come out with the names in an other relative position like this:
-
-X01 100
-X03 100
-X00 100
-X02 100
-X05 110
-X04 110
-X06 110
-X07 110
-See Also:
-Array Tutorial
-
-Array Constructor
-
-Array Basic Methods
-
-Array Search Methods
-
-Array Iteration Methods
-
-Array Reference
-
-Complete JavaScript Reference
-For a complete reference to all JavaScript properties and methods, with full descriptions and many examples, go to:
-
-W3Schools' Full JavaScript Reference.
-
-The reference inludes all JavaScript updates from 1999 to 2025.
-
-Exercise
-?
-Consider the following code:
-const fruits = ['Apple', 'Orange', 'Banana'];
-fruits.reverse();
-What will the result of the fruits array?
-
-
-['Orange', 'Banana', 'Apple']
-['Banana', 'Orange', 'Apple']
-['Apple', 'Banana', 'Orange']
-['Orange', 'Apple', 'Banana']
-
-
-
-JavaScript Array Iterations
-Array Iteration Methods
-Array iteration methods operate on every array item.
-
-Array for...of
-Array for...in
-Array forEach()
-Array map()
-Array flatMap()
-Array filter()
-Array reduce()
-Array reduceRight()
-Array every()
-Array some()
-Array from()
-Array keys()
-Array entries()
-Array with()
-Array Spread (...)
-Array Rest (...)
-Complete JavaScript Array Reference
-
-Looping Array Values
-JavaScript provides 3 simple statements for looping over each array items:
-
-for ... of (loops over entries)
-for ... in (loops over indexes)
-forEach (myFunction)
-The for...of Loop (Recommended)
-The for...of statements hands you the array values.
-
-Example
-// Create an Array
-const cars = ['BMW', 'Volvo', 'Mini'];
-
-// Iterate over the Array values
-let text = "";
-for (let x of cars) {
-  text += x + ",";
-}
-The for...in Loop (Not Recommended)
-The for...in statements hands you the array indexes.
-
-Example
-// Create an Array
-const cars = ['BMW', 'Volvo', 'Mini'];
-
-// Iterate over the Array values
-let text = "";
-for (let x in cars) {
-  text += x + ",";
-}
-To make it return the elements you must use [x].
-
-Example
-// Create an Array
-const cars = ['BMW', 'Volvo', 'Mini'];
-
-// Iterate over the Array values
-let text = "";
-for (let cars[x] in cars) {
-  text += x + ",";
-}
-Even though it works, using for...in for arrays is generally a bad idea.
-
-for...in was created to inspect Object properties (like: name, age, height), not Arrays.
-
-JavaScript Array forEach()
-The forEach() method calls a function (a callback function) for each array element.
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let txt = "";
-numbers.forEach(myFunction);
-
-function myFunction(value, index, array) {
-  txt += value + "<br>";
-}
-Note that the function takes 3 arguments:
-
-The item value
-The item index
-The array itself
-The example above uses only the value parameter. The example can be rewritten to:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let txt = "";
-numbers.forEach(myFunction);
-
-function myFunction(value) {
-  txt += value + "<br>";
-}
-REMOVE ADS
-
-JavaScript Array map()
-The map() method creates a new array by performing a function on each array element.
-
-The map() method does not execute the function for array elements without values.
-
-The map() method does not change the original array.
-
-This example multiplies each array value by 2:
-
-Example
-const numbers1 = [45, 4, 9, 16, 25];
-const numbers2 = numbers1.map(myFunction);
-
-function myFunction(value, index, array) {
-  return value * 2;
-}
-Note that the function takes 3 arguments:
-
-The item value
-The item index
-The array itself
-When a callback function uses only the value parameter, the index and array parameters can be omitted:
-
-Example
-const numbers1 = [45, 4, 9, 16, 25];
-const numbers2 = numbers1.map(myFunction);
-
-function myFunction(value) {
-  return value * 2;
-}
-JavaScript Array flatMap()
-ES2019 added the Array flatMap() method to JavaScript.
-
-The flatMap() method first maps all elements of an array and then creates a new array by flattening the array.
-
-Example
-const myArr = [1, 2, 3, 4, 5, 6];
-const newArr = myArr.flatMap(x => [x, x * 10]);
-REMOVE ADS
-
-JavaScript Array filter()
-The filter() method creates a new array with array elements that pass a test.
-
-This example creates a new array from elements with a value larger than 18:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-const over18 = numbers.filter(myFunction);
-
-function myFunction(value, index, array) {
-  return value > 18;
-}
-Note that the function takes 3 arguments:
-
-The item value
-The item index
-The array itself
-In the example above, the callback function does not use the index and array parameters, so they can be omitted:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-const over18 = numbers.filter(myFunction);
-
-function myFunction(value) {
-  return value > 18;
-}
-JavaScript Array reduce()
-The reduce() method runs a function on each array element to produce a single value.
-
-The reduce() method works from left-to-right in the array. See also reduceRight().
-
-The reduce() method does not reduce the original array.
-
-This example finds the sum of all numbers in an array:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let sum = numbers.reduce(myFunction);
-
-function myFunction(total, value, index, array) {
-  return total + value;
-}
-Note that the function takes 4 arguments:
-
-The total (the initial value / previously returned value)
-The item value
-The item index
-The array itself
-Since the example above does not use the index and array parameters, it can be rewritten to:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let sum = numbers.reduce(myFunction);
-
-function myFunction(total, value) {
-  return total + value;
-}
-The reduce() method can accept an initial value:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let sum = numbers.reduce(myFunction, 100);
-
-function myFunction(total, value) {
-  return total + value;
-}
-JavaScript Array reduceRight()
-The reduceRight() method runs a function on each array element to produce a single value.
-
-The reduceRight() works from right-to-left in the array. See also reduce().
-
-The reduceRight() method does not reduce the original array.
-
-This example finds the sum of all numbers in an array:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let sum = numbers.reduceRight(myFunction);
-
-function myFunction(total, value, index, array) {
-  return total + value;
-}
-Note that the function takes 4 arguments:
-
-The total (the initial value / previously returned value)
-The item value
-The item index
-The array itself
-The example above does not use the index and array parameters. It can be rewritten to:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let sum = numbers.reduceRight(myFunction);
-
-function myFunction(total, value) {
-  return total + value;
-}
-JavaScript Array every()
-The every() method checks if all array values pass a test.
-
-This example checks if all array values are larger than 18:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let allOver18 = numbers.every(myFunction);
-
-function myFunction(value, index, array) {
-  return value > 18;
-}
-Note that the function takes 3 arguments:
-
-The item value
-The item index
-The array itself
-When a callback function uses the first parameter only (value), the other parameters can be omitted:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let allOver18 = numbers.every(myFunction);
-
-function myFunction(value) {
-  return value > 18;
-}
-JavaScript Array some()
-The some() method checks if some array values pass a test.
-
-This example checks if some array values are larger than 18:
-
-Example
-const numbers = [45, 4, 9, 16, 25];
-let someOver18 = numbers.some(myFunction);
-
-function myFunction(value, index, array) {
-  return value > 18;
-}
-Note that the function takes 3 arguments:
-
-The item value
-The item index
-The array itself
-JavaScript Array.from()
-The Array.from() method returns an Array object from:
-
-Any iterable object
-
-Any object with a length property
-
-Example
-Create an Array from a String:
-
-let text = "ABCDEFG";
-Array.from(text);
-Array.from() has an optional parameter which allows you to execute a function on each element of the new array:
-
-Example
-Create an Array from an Array:
-
-const myNumbers = [1,2,3,4];
-const myArr = Array.from(myNumbers, (x) => x * 2);
-JavaScript Array keys()
-The Array.keys() method returns an Array Iterator object with the keys of an array.
-
-Example
-Create an Array Iterator object, containing the keys of the array:
-
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-const keys = fruits.keys();
-
-for (let x of keys) {
-  text += x + "<br>";
-}
-JavaScript Array entries()
-Example
-Create an Array Iterator, and then iterate over the key/value pairs:
-
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-const f = fruits.entries();
-
-for (let x of f) {
-  document.getElementById("demo").innerHTML += x;
-}
-The entries() method returns an Array Iterator object with key/value pairs:
-
-[0, "Banana"]
-[1, "Orange"]
-[2, "Apple"]
-[3, "Mango"]
-
-The entries() method does not change the original array.
-
-JavaScript Array with() Method
-ES2023 added the Array with() method as a safe way to update elements in an array without altering the original array.
-
-Example
-const months = ["Januar", "Februar", "Mar", "April"];
-const myMonths = months.with(2, "March");
-JavaScript Array Spread (...)
-The ... operator expands an array into individual elements.
-
-This can be used join arrays:
-
-Example 1
-const arr1 = [1, 2, 3];
-const arr2 = [4, 5, 6];
-
-const arr3 = [...arr1, ...arr2];
-In the example above, ...arr1 expands arr1 into single elements, ...arr2 expands arr2 into single elements, and arr3 is constructed using ...arr1 and ...arr2.
-
-Example 2
-const q1 = ["Jan", "Feb", "Mar"];
-const q2 = ["Apr", "May", "Jun"];
-const q3 = ["Jul", "Aug", "Sep"];
-const q4 = ["Oct", "Nov", "Des"];
-
-const year = [...q1, ...q2, ...q3, ...q4];
-The spread operator (...) can be used to copy an array:
-
-Example 3
-const arr1 = [1, 2, 3];
-const arr2 = [...arr1];
-The spread operator (...) can be used to pass arguments to a function:
-
-Example 4
-const numbers = [23,55,21,87,56];
-let minValue = Math.min(...numbers);
-let maxValue = Math.max(...numbers);
-JavaScript Array Rest (...)
-The rest operator (...) allows us to destruct an array and collect the leftovers:
-
-Examples
-let a, rest;
-const arr1 = [1,2,3,4,5,6,7,8];
-
-[a, ...rest] = arr1;
-let a, b, rest;
-const arr1 = [1,2,3,4,5,6,7,8];
-
-[a, b, ...rest] = arr1;
-See Also:
-Array Tutorial
-
-Array Constructor
-
-Array Basic Methods
-
-Array Search Methods
-
-Array Sort Methods
-
-Array Reference
-
-Complete JavaScript Reference
-For a complete reference to all JavaScript properties and methods, with full descriptions and many examples, go to:
-
-W3Schools' Full JavaScript Reference.
-
-The reference inludes all JavaScript updates from 1999 to 2025.
-
-Exercise
-?
-Consider the following code:
-const x = [45, 4, 9, 16, 25];
-let y = x.every(myfunc);
-function myfunc(val) {
-  return val > 20;
-}
-What will the result of the y?
-
-
-[45, 25]
-false
-[]
-NaN
-
-
-
-JavaScript Array Reference
-Complete Array Reference
-Revised July 2025
-Name	Description
-[ ]	Creates a new Array
-new Array()	Creates a new Array
-at()	Returns an indexed element of an array
-concat()	Joins arrays and returns an array with the joined arrays
-constructor	Returns the function that created the Array prototype
-copyWithin()	Copies array elements within the array, to and from specified positions
-entries()	Returns a key/value pair Array Iteration Object
-every()	Checks if every element in an array pass a test
-fill()	Fill the elements in an array with a static value
-filter()	Creates a new array with every element in an array that pass a test
-find()	Returns the value of the first element in an array that pass a test
-findIndex()	Returns the index of the first element in an array that pass a test
-findLast()	Returns the value of the last element in an array that pass a test
-findLastIndex()	Returns the index of the last element in an array that pass a test
-flat()	Concatenates sub-array elements
-flatMap()	Maps all array elements and creates a new flat array
-forEach()	Calls a function for each array element
-from()	Creates an array from an object
-includes()	Check if an array contains the specified element
-indexOf()	Search the array for an element and returns its position
-isArray()	Checks whether an object is an array
-join()	Joins all elements of an array into a string
-keys()	Returns a Array Iteration Object, containing the keys of the original array
-lastIndexOf()	Search the array for an element, starting at the end, and returns its position
-length	Sets or returns the number of elements in an array
-map()	Creates a new array with the result of calling a function for each array element
-of()	Creates an array from a number of arguments
-pop()	Removes the last element of an array, and returns that element
-prototype	Allows you to add properties and methods to an Array object
-push()	Adds new elements to the end of an array, and returns the new length
-reduce()	Reduce the values of an array to a single value (going left-to-right)
-reduceRight()	Reduce the values of an array to a single value (going right-to-left)
-reverse()	Reverses the order of the elements in an array
-shift()	Removes the first element of an array, and returns that element
-slice()	Selects a part of an array, and returns the new array
-some()	Checks if any of the elements in an array pass a test
-sort()	Sorts the elements of an array
-splice()	Adds or Removes array elements
-toReversed()	Reverses the order of array elements (to a new array)
-toSorted()	Sorts the elements of an array (to a new array)
-toSpliced()	Adds or Removes array elements (to a new array)
-toString()	Converts an array to a string, and returns the result
-unshift()	Adds new elements to the beginning of an array, and returns the new length
-valueOf()	Returns the primitive value of an array
-with()	Returns a new array with updated elements
-REMOVE ADS
-
-See Also:
-Array Tutorial
-
-Array Constructor
-
-Array Basic Methods
-
-Array Search Methods
-
-Array Sort Methods
-
-Array Iteration Methods
-
-
-
-JavaScript Array Const
-ECMAScript 2015 (ES6)
-In 2015, JavaScript introduced an important new keyword: const.
-
-It has become a common practice to declare arrays using const:
-
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-Cannot be Reassigned
-An array declared with const cannot be reassigned:
-
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-cars = ["Toyota", "Volvo", "Audi"];    // ERROR
-Arrays are Not Constants
-The keyword const is a little misleading.
-
-It does NOT define a constant array. It defines a constant reference to an array.
-
-Because of this, we can still change the elements of a constant array.
-
-Elements Can be Reassigned
-You can change the elements of a constant array:
-
-Example
-// You can create a constant array:
-const cars = ["Saab", "Volvo", "BMW"];
-
-// You can change an element:
-cars[0] = "Toyota";
-
-// You can add an element:
-cars.push("Audi");
-Assigned when Declared
-JavaScript const variables must be assigned a value when they are declared:
-
-Meaning: An array declared with const must be initialized when it is declared.
-
-Using const without initializing the array is a syntax error:
-
-Example
-This will not work:
-
-const cars;
-cars = ["Saab", "Volvo", "BMW"];
-Arrays declared with var can be initialized at any time.
-
-You can even use the array before it is declared:
-
-Example
-This is OK:
-
-cars = ["Saab", "Volvo", "BMW"];
-var cars;
-Const Block Scope
-An array declared with const has Block Scope.
-
-An array declared in a block is not the same as an array declared outside the block:
-
-Example
-const cars = ["Saab", "Volvo", "BMW"];
-// Here cars[0] is "Saab"
-{
-  const cars = ["Toyota", "Volvo", "BMW"];
-  // Here cars[0] is "Toyota"
-}
-// Here cars[0] is "Saab"
-An array declared with var does not have block scope:
-
-Example
-var cars = ["Saab", "Volvo", "BMW"];
-// Here cars[0] is "Saab"
-{
-  var cars = ["Toyota", "Volvo", "BMW"];
-  // Here cars[0] is "Toyota"
-}
-// Here cars[0] is "Toyota"
-You can learn more about Block Scope in the chapter: JavaScript Scope.
-
-REMOVE ADS
-
-Redeclaring Arrays
-Redeclaring an array declared with var is allowed anywhere in a program:
-
-Example
-var cars = ["Volvo", "BMW"];   // Allowed
-var cars = ["Toyota", "BMW"];  // Allowed
-cars = ["Volvo", "Saab"];      // Allowed
-Redeclaring or reassigning an array to const, in the same scope, or in the same block, is not allowed:
-
-Example
-var cars = ["Volvo", "BMW"];     // Allowed
-const cars = ["Volvo", "BMW"];   // Not allowed
-{
-  var cars = ["Volvo", "BMW"];   // Allowed
-  const cars = ["Volvo", "BMW"]; // Not allowed
-}
-Redeclaring or reassigning an existing const array, in the same scope, or in the same block, is not allowed:
-
-Example
-const cars = ["Volvo", "BMW"];   // Allowed
-const cars = ["Volvo", "BMW"];   // Not allowed
-var cars = ["Volvo", "BMW"];     // Not allowed
-cars = ["Volvo", "BMW"];         // Not allowed
-
-{
-  const cars = ["Volvo", "BMW"]; // Allowed
-  const cars = ["Volvo", "BMW"]; // Not allowed
-  var cars = ["Volvo", "BMW"];   // Not allowed
-  cars = ["Volvo", "BMW"];       // Not allowed
-}
-Redeclaring an array with const, in another scope, or in another block, is allowed:
-
-Example
-const cars = ["Volvo", "BMW"];   // Allowed
-{
-  const cars = ["Volvo", "BMW"]; // Allowed
-}
-{
-  const cars = ["Volvo", "BMW"]; // Allowed
-}
-Complete Array Reference
-For a complete Array reference, go to our:
-
-Complete JavaScript Array Reference
-
-The reference contains descriptions and examples of all Array properties and methods.
-
-Exercise
-?
-True or False.
-If you declare an array with the const keyword, you cannot change the array items later.
-
-
-True
-False
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Objects, Scope & Arrays | Complete Lecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f8;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .slide-deck {
+            max-width: 1200px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-height: 95vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .slide-deck::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .slide-deck::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        .slide-deck::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+
+        .progress-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .progress-track {
+            flex: 1;
+            min-width: 100px;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .slide-counter {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .slide-content {
+            min-height: 350px;
+            padding: 0.5rem 0;
+        }
+
+        .slide-tag {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #475569;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+        }
+
+        .slide-tag.beginner {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .slide-tag.advanced {
+            background: #fae8ff;
+            color: #7c3aed;
+        }
+
+        .slide-tag.scope-tag {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .slide-tag.array-tag {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .slide-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+
+        .slide-title i {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-right: 0.6rem;
+        }
+
+        .slide-title .scope-title i {
+            background: linear-gradient(135deg, #059669, #10b981);
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        .slide-title .array-title i {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        .slide-desc {
+            font-size: 1.05rem;
+            color: #334155;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.4rem 0;
+            color: #334155;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .feature-list li i {
+            color: #2563eb;
+            width: 20px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .feature-list li .badge-level {
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            margin-left: 0.3rem;
+        }
+
+        .feature-list li .badge-level.advanced-badge {
+            background: #fae8ff;
+            color: #7c3aed;
+        }
+
+        .feature-list li .badge-level.scope-badge {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid #e2e8f0;
+            color: #475569;
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            border-color: #2563eb;
+            color: #0f172a;
+            background: #f8fafc;
+        }
+
+        .nav-btn.primary {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: #ffffff;
+        }
+
+        .nav-btn.primary:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .dot-indicators {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: #2563eb;
+            width: 28px;
+            border-radius: 20px;
+        }
+
+        .code-block {
+            background: #1e293b;
+            border-radius: 0.8rem;
+            padding: 1rem 1.2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            overflow-x: auto;
+            margin: 0.75rem 0 0.5rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.6;
+        }
+
+        .code-block .c { color: #94a3b8; }
+        .code-block .k { color: #c084fc; }
+        .code-block .s { color: #facc15; }
+        .code-block .f { color: #60a5fa; }
+        .code-block .n { color: #34d399; }
+        .code-block .v { color: #f472b6; }
+        .code-block .b { color: #a78bfa; }
+        .code-block .o { color: #fbbf24; }
+        .code-block .t { color: #f87171; }
+
+        .info-box {
+            background: #f4f7fd;
+            border-left: 4px solid #2563eb;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.8rem;
+        }
+
+        .info-box i {
+            color: #2563eb;
+            margin-right: 0.5rem;
+        }
+
+        .info-box.scope-info {
+            background: #ecfdf5;
+            border-left-color: #059669;
+        }
+
+        .info-box.scope-info i {
+            color: #059669;
+        }
+
+        .info-box.array-info {
+            background: #fffbeb;
+            border-left-color: #d97706;
+        }
+
+        .info-box.array-info i {
+            color: #d97706;
+        }
+
+        .highlight-box {
+            background: #fef9e7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.8rem;
+        }
+
+        .highlight-box i {
+            color: #f59e0b;
+            margin-right: 0.5rem;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .comparison-box {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .comparison-box h4 {
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-box h4 i {
+            color: #2563eb;
+            margin-right: 0.5rem;
+        }
+
+        .comparison-box .result {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .comparison-box .label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 0.3rem;
+        }
+
+        .interactive-area {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            margin: 0.5rem 0;
+        }
+
+        .interactive-area button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0.2rem;
+            transition: 0.2s;
+        }
+
+        .interactive-area button:hover {
+            background: #1d4ed8;
+        }
+
+        .interactive-area button.reset-btn {
+            background: #64748b;
+        }
+
+        .interactive-area button.reset-btn:hover {
+            background: #475569;
+        }
+
+        .interactive-area button.scope-btn {
+            background: #059669;
+        }
+
+        .interactive-area button.scope-btn:hover {
+            background: #047857;
+        }
+
+        .interactive-area button.array-btn {
+            background: #d97706;
+        }
+
+        .interactive-area button.array-btn:hover {
+            background: #b45309;
+        }
+
+        .interactive-area input[type="text"],
+        .interactive-area input[type="number"] {
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            border: 1px solid #cbd5e1;
+            width: 200px;
+            max-width: 100%;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fefaf5;
+            border-radius: 1rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.6rem;
+            text-align: left;
+            border-bottom: 1px solid #ece3d7;
+            font-size: 0.85rem;
+        }
+
+        .comparison-table th {
+            background: #f0f7fe;
+            color: #1e3a8a;
+        }
+
+        .comparison-table.scope-table th {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .comparison-table.array-table th {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .keyword-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .keyword-grid span {
+            background: #f1f5f9;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .keyword-grid.scope-grid span {
+            background: #d1fae5;
+            border-color: #a7f3d0;
+        }
+
+        .keyword-grid.array-grid span {
+            background: #fef3c7;
+            border-color: #fcd34d;
+        }
+
+        .quiz-question {
+            background: #fef9f2;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 1rem;
+            border: 1px solid #fce4c1;
+        }
+
+        .quiz-question label {
+            display: block;
+            margin: 0.2rem 0;
+            cursor: pointer;
+        }
+
+        .quiz-question input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+        .answer-key {
+            background: #f0f7ff;
+            padding: 1rem;
+            border-radius: 1rem;
+            display: none;
+            margin-top: 0.5rem;
+        }
+
+        .slide-footer {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #ece3d7;
+            margin-top: 1rem;
+            color: #7a6b5a;
+            font-size: 0.8rem;
+        }
+
+        .btn-toggle {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0.5rem 0;
+            transition: 0.2s;
+        }
+
+        .btn-toggle:hover {
+            background: #1d4ed8;
+        }
+
+        .exercise-box {
+            background: #f0f7fe;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #dce3ef;
+        }
+
+        .exercise-box h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: #0f172a;
+        }
+
+        .exercise-box h3 i {
+            color: #2563eb;
+            margin-right: 0.5rem;
+        }
+
+        .output-demo {
+            background: #f1f5f9;
+            padding: 0.6rem 1rem;
+            border-radius: 0.8rem;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .real-life-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .real-life-table th,
+        .real-life-table td {
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .real-life-table th {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+
+        .real-life-table td i {
+            color: #2563eb;
+            margin-right: 0.3rem;
+        }
+
+        .primitive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .primitive-grid .item {
+            background: #f1f5f9;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .primitive-grid .item .type {
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .primitive-grid .item .example {
+            color: #64748b;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+        }
+
+        .method-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .method-demo button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .method-demo button:hover {
+            background: #1d4ed8;
+        }
+
+        .method-demo button.reset {
+            background: #64748b;
+        }
+
+        .method-demo button.reset:hover {
+            background: #475569;
+        }
+
+        .property-demo {
+            background: #f8fafc;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .property-demo .prop-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .property-demo .prop-row:last-child {
+            border-bottom: none;
+        }
+
+        .property-demo .key {
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .property-demo .value {
+            color: #334155;
+            font-family: 'Courier New', monospace;
+        }
+
+        .scope-demo-box {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .scope-demo-box h4 i {
+            color: #059669;
+        }
+
+        .array-demo-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .array-demo-box h4 i {
+            color: #d97706;
+        }
+
+        .comparison-table th.scope-header {
+            background: #059669;
+            color: white;
+        }
+
+        .comparison-table th.array-header {
+            background: #d97706;
+            color: white;
+        }
+
+        .var-let-const-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .var-let-const-grid .card {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .var-let-const-grid .card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .var-let-const-grid .card h4 i {
+            margin-right: 0.5rem;
+        }
+
+        .var-let-const-grid .card.var-card h4 i {
+            color: #ef4444;
+        }
+
+        .var-let-const-grid .card.let-card h4 i {
+            color: #3b82f6;
+        }
+
+        .var-let-const-grid .card.const-card h4 i {
+            color: #8b5cf6;
+        }
+
+        .var-let-const-grid .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .var-let-const-grid .card ul li {
+            padding: 0.2rem 0;
+            font-size: 0.85rem;
+            color: #334155;
+        }
+
+        .var-let-const-grid .card ul li i {
+            color: #2563eb;
+            width: 16px;
+            margin-right: 0.3rem;
+        }
+
+        .var-let-const-grid .card ul li .check {
+            color: #10b981;
+        }
+
+        .var-let-const-grid .card ul li .cross {
+            color: #ef4444;
+        }
+
+        .array-method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .array-method-grid .method-item {
+            background: #f8fafc;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .array-method-grid .method-item i {
+            color: #d97706;
+            margin-right: 0.3rem;
+        }
+
+        .array-method-grid .method-item .method-name {
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 992px) {
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+            .three-columns {
+                grid-template-columns: 1fr 1fr;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            .var-let-const-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-deck {
+                padding: 1.2rem;
+                border-radius: 1.5rem;
+            }
+            .slide-title {
+                font-size: 1.6rem;
+            }
+            .slide-desc {
+                font-size: 0.95rem;
+            }
+            .three-columns {
+                grid-template-columns: 1fr;
+            }
+            .feature-list li {
+                font-size: 0.9rem;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-btn {
+                justify-content: center;
+            }
+            .dot-indicators {
+                justify-content: center;
+            }
+            .progress-row {
+                flex-wrap: wrap;
+            }
+            .array-method-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-deck {
+                padding: 0.8rem;
+                border-radius: 1rem;
+            }
+            .slide-title {
+                font-size: 1.3rem;
+            }
+            .slide-tag {
+                font-size: 0.6rem;
+                padding: 0.1rem 0.8rem;
+            }
+            .nav-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.75rem;
+            }
+            .code-block {
+                font-size: 0.7rem;
+                padding: 0.8rem;
+            }
+            .interactive-area input[type="text"],
+            .interactive-area input[type="number"] {
+                width: 100%;
+            }
+            .real-life-table {
+                font-size: 0.75rem;
+            }
+            .real-life-table th,
+            .real-life-table td {
+                padding: 0.3rem 0.5rem;
+            }
+            .var-let-const-grid .card {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-deck">
+        <div class="progress-row">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="slide-counter" id="slideCounter">1 / 45</span>
+        </div>
+        <div class="slide-content" id="slideContent"></div>
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prevBtn"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="dot-indicators" id="dotContainer"></div>
+            <button class="nav-btn primary" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="slide-footer">
+            <i class="fas fa-cube"></i> JavaScript Objects, Scope & Arrays — Complete Lecture
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // Slide Data - JavaScript Objects, Scope & Arrays Complete Lecture
+        // ============================================================
+        var slides = [
+            // === OBJECTS SECTION (Slides 1-23) ===
+            {
+                tag: 'Introduction',
+                title: 'JavaScript Objects',
+                desc: 'Objects are variables that can store both values and functions. If you understand objects, you understand JavaScript.',
+                icon: 'fa-cube',
+                features: [
+                    'Objects are one of the most important concepts in JavaScript',
+                    'They store data as key:value pairs (properties)',
+                    'They can also store functions (methods)',
+                    'Almost everything in JavaScript is an object'
+                ],
+                extra: '<i class="fas fa-lightbulb"></i> <strong>Key Insight:</strong> Understanding objects is the key to mastering JavaScript!'
+            },
+            {
+                tag: 'Learning Path',
+                title: 'Objects Study Path',
+                desc: 'Learn Objects in the Right Order: First the idea, then how to make them, then how to use them.',
+                icon: 'fa-road',
+                features: [
+                    'Step 1: Understand what objects are and why they matter',
+                    'Step 2: Learn to create objects using different methods',
+                    'Step 3: Master object properties and how to access them',
+                    'Step 4: Learn object methods and the "this" keyword',
+                    'Step 5: Advanced topics: constructors, prototypes, and more'
+                ],
+                extra: '<i class="fas fa-graduation-cap"></i> <strong>Beginner to Advanced:</strong> This lecture covers everything from basics to advanced object concepts.'
+            },
+            {
+                tag: 'Beginner <span class="badge-level">Step 1</span>',
+                title: 'What Are JavaScript Objects?',
+                desc: 'Objects are containers for properties (values) and methods (functions). They help organize related data and functionality.',
+                icon: 'fa-box',
+                code: 'const car = {\n  type: "Fiat",\n  model: "500",\n  color: "white"\n};',
+                features: [
+                    'Properties are key:value pairs (like type: "Fiat")',
+                    'Methods are functions stored as property values',
+                    'Objects can be created using object literals: { }',
+                    'Use const to declare objects for better practice'
+                ],
+                info: 'In the example above, "type", "model", and "color" are properties. "Fiat", "500", and "white" are property values.'
+            },
+            {
+                tag: 'Beginner <span class="badge-level">Real World</span>',
+                title: 'Real Life Comparison',
+                desc: 'Objects help us model real-world things in code. Think of a car, a person, or a house.',
+                icon: 'fa-car',
+                real_life: true,
+                features: [
+                    'Different objects of the same type share the same properties',
+                    'Property values can differ from object to object',
+                    'Methods represent actions that can be performed on the object'
+                ],
+                extra: 'A car object has properties like name, model, weight, and color. It has methods like start(), drive(), and stop().'
+            },
+            {
+                tag: 'Beginner <span class="badge-level">Step 2</span>',
+                title: 'Object Properties',
+                desc: 'JavaScript objects are collections of properties. Properties can be changed, added, and deleted.',
+                icon: 'fa-tags',
+                features: [
+                    'Properties are key:value pairs',
+                    'Access properties with dot notation: person.firstName',
+                    'Access properties with bracket notation: person["firstName"]',
+                    'Add new properties by assignment: person.nationality = "English"',
+                    'Delete properties using the delete keyword'
+                ],
+                info: 'Dot notation is preferred for readability. Bracket notation is useful when property names are stored in variables.'
+            },
+            {
+                tag: 'Beginner <span class="badge-level">Step 3</span>',
+                title: 'Object Methods',
+                desc: 'Methods are actions that can be performed on objects. Methods are functions stored as property values.',
+                icon: 'fa-play-circle',
+                code: 'const person = {\n  firstName: "John",\n  lastName: "Doe",\n  fullName: function() {\n    return this.firstName + " " + this.lastName;\n  }\n};',
+                features: [
+                    'Methods are functions stored as property values',
+                    'Call a method with parentheses: person.fullName()',
+                    'Methods can access object properties using "this"',
+                    'You can add methods to objects by assigning functions'
+                ],
+                info: 'In the example above, fullName is a method that returns the full name of the person object.'
+            },
+            {
+                tag: 'Beginner <span class="badge-level">Step 4</span>',
+                title: 'The "this" Keyword',
+                desc: 'In JavaScript, the "this" keyword refers to an object. It is used to access the object that is calling a method.',
+                icon: 'fa-arrow-pointer',
+                code: 'const person = {\n  firstName: "John",\n  lastName: "Doe",\n  fullName: function() {\n    return this.firstName + " " + this.lastName;\n  }\n};',
+                features: [
+                    'In an object method, "this" refers to the object itself',
+                    'this.firstName refers to the firstName property of the object',
+                    'Makes it possible to use the same method with different objects',
+                    'When used alone, "this" refers to the global object (window in browsers)'
+                ],
+                info: 'The "this" keyword is essential for writing reusable object methods.'
+            },
+            {
+                tag: 'Beginner <span class="badge-level">Step 5</span>',
+                title: 'Object Display',
+                desc: 'Displaying a JavaScript object directly outputs [object Object]. Here are 4 ways to display objects properly.',
+                icon: 'fa-display',
+                features: [
+                    'Display properties by name: person.name + ", " + person.age',
+                    'Use a for...in loop to iterate over properties',
+                    'Use Object.values() to get an array of property values',
+                    'Use JSON.stringify() to convert object to JSON string'
+                ],
+                info: 'JSON.stringify() is the most complete way to display an object as it shows all properties and nested objects.'
+            },
+            {
+                tag: 'Beginner <span class="badge-level">Step 6</span>',
+                title: 'Object Constructors',
+                desc: 'Sometimes we need to create many objects of the same type. Object constructor functions make this easy.',
+                icon: 'fa-building',
+                code: 'function Person(first, last, age, eye) {\n  this.firstName = first;\n  this.lastName = last;\n  this.age = age;\n  this.eyeColor = eye;\n}\n\nconst myFather = new Person("John", "Doe", 50, "blue");',
+                features: [
+                    'Constructor functions are templates for creating objects',
+                    'Use the "new" keyword to create objects from constructors',
+                    'Properties can have default values',
+                    'Methods can be added to constructors using prototypes'
+                ],
+                info: 'It\'s considered good practice to name constructor functions with an upper-case first letter.'
+            },
+            {
+                tag: 'Advanced <span class="badge-level advanced-badge">Step 1</span>',
+                title: 'Object Definitions',
+                desc: 'There are multiple ways to define JavaScript objects. Each method has its use cases.',
+                icon: 'fa-code-branch',
+                features: [
+                    'Object Literal: { key: value } — simplest and most common',
+                    'new Keyword: new Object() — less common, not recommended',
+                    'Object Constructor: function Person() { } — for creating multiple objects',
+                    'Object.assign() — copies properties from one object to another',
+                    'Object.create() — creates an object from an existing prototype'
+                ],
+                info: 'For most cases, object literal syntax is the best choice. Use constructors when you need many objects of the same type.'
+            },
+            {
+                tag: 'Advanced <span class="badge-level advanced-badge">Step 2</span>',
+                title: 'Advanced "this"',
+                desc: 'The behavior of "this" changes depending on how a function is called. Understanding this is crucial for advanced JavaScript.',
+                icon: 'fa-crosshairs',
+                features: [
+                    'In object methods, "this" refers to the object',
+                    'In regular functions, "this" refers to the global object',
+                    'In strict mode, "this" is undefined in regular functions',
+                    'Arrow functions do not have their own "this" binding'
+                ],
+                info: 'Understanding "this" is one of the most important skills in JavaScript. It determines how functions access object properties.'
+            },
+            {
+                tag: 'Advanced <span class="badge-level advanced-badge">Step 3</span>',
+                title: 'Object Iterations',
+                desc: 'Modern JavaScript provides powerful methods for iterating over object properties.',
+                icon: 'fa-arrows-rotate',
+                features: [
+                    'Object.keys(obj) — returns array of property names',
+                    'Object.values(obj) — returns array of property values',
+                    'Object.entries(obj) — returns array of [key, value] pairs',
+                    'Object.groupBy(obj, callback) — groups properties by a condition'
+                ],
+                info: 'Object.entries() is particularly useful for looping over objects with for...of loops.'
+            },
+            {
+                tag: 'Advanced <span class="badge-level advanced-badge">Step 4</span>',
+                title: 'Object Get & Set',
+                desc: 'Getters and setters allow you to define Object Accessors (Computed Properties).',
+                icon: 'fa-sliders',
+                code: 'const person = {\n  firstName: "John",\n  lastName: "Doe",\n  get fullName() {\n    return this.firstName + " " + this.lastName;\n  },\n  set fullName(value) {\n    const parts = value.split(" ");\n    this.firstName = parts[0];\n    this.lastName = parts[1];\n  }\n};',
+                features: [
+                    'Getters access properties (get fullName() { })',
+                    'Setters change properties (set fullName(value) { })',
+                    'Accessors are used like regular properties, not methods',
+                    'They provide computed properties that depend on other properties'
+                ],
+                info: 'Getters and setters let you control how properties are accessed and modified.'
+            },
+            {
+                tag: 'Advanced <span class="badge-level advanced-badge">Step 5</span>',
+                title: 'Object Management',
+                desc: 'Manage object properties with property descriptors and advanced configuration.',
+                icon: 'fa-gear',
+                features: [
+                    'Property descriptors control property behavior: writable, enumerable, configurable',
+                    'Object.defineProperty() adds or changes a property with descriptors',
+                    'Object.getOwnPropertyDescriptor() gets property metadata',
+                    'Property descriptors enable fine-grained control over objects'
+                ],
+                info: 'Property descriptors are powerful for creating robust, secure objects.'
+            },
+            {
+                tag: 'Advanced <span class="badge-level advanced-badge">Step 6</span>',
+                title: 'Object Protection',
+                desc: 'JavaScript provides methods to protect objects from unwanted changes.',
+                icon: 'fa-shield-halved',
+                features: [
+                    'Object.freeze() — prevents all changes to an object',
+                    'Object.seal() — prevents adding/deleting properties, but allows changes',
+                    'Object.preventExtensions() — prevents adding new properties',
+                    'These methods help create immutable objects'
+                ],
+                info: 'Object.freeze() creates truly immutable objects. Use it for constants and configuration objects.'
+            },
+            {
+                tag: 'Advanced <span class="badge-level advanced-badge">Step 7</span>',
+                title: 'Object Prototypes',
+                desc: 'JavaScript objects inherit properties and methods from a prototype. This is the foundation of inheritance in JavaScript.',
+                icon: 'fa-sitemap',
+                features: [
+                    'Every object has a prototype (except Object.prototype)',
+                    'Prototypes allow objects to share properties and methods',
+                    'The prototype chain enables inheritance across objects',
+                    'You can access an object\'s prototype with Object.getPrototypeOf()'
+                ],
+                info: 'Prototypes are the mechanism behind JavaScript\'s inheritance system.'
+            },
+            {
+                tag: 'Advanced <span class="badge-level advanced-badge">Step 8</span>',
+                title: 'Object Reference',
+                desc: 'All Object Methods and Properties — comprehensive reference for working with objects.',
+                icon: 'fa-book',
+                features: [
+                    'Object.keys(), Object.values(), Object.entries()',
+                    'Object.assign(), Object.create(), Object.defineProperty()',
+                    'Object.freeze(), Object.seal(), Object.preventExtensions()',
+                    'Object.getPrototypeOf(), Object.setPrototypeOf()',
+                    'Object.hasOwn(), Object.is(), Object.groupBy()'
+                ],
+                info: 'This reference covers all essential Object methods available in modern JavaScript (Revised July 2025).'
+            },
+            {
+                tag: 'Examples',
+                title: 'Object Examples',
+                desc: 'Here are practical examples of creating and using objects in JavaScript.',
+                icon: 'fa-code',
+                code: '// Object Literal\nconst student = {\n  firstName: "Killion",\n  lastName: "Nelson",\n  age: 34,\n  email: function() {\n    return this.firstName + this.lastName + "@gmail.com";\n  }\n};\n\n// Using the object\nconsole.log(student.firstName);\nconsole.log(student.email());',
+                examples: true,
+                features: [
+                    'const car = { type: "Toyota", model: "2025", color: "Red" }',
+                    'const person = {}; person.name = "Pius"; person.age = 43;',
+                    'const country = new Object({ name: "Nigeria", capital: "Abuja" })',
+                    'student.cgpa = 4.2; // Adding a new property',
+                    'delete student.age; // Deleting a property'
+                ]
+            },
+            {
+                tag: 'Nested Objects',
+                title: 'Nested Objects',
+                desc: 'Objects can contain other objects as property values, creating complex data structures.',
+                icon: 'fa-layer-group',
+                code: 'const banker = {\n  full_name: "Gauis Ighalo",\n  account_number: "1234567890",\n  monthly_salary: "300,000",\n  car: {\n    model: "Volvo",\n    year: "2025",\n    color: "Magenta"\n  }\n};\n\nconsole.log(banker.car.color); // "Magenta"',
+                features: [
+                    'Nested objects help organize complex data',
+                    'Access nested properties with dot notation: obj.nested.property',
+                    'Or with bracket notation: obj["nested"]["property"]',
+                    'Nested objects can be as deep as needed'
+                ],
+                info: 'Nested objects are common in real-world applications, especially when working with JSON data from APIs.'
+            },
+            {
+                tag: 'Primitives vs Objects',
+                title: 'JavaScript Primitives vs Objects',
+                desc: 'JavaScript has 7 primitive data types. Everything else is an object.',
+                icon: 'fa-diagram-project',
+                primitives: true,
+                features: [
+                    'Primitives: string, number, boolean, bigint, null, undefined, symbol',
+                    'Objects: Objects, Arrays, Dates, Maps, Sets, RegExp, Errors',
+                    'Primitives store single values; objects store collections',
+                    'Objects are mutable; primitives are immutable',
+                    'typeof null returns "object" (historical bug)'
+                ],
+                info: 'All JavaScript values except primitives are objects. This is why objects are so important!'
+            },
+            {
+                tag: 'Interactive Demo',
+                title: 'Live Object Demo',
+                desc: 'Interact with objects in real-time to see how they work.',
+                icon: 'fa-play',
+                interactive_object: true,
+                features: [
+                    'Add properties to an object dynamically',
+                    'Access properties using dot and bracket notation',
+                    'See object changes update in real-time',
+                    'Practice creating and manipulating objects'
+                ]
+            },
+            {
+                tag: 'Object Assessment',
+                title: 'Object Module Assessment',
+                desc: 'Test your understanding of JavaScript objects.',
+                icon: 'fa-clipboard-list',
+                obj_quiz: true,
+                features: [
+                    'Answer the quiz questions about objects',
+                    'Check your answers with the answer key',
+                    'Review any topics you need to practice'
+                ]
+            },
+            {
+                tag: 'Object Summary',
+                title: 'Objects Summary & Next Steps',
+                desc: 'Congratulations! You\'ve completed the JavaScript Objects section.',
+                icon: 'fa-flag-checkered',
+                features: [
+                    'Objects are containers for Properties and Methods',
+                    'Properties are named Values stored as key:value pairs',
+                    'Methods are Functions stored as key:function() pairs',
+                    'In JavaScript, Objects are King!',
+                    'If you Understand Objects, you Understand JavaScript'
+                ],
+                extra: '<i class="fas fa-graduation-cap"></i> <strong>You\'ve learned:</strong> Object basics, properties, methods, this, constructors, prototypes, and more! 🎉'
+            },
+
+            // === SCOPE SECTION (Slides 24-32) ===
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Introduction</span>',
+                title: 'JavaScript Scope',
+                desc: 'Scope = Visibility. Scope determines the accessibility (visibility) of variables.',
+                icon: 'fa-eye',
+                scope_section: true,
+                features: [
+                    'JavaScript variables have 3 types of scope:',
+                    '🌍 Global Scope — accessible everywhere',
+                    '📦 Function Scope — accessible only inside functions',
+                    '🔒 Block Scope — accessible only inside { } blocks (let/const)'
+                ],
+                extra: '<i class="fas fa-lightbulb"></i> <strong>Key Insight:</strong> Understanding scope prevents variable conflicts and bugs!'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Global</span>',
+                title: 'Global Scope',
+                desc: 'Variables declared Globally (outside any block or function) have Global Scope. They can be accessed from anywhere in a JavaScript program.',
+                icon: 'fa-globe',
+                scope_section: true,
+                code: 'var x = 1;    // Global scope\nlet y = 2;    // Global scope\nconst z = 3;  // Global scope\n\n// code here can use carName\nlet carName = "Volvo";\n\nfunction myFunction() {\n  // code here can also use carName\n}',
+                features: [
+                    'Global variables are accessible from any script or function',
+                    'Variables declared with var, let, and const all have global scope when declared outside blocks',
+                    'All scripts and functions in the same web page can access global variables',
+                    'Global variables are created when the page loads and deleted when the page closes'
+                ],
+                info: 'In HTML, the global scope is the window object. Global variables defined with var belong to window.'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Function</span>',
+                title: 'Function Scope',
+                desc: 'All JavaScript functions have their own scope. Variables defined inside a function are not accessible from outside the function.',
+                icon: 'fa-function',
+                scope_section: true,
+                code: 'function myFunction1() {\n  var carName = "Volvo";  // Function Scope\n}\n\nfunction myFunction2() {\n  let carName = "Volvo";  // Function Scope\n}\n\nfunction myFunction3() {\n  const carName = "Volvo";  // Function Scope\n}\n\n// code here can NOT use carName',
+                features: [
+                    'Local variables have Function Scope',
+                    'They can only be accessed from within the function',
+                    'No scripts or functions outside the function can access them',
+                    'Variables with the same name can be used outside the function or in different functions',
+                    'Local variables are created when a function starts and deleted when it completes'
+                ],
+                info: 'Arguments (parameters) work as local variables inside functions.'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Block</span>',
+                title: 'Block Scope',
+                desc: 'ES6 introduced let and const which provide Block Scope in JavaScript. Variables declared inside a { } block are only accessible within that block.',
+                icon: 'fa-cube',
+                scope_section: true,
+                code: '{\n  let x = 2;\n  const y = 3;\n}\n// x and y can NOT be used here\n\n{\n  var z = 2;\n}\n// z CAN be used here (var does NOT have block scope)',
+                features: [
+                    'let and const are block-scoped — only accessible within the { } block',
+                    'var does NOT have block scope — it can be accessed outside the block',
+                    'Block scope helps prevent unintended variable overwrites',
+                    'Promotes better code organization and reduces bugs'
+                ],
+                info: 'Variables declared with var inside a { } block can be accessed from outside the block — this is a common source of bugs!'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Auto Global</span>',
+                title: 'Automatically Global',
+                desc: 'If you assign a value to a variable that has not been declared, it will become a GLOBAL variable.',
+                icon: 'fa-exclamation-triangle',
+                scope_section: true,
+                code: 'myFunction();\n\n// code here can use carName\n\nfunction myFunction() {\n  carName = "Volvo";  // This creates a GLOBAL variable\n}',
+                features: [
+                    'Undeclared variables assigned a value become global automatically',
+                    'This can happen even inside a function',
+                    'This behavior can cause unexpected bugs',
+                    'In "Strict Mode", undeclared variables are NOT automatically global'
+                ],
+                info: '⚠️ <strong>Warning:</strong> Do NOT create global variables accidentally. Always declare your variables with let, const, or var!'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Lifetime</span>',
+                title: 'Lifetime of JavaScript Variables',
+                desc: 'The lifetime of a JavaScript variable starts when it is declared.',
+                icon: 'fa-clock',
+                scope_section: true,
+                features: [
+                    'Function (local) variables are deleted when the function is completed',
+                    'Global variables are deleted when you close the browser window (or tab)',
+                    'Variables declared with let and const are block-scoped and follow block lifetime',
+                    'var variables are function-scoped and follow function lifetime'
+                ],
+                info: 'Understanding variable lifetime is important for memory management and avoiding bugs.'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Code Blocks</span>',
+                title: 'JavaScript Code Blocks',
+                desc: 'A code block is a group of statements enclosed within curly braces { }. Code blocks control flow and define variable scope.',
+                icon: 'fa-brackets-curly',
+                scope_section: true,
+                code: 'function myFunction() {\n  // This is a code block\n}\n\nif (condition) {\n  // This is a code block\n} else {\n  // This is a code block\n}\n\nfor (let i = 0; i < 10; i++) {\n  // This is a code block\n}\n\n{\n  // Standalone block\n  let x = 10;\n  let y = 100;\n  let area = x * y;\n}',
+                features: [
+                    'Code blocks allow multiple statements to be treated as a single unit',
+                    'The body of a function is always enclosed within a code block',
+                    'Code blocks are essential for if statements, loops, and standalone blocks',
+                    'Variables declared with let and const inside a block are block-scoped',
+                    'Standalone blocks can be used to create scope for let and const variables'
+                ],
+                info: 'Standalone blocks help prevent "polluting" the global scope, keep code clean, and reduce the risk of name collisions.'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Hoisting</span>',
+                title: 'JavaScript Hoisting',
+                desc: 'Hoisting is JavaScript\'s default behavior of moving declarations to the top of the current scope.',
+                icon: 'fa-arrow-up',
+                scope_section: true,
+                code: '// Example 1: Variable used before declaration\nx = 5;\nconsole.log(x);  // 5\nvar x;\n\n// Example 2: With let (ReferenceError)\n// carName = "Volvo";\n// let carName;  // ReferenceError\n\n// Example 3: Initializations are NOT hoisted\nvar y = 5;\nconsole.log(y);  // 5\nconsole.log(z);  // undefined\nvar z = 7;',
+                features: [
+                    'JavaScript only hoists declarations, not initializations',
+                    'var declarations are hoisted and initialized with undefined',
+                    'let and const declarations are hoisted but NOT initialized (Temporal Dead Zone)',
+                    'Using a let or const variable before declaration results in a ReferenceError',
+                    'Always declare variables at the top of every scope to avoid bugs'
+                ],
+                info: 'Hoisting is a common source of bugs. Always declare variables at the top of their scope!'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">var vs let vs const</span>',
+                title: 'var vs let vs const',
+                desc: 'The primary difference between var, let, and const lies in scoping, reassignment rules, and hoisting behavior.',
+                icon: 'fa-code-compare',
+                scope_section: true,
+                var_let_const: true,
+                features: [
+                    'var: Function-scoped, can be redeclared, hoisted with undefined',
+                    'let: Block-scoped, cannot be redeclared, hoisted but not initialized',
+                    'const: Block-scoped, cannot be redeclared, cannot be reassigned',
+                    'Always use const by default, use let when reassignment is needed, never use var'
+                ],
+                info: 'Modern JavaScript standards recommend avoiding var entirely to minimize unintentional bugs.'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Strict Mode</span>',
+                title: 'JavaScript "use strict"',
+                desc: 'The "use strict" directive defines that JavaScript code should be executed in strict mode.',
+                icon: 'fa-shield-halved',
+                scope_section: true,
+                code: '"use strict";\nx = 3.14;  // ❌ Error: x is not declared\n\nfunction myFunction() {\n  "use strict";\n  y = 3.14;  // ❌ Error: y is not declared\n}\n\n// Allowed in strict mode:\nlet z = 3.14;  // ✅ Correct',
+                features: [
+                    'Strict mode makes it easier to write "secure" JavaScript',
+                    'Mistyping a variable name creates a global variable in normal mode — in strict mode it throws an error',
+                    'Strict mode changes previously accepted "bad syntax" into real errors',
+                    'Cannot use undeclared variables, delete functions, duplicate parameter names, octal literals, etc.'
+                ],
+                info: 'The "use strict" directive is only recognized at the beginning of a script or a function.'
+            },
+            {
+                tag: 'Scope <span class="badge-level scope-badge">Assessment</span>',
+                title: 'Scope Module Assessment',
+                desc: 'Test your understanding of JavaScript scope and variables.',
+                icon: 'fa-clipboard-list',
+                scope_quiz: true,
+                features: [
+                    'Answer the quiz questions about scope, hoisting, and variables',
+                    'Check your answers with the answer key',
+                    'Review any topics you need to practice'
+                ]
+            },
+
+            // === ARRAYS SECTION (Slides 33-45) ===
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Introduction</span>',
+                title: 'JavaScript Arrays',
+                desc: 'An Array is an object type designed for storing data collections.',
+                icon: 'fa-list',
+                array_section: true,
+                code: 'const cars = ["Saab", "Volvo", "BMW"];\n\n// Arrays can hold different data types\nconst mixed = ["Hello", 42, true, {name: "John"}];\n\n// Arrays are zero-indexed\nconsole.log(cars[0]);  // "Saab"',
+                features: [
+                    'Elements: An array is a list of values, known as elements',
+                    'Ordered: Array elements are ordered based on their index',
+                    'Zero indexed: The first element is at index 0, the second at index 1',
+                    'Dynamic size: Arrays can grow or shrink as elements are added or removed',
+                    'Heterogeneous: Arrays can store elements of different data types'
+                ],
+                info: 'Arrays are a special type of object. The typeof operator returns "object" for arrays.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Creating</span>',
+                title: 'Creating Arrays',
+                desc: 'There are multiple ways to create arrays in JavaScript. The array literal is the most common and recommended.',
+                icon: 'fa-plus-circle',
+                array_section: true,
+                code: '// Array Literal (Recommended)\nconst cars = ["Saab", "Volvo", "BMW"];\n\n// Empty array with elements added later\nconst cars2 = [];\ncars2[0] = "Saab";\ncars2[1] = "Volvo";\n\n// Using new Array() (Not Recommended)\nconst cars3 = new Array("Saab", "Volvo", "BMW");\n\n// Array with 40 undefined elements (dangerous!)\nconst points = new Array(40);  // ⚠️ Not [40]',
+                features: [
+                    'Array literals: [ ] — easiest and fastest way',
+                    'Empty arrays can be filled later using index assignment',
+                    'new Array() — not recommended for most cases',
+                    '⚠️ new Array(number) creates an array with empty elements, not [number]',
+                    'Always use [ ] instead of new Array() for clarity and safety'
+                ],
+                info: 'Use array literals [ ] instead of new Array() for better readability and to avoid the "single number trap".'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Accessing</span>',
+                title: 'Accessing Array Elements',
+                desc: 'You access an array element by referring to its index number. Array indexes start with 0.',
+                icon: 'fa-hand-pointer',
+                array_section: true,
+                code: 'const cars = ["Saab", "Volvo", "BMW"];\n\n// Access first element\nlet car = cars[0];  // "Saab"\n\n// Change an element\ncars[0] = "Opel";\n\n// Access last element\nlet last = cars[cars.length - 1];\n\n// Access using at() (ES2022)\nlet second = cars.at(1);  // "Volvo"',
+                features: [
+                    '[0] is the first element, [1] is the second, and so on',
+                    'You can change array elements by assigning a new value to an index',
+                    'cars.length - 1 gives the index of the last element',
+                    'The at() method (ES2022) allows negative indexing: cars.at(-1)'
+                ],
+                info: 'The at() method was introduced in ES2022 to support negative indexing like [-1] in other languages.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Properties</span>',
+                title: 'Array Properties & Methods',
+                desc: 'JavaScript arrays have built-in properties and methods for powerful data manipulation.',
+                icon: 'fa-cogs',
+                array_section: true,
+                code: 'const cars = ["Saab", "Volvo", "BMW"];\n\n// Length property\nlet count = cars.length;  // 3\n\n// Convert to string\nlet str = cars.toString();  // "Saab,Volvo,BMW"\n\n// Loop through array\nfor (let i = 0; i < cars.length; i++) {\n  console.log(cars[i]);\n}\n\n// Using forEach\ncars.forEach(function(car) {\n  console.log(car);\n});',
+                features: [
+                    'length — returns the number of elements in an array',
+                    'toString() — converts array to a comma-separated string',
+                    'Arrays can be displayed directly: document.getElementById("demo").innerHTML = cars',
+                    'Arrays can be looped using for loops, for...of, and forEach()'
+                ],
+                info: 'The length property is always one more than the highest array index.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Methods</span>',
+                title: 'Array Methods (Part 1)',
+                desc: 'Basic array methods for adding, removing, and manipulating elements.',
+                icon: 'fa-tools',
+                array_section: true,
+                array_methods_1: true,
+                features: [
+                    'pop() — removes the last element and returns it',
+                    'push() — adds an element to the end and returns new length',
+                    'shift() — removes the first element and returns it',
+                    'unshift() — adds an element to the beginning and returns new length',
+                    'concat() — merges arrays and returns a new array',
+                    'slice() — extracts a portion and returns a new array',
+                    'splice() — adds/removes elements at a specific position'
+                ],
+                info: 'pop() and push() work on the end of the array. shift() and unshift() work on the beginning.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Methods</span>',
+                title: 'Array Methods (Part 2)',
+                desc: 'More array methods for searching, sorting, and iterating.',
+                icon: 'fa-search',
+                array_section: true,
+                array_methods_2: true,
+                features: [
+                    'indexOf() — finds the first occurrence of an element',
+                    'lastIndexOf() — finds the last occurrence of an element',
+                    'includes() — checks if an element exists (ES2016)',
+                    'find() — returns the first element that passes a test',
+                    'findIndex() — returns the index of the first element that passes a test',
+                    'findLast() — returns the last element that passes a test (ES2023)',
+                    'findLastIndex() — returns the index of the last element that passes a test (ES2023)'
+                ],
+                info: 'includes() is preferred over indexOf() when you just need to check existence.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Methods</span>',
+                title: 'Array Methods (Part 3)',
+                desc: 'Powerful array methods for transforming and aggregating data.',
+                icon: 'fa-arrow-right-arrow-left',
+                array_section: true,
+                array_methods_3: true,
+                features: [
+                    'map() — creates a new array by applying a function to each element',
+                    'filter() — creates a new array with elements that pass a test',
+                    'reduce() — reduces the array to a single value (left to right)',
+                    'reduceRight() — reduces the array to a single value (right to left)',
+                    'every() — checks if all elements pass a test',
+                    'some() — checks if any elements pass a test',
+                    'flat() — flattens a nested array (ES2019)',
+                    'flatMap() — maps and flattens in one step (ES2019)'
+                ],
+                info: 'These methods are called "higher-order functions" because they take functions as arguments.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Sorting</span>',
+                title: 'Array Sorting',
+                desc: 'JavaScript provides powerful methods for sorting arrays in various ways.',
+                icon: 'fa-arrow-up-arrow-down',
+                array_section: true,
+                code: '// Alphabetical sort\nconst fruits = ["Banana", "Orange", "Apple", "Mango"];\nfruits.sort();  // ["Apple", "Banana", "Mango", "Orange"]\nfruits.reverse();  // ["Orange", "Mango", "Banana", "Apple"]\n\n// Numeric sort with compare function\nconst points = [40, 100, 1, 5, 25, 10];\npoints.sort((a, b) => a - b);  // [1, 5, 10, 25, 40, 100]\n\n// Sorting objects\nconst cars = [\n  {type:"Volvo", year:2016},\n  {type:"Saab", year:2001},\n  {type:"BMW", year:2010}\n];\ncars.sort((a, b) => a.year - b.year);',
+                features: [
+                    'sort() — sorts alphabetically by default',
+                    'reverse() — reverses the array order',
+                    'To sort numbers, use a compare function: (a, b) => a - b',
+                    'Objects can be sorted by property values',
+                    'toSorted() and toReversed() (ES2023) create new arrays without modifying original'
+                ],
+                info: 'When sorting numbers, JavaScript converts them to strings first. Always use a compare function for numeric sorting!'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Iteration</span>',
+                title: 'Array Iteration',
+                desc: 'Different ways to loop through and process array elements.',
+                icon: 'fa-arrows-rotate',
+                array_section: true,
+                array_iteration: true,
+                features: [
+                    'for...of — loops over array values (Recommended)',
+                    'for...in — loops over array indexes (Not Recommended for arrays)',
+                    'forEach() — calls a function for each element',
+                    'map() — creates a new array from function results',
+                    'filter() — creates a new array with elements that pass a test',
+                    'reduce() — reduces to a single value',
+                    'keys() — returns an iterator of keys',
+                    'entries() — returns an iterator of [key, value] pairs'
+                ],
+                info: 'For arrays, for...of is recommended over for...in. for...in was designed for objects, not arrays.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Const</span>',
+                title: 'Array Const',
+                desc: 'Arrays declared with const cannot be reassigned, but their elements can be changed.',
+                icon: 'fa-lock',
+                array_section: true,
+                code: 'const cars = ["Saab", "Volvo", "BMW"];\n\n// ✅ This is allowed (changing elements)\ncars[0] = "Toyota";\ncars.push("Audi");\n\n// ❌ This is NOT allowed (reassigning)\ncars = ["Toyota", "Volvo", "Audi"];  // Error\n\n// Const arrays have block scope\n{\n  const cars = ["Toyota", "BMW"];  // Different block scope\n}',
+                features: [
+                    'const defines a constant reference to an array, not a constant array',
+                    'You CAN change array elements with const',
+                    'You CAN add elements with methods like push()',
+                    'You CANNOT reassign the array to a new value',
+                    'const arrays have block scope (unlike var)'
+                ],
+                info: 'The keyword const is a little misleading — it defines a constant reference, not a constant array.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Nested</span>',
+                title: 'Nested Arrays & Objects',
+                desc: 'Values in arrays can be objects, and values in objects can be arrays.',
+                icon: 'fa-layer-group',
+                array_section: true,
+                code: 'const myObj = {\n  name: "John",\n  age: 30,\n  cars: [\n    {name:"Ford", models:["Fiesta", "Focus", "Mustang"]},\n    {name:"BMW", models:["320", "X3", "X5"]},\n    {name:"Fiat", models:["500", "Panda"]}\n  ]\n};\n\n// Access nested data\nconsole.log(myObj.cars[0].name);  // "Ford"\nconsole.log(myObj.cars[1].models[0]);  // "320"',
+                features: [
+                    'Arrays can contain objects as elements',
+                    'Objects can contain arrays as property values',
+                    'Nested structures can be accessed using dot and bracket notation',
+                    'Use nested loops to iterate through complex structures'
+                ],
+                info: 'Nested arrays and objects are common in real-world applications, especially when working with API data.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Reference</span>',
+                title: 'Complete Array Reference',
+                desc: 'All Array properties and methods (Revised July 2025).',
+                icon: 'fa-book',
+                array_section: true,
+                array_reference: true,
+                features: [
+                    'Properties: length, constructor, prototype',
+                    'Methods: at(), concat(), copyWithin(), entries(), every(), fill(), filter(), find(), findIndex(), findLast(), findLastIndex(), flat(), flatMap(), forEach(), from(), includes(), indexOf(), isArray(), join(), keys(), lastIndexOf(), map(), of(), pop(), push(), reduce(), reduceRight(), reverse(), shift(), slice(), some(), sort(), splice(), toReversed(), toSorted(), toSpliced(), toString(), unshift(), valueOf(), with()'
+                ],
+                info: 'The reference includes all JavaScript updates from 1999 to 2025.'
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Interactive</span>',
+                title: 'Live Array Demo',
+                desc: 'Experiment with array methods in real-time.',
+                icon: 'fa-play',
+                interactive_array: true,
+                features: [
+                    'Push, pop, shift, and unshift elements',
+                    'Sort and reverse the array',
+                    'Use map and filter on the array',
+                    'See array changes update in real-time'
+                ]
+            },
+            {
+                tag: 'Arrays <span class="badge-level array-badge">Assessment</span>',
+                title: 'Array Module Assessment',
+                desc: 'Test your understanding of JavaScript arrays.',
+                icon: 'fa-clipboard-list',
+                array_quiz: true,
+                features: [
+                    'Answer the quiz questions about arrays',
+                    'Check your answers with the answer key',
+                    'Review any topics you need to practice'
+                ]
+            },
+            {
+                tag: 'Final Summary',
+                title: 'Congratulations!',
+                desc: 'You\'ve completed the JavaScript Objects, Scope & Arrays lecture!',
+                icon: 'fa-trophy',
+                features: [
+                    '✅ JavaScript Objects — properties, methods, this, constructors, prototypes',
+                    '✅ JavaScript Scope — global, function, block, hoisting, strict mode',
+                    '✅ JavaScript Arrays — creation, methods, iteration, sorting, nested structures',
+                    '✅ var, let, const — understanding the differences',
+                    '✅ Real-world examples and interactive demos'
+                ],
+                extra: '<i class="fas fa-graduation-cap"></i> <strong>You\'re now ready to:</strong> Build complex applications, manipulate data structures, and write clean, organized JavaScript code! 🎉'
+            }
+        ];
+
+        var currentIndex = 0;
+        var totalSlides = slides.length;
+
+        function renderSlide(index) {
+            var slide = slides[index];
+            var contentDiv = document.getElementById('slideContent');
+            var progressFill = document.getElementById('progressFill');
+            var counterSpan = document.getElementById('slideCounter');
+
+            var html = '';
+
+            // Tag
+            var tagContent = slide.tag;
+            html += '<div class="slide-tag">' + tagContent + '</div>';
+
+            // Title with icon
+            var title = slide.title;
+            if (slide.icon) {
+                title = '<i class="fas ' + slide.icon + '"></i> ' + slide.title;
+            }
+            html += '<div class="slide-title">' + title + '</div>';
+
+            // Description
+            html += '<div class="slide-desc">' + slide.desc + '</div>';
+
+            // Features list
+            if (slide.features) {
+                html += '<ul class="feature-list">';
+                for (var f = 0; f < slide.features.length; f++) {
+                    html += '<li><i class="fas fa-check-circle"></i> ' + slide.features[f] + '</li>';
+                }
+                html += '</ul>';
+            }
+
+            // Extra text
+            if (slide.extra) {
+                var extraClass = '';
+                if (slide.scope_section) extraClass = ' scope-info';
+                if (slide.array_section) extraClass = ' array-info';
+                html += '<div class="info-box' + extraClass + '"><i class="fas fa-info-circle"></i> ' + slide.extra + '</div>';
+            }
+
+            // Info box
+            if (slide.info) {
+                var infoClass = '';
+                if (slide.scope_section) infoClass = ' scope-info';
+                if (slide.array_section) infoClass = ' array-info';
+                html += '<div class="info-box' + infoClass + '"><i class="fas fa-lightbulb"></i> ' + slide.info + '</div>';
+            }
+
+            // Code block
+            if (slide.code) {
+                var lines = slide.code.split('\n');
+                var result = [];
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+                    var processed = line;
+                    processed = processed.replace(/^( +)?(#.*)$/, function(match, spaces, comment) {
+                        return (spaces || '') + '<span class="c">' + comment + '</span>';
+                    });
+                    processed = processed.replace(/\b(let|const|var|function|return|if|else|for|while|typeof|new|class|try|catch|finally|throw|switch|case|break|continue|import|export|default|from|as|extends|super|static|get|set|delete|in|instanceof|of|void)\b/g,
+                        '<span class="k">$1</span>');
+                    processed = processed.replace(/"(.*?)"/g, '<span class="s">"$1"</span>');
+                    processed = processed.replace(/'(.*?)'/g, '<span class="s">\'$1\'</span>');
+                    processed = processed.replace(/\b(\d+\.?\d*)\b/g, '<span class="n">$1</span>');
+                    processed = processed.replace(/\b(document|console|window|alert|prompt|getElementById|innerHTML|innerText|style|addEventListener|Object|Array|Map|Set|Date|JSON|Math|Number|String|Boolean)\b/g,
+                        '<span class="f">$1</span>');
+                    processed = processed.replace(/\b(true|false|null|undefined|NaN|Infinity)\b/g, '<span class="b">$1</span>');
+                    result.push(processed);
+                }
+                html += '<div class="code-block">' + result.join('\n') + '</div>';
+            }
+
+            // Real Life Table
+            if (slide.real_life) {
+                html += '<table class="real-life-table">';
+                html += '<thead><tr><th>Car Properties</th><th>Car Methods</th></tr></thead>';
+                html += '<tbody>';
+                html += '<tr><td><i class="fas fa-car"></i> car.name = Fiat</td><td><i class="fas fa-play"></i> car.start()</td></tr>';
+                html += '<tr><td><i class="fas fa-car"></i> car.model = 500</td><td><i class="fas fa-play"></i> car.drive()</td></tr>';
+                html += '<tr><td><i class="fas fa-weight-scale"></i> car.weight = 850kg</td><td><i class="fas fa-play"></i> car.brake()</td></tr>';
+                html += '<tr><td><i class="fas fa-palette"></i> car.color = white</td><td><i class="fas fa-play"></i> car.stop()</td></tr>';
+                html += '</tbody></table>';
+                html += '<div class="highlight-box"><i class="fas fa-lightbulb"></i> <strong>Key Concept:</strong> Different cars have the same properties, but property values can differ. Different cars have the same methods, but methods can be performed at different times.</div>';
+            }
+
+            // Primitives Grid
+            if (slide.primitives) {
+                html += '<div class="primitive-grid">';
+                var primitives = [
+                    { type: 'string', example: '"Hello"' },
+                    { type: 'number', example: '3.14' },
+                    { type: 'boolean', example: 'true' },
+                    { type: 'bigint', example: '12345678901234n' },
+                    { type: 'null', example: 'null' },
+                    { type: 'undefined', example: 'undefined' },
+                    { type: 'symbol', example: 'symbol()' }
+                ];
+                for (var p = 0; p < primitives.length; p++) {
+                    html += '<div class="item"><div class="type">' + primitives[p].type + '</div><div class="example">' + primitives[p].example + '</div></div>';
+                }
+                html += '</div>';
+                html += '<div class="highlight-box"><i class="fas fa-info-circle"></i> <strong>Note:</strong> All other values in JavaScript (Objects, Arrays, Dates, etc.) are objects!</div>';
+            }
+
+            // var vs let vs const comparison
+            if (slide.var_let_const) {
+                html += '<div class="var-let-const-grid">';
+                // var card
+                html += '<div class="card var-card">';
+                html += '<h4><i class="fas fa-code"></i> var</h4>';
+                html += '<ul>';
+                html += '<li><i class="fas fa-check check"></i> Function-scoped</li>';
+                html += '<li><i class="fas fa-check check"></i> Can be redeclared</li>';
+                html += '<li><i class="fas fa-check check"></i> Can be reassigned</li>';
+                html += '<li><i class="fas fa-check check"></i> Hoisted with undefined</li>';
+                html += '<li><i class="fas fa-times cross"></i> Block-scoped (leaks out)</li>';
+                html += '<li><i class="fas fa-times cross"></i> Not recommended</li>';
+                html += '</ul></div>';
+                // let card
+                html += '<div class="card let-card">';
+                html += '<h4><i class="fas fa-code"></i> let</h4>';
+                html += '<ul>';
+                html += '<li><i class="fas fa-check check"></i> Block-scoped</li>';
+                html += '<li><i class="fas fa-check check"></i> Can be reassigned</li>';
+                html += '<li><i class="fas fa-times cross"></i> Cannot be redeclared</li>';
+                html += '<li><i class="fas fa-info-circle"></i> Hoisted, not initialized</li>';
+                html += '<li><i class="fas fa-check check"></i> Recommended when reassignment needed</li>';
+                html += '</ul></div>';
+                // const card
+                html += '<div class="card const-card">';
+                html += '<h4><i class="fas fa-code"></i> const</h4>';
+                html += '<ul>';
+                html += '<li><i class="fas fa-check check"></i> Block-scoped</li>';
+                html += '<li><i class="fas fa-times cross"></i> Cannot be reassigned</li>';
+                html += '<li><i class="fas fa-times cross"></i> Cannot be redeclared</li>';
+                html += '<li><i class="fas fa-info-circle"></i> Hoisted, not initialized</li>';
+                html += '<li><i class="fas fa-check check"></i> Use by default!</li>';
+                html += '</ul></div>';
+                html += '</div>';
+                html += '<div class="info-box scope-info"><i class="fas fa-lightbulb"></i> <strong>Best Practice:</strong> Use const by default, use let only when you need to reassign, avoid var entirely.</div>';
+            }
+
+            // Array methods sections
+            if (slide.array_methods_1) {
+                html += '<div class="comparison-table array-table"><table>';
+                html += '<thead><tr><th>Method</th><th>Description</th><th>Returns</th></tr></thead><tbody>';
+                html += '<tr><td><strong>pop()</strong></td><td>Removes the last element</td><td>The removed element</td></tr>';
+                html += '<tr><td><strong>push()</strong></td><td>Adds an element to the end</td><td>New array length</td></tr>';
+                html += '<tr><td><strong>shift()</strong></td><td>Removes the first element</td><td>The removed element</td></tr>';
+                html += '<tr><td><strong>unshift()</strong></td><td>Adds an element to the beginning</td><td>New array length</td></tr>';
+                html += '<tr><td><strong>concat()</strong></td><td>Merges arrays</td><td>New array</td></tr>';
+                html += '<tr><td><strong>slice()</strong></td><td>Extracts a portion</td><td>New array</td></tr>';
+                html += '<tr><td><strong>splice()</strong></td><td>Adds/removes at a position</td><td>Array of removed items</td></tr>';
+                html += '</tbody></table></div>';
+            }
+
+            if (slide.array_methods_2) {
+                html += '<div class="comparison-table array-table"><table>';
+                html += '<thead><tr><th>Method</th><th>Description</th><th>Returns</th></tr></thead><tbody>';
+                html += '<tr><td><strong>indexOf()</strong></td><td>Finds first occurrence</td><td>Index or -1</td></tr>';
+                html += '<tr><td><strong>lastIndexOf()</strong></td><td>Finds last occurrence</td><td>Index or -1</td></tr>';
+                html += '<tr><td><strong>includes()</strong></td><td>Checks if element exists</td><td>true/false</td></tr>';
+                html += '<tr><td><strong>find()</strong></td><td>Finds first element passing test</td><td>Element or undefined</td></tr>';
+                html += '<tr><td><strong>findIndex()</strong></td><td>Finds index of first passing test</td><td>Index or -1</td></tr>';
+                html += '<tr><td><strong>findLast()</strong></td><td>Finds last element passing test (ES2023)</td><td>Element or undefined</td></tr>';
+                html += '<tr><td><strong>findLastIndex()</strong></td><td>Finds index of last passing test (ES2023)</td><td>Index or -1</td></tr>';
+                html += '</tbody></table></div>';
+            }
+
+            if (slide.array_methods_3) {
+                html += '<div class="comparison-table array-table"><table>';
+                html += '<thead><tr><th>Method</th><th>Description</th><th>Returns</th></tr></thead><tbody>';
+                html += '<tr><td><strong>map()</strong></td><td>Applies function to each element</td><td>New array</td></tr>';
+                html += '<tr><td><strong>filter()</strong></td><td>Filters elements that pass test</td><td>New array</td></tr>';
+                html += '<tr><td><strong>reduce()</strong></td><td>Reduces to single value (left→right)</td><td>Accumulated value</td></tr>';
+                html += '<tr><td><strong>reduceRight()</strong></td><td>Reduces to single value (right→left)</td><td>Accumulated value</td></tr>';
+                html += '<tr><td><strong>every()</strong></td><td>Checks if all pass test</td><td>true/false</td></tr>';
+                html += '<tr><td><strong>some()</strong></td><td>Checks if any pass test</td><td>true/false</td></tr>';
+                html += '<tr><td><strong>flat()</strong></td><td>Flattens nested arrays (ES2019)</td><td>New array</td></tr>';
+                html += '<tr><td><strong>flatMap()</strong></td><td>Maps then flattens (ES2019)</td><td>New array</td></tr>';
+                html += '</tbody></table></div>';
+            }
+
+            if (slide.array_iteration) {
+                html += '<div class="comparison-table array-table"><table>';
+                html += '<thead><tr><th>Method</th><th>Description</th><th>Use Case</th></tr></thead><tbody>';
+                html += '<tr><td><strong>for...of</strong></td><td>Loops over values</td><td>Recommended for arrays</td></tr>';
+                html += '<tr><td><strong>for...in</strong></td><td>Loops over indexes</td><td>Not recommended for arrays</td></tr>';
+                html += '<tr><td><strong>forEach()</strong></td><td>Calls function for each element</td><td>Side effects</td></tr>';
+                html += '<tr><td><strong>keys()</strong></td><td>Returns iterator of keys</td><td>Getting indexes</td></tr>';
+                html += '<tr><td><strong>entries()</strong></td><td>Returns iterator of [key, value] pairs</td><td>Getting both index and value</td></tr>';
+                html += '</tbody></table></div>';
+            }
+
+            if (slide.array_reference) {
+                html += '<div class="array-method-grid">';
+                var methods = ['at()', 'concat()', 'copyWithin()', 'entries()', 'every()', 'fill()', 'filter()', 'find()', 'findIndex()', 'findLast()', 'findLastIndex()', 'flat()', 'flatMap()', 'forEach()', 'from()', 'includes()', 'indexOf()', 'isArray()', 'join()', 'keys()', 'lastIndexOf()', 'map()', 'of()', 'pop()', 'push()', 'reduce()', 'reduceRight()', 'reverse()', 'shift()', 'slice()', 'some()', 'sort()', 'splice()', 'toReversed()', 'toSorted()', 'toSpliced()', 'toString()', 'unshift()', 'valueOf()', 'with()'];
+                for (var m = 0; m < methods.length; m++) {
+                    html += '<div class="method-item"><i class="fas fa-code"></i> <span class="method-name">' + methods[m] + '</span></div>';
+                }
+                html += '</div>';
+                html += '<div class="info-box array-info"><i class="fas fa-info-circle"></i> Complete reference including all JavaScript updates from 1999 to 2025.</div>';
+            }
+
+            // Interactive Object Demo
+            if (slide.interactive_object) {
+                html += '<div class="interactive-area">';
+                html += '<h4><i class="fas fa-cube"></i> Live Object Demo</h4>';
+                html += '<p style="font-size:0.9rem; color:#64748b; margin-bottom:0.5rem;">Create and manipulate a person object in real-time.</p>';
+
+                html += '<div class="property-demo" id="objectDisplay">';
+                html += '<div class="prop-row"><span class="key">firstName</span><span class="value" id="demoFirstName">John</span></div>';
+                html += '<div class="prop-row"><span class="key">lastName</span><span class="value" id="demoLastName">Doe</span></div>';
+                html += '<div class="prop-row"><span class="key">age</span><span class="value" id="demoAge">30</span></div>';
+                html += '<div class="prop-row"><span class="key">city</span><span class="value" id="demoCity">New York</span></div>';
+                html += '</div>';
+
+                html += '<div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem;">';
+                html += '<input type="text" id="propKeyInput" placeholder="Property name" style="padding:0.4rem 0.8rem; border-radius:30px; border:1px solid #cbd5e1; width:150px;">';
+                html += '<input type="text" id="propValueInput" placeholder="Property value" style="padding:0.4rem 0.8rem; border-radius:30px; border:1px solid #cbd5e1; width:150px;">';
+                html += '<button onclick="addObjectProperty()"><i class="fas fa-plus"></i> Add Property</button>';
+                html += '</div>';
+
+                html += '<div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem;">';
+                html += '<button onclick="accessDotNotation()"><i class="fas fa-circle"></i> Dot Notation</button>';
+                html += '<button onclick="accessBracketNotation()"><i class="fas fa-bracket"></i> Bracket Notation</button>';
+                html += '<button class="reset-btn" onclick="resetPersonObject()"><i class="fas fa-undo"></i> Reset Object</button>';
+                html += '</div>';
+
+                html += '<div class="output-demo" id="accessOutput" style="margin-top:0.5rem;">Access result will appear here...</div>';
+                html += '</div>';
+
+                // Initialize the object for the demo
+                var personObj = { firstName: 'John', lastName: 'Doe', age: 30, city: 'New York' };
+
+                // Store for use in functions
+                window._personObj = personObj;
+
+                // Define functions
+                window.addObjectProperty = function() {
+                    var keyInput = document.getElementById('propKeyInput');
+                    var valInput = document.getElementById('propValueInput');
+                    var key = keyInput ? keyInput.value.trim() : '';
+                    var val = valInput ? valInput.value.trim() : '';
+                    if (key && val) {
+                        window._personObj[key] = val;
+                        updateObjectDisplay();
+                        var output = document.getElementById('accessOutput');
+                        if (output) output.innerHTML = '✅ Added property: <strong>' + key + '</strong> = "' + val + '"';
+                        if (keyInput) keyInput.value = '';
+                        if (valInput) valInput.value = '';
+                    }
+                };
+
+                window.accessDotNotation = function() {
+                    var keyInput = document.getElementById('propKeyInput');
+                    var key = keyInput ? keyInput.value.trim() : 'firstName';
+                    var output = document.getElementById('accessOutput');
+                    if (window._personObj && output) {
+                        var val = window._personObj[key];
+                        output.innerHTML = '📌 <strong>Dot Notation:</strong> person.' + key + ' = "' + val + '"';
+                    }
+                };
+
+                window.accessBracketNotation = function() {
+                    var keyInput = document.getElementById('propKeyInput');
+                    var key = keyInput ? keyInput.value.trim() : 'firstName';
+                    var output = document.getElementById('accessOutput');
+                    if (window._personObj && output) {
+                        var val = window._personObj[key];
+                        output.innerHTML = '📌 <strong>Bracket Notation:</strong> person["' + key + '"] = "' + val + '"';
+                    }
+                };
+
+                window.resetPersonObject = function() {
+                    window._personObj = { firstName: 'John', lastName: 'Doe', age: 30, city: 'New York' };
+                    updateObjectDisplay();
+                    var output = document.getElementById('accessOutput');
+                    if (output) output.innerHTML = '🔄 Object reset to default values.';
+                };
+
+                window.updateObjectDisplay = function() {
+                    var obj = window._personObj;
+                    var container = document.getElementById('objectDisplay');
+                    if (container) {
+                        var html = '';
+                        for (var key in obj) {
+                            if (obj.hasOwnProperty(key)) {
+                                html += '<div class="prop-row"><span class="key">' + key + '</span><span class="value">' + obj[key] + '</span></div>';
+                            }
+                        }
+                        container.innerHTML = html;
+                    }
+                };
+
+                // Initial display
+                setTimeout(function() {
+                    updateObjectDisplay();
+                }, 50);
+            }
+
+            // Interactive Array Demo
+            if (slide.interactive_array) {
+                html += '<div class="interactive-area">';
+                html += '<h4><i class="fas fa-list"></i> Live Array Demo</h4>';
+                html += '<p style="font-size:0.9rem; color:#64748b; margin-bottom:0.5rem;">Experiment with array methods in real-time.</p>';
+
+                html += '<div class="array-demo-box">';
+                html += '<div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">';
+                html += '<input type="text" id="arrayItemInput" placeholder="Item to add" style="padding:0.4rem 0.8rem; border-radius:30px; border:1px solid #cbd5e1; width:150px;">';
+                html += '<button class="array-btn" onclick="arrayPush()"><i class="fas fa-plus"></i> Push</button>';
+                html += '<button class="array-btn" onclick="arrayPop()"><i class="fas fa-minus"></i> Pop</button>';
+                html += '<button class="array-btn" onclick="arrayUnshift()"><i class="fas fa-plus"></i> Unshift</button>';
+                html += '<button class="array-btn" onclick="arrayShift()"><i class="fas fa-minus"></i> Shift</button>';
+                html += '</div>';
+                html += '<div style="display:flex; flex-wrap:wrap; gap:0.5rem;">';
+                html += '<button class="array-btn" onclick="arraySort()"><i class="fas fa-sort"></i> Sort</button>';
+                html += '<button class="array-btn" onclick="arrayReverse()"><i class="fas fa-arrow-up-arrow-down"></i> Reverse</button>';
+                html += '<button class="array-btn" onclick="arrayMapDemo()"><i class="fas fa-arrow-right"></i> Map (x2)</button>';
+                html += '<button class="array-btn" onclick="arrayFilterDemo()"><i class="fas fa-filter"></i> Filter (>3)</button>';
+                html += '<button class="reset-btn" onclick="arrayReset()"><i class="fas fa-undo"></i> Reset</button>';
+                html += '</div>';
+                html += '<div id="arrayDisplay" style="margin-top:0.5rem; background:white; padding:0.5rem; border-radius:0.5rem; border:1px solid #e2e8f0; min-height:50px; font-family:monospace;">[1, 2, 3, 4, 5]</div>';
+                html += '<div id="arrayOutput" class="output-demo" style="margin-top:0.5rem;">Array operations log will appear here...</div>';
+                html += '</div></div>';
+
+                // Initialize array
+                var demoArray = [1, 2, 3, 4, 5];
+                window._demoArray = demoArray;
+
+                function updateArrayDisplay() {
+                    var display = document.getElementById('arrayDisplay');
+                    if (display) display.textContent = '[' + window._demoArray.join(', ') + ']';
+                }
+
+                window.arrayPush = function() {
+                    var input = document.getElementById('arrayItemInput');
+                    var val = input ? input.value.trim() : '';
+                    if (val) {
+                        var num = parseFloat(val);
+                        if (!isNaN(num)) {
+                            window._demoArray.push(num);
+                            updateArrayDisplay();
+                            var output = document.getElementById('arrayOutput');
+                            if (output) output.innerHTML = '✅ Pushed: ' + num + ' → [' + window._demoArray.join(', ') + ']';
+                            if (input) input.value = '';
+                        } else {
+                            var output = document.getElementById('arrayOutput');
+                            if (output) output.innerHTML = '⚠️ Please enter a number.';
+                        }
+                    }
+                };
+
+                window.arrayPop = function() {
+                    var val = window._demoArray.pop();
+                    updateArrayDisplay();
+                    var output = document.getElementById('arrayOutput');
+                    if (output) output.innerHTML = '⏏️ Popped: ' + val + ' → [' + window._demoArray.join(', ') + ']';
+                };
+
+                window.arrayUnshift = function() {
+                    var input = document.getElementById('arrayItemInput');
+                    var val = input ? input.value.trim() : '';
+                    if (val) {
+                        var num = parseFloat(val);
+                        if (!isNaN(num)) {
+                            window._demoArray.unshift(num);
+                            updateArrayDisplay();
+                            var output = document.getElementById('arrayOutput');
+                            if (output) output.innerHTML = '✅ Unshifted: ' + num + ' → [' + window._demoArray.join(', ') + ']';
+                            if (input) input.value = '';
+                        } else {
+                            var output = document.getElementById('arrayOutput');
+                            if (output) output.innerHTML = '⚠️ Please enter a number.';
+                        }
+                    }
+                };
+
+                window.arrayShift = function() {
+                    var val = window._demoArray.shift();
+                    updateArrayDisplay();
+                    var output = document.getElementById('arrayOutput');
+                    if (output) output.innerHTML = '⏏️ Shifted: ' + val + ' → [' + window._demoArray.join(', ') + ']';
+                };
+
+                window.arraySort = function() {
+                    window._demoArray.sort(function(a, b) { return a - b; });
+                    updateArrayDisplay();
+                    var output = document.getElementById('arrayOutput');
+                    if (output) output.innerHTML = '📊 Sorted: [' + window._demoArray.join(', ') + ']';
+                };
+
+                window.arrayReverse = function() {
+                    window._demoArray.reverse();
+                    updateArrayDisplay();
+                    var output = document.getElementById('arrayOutput');
+                    if (output) output.innerHTML = '🔄 Reversed: [' + window._demoArray.join(', ') + ']';
+                };
+
+                window.arrayMapDemo = function() {
+                    var mapped = window._demoArray.map(function(x) { return x * 2; });
+                    var output = document.getElementById('arrayOutput');
+                    if (output) output.innerHTML = '📈 Map (x2): [' + window._demoArray.join(', ') + '] → [' + mapped.join(', ') + ']';
+                    // Optionally update the array
+                    // window._demoArray = mapped;
+                    // updateArrayDisplay();
+                };
+
+                window.arrayFilterDemo = function() {
+                    var filtered = window._demoArray.filter(function(x) { return x > 3; });
+                    var output = document.getElementById('arrayOutput');
+                    if (output) output.innerHTML = '🔍 Filter (>3): [' + window._demoArray.join(', ') + '] → [' + filtered.join(', ') + ']';
+                };
+
+                window.arrayReset = function() {
+                    window._demoArray = [1, 2, 3, 4, 5];
+                    updateArrayDisplay();
+                    var output = document.getElementById('arrayOutput');
+                    if (output) output.innerHTML = '🔄 Array reset to [1, 2, 3, 4, 5]';
+                };
+
+                setTimeout(updateArrayDisplay, 50);
+            }
+
+            // Examples
+            if (slide.examples) {
+                html += '<div class="code-block">';
+                html += '// Example 1: Object Literal\n';
+                html += 'const car = { type: "Toyota", model: "2025", color: "Red" };\n\n';
+                html += '// Example 2: Empty object with added properties\n';
+                html += 'const person = {};\n';
+                html += 'person.name = "Pius Iragunima";\n';
+                html += 'person.age = 43;\n';
+                html += 'person.height = 23.43;\n\n';
+                html += '// Example 3: Using new Object()\n';
+                html += 'const country = new Object({ name: "Nigeria", capital: "Abuja" });\n\n';
+                html += '// Adding and deleting properties\n';
+                html += 'student.cgpa = 4.2;  // Add\n';
+                html += 'delete student.age;   // Delete';
+                html += '</div>';
+            }
+
+            // Object Quiz
+            if (slide.obj_quiz) {
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q1:</strong> How many properties does the following object have?<br>';
+                html += '<code>const car = { brand: "Volvo", model: "EX90" };</code></p>';
+                html += '<label><input type="radio" name="objq1" value="A"> A) 0</label>';
+                html += '<label><input type="radio" name="objq1" value="B"> B) 1</label>';
+                html += '<label><input type="radio" name="objq1" value="C"> C) 2</label>';
+                html += '<label><input type="radio" name="objq1" value="D"> D) 3</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q2:</strong> What is NOT a correct syntax to alert "Volvo" from this object?<br>';
+                html += '<code>const car = { brand: "Volvo", model: "EX90" };</code></p>';
+                html += '<label><input type="radio" name="objq2" value="A"> A) alert(car[brand])</label>';
+                html += '<label><input type="radio" name="objq2" value="B"> B) alert(car.brand)</label>';
+                html += '<label><input type="radio" name="objq2" value="C"> C) alert(car["brand"])</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q3:</strong> How many methods does this object have?<br>';
+                html += '<code>const person = { firstname: "Jane", lastname: "Doe", fullname: function() { return this.firstname + " " + this.lastname; } };</code></p>';
+                html += '<label><input type="radio" name="objq3" value="A"> A) 0</label>';
+                html += '<label><input type="radio" name="objq3" value="B"> B) 1</label>';
+                html += '<label><input type="radio" name="objq3" value="C"> C) 2</label>';
+                html += '<label><input type="radio" name="objq3" value="D"> D) 3</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q4:</strong> Which of these is a built-in JavaScript Object method?</p>';
+                html += '<label><input type="radio" name="objq4" value="A"> A) return()</label>';
+                html += '<label><input type="radio" name="objq4" value="B"> B) all()</label>';
+                html += '<label><input type="radio" name="objq4" value="C"> C) entries()</label>';
+                html += '<label><input type="radio" name="objq4" value="D"> D) methods()</label>';
+                html += '</div>';
+
+                html += '<button class="btn-toggle" id="revealObjAnswersBtn"><i class="fas fa-key"></i> Reveal Answer Key</button>';
+                html += '<div id="objAnswerKey" class="answer-key">';
+                html += '<i class="fas fa-check-double"></i> <strong>ANSWER KEY</strong><br>';
+                html += '<strong>Q1:</strong> C) 2<br>';
+                html += '<strong>Q2:</strong> A) alert(car[brand]) — missing quotes<br>';
+                html += '<strong>Q3:</strong> B) 1 (fullname is a method)<br>';
+                html += '<strong>Q4:</strong> C) entries()<br>';
+                html += '</div>';
+            }
+
+            // Scope Quiz
+            if (slide.scope_quiz) {
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q1:</strong> Consider the following code:<br>';
+                html += '<code>let x = 5; { let x = 3; } alert(x);</code><br>';
+                html += 'What will be the alerted result?</p>';
+                html += '<label><input type="radio" name="scopeq1" value="A"> A) 5</label>';
+                html += '<label><input type="radio" name="scopeq1" value="B"> B) 3</label>';
+                html += '<label><input type="radio" name="scopeq1" value="C"> C) undefined</label>';
+                html += '<label><input type="radio" name="scopeq1" value="D"> D) ReferenceError</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q2:</strong> Consider the following code:<br>';
+                html += '<code>x = 5; alert(x); var x;</code><br>';
+                html += 'What will be the alerted result?</p>';
+                html += '<label><input type="radio" name="scopeq2" value="A"> A) 5</label>';
+                html += '<label><input type="radio" name="scopeq2" value="B"> B) undefined</label>';
+                html += '<label><input type="radio" name="scopeq2" value="C"> C) ReferenceError</label>';
+                html += '<label><input type="radio" name="scopeq2" value="D"> D) null</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q3:</strong> How do we define that JavaScript code should be executed in "strict mode"?</p>';
+                html += '<label><input type="radio" name="scopeq3" value="A"> A) "use strict";</label>';
+                html += '<label><input type="radio" name="scopeq3" value="B"> B) use strict;</label>';
+                html += '<label><input type="radio" name="scopeq3" value="C"> C) "strict mode";</label>';
+                html += '<label><input type="radio" name="scopeq3" value="D"> D) strict mode;</label>';
+                html += '</div>';
+
+                html += '<button class="btn-toggle" id="revealScopeAnswersBtn"><i class="fas fa-key"></i> Reveal Answer Key</button>';
+                html += '<div id="scopeAnswerKey" class="answer-key">';
+                html += '<i class="fas fa-check-double"></i> <strong>ANSWER KEY</strong><br>';
+                html += '<strong>Q1:</strong> A) 5 (let has block scope, outer x remains 5)<br>';
+                html += '<strong>Q2:</strong> A) 5 (var is hoisted, assignment works)<br>';
+                html += '<strong>Q3:</strong> A) "use strict";<br>';
+                html += '</div>';
+            }
+
+            // Array Quiz
+            if (slide.array_quiz) {
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q1:</strong> What is NOT a legal way to create an array?</p>';
+                html += '<label><input type="radio" name="arrayq1" value="A"> A) const fruits = ["Orange", "Banana", "Apple"];</label>';
+                html += '<label><input type="radio" name="arrayq1" value="B"> B) const fruits = new Array("Orange", "Banana", "Apple");</label>';
+                html += '<label><input type="radio" name="arrayq1" value="C"> C) const fruits = ("Orange", "Banana", "Apple");</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q2:</strong> Consider the following code:<br>';
+                html += '<code>const fruits = ["Apple", "Orange", "Mango"];<br>let x = fruits.indexOf("Orange");</code><br>';
+                html += 'What will the result of x be?</p>';
+                html += '<label><input type="radio" name="arrayq2" value="A"> A) 0</label>';
+                html += '<label><input type="radio" name="arrayq2" value="B"> B) 1</label>';
+                html += '<label><input type="radio" name="arrayq2" value="C"> C) true</label>';
+                html += '<label><input type="radio" name="arrayq2" value="D"> D) false</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q3:</strong> Consider the following code:<br>';
+                html += '<code>const fruits = ["Apple", "Orange", "Banana"];<br>fruits.reverse();</code><br>';
+                html += 'What will the result of the fruits array be?</p>';
+                html += '<label><input type="radio" name="arrayq3" value="A"> A) ["Orange", "Banana", "Apple"]</label>';
+                html += '<label><input type="radio" name="arrayq3" value="B"> B) ["Banana", "Orange", "Apple"]</label>';
+                html += '<label><input type="radio" name="arrayq3" value="C"> C) ["Apple", "Banana", "Orange"]</label>';
+                html += '<label><input type="radio" name="arrayq3" value="D"> D) ["Orange", "Apple", "Banana"]</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q4:</strong> True or False. If you declare an array with the const keyword, you cannot change the array items later.</p>';
+                html += '<label><input type="radio" name="arrayq4" value="A"> A) True</label>';
+                html += '<label><input type="radio" name="arrayq4" value="B"> B) False</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q5:</strong> Consider the following code:<br>';
+                html += '<code>const x = [45, 4, 9, 16, 25];<br>let y = x.every(myfunc);<br>function myfunc(val) { return val > 20; }</code><br>';
+                html += 'What will the result of y be?</p>';
+                html += '<label><input type="radio" name="arrayq5" value="A"> A) [45, 25]</label>';
+                html += '<label><input type="radio" name="arrayq5" value="B"> B) false</label>';
+                html += '<label><input type="radio" name="arrayq5" value="C"> C) []</label>';
+                html += '<label><input type="radio" name="arrayq5" value="D"> D) NaN</label>';
+                html += '</div>';
+
+                html += '<button class="btn-toggle" id="revealArrayAnswersBtn"><i class="fas fa-key"></i> Reveal Answer Key</button>';
+                html += '<div id="arrayAnswerKey" class="answer-key">';
+                html += '<i class="fas fa-check-double"></i> <strong>ANSWER KEY</strong><br>';
+                html += '<strong>Q1:</strong> C) const fruits = ("Orange", "Banana", "Apple"); — this is not valid array syntax<br>';
+                html += '<strong>Q2:</strong> B) 1 (Orange is at index 1)<br>';
+                html += '<strong>Q3:</strong> A) ["Orange", "Banana", "Apple"] (reverse reverses the order)<br>';
+                html += '<strong>Q4:</strong> B) False (const prevents reassignment, but you can change elements)<br>';
+                html += '<strong>Q5:</strong> B) false (not all values are > 20)<br>';
+                html += '</div>';
+            }
+
+            contentDiv.innerHTML = html;
+
+            // Reveal answer buttons
+            if (slide.obj_quiz) {
+                document.addEventListener('click', function(e) {
+                    if (e.target && e.target.id === 'revealObjAnswersBtn') {
+                        var key = document.getElementById('objAnswerKey');
+                        var btn = document.getElementById('revealObjAnswersBtn');
+                        if (key) {
+                            if (key.style.display === 'none' || key.style.display === '') {
+                                key.style.display = 'block';
+                                if (btn) btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Answer Key';
+                            } else {
+                                key.style.display = 'none';
+                                if (btn) btn.innerHTML = '<i class="fas fa-key"></i> Reveal Answer Key';
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (slide.scope_quiz) {
+                document.addEventListener('click', function(e) {
+                    if (e.target && e.target.id === 'revealScopeAnswersBtn') {
+                        var key = document.getElementById('scopeAnswerKey');
+                        var btn = document.getElementById('revealScopeAnswersBtn');
+                        if (key) {
+                            if (key.style.display === 'none' || key.style.display === '') {
+                                key.style.display = 'block';
+                                if (btn) btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Answer Key';
+                            } else {
+                                key.style.display = 'none';
+                                if (btn) btn.innerHTML = '<i class="fas fa-key"></i> Reveal Answer Key';
+                            }
+                        }
+                    }
+                });
+            }
+
+            if (slide.array_quiz) {
+                document.addEventListener('click', function(e) {
+                    if (e.target && e.target.id === 'revealArrayAnswersBtn') {
+                        var key = document.getElementById('arrayAnswerKey');
+                        var btn = document.getElementById('revealArrayAnswersBtn');
+                        if (key) {
+                            if (key.style.display === 'none' || key.style.display === '') {
+                                key.style.display = 'block';
+                                if (btn) btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Answer Key';
+                            } else {
+                                key.style.display = 'none';
+                                if (btn) btn.innerHTML = '<i class="fas fa-key"></i> Reveal Answer Key';
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Update progress
+            var progress = ((index + 1) / totalSlides) * 100;
+            progressFill.style.width = progress + '%';
+            counterSpan.textContent = (index + 1) + ' / ' + totalSlides;
+
+            // Update dots
+            var dots = document.querySelectorAll('.dot');
+            for (var d = 0; d < dots.length; d++) {
+                dots[d].className = 'dot' + (d === index ? ' active' : '');
+            }
+
+            // Update buttons
+            document.getElementById('prevBtn').disabled = (index === 0);
+            document.getElementById('nextBtn').disabled = (index === totalSlides - 1);
+            var nextBtn = document.getElementById('nextBtn');
+            if (index === totalSlides - 1) {
+                nextBtn.innerHTML = 'Done <i class="fas fa-check"></i>';
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+            }
+
+            currentIndex = index;
+        }
+
+        function goToSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= totalSlides) index = totalSlides - 1;
+            renderSlide(index);
+        }
+
+        function nextSlide() {
+            if (currentIndex < totalSlides - 1) {
+                goToSlide(currentIndex + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                goToSlide(currentIndex - 1);
+            }
+        }
+
+        // Initialize dots
+        function initDots() {
+            var container = document.getElementById('dotContainer');
+            container.innerHTML = '';
+            for (var i = 0; i < totalSlides; i++) {
+                var dot = document.createElement('span');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.onclick = (function(idx) {
+                    return function() {
+                        goToSlide(idx);
+                    };
+                })(i);
+                container.appendChild(dot);
+            }
+        }
+
+        // Set up event listeners
+        document.getElementById('prevBtn').onclick = prevSlide;
+        document.getElementById('nextBtn').onclick = nextSlide;
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        initDots();
+        renderSlide(0);
+
+        console.log('📚 JavaScript Objects, Scope & Arrays Complete Lecture loaded!');
+        console.log('📖 Total slides: ' + totalSlides);
+        console.log('💡 Use arrow keys or click Next/Back to navigate.');
+    </script>
+</body>
+</html>
