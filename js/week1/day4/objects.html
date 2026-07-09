@@ -634,3 +634,1849 @@ strict mode;
 
 
 
+
+
+JavaScript Arrays
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+An Array is an object type designed for storing data collections.
+
+Key characteristics of JavaScript arrays are:
+
+Elements: An array is a list of values, known as elements.
+
+Ordered: Array elements are ordered based on their index.
+
+Zero indexed: The first element is at index 0, the second at index 1, and so on.
+
+Dynamic size: Arrays can grow or shrink as elements are added or removed.
+
+Heterogeneous: Arrays can store elements of different data types (numbers, strings, objects and other arrays).
+
+Why Use Arrays?
+If you have a list of items (a list of car names, for example), storing the names in single variables could look like this:
+
+let car1 = "Saab";
+let car2 = "Volvo";
+let car3 = "BMW";
+However, what if you want to loop through the cars and find a specific one? And what if you had not 3 cars, but 300?
+
+The solution is an array!
+
+An array can hold many values under a single name, and you can access the values by referring to an index number.
+
+Creating an Array
+Using an array literal is the easiest way to create a JavaScript Array.
+
+Syntax:
+
+const array_name = [item1, item2, ...];      
+It is a common practice to declare arrays with the const keyword.
+
+Learn more about const with arrays in the chapter: JS Array Const.
+
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+Spaces and line breaks are not important. A declaration can span multiple lines:
+
+Example
+const cars = [
+  "Saab",
+  "Volvo",
+  "BMW"
+];
+You can also create an empty array, and provide elements later:
+
+Example
+const cars = [];
+cars[0]= "Saab";
+cars[1]= "Volvo";
+cars[2]= "BMW";
+Using the JavaScript Keyword new
+The following example also creates an Array, and assigns values to it:
+
+Example
+const cars = new Array("Saab", "Volvo", "BMW");
+The two examples above do exactly the same.
+
+For simplicity, readability and speed, you can most often use the array literal method.
+
+REMOVE ADS
+
+Accessing Array Elements
+You access an array element by referring to the index number:
+
+const cars = ["Saab", "Volvo", "BMW"];
+let car = cars[0];
+Note: Array indexes start with 0.
+
+[0] is the first element. [1] is the second element.
+
+Changing an Array Element
+This statement changes the value of the first element in cars:
+
+cars[0] = "Opel";
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+cars[0] = "Opel";
+Converting an Array to a String
+The JavaScript method toString() converts an array to a string of (comma separated) array values.
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.toString();
+Result:
+
+Banana,Orange,Apple,Mango
+Display an Array
+In JavaScript, the full array can be displayed by referring to the array name:
+
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+
+let text = cars;
+Display an Array using JSON
+The full array can also be displayed using JSON.stringify():
+
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+
+let text = JSON-stringify(cars);
+Arrays are Objects
+Arrays are a special type of objects. The typeof operator in JavaScript returns "object" for arrays.
+
+But, JavaScript arrays are best described as arrays.
+
+Arrays use numbers to access its "elements". In this example, person[0] returns John:
+
+Array:
+const person = ["John", "Doe", 46];
+Objects use names to access its "members". In this example, person.firstName returns John:
+
+Object:
+const person = {firstName:"John", lastName:"Doe", age:46};
+Array Elements Can Be Objects
+JavaScript variables can be objects. Arrays are special kinds of objects.
+
+Because of this, you can have variables of different types in the same Array.
+
+You can have objects in an Array. You can have functions in an Array. You can have arrays in an Array:
+
+myArray[0] = Date.now;
+myArray[1] = myFunction;
+myArray[2] = myCars;
+Array Properties and Methods
+The real strength of JavaScript arrays are the built-in array properties and methods:
+
+cars.length   // Returns the number of elements
+cars.sort()   // Sorts the array
+Array methods are covered in the next chapters.
+
+The length Property
+The length property of an array returns the length of an array (the number of array elements).
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let length = fruits.length;
+The length property is always one more than the highest array index.
+
+Accessing the First Array Element
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruit = fruits[0];
+Accessing the Last Array Element
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruit = fruits[fruits.length - 1];
+Looping Array Elements
+One way to loop through an array, is using a for loop:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fLen = fruits.length;
+
+let text = "<ul>";
+for (let i = 0; i < fLen; i++) {
+  text += "<li>" + fruits[i] + "</li>";
+}
+text += "</ul>";
+You can also use the Array.forEach() function:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+let text = "<ul>";
+fruits.forEach(myFunction);
+text += "</ul>";
+
+function myFunction(value) {
+  text += "<li>" + value + "</li>";
+}
+Adding Array Elements
+The easiest way to add a new element to an array is using the push() method:
+
+Example
+const fruits = ["Banana", "Orange", "Apple"];
+fruits.push("Lemon");  // Adds a new element (Lemon) to fruits
+New element can also be added to an array using the length property:
+
+Example
+const fruits = ["Banana", "Orange", "Apple"];
+fruits[fruits.length] = "Lemon";  // Adds "Lemon" to fruits
+WARNING !
+
+Adding elements with high indexes can create undefined "holes" in an array:
+
+Example
+const fruits = ["Banana", "Orange", "Apple"];
+fruits[6] = "Lemon";  // Creates undefined "holes" in fruits
+Associative Arrays
+Many programming languages support arrays with named indexes.
+
+Arrays with named indexes are called associative arrays (or hashes).
+
+JavaScript does not support arrays with named indexes.
+
+In JavaScript, arrays always use numbered indexes.  
+
+Example
+const person = [];
+person[0] = "John";
+person[1] = "Doe";
+person[2] = 46;
+person.length;    // Will return 3
+person[0];        // Will return "John"
+WARNING !!
+If you use named indexes, JavaScript will redefine the array to an object.
+
+After that, some array methods and properties will produce incorrect results.
+
+ Example:
+const person = [];
+person["firstName"] = "John";
+person["lastName"] = "Doe";
+person["age"] = 46;
+person.length;     // Will return 0
+person[0];         // Will return undefined
+The Difference Between Arrays and Objects
+In JavaScript, arrays use numbered indexes.  
+
+In JavaScript, objects use named indexes.
+
+Arrays are a special kind of objects, with numbered indexes.
+
+When to Use Arrays. When to use Objects.
+JavaScript does not support associative arrays.
+You should use objects when you want the element names to be strings (text).
+You should use arrays when you want the element names to be numbers.
+JavaScript new Array()
+JavaScript has a built-in array constructor new Array().
+
+But you can safely use [] instead.
+
+These two different statements both create a new empty array named points:
+
+const points = new Array();
+const points = [];
+These two different statements both create a new array containing 6 numbers:
+
+const points = new Array(40, 100, 1, 5, 25, 10);
+const points = [40, 100, 1, 5, 25, 10];
+Learn More:
+JavaScript Array Constructor
+
+How to Recognize an Array
+A common question is: How do I know if a variable is an array?
+
+The problem is that the JavaScript operator typeof returns "object":
+
+const fruits = ["Banana", "Orange", "Apple"];
+let type = typeof fruits;
+The typeof operator returns object because a JavaScript array is an object.
+
+Solution 1:
+To solve this problem ECMAScript 5 (JavaScript 2009) defined a new method Array.isArray():
+
+Array.isArray(fruits);
+Solution 2:
+The instanceof operator returns true if an object is created by a given constructor:
+
+const fruits = ["Banana", "Orange", "Apple"];
+
+(fruits instanceof Array);
+Nested Arrays and Objects
+Values in objects can be arrays, and values in arrays can be objects:
+
+Example
+const myObj = {
+  name: "John",
+  age: 30,
+  cars: [
+    {name:"Ford", models:["Fiesta", "Focus", "Mustang"]},
+    {name:"BMW", models:["320", "X3", "X5"]},
+    {name:"Fiat", models:["500", "Panda"]}
+  ]
+}
+To access arrays inside arrays, use a for-in loop for each array:
+
+Example
+for (let i in myObj.cars) {
+  x += "<h1>" + myObj.cars[i].name + "</h1>";
+  for (let j in myObj.cars[i].models) {
+    x += myObj.cars[i].models[j];
+  }
+}
+Learn More:
+Array Methods
+
+Array Constructor
+
+Array Search Methods
+
+Array Sort Methods
+
+Array Iteration Methods
+
+Full JavaScript Array Reference
+
+Exercise
+?
+What is NOT a legal way to create an array??
+
+
+const fruits = ['Orange', 'Banana', 'Apple'];
+const fruits = new Array ('Orange', 'Banana', 'Apple');
+const fruits = ('Orange', 'Banana', 'Apple');
+
+
+The new Array() Constructor
+The new Array() constructor creates an Array object.
+
+Syntax
+new Array()
+new Array(number)
+new Array(element1, element2, ..., elementN)
+
+Array()
+Array(number)
+Array(element1, element2, ..., elementN)
+Examples
+new Array()
+new Array(3)
+new Array("3")
+new Array("Saab", "Volvo", "BMW")
+Array()
+Array(3)
+Array("3")
+Array("Saab", "Volvo", "BMW")
+Syntax	Description
+new Array()	Creates an empty array.
+new Array(x)	Creates an array with x empty spots.
+new Array(elem1)	Creates an array with one element.
+new Array(elem1,...,elemN)	Creates an array with multiple elements.
+The Difference? new Array() vs Array()
+The short answer is: there is no functional difference between new Array() and Array().
+
+Both commands do the exact same thing and create an array.
+
+Note
+The Array creator function is smart.
+
+It is programmed to check if you forgot the new keyword.
+
+If you leave it out, it adds it behind the scene.
+
+
+REMOVE ADS
+
+JavaScript new Array()
+JavaScript has a built-in array constructor new Array().
+
+But you can most often use [] instead.
+
+These two different statements both create a new empty array named points:
+
+const points = new Array();
+const points = [];
+These two different statements both create a new array containing 6 numbers:
+
+const points = new Array(40, 100, 1, 5, 25, 10);
+const points = [40, 100, 1, 5, 25, 10];
+The new keyword can produce some unexpected results:
+
+// Create an array with three elements:
+const points = new Array(40, 100, 1);
+// Create an array with two elements:
+const points = new Array(40, 100);
+// Create an array with one element ???
+const points = new Array(40);  
+A Common Error
+const points = [40];
+is not the same as:
+
+const points = new Array(40);
+// Create an array with one element:
+const points = [40];
+// Create an array with 40 undefined elements:
+const points = new Array(40);  
+Important Warning
+Use an array literal [ ] instead of the new Array() when possible.
+
+new Array(number) is a special dangerous case.
+
+new Array(3) creates an array with 3 empty elements; not an array containing the number 3.
+
+Using [ ] is faster to type, easier to read, and avoids the "single number trap":
+
+For example, [3] actually creates [3], not [null,null,null].
+
+Array Literal (Preferred)
+The recommended way to create an array is with an array literal:
+
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+Learn More:
+Array Tutorial
+
+Array Methods
+
+Array Search Methods
+
+Array Sort Methods
+
+Array Iteration Methods
+
+Full JavaScript Array Reference
+
+
+
+JavaScript Array Methods
+Basic Array Methods
+Array length
+Array toString()
+Array at()
+Array join()
+Array pop()
+Array push()
+Array shift()
+Array unshift()
+Array isArray()
+Array delete()
+Array concat()
+Array copyWithin()
+Array flat()
+Array slice()
+Array splice()
+Array toSpliced()
+Complete JavaScript Array Reference
+
+JavaScript Array length
+The length property returns the length (size) of an array:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+let size = fruits.length;
+The length property can also be used to set the length of an array:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+fruits.length = 2;
+JavaScript Array toString()
+The toString() method returns the elements of an array as a comma separated string.
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+let myList = fruits.toString();
+Every JavaScript object has a toString() method.
+
+The toString() method is used internally by JavaScript when an object needs to be displayed as a text (like in HTML), or when an object needs to be used as a string.
+
+JavaScript Array at()
+ES2022 introduced the array method at():
+
+Examples
+Get the third element of fruits using at():
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruit = fruits.at(2);
+Get the third element of fruits using []:
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruit = fruits[2];
+The at() method returns an indexed element from an array.
+
+The at() method returns the same as [].
+
+Browser Support
+at() is an ECMAScript 2022 feature.
+
+JavaScript 2022 is supported in all modern browsers since March 2022:
+
+Chrome
+92	Edge
+92	Firefox
+90	Safari
+15.4	Opera
+78
+Apr 2021	Jul 2021	Jul 2021	Mar 2022	Aug 2021
+Many languages allow negative bracket indexing like [-1] to access elements from the end of an object / array / string.
+
+This is not possible in JavaScript, because [] is used for accessing both arrays and objects. obj[-1] refers to the value of key -1, not to the last property of the object.
+
+The at() method was introduced in ES2022 to solve this problem.
+
+
+REMOVE ADS
+
+JavaScript Array join()
+The join() method also joins all array elements into a string.
+
+It behaves just like toString(), but in addition you can specify the separator:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.join(" * ");
+Result:
+
+Banana * Orange * Apple * Mango
+Popping and Pushing
+When you work with arrays, it is easy to remove elements and add new elements.
+
+This is what popping and pushing is:
+
+Popping items out of an array, or pushing items into an array.
+
+REMOVE ADS
+
+JavaScript Array pop()
+The pop() method removes the last element from an array:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.pop();
+The pop() method returns the value that was "popped out":
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruit = fruits.pop();
+JavaScript Array push()
+The push() method adds a new element to an array (at the end):
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.push("Kiwi");
+The push() method returns the new array length:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let length = fruits.push("Kiwi");
+Shifting Elements
+Shifting is equivalent to popping, but working on the first element instead of the last.
+
+JavaScript Array shift()
+The shift() method removes the first array element and "shifts" all other elements to a lower index.
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.shift();
+The shift() method returns the value that was "shifted out":
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruit = fruits.shift();
+JavaScript Array unshift()
+The unshift() method adds a new element to an array (at the beginning), and "unshifts" older elements:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.unshift("Lemon");
+The unshift() method returns the new array length:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.unshift("Lemon");
+Changing Elements
+Array elements are accessed using their index number:
+
+Array indexes start with 0:
+
+[0] is the first array element
+[1] is the second
+[2] is the third ...
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits[0] = "Kiwi";
+JavaScript Array length
+The length property provides an easy way to append a new element to an array:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits[fruits.length] = "Kiwi";
+Array.isArray()
+ECMAScript 5 (JavaScript 2009) added the new method Array.isArray() to JavaScript:
+
+Example
+Array.isArray(fruits);
+JavaScript Array delete()
+Warning !
+Using delete() leaves undefined holes in the array.
+
+Use pop() or shift() instead.
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+delete fruits[0];
+Merging Arrays (Concatenating)
+In programming languages, concatenation means joining strings end-to-end.
+
+Concatenation "snow" and "ball" gives "snowball".
+
+Concatenating arrays means joining arrays end-to-end.
+
+JavaScript Array concat()
+The concat() method creates a new array by merging (concatenating) existing arrays:
+
+Example (Merging Two Arrays)
+const myGirls = ["Cecilie", "Lone"];
+const myBoys = ["Emil", "Tobias", "Linus"];
+
+const myChildren = myGirls.concat(myBoys);
+The concat() method does not change the existing arrays. It always returns a new array.
+
+The concat() method can take any number of array arguments.
+
+Example (Merging Three Arrays)
+const arr1 = ["Cecilie", "Lone"];
+const arr2 = ["Emil", "Tobias", "Linus"];
+const arr3 = ["Robin", "Morgan"];
+const myChildren = arr1.concat(arr2, arr3);
+The concat() method can also take strings as arguments:
+
+Example (Merging an Array with Values)
+const arr1 = ["Emil", "Tobias", "Linus"];
+const myChildren = arr1.concat("Peter"); 
+Array copyWithin()
+The copyWithin() method copies array elements to another position in an array:
+
+Examples
+Copy to index 2, all elements from index 0:
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.copyWithin(2, 0);
+Copy to index 2, the elements from index 0 to 2:
+
+const fruits = ["Banana", "Orange", "Apple", "Mango", "Kiwi"];
+fruits.copyWithin(2, 0, 2);
+The copyWithin() method overwrites the existing values.
+
+The copyWithin() method does not add items to the array.
+
+The copyWithin() method does not change the length of the array.
+
+Flattening an Array
+Flattening an array is the process of reducing the dimensionality of an array.
+
+Flattening is useful when you want to convert a multi-dimensional array into a one-dimensional array.
+
+JavaScript Array flat()
+ES2019 Introduced the Array flat() method.
+
+The flat() method creates a new array with sub-array elements concatenated to a specified depth.
+
+Example
+const myArr = [[1,2],[3,4],[5,6]];
+const newArr = myArr.flat();
+JavaScript Array flatMap()
+ES2019 added the Array flatMap() method to JavaScript.
+
+The flatMap() method first maps all elements of an array and then creates a new array by flattening the array.
+
+Example
+const myArr = [1, 2, 3, 4, 5, 6];
+const newArr = myArr.flatMap(x => [x, x * 10]);
+Splicing and Slicing Arrays
+The splice() method adds new items to an array.
+
+The slice() method slices out a piece of an array.
+
+JavaScript Array splice()
+The splice() method can be used to add new items to an array:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(2, 0, "Lemon", "Kiwi");
+The first parameter (2) defines the position where new elements should be added (spliced in).
+
+The second parameter (0) defines how many elements should be removed.
+
+The rest of the parameters ("Lemon" , "Kiwi") define the new elements to be added.
+
+The splice() method returns an array with the deleted items:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(2, 2, "Lemon", "Kiwi");
+Using splice() to Remove Elements
+With clever parameter setting, you can use splice() to remove elements without leaving "holes" in the array:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.splice(0, 1);
+The first parameter (0) defines the position where new elements should be added (spliced in).
+
+The second parameter (1) defines how many elements should be removed.
+
+The rest of the parameters are omitted. No new elements will be added.
+
+JavaScript Array toSpliced()
+ES2023 added the Array toSpliced() method as a safe way to splice an array without altering the original array.
+
+The difference between the new toSpliced() method and the old splice() method is that the new method creates a new array, keeping the original array unchanged, while the old method altered the original array.
+
+Example
+const months = ["Jan", "Feb", "Mar", "Apr"];
+const spliced = months.toSpliced(0, 1);
+JavaScript Array slice()
+The slice() method slices out a piece of an array into a new array:
+
+Example
+Slice out a part of an array starting from array element 1 ("Orange"):
+
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.slice(1);
+The slice() method creates a new array.
+
+The slice() method does not remove any elements from the source array.
+
+Example
+Slice out a part of an array starting from array element 3 ("Apple"):
+
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.slice(3);
+The slice() method can take two arguments like slice(1, 3).
+
+The method then selects elements from the start argument, and up to (but not including) the end argument.
+
+Example
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.slice(1, 3);
+If the end argument is omitted, like in the first examples, the slice() method slices out the rest of the array.
+
+Example
+const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const citrus = fruits.slice(2);
+Automatic toString()
+JavaScript automatically converts an array to a comma separated string when a primitive value is expected.
+
+This is always the case when you try to output an array.
+
+These two examples will produce the same result:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits.toString();
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo").innerHTML = fruits;
+All JavaScript objects have a toString() method.
+
+Searching Arrays
+Searching arrays are covered in the next chapter of this tutorial.
+
+Sorting Arrays
+Sorting arrays covers the methods used to sort arrays.
+
+Iterating Arrays
+Iterating arrays covers methods that operate on all array elements.
+
+E
+
+JavaScript Array Search
+Array Search Methods
+Array indexOf()
+Array lastIndexOf()
+Array includes()
+Array find()
+Array findIndex()
+Array findLast()
+Array findLastIndex()
+Complete JavaScript Array Reference
+
+JavaScript Array indexOf()
+The indexOf() method searches an array for an element value and returns its position.
+
+Note: The first item has position 0, the second item has position 1, and so on.
+
+Example
+Search an array for the item "Apple":
+
+const fruits = ["Apple", "Orange", "Apple", "Mango"];
+let position = fruits.indexOf("Apple") + 1;
+Syntax
+array.indexOf(item, start)
+item	Required. The item to search for.
+start	Optional. Where to start the search. Negative values will start at the given position counting from the end, and search to the end.
+Array.indexOf() returns -1 if the item is not found.
+
+If the item is present more than once, it returns the position of the first occurrence.
+
+JavaScript Array lastIndexOf()
+Array.lastIndexOf() is the same as Array.indexOf(), but returns the position of the last occurrence of the specified element.
+
+Example
+Search an array for the item "Apple":
+
+const fruits = ["Apple", "Orange", "Apple", "Mango"];
+let position = fruits.lastIndexOf("Apple") + 1;
+Syntax
+array.lastIndexOf(item, start)
+item	Required. The item to search for
+start	Optional. Where to start the search. Negative values will start at the given position counting from the end, and search to the beginning
+JavaScript Array includes()
+ECMAScript 2016 introduced Array.includes() to arrays. This allows us to check if an element is present in an array (including NaN, unlike indexOf).
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+fruits.includes("Mango"); // is true
+Syntax
+array.includes(search-item)
+Array.includes() allows to check for NaN values. Unlike Array.indexOf().
+
+REMOVE ADS
+
+JavaScript Array find()
+The find() method returns the value of the first array element that passes a test function.
+
+This example finds (returns the value of) the first element that is larger than 18:
+
+Example
+const numbers = [4, 9, 16, 25, 29];
+let first = numbers.find(myFunction);
+
+function myFunction(value, index, array) {
+  return value > 18;
+}
+Note that the function takes 3 arguments:
+
+The item value
+The item index
+The array itself
+JavaScript Array findIndex()
+The findIndex() method returns the index of the first array element that passes a test function.
+
+This example finds the index of the first element that is larger than 18:
+
+Example
+const numbers = [4, 9, 16, 25, 29];
+let first = numbers.findIndex(myFunction);
+
+function myFunction(value, index, array) {
+  return value > 18;
+}
+Note that the function takes 3 arguments:
+
+The item value
+The item index
+The array itself
+JavaScript Array findLast() Method
+ES2023 added the findLast() method that will start from the end of an array and return the value of the first element that satisfies a condition.
+
+Example
+const temp = [27, 28, 30, 40, 42, 35, 30];
+let high = temp.findLast(x => x > 40);
+Browser Support
+findLast() is an ECMAScript 2023 feature.
+
+JavaScript 2023 is supported in all modern browsers since July 2023:
+
+Chrome
+110	Edge
+110	Firefox
+115	Safari
+16.4	Opera
+96
+Feb 2023	Feb 2023	Jul 2023	Mar 2023	May 2023
+JavaScript Array findLastIndex() Method
+The findLastIndex() method finds the index of the last element that satisfies a condition.
+
+Example
+const temp = [27, 28, 30, 40, 42, 35, 30];
+let pos = temp.findLastIndex(x => x > 40);
+Browser Support
+findLastIndex() is an ECMAScript 2023 feature.
+
+JavaScript 2023 is supported in all modern browsers since July 2023:
+
+Chrome
+110	Edge
+110	Firefox
+115	Safari
+16.4	Opera
+96
+Feb 2023	Feb 2023	Jul 2023	Mar 2023	May 2023
+See Also:
+Array Tutorial
+
+Array Constructor
+
+Array Basic Methods
+
+Array Sort Methods
+
+Array Iteration Methods
+
+Array Reference
+
+Complete JavaScript Reference
+For a complete reference to all JavaScript properties and methods, with full descriptions and many examples, go to:
+
+W3Schools' Full JavaScript Reference.
+
+The reference inludes all JavaScript updates from 1999 to 2025.
+
+Exercise
+?
+Consider the following code:
+const fruits = ['Apple', 'Orange', 'Mango'];
+let x = fruits.indexOf('Orange');
+What will the result of x?
+
+
+0
+1
+true
+
+
+
+JavaScript Array Sort
+Alphabetic Sort
+Array sort()
+Array reverse()
+Array toSorted()
+Array toReversed()
+Sorting Objects
+Numeric Sort
+Numeric Sort
+Random Sort
+Math.min()
+Math.max()
+Home made Min()
+Home made Max()
+Complete JavaScript Array Reference
+
+Sorting an Array
+The sort() method sorts an array alphabetically:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.sort();
+Reversing an Array
+The reverse() method reverses the elements in an array:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.reverse();
+By combining sort() and reverse(), you can sort an array in descending order:
+
+Example
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.sort();
+fruits.reverse();
+JavaScript Array toSorted() Method
+ES2023 added the toSorted() method as a safe way to sort an array without altering the original array.
+
+The difference between toSorted() and sort() is that the first method creates a new array, keeping the original array unchanged, while the last method alters the original array.
+
+Example
+const months = ["Jan", "Feb", "Mar", "Apr"];
+const sorted = months.toSorted();
+JavaScript Array toReversed() Method
+ES2023 added the toReversed() method as a safe way to reverse an array without altering the original array.
+
+The difference between toReversed() and reverse() is that the first method creates a new array, keeping the original array unchanged, while the last method alters the original array.
+
+Example
+const months = ["Jan", "Feb", "Mar", "Apr"];
+const reversed = months.toReversed();
+REMOVE ADS
+
+Numeric Sort
+By default, the sort() function sorts values as strings.
+
+This works well for strings ("Apple" comes before "Banana").
+
+If numbers are sorted as strings, "25" is bigger than "100", because "2" is bigger than "1".
+
+Because of this, the sort() method will produce incorrect result when sorting numbers.
+
+You can fix this by providing a compare function:
+
+Example
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return a - b});
+Use the same trick to sort an array descending:
+
+Example
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return b - a});
+REMOVE ADS
+
+The Compare Function
+The purpose of the compare function is to define an alternative sort order.
+
+The compare function should return a negative, zero, or positive value, depending on the arguments:
+
+function(a, b){return a - b}
+When the sort() function compares two values, it sends the values to the compare function, and sorts the values according to the returned (negative, zero, positive) value.
+
+If the result is negative, a is sorted before b.
+
+If the result is positive, b is sorted before a.
+
+If the result is 0, no changes are done with the sort order of the two values.
+
+Example:
+
+The compare function compares all the values in the array, two values at a time (a, b).
+
+When comparing 40 and 100, the sort() method calls the compare function(40, 100).
+
+The function calculates 40 - 100 (a - b), and since the result is negative (-60),  the sort function will sort 40 as a value lower than 100.
+
+You can use this code snippet to experiment with numerically and alphabetically sorting:
+
+<button onclick="myFunction1()">Sort Alphabetically</button>
+<button onclick="myFunction2()">Sort Numerically</button>
+
+<p id="demo"></p>
+
+<script>
+const points = [40, 100, 1, 5, 25, 10];
+document.getElementById("demo").innerHTML = points;
+
+function myFunction1() {
+  points.sort();
+  document.getElementById("demo").innerHTML = points;
+}
+
+function myFunction2() {
+  points.sort(function(a, b){return a - b});
+  document.getElementById("demo").innerHTML = points;
+}
+</script>
+Sorting an Array in Random Order
+Using a sort function, like explained above, you can sort an numeric array in random order
+
+Example
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(){return 0.5 - Math.random()});
+
+The Fisher Yates Method
+The points.sort() method in the example above is not accurate. It will favor some numbers over others.
+
+The most popular correct method, is called the Fisher Yates shuffle, and was introduced in data science as early as 1938!
+
+In JavaScript the method can be translated to this:
+
+Example
+const points = [40, 100, 1, 5, 25, 10];
+
+for (let i = points.length -1; i > 0; i--) {
+  let j = Math.floor(Math.random() * (i+1));
+  let k = points[i];
+  points[i] = points[j];
+  points[j] = k;
+}
+
+Find the Lowest (or Highest) Array Value
+There are no built-in functions for finding the max or min value in an array.
+
+To find the lowest or highest value you have 3 options:
+
+Sort the array and read the first or last element
+Use Math.min() or Math.max()
+Write a home made function
+Find Min or Max with sort()
+After you have sorted an array, you can use the index to obtain the highest and lowest values.
+
+Sort Ascending:
+Example
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return a - b});
+// now points[0] contains the lowest value
+// and points[points.length-1] contains the highest value
+Sort Descending:
+Example
+const points = [40, 100, 1, 5, 25, 10];
+points.sort(function(a, b){return b - a});
+// now points[0] contains the highest value
+// and points[points.length-1] contains the lowest value
+Sorting a whole array is a very inefficient method if you only want to find the highest (or lowest) value.
+
+Using Math.min() on an Array
+You can use Math.min.apply to find the lowest number in an array:
+
+Example
+function myArrayMin(arr) {
+  return Math.min.apply(null, arr);
+}
+
+Math.min.apply(null, [1, 2, 3]) is equivalent to Math.min(1, 2, 3).
+
+Using Math.max() on an Array
+You can use Math.max.apply to find the highest number in an array:
+
+Example
+function myArrayMax(arr) {
+  return Math.max.apply(null, arr);
+}
+
+Math.max.apply(null, [1, 2, 3]) is equivalent to Math.max(1, 2, 3).
+
+JavaScript Array Minimum Method
+There is no built-in function for finding the lowest value in a JavaScript array.
+
+The fastest code to find the lowest number is to use a home made method.
+
+This function loops through an array comparing each value with the lowest value found:
+
+Example (Find Min)
+function myArrayMin(arr) {
+  let len = arr.length;
+  let min = Infinity;
+  while (len--) {
+    if (arr[len] < min) {
+      min = arr[len];
+    }
+  }
+  return min;
+}
+
+JavaScript Array Maximum Method
+There is no built-in function for finding the highest value in a JavaScript array.
+
+The fastest code to find the highest number is to use a home made method.
+
+This function loops through an array comparing each value with the highest value found:
+
+Example (Find Max)
+function myArrayMax(arr) {
+  let len = arr.length;
+  let max = -Infinity;
+  while (len--) {
+    if (arr[len] > max) {
+      max = arr[len];
+    }
+  }
+  return max;
+}
+
+Sorting Object Arrays
+JavaScript arrays often contain objects:
+
+Example
+const cars = [
+  {type:"Volvo", year:2016},
+  {type:"Saab", year:2001},
+  {type:"BMW", year:2010}
+];
+Even if objects have properties of different data types, the sort() method can be used to sort the array.
+
+The solution is to write a compare function to compare the property values:
+
+Example
+cars.sort(function(a, b){return a.year - b.year});
+Comparing string properties is a little more complex:
+
+Example
+cars.sort(function(a, b){
+  let x = a.type.toLowerCase();
+  let y = b.type.toLowerCase();
+  if (x < y) {return -1;}
+  if (x > y) {return 1;}
+  return 0;
+});
+Stable Array sort()
+ES2019 revised the Array sort() method.
+
+Before 2019, the specification allowed unstable sorting algorithms such as QuickSort.
+
+After ES2019, browsers must use a stable sorting algorithm:
+
+When sorting elements on a value, the elements must keep their relative position to other elements with the same value.
+
+Example
+const myArr = [
+  {name:"X00",price:100 },
+  {name:"X01",price:100 },
+  {name:"X02",price:100 },
+  {name:"X03",price:100 },
+  {name:"X04",price:110 },
+  {name:"X05",price:110 },
+  {name:"X06",price:110 },
+  {name:"X07",price:110 }
+];
+In the example above, when sorting on price, the result is not allowed to come out with the names in an other relative position like this:
+
+X01 100
+X03 100
+X00 100
+X02 100
+X05 110
+X04 110
+X06 110
+X07 110
+See Also:
+Array Tutorial
+
+Array Constructor
+
+Array Basic Methods
+
+Array Search Methods
+
+Array Iteration Methods
+
+Array Reference
+
+Complete JavaScript Reference
+For a complete reference to all JavaScript properties and methods, with full descriptions and many examples, go to:
+
+W3Schools' Full JavaScript Reference.
+
+The reference inludes all JavaScript updates from 1999 to 2025.
+
+Exercise
+?
+Consider the following code:
+const fruits = ['Apple', 'Orange', 'Banana'];
+fruits.reverse();
+What will the result of the fruits array?
+
+
+['Orange', 'Banana', 'Apple']
+['Banana', 'Orange', 'Apple']
+['Apple', 'Banana', 'Orange']
+['Orange', 'Apple', 'Banana']
+
+
+
+JavaScript Array Iterations
+Array Iteration Methods
+Array iteration methods operate on every array item.
+
+Array for...of
+Array for...in
+Array forEach()
+Array map()
+Array flatMap()
+Array filter()
+Array reduce()
+Array reduceRight()
+Array every()
+Array some()
+Array from()
+Array keys()
+Array entries()
+Array with()
+Array Spread (...)
+Array Rest (...)
+Complete JavaScript Array Reference
+
+Looping Array Values
+JavaScript provides 3 simple statements for looping over each array items:
+
+for ... of (loops over entries)
+for ... in (loops over indexes)
+forEach (myFunction)
+The for...of Loop (Recommended)
+The for...of statements hands you the array values.
+
+Example
+// Create an Array
+const cars = ['BMW', 'Volvo', 'Mini'];
+
+// Iterate over the Array values
+let text = "";
+for (let x of cars) {
+  text += x + ",";
+}
+The for...in Loop (Not Recommended)
+The for...in statements hands you the array indexes.
+
+Example
+// Create an Array
+const cars = ['BMW', 'Volvo', 'Mini'];
+
+// Iterate over the Array values
+let text = "";
+for (let x in cars) {
+  text += x + ",";
+}
+To make it return the elements you must use [x].
+
+Example
+// Create an Array
+const cars = ['BMW', 'Volvo', 'Mini'];
+
+// Iterate over the Array values
+let text = "";
+for (let cars[x] in cars) {
+  text += x + ",";
+}
+Even though it works, using for...in for arrays is generally a bad idea.
+
+for...in was created to inspect Object properties (like: name, age, height), not Arrays.
+
+JavaScript Array forEach()
+The forEach() method calls a function (a callback function) for each array element.
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let txt = "";
+numbers.forEach(myFunction);
+
+function myFunction(value, index, array) {
+  txt += value + "<br>";
+}
+Note that the function takes 3 arguments:
+
+The item value
+The item index
+The array itself
+The example above uses only the value parameter. The example can be rewritten to:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let txt = "";
+numbers.forEach(myFunction);
+
+function myFunction(value) {
+  txt += value + "<br>";
+}
+REMOVE ADS
+
+JavaScript Array map()
+The map() method creates a new array by performing a function on each array element.
+
+The map() method does not execute the function for array elements without values.
+
+The map() method does not change the original array.
+
+This example multiplies each array value by 2:
+
+Example
+const numbers1 = [45, 4, 9, 16, 25];
+const numbers2 = numbers1.map(myFunction);
+
+function myFunction(value, index, array) {
+  return value * 2;
+}
+Note that the function takes 3 arguments:
+
+The item value
+The item index
+The array itself
+When a callback function uses only the value parameter, the index and array parameters can be omitted:
+
+Example
+const numbers1 = [45, 4, 9, 16, 25];
+const numbers2 = numbers1.map(myFunction);
+
+function myFunction(value) {
+  return value * 2;
+}
+JavaScript Array flatMap()
+ES2019 added the Array flatMap() method to JavaScript.
+
+The flatMap() method first maps all elements of an array and then creates a new array by flattening the array.
+
+Example
+const myArr = [1, 2, 3, 4, 5, 6];
+const newArr = myArr.flatMap(x => [x, x * 10]);
+REMOVE ADS
+
+JavaScript Array filter()
+The filter() method creates a new array with array elements that pass a test.
+
+This example creates a new array from elements with a value larger than 18:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+const over18 = numbers.filter(myFunction);
+
+function myFunction(value, index, array) {
+  return value > 18;
+}
+Note that the function takes 3 arguments:
+
+The item value
+The item index
+The array itself
+In the example above, the callback function does not use the index and array parameters, so they can be omitted:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+const over18 = numbers.filter(myFunction);
+
+function myFunction(value) {
+  return value > 18;
+}
+JavaScript Array reduce()
+The reduce() method runs a function on each array element to produce a single value.
+
+The reduce() method works from left-to-right in the array. See also reduceRight().
+
+The reduce() method does not reduce the original array.
+
+This example finds the sum of all numbers in an array:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers.reduce(myFunction);
+
+function myFunction(total, value, index, array) {
+  return total + value;
+}
+Note that the function takes 4 arguments:
+
+The total (the initial value / previously returned value)
+The item value
+The item index
+The array itself
+Since the example above does not use the index and array parameters, it can be rewritten to:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers.reduce(myFunction);
+
+function myFunction(total, value) {
+  return total + value;
+}
+The reduce() method can accept an initial value:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers.reduce(myFunction, 100);
+
+function myFunction(total, value) {
+  return total + value;
+}
+JavaScript Array reduceRight()
+The reduceRight() method runs a function on each array element to produce a single value.
+
+The reduceRight() works from right-to-left in the array. See also reduce().
+
+The reduceRight() method does not reduce the original array.
+
+This example finds the sum of all numbers in an array:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers.reduceRight(myFunction);
+
+function myFunction(total, value, index, array) {
+  return total + value;
+}
+Note that the function takes 4 arguments:
+
+The total (the initial value / previously returned value)
+The item value
+The item index
+The array itself
+The example above does not use the index and array parameters. It can be rewritten to:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers.reduceRight(myFunction);
+
+function myFunction(total, value) {
+  return total + value;
+}
+JavaScript Array every()
+The every() method checks if all array values pass a test.
+
+This example checks if all array values are larger than 18:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let allOver18 = numbers.every(myFunction);
+
+function myFunction(value, index, array) {
+  return value > 18;
+}
+Note that the function takes 3 arguments:
+
+The item value
+The item index
+The array itself
+When a callback function uses the first parameter only (value), the other parameters can be omitted:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let allOver18 = numbers.every(myFunction);
+
+function myFunction(value) {
+  return value > 18;
+}
+JavaScript Array some()
+The some() method checks if some array values pass a test.
+
+This example checks if some array values are larger than 18:
+
+Example
+const numbers = [45, 4, 9, 16, 25];
+let someOver18 = numbers.some(myFunction);
+
+function myFunction(value, index, array) {
+  return value > 18;
+}
+Note that the function takes 3 arguments:
+
+The item value
+The item index
+The array itself
+JavaScript Array.from()
+The Array.from() method returns an Array object from:
+
+Any iterable object
+
+Any object with a length property
+
+Example
+Create an Array from a String:
+
+let text = "ABCDEFG";
+Array.from(text);
+Array.from() has an optional parameter which allows you to execute a function on each element of the new array:
+
+Example
+Create an Array from an Array:
+
+const myNumbers = [1,2,3,4];
+const myArr = Array.from(myNumbers, (x) => x * 2);
+JavaScript Array keys()
+The Array.keys() method returns an Array Iterator object with the keys of an array.
+
+Example
+Create an Array Iterator object, containing the keys of the array:
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const keys = fruits.keys();
+
+for (let x of keys) {
+  text += x + "<br>";
+}
+JavaScript Array entries()
+Example
+Create an Array Iterator, and then iterate over the key/value pairs:
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const f = fruits.entries();
+
+for (let x of f) {
+  document.getElementById("demo").innerHTML += x;
+}
+The entries() method returns an Array Iterator object with key/value pairs:
+
+[0, "Banana"]
+[1, "Orange"]
+[2, "Apple"]
+[3, "Mango"]
+
+The entries() method does not change the original array.
+
+JavaScript Array with() Method
+ES2023 added the Array with() method as a safe way to update elements in an array without altering the original array.
+
+Example
+const months = ["Januar", "Februar", "Mar", "April"];
+const myMonths = months.with(2, "March");
+JavaScript Array Spread (...)
+The ... operator expands an array into individual elements.
+
+This can be used join arrays:
+
+Example 1
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+const arr3 = [...arr1, ...arr2];
+In the example above, ...arr1 expands arr1 into single elements, ...arr2 expands arr2 into single elements, and arr3 is constructed using ...arr1 and ...arr2.
+
+Example 2
+const q1 = ["Jan", "Feb", "Mar"];
+const q2 = ["Apr", "May", "Jun"];
+const q3 = ["Jul", "Aug", "Sep"];
+const q4 = ["Oct", "Nov", "Des"];
+
+const year = [...q1, ...q2, ...q3, ...q4];
+The spread operator (...) can be used to copy an array:
+
+Example 3
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1];
+The spread operator (...) can be used to pass arguments to a function:
+
+Example 4
+const numbers = [23,55,21,87,56];
+let minValue = Math.min(...numbers);
+let maxValue = Math.max(...numbers);
+JavaScript Array Rest (...)
+The rest operator (...) allows us to destruct an array and collect the leftovers:
+
+Examples
+let a, rest;
+const arr1 = [1,2,3,4,5,6,7,8];
+
+[a, ...rest] = arr1;
+let a, b, rest;
+const arr1 = [1,2,3,4,5,6,7,8];
+
+[a, b, ...rest] = arr1;
+See Also:
+Array Tutorial
+
+Array Constructor
+
+Array Basic Methods
+
+Array Search Methods
+
+Array Sort Methods
+
+Array Reference
+
+Complete JavaScript Reference
+For a complete reference to all JavaScript properties and methods, with full descriptions and many examples, go to:
+
+W3Schools' Full JavaScript Reference.
+
+The reference inludes all JavaScript updates from 1999 to 2025.
+
+Exercise
+?
+Consider the following code:
+const x = [45, 4, 9, 16, 25];
+let y = x.every(myfunc);
+function myfunc(val) {
+  return val > 20;
+}
+What will the result of the y?
+
+
+[45, 25]
+false
+[]
+NaN
+
+
+
+JavaScript Array Reference
+Complete Array Reference
+Revised July 2025
+Name	Description
+[ ]	Creates a new Array
+new Array()	Creates a new Array
+at()	Returns an indexed element of an array
+concat()	Joins arrays and returns an array with the joined arrays
+constructor	Returns the function that created the Array prototype
+copyWithin()	Copies array elements within the array, to and from specified positions
+entries()	Returns a key/value pair Array Iteration Object
+every()	Checks if every element in an array pass a test
+fill()	Fill the elements in an array with a static value
+filter()	Creates a new array with every element in an array that pass a test
+find()	Returns the value of the first element in an array that pass a test
+findIndex()	Returns the index of the first element in an array that pass a test
+findLast()	Returns the value of the last element in an array that pass a test
+findLastIndex()	Returns the index of the last element in an array that pass a test
+flat()	Concatenates sub-array elements
+flatMap()	Maps all array elements and creates a new flat array
+forEach()	Calls a function for each array element
+from()	Creates an array from an object
+includes()	Check if an array contains the specified element
+indexOf()	Search the array for an element and returns its position
+isArray()	Checks whether an object is an array
+join()	Joins all elements of an array into a string
+keys()	Returns a Array Iteration Object, containing the keys of the original array
+lastIndexOf()	Search the array for an element, starting at the end, and returns its position
+length	Sets or returns the number of elements in an array
+map()	Creates a new array with the result of calling a function for each array element
+of()	Creates an array from a number of arguments
+pop()	Removes the last element of an array, and returns that element
+prototype	Allows you to add properties and methods to an Array object
+push()	Adds new elements to the end of an array, and returns the new length
+reduce()	Reduce the values of an array to a single value (going left-to-right)
+reduceRight()	Reduce the values of an array to a single value (going right-to-left)
+reverse()	Reverses the order of the elements in an array
+shift()	Removes the first element of an array, and returns that element
+slice()	Selects a part of an array, and returns the new array
+some()	Checks if any of the elements in an array pass a test
+sort()	Sorts the elements of an array
+splice()	Adds or Removes array elements
+toReversed()	Reverses the order of array elements (to a new array)
+toSorted()	Sorts the elements of an array (to a new array)
+toSpliced()	Adds or Removes array elements (to a new array)
+toString()	Converts an array to a string, and returns the result
+unshift()	Adds new elements to the beginning of an array, and returns the new length
+valueOf()	Returns the primitive value of an array
+with()	Returns a new array with updated elements
+REMOVE ADS
+
+See Also:
+Array Tutorial
+
+Array Constructor
+
+Array Basic Methods
+
+Array Search Methods
+
+Array Sort Methods
+
+Array Iteration Methods
+
+
+
+JavaScript Array Const
+ECMAScript 2015 (ES6)
+In 2015, JavaScript introduced an important new keyword: const.
+
+It has become a common practice to declare arrays using const:
+
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+Cannot be Reassigned
+An array declared with const cannot be reassigned:
+
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+cars = ["Toyota", "Volvo", "Audi"];    // ERROR
+Arrays are Not Constants
+The keyword const is a little misleading.
+
+It does NOT define a constant array. It defines a constant reference to an array.
+
+Because of this, we can still change the elements of a constant array.
+
+Elements Can be Reassigned
+You can change the elements of a constant array:
+
+Example
+// You can create a constant array:
+const cars = ["Saab", "Volvo", "BMW"];
+
+// You can change an element:
+cars[0] = "Toyota";
+
+// You can add an element:
+cars.push("Audi");
+Assigned when Declared
+JavaScript const variables must be assigned a value when they are declared:
+
+Meaning: An array declared with const must be initialized when it is declared.
+
+Using const without initializing the array is a syntax error:
+
+Example
+This will not work:
+
+const cars;
+cars = ["Saab", "Volvo", "BMW"];
+Arrays declared with var can be initialized at any time.
+
+You can even use the array before it is declared:
+
+Example
+This is OK:
+
+cars = ["Saab", "Volvo", "BMW"];
+var cars;
+Const Block Scope
+An array declared with const has Block Scope.
+
+An array declared in a block is not the same as an array declared outside the block:
+
+Example
+const cars = ["Saab", "Volvo", "BMW"];
+// Here cars[0] is "Saab"
+{
+  const cars = ["Toyota", "Volvo", "BMW"];
+  // Here cars[0] is "Toyota"
+}
+// Here cars[0] is "Saab"
+An array declared with var does not have block scope:
+
+Example
+var cars = ["Saab", "Volvo", "BMW"];
+// Here cars[0] is "Saab"
+{
+  var cars = ["Toyota", "Volvo", "BMW"];
+  // Here cars[0] is "Toyota"
+}
+// Here cars[0] is "Toyota"
+You can learn more about Block Scope in the chapter: JavaScript Scope.
+
+REMOVE ADS
+
+Redeclaring Arrays
+Redeclaring an array declared with var is allowed anywhere in a program:
+
+Example
+var cars = ["Volvo", "BMW"];   // Allowed
+var cars = ["Toyota", "BMW"];  // Allowed
+cars = ["Volvo", "Saab"];      // Allowed
+Redeclaring or reassigning an array to const, in the same scope, or in the same block, is not allowed:
+
+Example
+var cars = ["Volvo", "BMW"];     // Allowed
+const cars = ["Volvo", "BMW"];   // Not allowed
+{
+  var cars = ["Volvo", "BMW"];   // Allowed
+  const cars = ["Volvo", "BMW"]; // Not allowed
+}
+Redeclaring or reassigning an existing const array, in the same scope, or in the same block, is not allowed:
+
+Example
+const cars = ["Volvo", "BMW"];   // Allowed
+const cars = ["Volvo", "BMW"];   // Not allowed
+var cars = ["Volvo", "BMW"];     // Not allowed
+cars = ["Volvo", "BMW"];         // Not allowed
+
+{
+  const cars = ["Volvo", "BMW"]; // Allowed
+  const cars = ["Volvo", "BMW"]; // Not allowed
+  var cars = ["Volvo", "BMW"];   // Not allowed
+  cars = ["Volvo", "BMW"];       // Not allowed
+}
+Redeclaring an array with const, in another scope, or in another block, is allowed:
+
+Example
+const cars = ["Volvo", "BMW"];   // Allowed
+{
+  const cars = ["Volvo", "BMW"]; // Allowed
+}
+{
+  const cars = ["Volvo", "BMW"]; // Allowed
+}
+Complete Array Reference
+For a complete Array reference, go to our:
+
+Complete JavaScript Array Reference
+
+The reference contains descriptions and examples of all Array properties and methods.
+
+Exercise
+?
+True or False.
+If you declare an array with the const keyword, you cannot change the array items later.
+
+
+True
+False
+
