@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2: Operators, Conditionals & Strings | JS Bootcamp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e1b13;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 1100;
+        }
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #0f766e, #0d9488);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        .logo a {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0f766e, #0d9488);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+        .logo i {
+            color: #0d9488;
+            margin-right: 6px;
+        }
+        .slide-counter {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        .slide-counter span {
+            color: #1e293b;
+            font-weight: 700;
+        }
+        .back-btn {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .back-btn:hover {
+            background: #e2e8f0;
+        }
+        .back-btn i {
+            margin-right: 6px;
+        }
+
+        .slide-container {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            overflow: hidden;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 1.5rem 2.5rem 2rem;
+            background: #f8fafc;
+        }
+
+        .slide::-webkit-scrollbar {
+            width: 6px;
+        }
+        .slide::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 3px;
+        }
+        .slide::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 3px;
+        }
+
+        .slide-card {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            min-height: 100%;
+        }
+
+        .slide-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0f766e;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid #0d9488;
+            padding-left: 1rem;
+        }
+        .slide-title i {
+            color: #0d9488;
+            margin-right: 8px;
+        }
+
+        .info-box {
+            background: #f0fdfa;
+            border-left: 4px solid #0d9488;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+        }
+        .info-box i {
+            color: #0d9488;
+            margin-right: 6px;
+        }
+
+        .highlight-box {
+            background: #fef9e7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+        }
+        .highlight-box i {
+            color: #f59e0b;
+            margin-right: 6px;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem 1.2rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 0.8rem 0;
+        }
+        .code-block .comment {
+            color: #94a3b8;
+        }
+        .code-block .keyword {
+            color: #c084fc;
+        }
+        .code-block .string {
+            color: #facc15;
+        }
+        .code-block .func {
+            color: #60a5fa;
+        }
+        .code-block .number {
+            color: #f472b6;
+        }
+        .code-block .var {
+            color: #34d399;
+        }
+        .code-block .operator {
+            color: #fbbf24;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 0.8rem 0;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin: 0.8rem 0;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+        }
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f8fafc;
+            border-radius: 0.8rem;
+            font-size: 0.85rem;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.5rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .comparison-table th {
+            background: #ccfbf1;
+            color: #0f766e;
+            font-weight: 600;
+        }
+        .comparison-table tr:hover {
+            background: #f1f5f9;
+        }
+
+        .output-demo {
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 0.6rem;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        .output-demo i {
+            margin-right: 6px;
+            color: #64748b;
+        }
+
+        .interactive-area {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            margin: 0.8rem 0;
+        }
+        .interactive-area button {
+            background: #0d9488;
+            color: white;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0.2rem 0.2rem 0.2rem 0;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .interactive-area button:hover {
+            background: #0f766e;
+        }
+        .interactive-area input {
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            border: 1px solid #cbd5e1;
+            width: 180px;
+            font-size: 0.85rem;
+        }
+
+        .quiz-question {
+            background: #fef9f2;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            border-radius: 0.8rem;
+            border: 1px solid #fce4c1;
+        }
+        .quiz-question label {
+            display: block;
+            margin: 0.2rem 0;
+            font-size: 0.9rem;
+        }
+        .quiz-question input[type="radio"] {
+            margin-right: 6px;
+        }
+
+        .answer-key {
+            background: #f0fdfa;
+            padding: 1rem;
+            border-radius: 1rem;
+            display: none;
+            margin-top: 1rem;
+        }
+        .answer-key.show {
+            display: block;
+        }
+        .answer-key strong {
+            color: #0f766e;
+        }
+        .answer-key i {
+            color: #0d9488;
+            margin-right: 6px;
+        }
+
+        .btn-toggle {
+            background: #0d9488;
+            color: white;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .btn-toggle:hover {
+            background: #0f766e;
+        }
+        .btn-toggle i {
+            margin-right: 6px;
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
+        }
+        .nav-btn {
+            background: #0d9488;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-btn:hover {
+            background: #0f766e;
+            transform: scale(1.02);
+        }
+        .nav-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .nav-btn:disabled:hover {
+            background: #cbd5e1;
+        }
+        .nav-btn-prev {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+        .nav-btn-prev:hover {
+            background: #e2e8f0;
+        }
+
+        .slide-dots {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            transition: 0.3s;
+        }
+        .dot.active {
+            background: #0d9488;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .two-columns,
+            .three-columns {
+                grid-template-columns: 1fr;
+            }
+            .slide {
+                padding: 1rem;
+            }
+            .slide-card {
+                padding: 1.2rem;
+            }
+            .slide-title {
+                font-size: 1.3rem;
+            }
+            .nav-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+            .slide-nav {
+                padding: 0 1rem;
+            }
+        }
+
+        .slide-content {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .slide-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .slide-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .slide-content::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.1rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            margin-right: 0.3rem;
+        }
+        .badge-success {
+            background: #10b98120;
+            color: #065f46;
+        }
+        .badge-warning {
+            background: #f59e0b20;
+            color: #b45309;
+        }
+        .badge-info {
+            background: #0d948820;
+            color: #0f766e;
+        }
+
+        .operator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .operator-grid span {
+            background: #f1f5f9;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .operator-grid span:hover {
+            background: #e2e8f0;
+        }
+
+        .truthy-falsy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .truthy-falsy-grid .truthy {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            border: 1px solid #86efac;
+        }
+        .truthy-falsy-grid .falsy {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            border: 1px solid #fca5a5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-container"><div class="progress-bar" id="progressFill"></div></div>
+
+    <div class="nav-bar">
+        <div class="logo"><a href="index.html"><i class="fas fa-server"></i> CodeForge·JS</a></div>
+        <div class="slide-counter"><i class="fas fa-chevron-left"></i> Slide <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">16</span> <i class="fas fa-chevron-right"></i></div>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Hub</a>
+    </div>
+
+    <div class="slide-container">
+        <div class="slides-wrapper" id="slidesWrapper">
+
+            <!-- ==================== SLIDE 1: Title ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div style="text-align:center; padding:2rem 0;">
+                            <i class="fas fa-calculator" style="font-size:4rem; color:#0d9488; background:#ccfbf1; padding:1.5rem; border-radius:50%;"></i>
+                            <h1 style="font-size:2.8rem; font-weight:900; margin:1.5rem 0 0.5rem; background:linear-gradient(135deg,#0f766e,#0d9488); background-clip:text; -webkit-background-clip:text; color:transparent;">Day 2</h1>
+                            <h2 style="font-size:2rem; font-weight:700; color:#1e293b;">Operators, Conditionals & Strings</h2>
+                            <p style="color:#64748b; font-size:1.1rem; margin:0.5rem 0 1.5rem;">Arithmetic, Assignment, Comparison, Logical Operators · if/else · Loops · String Methods</p>
+                            <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin:1rem 0;">
+                                <span style="background:#f1f5f9; padding:0.2rem 1rem; border-radius:40px; font-size:0.8rem;"><i class="far fa-clock"></i> 2 hours</span>
+                                <span style="background:#f1f5f9; padding:0.2rem 1rem; border-radius:40px; font-size:0.8rem;"><i class="fas fa-signal"></i> Beginner</span>
+                                <span style="background:#f1f5f9; padding:0.2rem 1rem; border-radius:40px; font-size:0.8rem;"><i class="fas fa-tools"></i> Browser + DevTools</span>
+                            </div>
+                            <div class="info-box" style="text-align:left;">
+                                <i class="fas fa-arrow-right"></i> <strong>What you'll learn today:</strong>
+                                <ul style="margin-left:1.5rem; margin-top:0.3rem;">
+                                    <li><i class="fas fa-check-circle" style="color:#0d9488;"></i> Arithmetic, Assignment, Comparison & Logical Operators</li>
+                                    <li><i class="fas fa-check-circle" style="color:#0d9488;"></i> Conditional Statements: if, else, else if, ternary operator</li>
+                                    <li><i class="fas fa-check-circle" style="color:#0d9488;"></i> Loops: for, while, do-while, break & continue</li>
+                                    <li><i class="fas fa-check-circle" style="color:#0d9488;"></i> Boolean values, truthy & falsy</li>
+                                    <li><i class="fas fa-check-circle" style="color:#0d9488;"></i> String methods: slice, substring, replace, trim, split & more</li>
+                                </ul>
+                            </div>
+                            <p style="color:#94a3b8; font-size:0.85rem; margin-top:1rem;"><i class="fas fa-arrow-right"></i> Use the arrow buttons below to navigate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 2: Introduction to Operators ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-calculator"></i> Introduction to Operators</div>
+                        <p><strong>Operators</strong> are used for mathematical and logical computations.</p>
+
+                        <div class="info-box">
+                            <i class="fas fa-info-circle"></i> <strong>Basic Operators:</strong>
+                            <ul style="margin-left:1.5rem; margin-top:0.3rem;">
+                                <li><strong>=</strong> The Assignment Operator <i class="fas fa-arrow-right"></i> assigns values</li>
+                                <li><strong>+</strong> The Addition Operator <i class="fas fa-arrow-right"></i> adds values</li>
+                                <li><strong>*</strong> The Multiplication Operator <i class="fas fa-arrow-right"></i> multiplies values</li>
+                                <li><strong>></strong> The Comparison Operator <i class="fas fa-arrow-right"></i> compares values</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="comment">// Assignment Operator (=)</span><br>
+                            <span class="keyword">let</span> x = <span class="number">10</span>; <span class="comment">// Assigns 10 to x</span><br>
+                            <span class="keyword">let</span> y = <span class="number">5</span>;  <span class="comment">// Assigns 5 to y</span><br>
+                            <span class="keyword">let</span> z = x + y; <span class="comment">// Assigns 15 to z</span>
+                        </div>
+
+                        <div class="two-columns">
+                            <div>
+                                <h4><i class="fas fa-plus"></i> Addition</h4>
+                                <div class="code-block" style="font-size:0.8rem;">
+                                    <span class="keyword">let</span> x = <span class="number">5</span>;<br>
+                                    <span class="keyword">let</span> y = <span class="number">2</span>;<br>
+                                    <span class="keyword">let</span> z = x + y; <span class="comment">// z = 7</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-times"></i> Multiplication</h4>
+                                <div class="code-block" style="font-size:0.8rem;">
+                                    <span class="keyword">let</span> x = <span class="number">5</span>;<br>
+                                    <span class="keyword">let</span> y = <span class="number">2</span>;<br>
+                                    <span class="keyword">let</span> z = x * y; <span class="comment">// z = 10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 3: Arithmetic Operators ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-plus-circle"></i> Arithmetic Operators</div>
+                        <p>Arithmetic operators perform arithmetic on numbers.</p>
+
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Description</th>
+                                        <th>Example</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>+</code></td><td>Addition</td><td><code>5 + 2</code></td><td>7</td></tr>
+                                    <tr><td><code>-</code></td><td>Subtraction</td><td><code>5 - 2</code></td><td>3</td></tr>
+                                    <tr><td><code>*</code></td><td>Multiplication</td><td><code>5 * 2</code></td><td>10</td></tr>
+                                    <tr><td><code>**</code></td><td>Exponentiation</td><td><code>5 ** 2</code></td><td>25</td></tr>
+                                    <tr><td><code>/</code></td><td>Division</td><td><code>5 / 2</code></td><td>2.5</td></tr>
+                                    <tr><td><code>%</code></td><td>Modulus (Remainder)</td><td><code>5 % 2</code></td><td>1</td></tr>
+                                    <tr><td><code>++</code></td><td>Increment</td><td><code>let x = 5; x++;</code></td><td>6</td></tr>
+                                    <tr><td><code>--</code></td><td>Decrement</td><td><code>let x = 5; x--;</code></td><td>4</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="keyword">let</span> a = <span class="number">3</span>;<br>
+                            <span class="keyword">let</span> x = (<span class="number">100</span> + <span class="number">50</span>) * a; <span class="comment">// x = 450</span>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-lightbulb"></i> <strong>Operator Precedence:</strong> Multiplication (<code>*</code>) and division (<code>/</code>) have higher precedence than addition (<code>+</code>) and subtraction (<code>-</code>). Use parentheses <code>( )</code> to change precedence.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 4: String Addition ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-quote-right"></i> String Addition</div>
+                        <p>The <code>+</code> operator can also be used to <strong>concatenate</strong> (join) strings.</p>
+
+                        <div class="code-block">
+                            <span class="keyword">let</span> text1 = <span class="string">"John"</span>;<br>
+                            <span class="keyword">let</span> text2 = <span class="string">"Doe"</span>;<br>
+                            <span class="keyword">let</span> text3 = text1 + <span class="string">" "</span> + text2; <span class="comment">// "John Doe"</span>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="comment">// The += operator can also concatenate strings</span><br>
+                            <span class="keyword">let</span> text1 = <span class="string">"What a very "</span>;<br>
+                            text1 += <span class="string">"nice day"</span>; <span class="comment">// "What a very nice day"</span>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-exclamation-triangle"></i> <strong>Adding Numbers and Strings:</strong>
+                            <ul style="margin-left:1.5rem; margin-top:0.3rem;">
+                                <li><code>5 + 5</code> <i class="fas fa-arrow-right"></i> <strong>10</strong> (number)</li>
+                                <li><code>"5" + 5</code> <i class="fas fa-arrow-right"></i> <strong>"55"</strong> (string)</li>
+                                <li><code>"Hello" + 5</code> <i class="fas fa-arrow-right"></i> <strong>"Hello5"</strong> (string)</li>
+                            </ul>
+                            <p style="margin-top:0.3rem;"><i class="fas fa-info-circle"></i> If you add a number and a string, the result will be a <strong>string</strong>!</p>
+                        </div>
+
+                        <div class="interactive-area">
+                            <h4><i class="fas fa-play"></i> Try it</h4>
+                            <p>Enter two values to see what happens:</p>
+                            <input type="text" id="addVal1" placeholder="e.g. 5 or 'Hello'" style="width:120px;">
+                            <span style="margin:0 8px;">+</span>
+                            <input type="text" id="addVal2" placeholder="e.g. 2 or ' World'" style="width:120px;">
+                            <button onclick="tryStringAddition()"><i class="fas fa-calculator"></i> Add</button>
+                            <p id="addResult" style="margin-top:0.5rem; font-weight:600; color:#0f766e;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 5: Assignment Operators ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-equals"></i> Assignment Operators</div>
+                        <p>Assignment operators assign values to JavaScript variables.</p>
+
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Example</th>
+                                        <th>Same As</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>=</code></td><td><code>x = 5</code></td><td><code>x = 5</code></td><td>5</td></tr>
+                                    <tr><td><code>+=</code></td><td><code>x += 5</code></td><td><code>x = x + 5</code></td><td>15</td></tr>
+                                    <tr><td><code>-=</code></td><td><code>x -= 5</code></td><td><code>x = x - 5</code></td><td>5</td></tr>
+                                    <tr><td><code>*=</code></td><td><code>x *= 5</code></td><td><code>x = x * 5</code></td><td>50</td></tr>
+                                    <tr><td><code>**=</code></td><td><code>x **= 5</code></td><td><code>x = x ** 5</code></td><td>100000</td></tr>
+                                    <tr><td><code>/=</code></td><td><code>x /= 5</code></td><td><code>x = x / 5</code></td><td>2</td></tr>
+                                    <tr><td><code>%=</code></td><td><code>x %= 5</code></td><td><code>x = x % 5</code></td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="keyword">let</span> x = <span class="number">10</span>;<br>
+                            x += <span class="number">5</span>; <span class="comment">// x is now 15</span><br>
+                            x *= <span class="number">2</span>; <span class="comment">// x is now 30</span>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-lightbulb"></i> <strong>The &&= Operator (ES2020):</strong>
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                <span class="keyword">let</span> x = <span class="boolean">true</span>;<br>
+                                x &&= <span class="number">10</span>; <span class="comment">// x is now 10 (only if x was truthy)</span>
+                            </div>
+                            <p style="font-size:0.8rem; margin-top:0.3rem;"><code>||=</code> assigns if falsy, <code>??=</code> assigns if null/undefined.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 6: Comparison Operators ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-greater-than"></i> Comparison Operators</div>
+                        <p>Comparison operators compare two values and always return <code>true</code> or <code>false</code>.</p>
+
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Description</th>
+                                        <th>Comparing</th>
+                                        <th>Returns</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>==</code></td><td>equal to</td><td><code>x == 5</code></td><td>true</td></tr>
+                                    <tr><td><code>===</code></td><td>equal value & type</td><td><code>x === "5"</code></td><td>false</td></tr>
+                                    <tr><td><code>!=</code></td><td>not equal</td><td><code>x != 8</code></td><td>true</td></tr>
+                                    <tr><td><code>!==</code></td><td>not equal value/type</td><td><code>x !== "5"</code></td><td>true</td></tr>
+                                    <tr><td><code>></code></td><td>greater than</td><td><code>x > 8</code></td><td>false</td></tr>
+                                    <tr><td><code><</code></td><td>less than</td><td><code>x < 8</code></td><td>true</td></tr>
+                                    <tr><td><code>>=</code></td><td>greater or equal</td><td><code>x >= 8</code></td><td>false</td></tr>
+                                    <tr><td><code><=</code></td><td>less or equal</td><td><code>x <= 8</code></td><td>true</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="keyword">let</span> x = <span class="number">5</span>;<br>
+                            <span class="keyword">let</span> result = x > <span class="number">8</span>; <span class="comment">// result = false</span>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-exclamation-triangle"></i> <strong>String Comparison:</strong> Strings are compared alphabetically.
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                <span class="keyword">let</span> text1 = <span class="string">"A"</span>;<br>
+                                <span class="keyword">let</span> text2 = <span class="string">"B"</span>;<br>
+                                <span class="keyword">let</span> result = text1 < text2; <span class="comment">// true</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 7: Logical Operators ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-code-branch"></i> Logical Operators</div>
+                        <p>Logical operators combine boolean expressions and return <code>true</code> or <code>false</code>.</p>
+
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Operator</th>
+                                        <th>Name</th>
+                                        <th>Example</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>&&</code></td><td>AND</td><td><code>(x < 10 && y > 1)</code></td><td>true if both are true</td></tr>
+                                    <tr><td><code>||</code></td><td>OR</td><td><code>(x === 5 || y === 5)</code></td><td>true if one is true</td></tr>
+                                    <tr><td><code>!</code></td><td>NOT</td><td><code>!(x === y)</code></td><td>true if false, false if true</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="keyword">let</span> x = <span class="number">6</span>;<br>
+                            <span class="keyword">let</span> y = <span class="number">3</span>;<br>
+                            <span class="keyword">let</span> z = (x < <span class="number">10</span> && y > <span class="number">1</span>); <span class="comment">// z = true</span>
+                        </div>
+
+                        <div class="info-box">
+                            <i class="fas fa-question-circle"></i> <strong>The Nullish Coalescing Operator (??)</strong>
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                <span class="keyword">let</span> name = <span class="keyword">null</span>;<br>
+                                <span class="keyword">let</span> text = <span class="string">"missing"</span>;<br>
+                                <span class="keyword">let</span> result = name ?? text; <span class="comment">// "missing"</span>
+                            </div>
+                            <p style="font-size:0.85rem;">Returns the right operand when the left operand is <code>null</code> or <code>undefined</code>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 8: Truthy & Falsy Values ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-check-circle"></i> Truthy & Falsy Values</div>
+                        <p>In JavaScript, values are either <strong>truthy</strong> or <strong>falsy</strong> when used in a boolean context.</p>
+
+                        <div class="two-columns">
+                            <div>
+                                <h4><i class="fas fa-times-circle" style="color:#dc2626;"></i> Falsy Values</h4>
+                                <div class="truthy-falsy-grid">
+                                    <span class="falsy"><code>false</code></span>
+                                    <span class="falsy"><code>0</code></span>
+                                    <span class="falsy"><code>-0</code></span>
+                                    <span class="falsy"><code>0n</code></span>
+                                    <span class="falsy"><code>""</code> (empty string)</span>
+                                    <span class="falsy"><code>null</code></span>
+                                    <span class="falsy"><code>undefined</code></span>
+                                    <span class="falsy"><code>NaN</code></span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-check-circle" style="color:#16a34a;"></i> Truthy Values</h4>
+                                <div class="truthy-falsy-grid">
+                                    <span class="truthy"><code>"0"</code></span>
+                                    <span class="truthy"><code>"false"</code></span>
+                                    <span class="truthy"><code>[]</code> (empty array)</span>
+                                    <span class="truthy"><code>{}</code> (empty object)</span>
+                                    <span class="truthy"><code>42</code></span>
+                                    <span class="truthy"><code>"Hello"</code></span>
+                                    <span class="truthy"><code>true</code></span>
+                                    <span class="truthy"><code>function() {}</code></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-exclamation-triangle"></i> <strong>Common Mistake:</strong> <code>"0"</code> and <code>"false"</code> are <strong>truthy</strong> because they are non-empty strings!
+                        </div>
+
+                        <div class="code-block">
+                            <span class="comment">// Everything with a "value" is true</span><br>
+                            <span class="func">Boolean</span>(<span class="number">100</span>); <span class="comment">// true</span><br>
+                            <span class="func">Boolean</span>(<span class="string">"Hello"</span>); <span class="comment">// true</span><br>
+                            <span class="func">Boolean</span>([]); <span class="comment">// true</span><br>
+                            <br>
+                            <span class="comment">// Everything without a "value" is false</span><br>
+                            <span class="func">Boolean</span>(<span class="number">0</span>); <span class="comment">// false</span><br>
+                            <span class="func">Boolean</span>(<span class="string">""</span>); <span class="comment">// false</span><br>
+                            <span class="func">Boolean</span>(<span class="keyword">null</span>); <span class="comment">// false</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 9: if / else / else if ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-code-branch"></i> if / else / else if</div>
+                        <p><strong>if</strong> statements execute code when a condition is <code>true</code>.</p>
+
+                        <div class="code-block">
+                            <span class="keyword">if</span> (hour < <span class="number">18</span>) {<br>
+                            &nbsp;&nbsp;greeting = <span class="string">"Good day"</span>;<br>
+                            } <span class="keyword">else</span> {<br>
+                            &nbsp;&nbsp;greeting = <span class="string">"Good evening"</span>;<br>
+                            }
+                        </div>
+
+                        <div class="code-block">
+                            <span class="keyword">if</span> (time < <span class="number">10</span>) {<br>
+                            &nbsp;&nbsp;greeting = <span class="string">"Good morning"</span>;<br>
+                            } <span class="keyword">else if</span> (time < <span class="number">20</span>) {<br>
+                            &nbsp;&nbsp;greeting = <span class="string">"Good day"</span>;<br>
+                            } <span class="keyword">else</span> {<br>
+                            &nbsp;&nbsp;greeting = <span class="string">"Good evening"</span>;<br>
+                            }
+                        </div>
+
+                        <div class="interactive-area">
+                            <h4><i class="fas fa-play"></i> Try it</h4>
+                            <p>Enter your age:</p>
+                            <input type="number" id="ageInput" placeholder="Enter age" style="width:120px;">
+                            <button onclick="checkAge()"><i class="fas fa-check"></i> Check</button>
+                            <p id="ageResult" style="margin-top:0.5rem; font-weight:600; color:#0f766e;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 10: Ternary Operator ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-question-circle"></i> Ternary Operator</div>
+                        <p>The <strong>ternary</strong> (conditional) operator is a shorthand for <code>if...else</code>.</p>
+
+                        <div class="info-box">
+                            <i class="fas fa-code"></i> <strong>Syntax:</strong>
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                (condition) ? <span class="var">expression1</span> : <span class="var">expression2</span>
+                            </div>
+                            <ul style="margin-left:1.5rem; margin-top:0.3rem;">
+                                <li>If <code>condition</code> is <code>true</code>, returns <code>expression1</code></li>
+                                <li>If <code>condition</code> is <code>false</code>, returns <code>expression2</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="keyword">let</span> age = <span class="number">20</span>;<br>
+                            <span class="keyword">let</span> status = (age >= <span class="number">18</span>) ? <span class="string">"Adult"</span> : <span class="string">"Minor"</span>;<br>
+                            <span class="comment">// status = "Adult"</span>
+                        </div>
+
+                        <div class="two-columns">
+                            <div>
+                                <h4><i class="fas fa-check"></i> Using Ternary</h4>
+                                <div class="code-block" style="font-size:0.8rem;">
+                                    <span class="keyword">let</span> isMember = <span class="boolean">true</span>;<br>
+                                    <span class="keyword">let</span> discount = isMember ? <span class="number">0.2</span> : <span class="number">0</span>;
+                                </div>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-code"></i> Same as if/else</h4>
+                                <div class="code-block" style="font-size:0.8rem;">
+                                    <span class="keyword">if</span> (isMember) {<br>
+                                    &nbsp;&nbsp;discount = <span class="number">0.2</span>;<br>
+                                    } <span class="keyword">else</span> {<br>
+                                    &nbsp;&nbsp;discount = <span class="number">0</span>;<br>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Use the ternary operator for simple conditionals to make your code more concise.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 11: Booleans ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-toggle-on"></i> JavaScript Booleans</div>
+                        <p>A <strong>Boolean</strong> can only have one of two values: <code>true</code> or <code>false</code>.</p>
+
+                        <div class="info-box">
+                            <i class="fas fa-check-circle"></i> <strong>Key Characteristics:</strong>
+                            <ul style="margin-left:1.5rem; margin-top:0.3rem;">
+                                <li><code>true</code> and <code>false</code> are boolean data types</li>
+                                <li>They are the only possible boolean values</li>
+                                <li>Must be written in <strong>lowercase</strong></li>
+                                <li>Must be written <strong>without quotes</strong></li>
+                            </ul>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="comment">// Comparisons return booleans</span><br>
+                            <span class="keyword">let</span> x = <span class="number">5</span>;<br>
+                            (x == <span class="number">8</span>); <span class="comment">// false</span><br>
+                            (x != <span class="number">8</span>); <span class="comment">// true</span><br>
+                            (x > <span class="number">8</span>);  <span class="comment">// false</span><br>
+                            (x < <span class="number">8</span>);  <span class="comment">// true</span>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-exclamation-triangle"></i> <strong>Warning:</strong> Do not create Boolean objects with <code>new Boolean()</code>. They produce unexpected results.
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                <span class="keyword">let</span> x = <span class="boolean">false</span>; <span class="comment">// boolean primitive</span><br>
+                                <span class="keyword">let</span> y = <span class="keyword">new</span> <span class="func">Boolean</span>(<span class="boolean">false</span>); <span class="comment">// boolean object</span><br>
+                                (x == y); <span class="comment">// true</span><br>
+                                (x === y); <span class="comment">// false</span>
+                            </div>
+                        </div>
+
+                        <div class="interactive-area">
+                            <h4><i class="fas fa-play"></i> Try it</h4>
+                            <button onclick="checkBoolean()"><i class="fas fa-toggle-on"></i> Check Truthiness</button>
+                            <p id="booleanResult" style="margin-top:0.5rem; font-weight:600; color:#0f766e;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 12: For Loop ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-sync"></i> For Loop</div>
+                        <p>The <strong>for</strong> loop executes a block of code a number of times.</p>
+
+                        <div class="info-box">
+                            <i class="fas fa-code"></i> <strong>Syntax:</strong>
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                <span class="keyword">for</span> (exp1; exp2; exp3) {<br>
+                                &nbsp;&nbsp;<span class="comment">// code block to be executed</span><br>
+                                }
+                            </div>
+                            <ul style="margin-left:1.5rem; margin-top:0.3rem;">
+                                <li><strong>exp1</strong>: Executed once before the loop starts (initialize)</li>
+                                <li><strong>exp2</strong>: Defines the condition for the loop to run</li>
+                                <li><strong>exp3</strong>: Executed after each iteration (increment)</li>
+                            </ul>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {<br>
+                            &nbsp;&nbsp;text += <span class="string">"The number is "</span> + i + <span class="string">"<br>"</span>;<br>
+                            }
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-lightbulb"></i> <strong>Looping through arrays:</strong>
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                <span class="keyword">const</span> cars = [<span class="string">"BMW"</span>, <span class="string">"Volvo"</span>, <span class="string">"Saab"</span>];<br>
+                                <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < cars.length; i++) {<br>
+                                &nbsp;&nbsp;text += cars[i];<br>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="interactive-area">
+                            <h4><i class="fas fa-play"></i> Try it</h4>
+                            <button onclick="runForLoop()"><i class="fas fa-play"></i> Run For Loop</button>
+                            <p id="loopResult" style="margin-top:0.5rem; font-weight:600; color:#0f766e;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 13: While & Do-While Loops ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-undo-alt"></i> While & Do-While Loops</div>
+
+                        <div class="two-columns">
+                            <div>
+                                <h4><i class="fas fa-arrow-right"></i> While Loop</h4>
+                                <p>Executes code as long as the condition is <code>true</code>.</p>
+                                <div class="code-block" style="font-size:0.8rem;">
+                                    <span class="keyword">while</span> (i < <span class="number">10</span>) {<br>
+                                    &nbsp;&nbsp;text += <span class="string">"The number is "</span> + i;<br>
+                                    &nbsp;&nbsp;i++;<br>
+                                    }
+                                </div>
+                                <p style="font-size:0.8rem; color:#64748b;"><i class="fas fa-exclamation-triangle"></i> Don't forget to increment!</p>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-arrow-right"></i> Do-While Loop</h4>
+                                <p>Executes code <strong>once</strong> before checking the condition.</p>
+                                <div class="code-block" style="font-size:0.8rem;">
+                                    <span class="keyword">do</span> {<br>
+                                    &nbsp;&nbsp;text += <span class="string">"The number is "</span> + i;<br>
+                                    &nbsp;&nbsp;i++;<br>
+                                    } <span class="keyword">while</span> (i < <span class="number">10</span>);
+                                </div>
+                                <p style="font-size:0.8rem; color:#64748b;"><i class="fas fa-info-circle"></i> Always runs at least once.</p>
+                            </div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-compare"></i> <strong>For vs While:</strong> A while loop is similar to a for loop with exp1 and exp3 omitted.
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                <span class="comment">// For loop</span><br>
+                                <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < cars.length; i++) { ... }<br>
+                                <br>
+                                <span class="comment">// Same as while</span><br>
+                                <span class="keyword">let</span> i = <span class="number">0</span>;<br>
+                                <span class="keyword">while</span> (i < cars.length) {<br>
+                                &nbsp;&nbsp;...<br>
+                                &nbsp;&nbsp;i++;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 14: Break & Continue ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-eject"></i> Break & Continue</div>
+
+                        <div class="two-columns">
+                            <div>
+                                <h4><i class="fas fa-stop"></i> break</h4>
+                                <p>Exits the loop immediately.</p>
+                                <div class="code-block" style="font-size:0.8rem;">
+                                    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < <span class="number">10</span>; i++) {<br>
+                                    &nbsp;&nbsp;<span class="keyword">if</span> (i === <span class="number">3</span>) { <span class="keyword">break</span>; }<br>
+                                    &nbsp;&nbsp;text += i;<br>
+                                    }<br>
+                                    <span class="comment">// Output: 0 1 2</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-forward"></i> continue</h4>
+                                <p>Skips the current iteration and continues.</p>
+                                <div class="code-block" style="font-size:0.8rem;">
+                                    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {<br>
+                                    &nbsp;&nbsp;<span class="keyword">if</span> (i === <span class="number">3</span>) { <span class="keyword">continue</span>; }<br>
+                                    &nbsp;&nbsp;text += i;<br>
+                                    }<br>
+                                    <span class="comment">// Output: 0 1 2 4</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <i class="fas fa-tag"></i> <strong>Labeled Break:</strong> You can break out of nested loops with labels.
+                            <div class="code-block" style="font-size:0.8rem; margin-top:0.3rem;">
+                                <span class="var">loop1</span>: <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j < <span class="number">5</span>; j++) {<br>
+                                &nbsp;&nbsp;<span class="var">loop2</span>: <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i < <span class="number">5</span>; i++) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (i === <span class="number">3</span>) { <span class="keyword">break</span> <span class="var">loop1</span>; }<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 15: String Methods Overview ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-font"></i> String Methods Overview</div>
+                        <p>Javascript strings are <strong>primitive and immutable</strong> — all string methods produce a new string without altering the original.</p>
+
+                        <div class="three-columns">
+                            <div>
+                                <h4><i class="fas fa-cut"></i> Extract</h4>
+                                <ul style="margin-left:1.2rem;">
+                                    <li><code>slice(start, end)</code></li>
+                                    <li><code>substring(start, end)</code></li>
+                                    <li><code>substr(start, length)</code> <span class="badge badge-warning">deprecated</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-crop"></i> Trim & Pad</h4>
+                                <ul style="margin-left:1.2rem;">
+                                    <li><code>trim()</code></li>
+                                    <li><code>trimStart()</code></li>
+                                    <li><code>trimEnd()</code></li>
+                                    <li><code>padStart()</code></li>
+                                    <li><code>padEnd()</code></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4><i class="fas fa-exchange-alt"></i> Replace & Split</h4>
+                                <ul style="margin-left:1.2rem;">
+                                    <li><code>replace()</code></li>
+                                    <li><code>replaceAll()</code></li>
+                                    <li><code>split()</code></li>
+                                    <li><code>repeat()</code></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="code-block">
+                            <span class="keyword">let</span> text = <span class="string">"Apple, Banana, Kiwi"</span>;<br>
+                            text.<span class="func">slice</span>(<span class="number">7</span>, <span class="number">13</span>); <span class="comment">// "Banana"</span><br>
+                            text.<span class="func">toUpperCase</span>(); <span class="comment">// "APPLE, BANANA, KIWI"</span><br>
+                            text.<span class="func">split</span>(<span class="string">","</span>); <span class="comment">// ["Apple", " Banana", " Kiwi"]</span>
+                        </div>
+
+                        <div class="info-box">
+                            <i class="fas fa-lightbulb"></i> <strong>Remember:</strong> Strings are immutable. Methods return new strings — they don't change the original!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SLIDE 16: Quiz ==================== -->
+            <div class="slide">
+                <div class="slide-card">
+                    <div class="slide-content">
+                        <div class="slide-title"><i class="fas fa-clipboard-list"></i> Module 2 Quiz</div>
+                        <p>Test your understanding. Answer the questions below, then reveal the answer key.</p>
+
+                        <div class="quiz-question">
+                            <p><strong>Q1:</strong> Consider: <code>let x = 5; let y = '8'; let z = x + y;</code> What will be the result of z?</p>
+                            <label><input type="radio" name="q1" value="A"> A) undefined</label>
+                            <label><input type="radio" name="q1" value="B"> B) 58</label>
+                            <label><input type="radio" name="q1" value="C"> C) 13</label>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q2:</strong> Consider: <code>let x = 5; x++;</code> What will be the result of x?</p>
+                            <label><input type="radio" name="q2" value="A"> A) 55</label>
+                            <label><input type="radio" name="q2" value="B"> B) 25</label>
+                            <label><input type="radio" name="q2" value="C"> C) 10</label>
+                            <label><input type="radio" name="q2" value="D"> D) 6</label>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q3:</strong> Consider: <code>let x = (5 == 5 || 5 < 2);</code> What will be the value of x?</p>
+                            <label><input type="radio" name="q3" value="A"> A) true</label>
+                            <label><input type="radio" name="q3" value="B"> B) false</label>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q4:</strong> Which one of these statements will be true for: <code>let i = 15, x = ''; do { x += 'The number is ' + i; } while (i < 10);</code></p>
+                            <label><input type="radio" name="q4" value="A"> A) x will be an empty string</label>
+                            <label><input type="radio" name="q4" value="B"> B) x will be a string with the value 'The number is 15'</label>
+                            <label><input type="radio" name="q4" value="C"> C) The loop will never end</label>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q5:</strong> What do the back-ticks used for template strings in JavaScript look like?</p>
+                            <label><input type="radio" name="q5" value="A"> A) " "</label>
+                            <label><input type="radio" name="q5" value="B"> B) ' '</label>
+                            <label><input type="radio" name="q5" value="C"> C) ` `</label>
+                            <label><input type="radio" name="q5" value="D"> D) / /</label>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q6:</strong> Consider: <code>let x = 'Having fun?';</code> Which statement returns 'fun'?</p>
+                            <label><input type="radio" name="q6" value="A"> A) x.slice(7, 10)</label>
+                            <label><input type="radio" name="q6" value="B"> B) x.substring(7, 9)</label>
+                            <label><input type="radio" name="q6" value="C"> C) x.substr(7, 10)</label>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q7:</strong> Consider: <code>let x = 'Hello world!'; alert(x.indexOf('Hello'));</code> What will be the alerted result?</p>
+                            <label><input type="radio" name="q7" value="A"> A) -1</label>
+                            <label><input type="radio" name="q7" value="B"> B) 0</label>
+                            <label><input type="radio" name="q7" value="C"> C) 1</label>
+                            <label><input type="radio" name="q7" value="D"> D) true</label>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p><strong>Q8:</strong> What is the correct syntax for a while loop?</p>
+                            <label><input type="radio" name="q8" value="A"> A) while (condition) { ... }</label>
+                            <label><input type="radio" name="q8" value="B"> B) while condition { ... }</label>
+                            <label><input type="radio" name="q8" value="C"> C) do while (condition) { ... }</label>
+                        </div>
+
+                        <button class="btn-toggle" id="revealAnswersBtn"><i class="fas fa-key"></i> Reveal Answer Key</button>
+                        <div id="answerKey" class="answer-key">
+                            <i class="fas fa-check-double"></i> <strong>ANSWER KEY</strong><br>
+                            <strong>Q1:</strong> B) 58<br>
+                            <strong>Q2:</strong> D) 6<br>
+                            <strong>Q3:</strong> A) true<br>
+                            <strong>Q4:</strong> B) x will be a string with the value 'The number is 15'<br>
+                            <strong>Q5:</strong> C) ` `<br>
+                            <strong>Q6:</strong> A) x.slice(7, 10)<br>
+                            <strong>Q7:</strong> B) 0<br>
+                            <strong>Q8:</strong> A) while (condition) { ... }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end slides-wrapper -->
+    </div><!-- end slide-container -->
+
+    <!-- Navigation -->
+    <div class="slide-nav">
+        <button class="nav-btn nav-btn-prev" id="prevBtn" disabled><i class="fas fa-arrow-left"></i> Previous</button>
+        <div class="slide-dots" id="dotsContainer"></div>
+        <button class="nav-btn" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <script>
+        // ============================================================
+        // Slide Navigation
+        // ============================================================
+        const wrapper = document.getElementById('slidesWrapper');
+        const slides = wrapper.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const currentNum = document.getElementById('currentSlideNum');
+        const totalNum = document.getElementById('totalSlidesNum');
+        const progressFill = document.getElementById('progressFill');
+
+        totalNum.textContent = totalSlides;
+
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.dataset.index = i;
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        function goToSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= totalSlides) index = totalSlides - 1;
+            currentSlide = index;
+            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.className = 'dot' + (i === currentSlide ? ' active' : '');
+            });
+
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+            currentNum.textContent = currentSlide + 1;
+
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            progressFill.style.width = progress + '%';
+
+            const slideContent = slides[currentSlide].querySelector('.slide-content');
+            if (slideContent) slideContent.scrollTop = 0;
+        }
+
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        // ============================================================
+        // Interactive Demos
+        // ============================================================
+
+        function tryStringAddition() {
+            const val1 = document.getElementById('addVal1').value;
+            const val2 = document.getElementById('addVal2').value;
+            const result = val1 + val2;
+            document.getElementById('addResult').innerHTML =
+                `<code>${val1}</code> + <code>${val2}</code> = <strong>"${result}"</strong> (${typeof result})`;
+        }
+
+        function checkAge() {
+            const age = parseInt(document.getElementById('ageInput').value);
+            let result;
+            if (isNaN(age)) {
+                result = 'Please enter a valid age.';
+            } else if (age < 13) {
+                result = 'You are a child.';
+            } else if (age < 18) {
+                result = 'You are a teenager.';
+            } else if (age < 65) {
+                result = 'You are an adult.';
+            } else {
+                result = 'You are a senior.';
+            }
+            document.getElementById('ageResult').textContent = result;
+        }
+
+        function checkBoolean() {
+            const testValues = [0, 1, "", "Hello", null, undefined, [], {}, NaN, -0];
+            let output = '<table style="width:100%; font-size:0.85rem;">';
+            output += '<tr><th>Value</th><th>Boolean(value)</th><th>Truthy?</th></tr>';
+            testValues.forEach(val => {
+                const bool = Boolean(val);
+                const isTruthy = bool ? '✅' : '❌';
+                const display = val === null ? 'null' :
+                    val === undefined ? 'undefined' :
+                    typeof val === 'string' ? `"${val}"` :
+                    JSON.stringify(val);
+                output += `<tr><td>${display}</td><td>${bool}</td><td style="text-align:center;">${isTruthy}</td></tr>`;
+            });
+            output += '</table>';
+            document.getElementById('booleanResult').innerHTML = output;
+        }
+
+        function runForLoop() {
+            let result = '';
+            for (let i = 1; i <= 5; i++) {
+                result += `${i} `;
+            }
+            document.getElementById('loopResult').textContent = `Loop output: 1 2 3 4 5`;
+        }
+
+        // ============================================================
+        // Reveal Answer Key
+        // ============================================================
+        const revealBtn = document.getElementById('revealAnswersBtn');
+        const answerDiv = document.getElementById('answerKey');
+
+        if (revealBtn && answerDiv) {
+            revealBtn.addEventListener('click', () => {
+                answerDiv.classList.toggle('show');
+                revealBtn.innerHTML = answerDiv.classList.contains('show') ?
+                    '<i class="fas fa-eye-slash"></i> Hide Answer Key' :
+                    '<i class="fas fa-key"></i> Reveal Answer Key';
+            });
+        }
+
+        // ============================================================
+        // Auto-mark completion
+        // ============================================================
+        (function markDay2Complete() {
+            try {
+                const completed = JSON.parse(localStorage.getItem('jsCourseCompleted') || '{}');
+                if (!completed[0]) completed[0] = {};
+                completed[0][1] = true;
+                localStorage.setItem('jsCourseCompleted', JSON.stringify(completed));
+            } catch (e) {}
+        })();
+
+        console.log('📚 Day 2: Operators, Conditionals & Strings');
+        console.log('📖 Topics: Arithmetic, Assignment, Comparison, Logical Operators');
+        console.log('📖 if/else, Ternary Operator, Loops (for, while, do-while)');
+        console.log('📖 String Methods: slice, replace, trim, split, and more');
+    </script>
+</body>
+</html>

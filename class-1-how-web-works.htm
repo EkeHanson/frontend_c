@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Web Development Foundations: The Internet, Browsers, and Developer Tools</title>
+    <!-- Font Awesome 6 (free CDN) - NO hardcoded emojis, all icons from FA -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0a0c15 0%, #111827 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .curriculum-header {
+            max-width: 1300px;
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 1.5rem;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+        }
+        .badge {
+            background: #3b82f6;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .duration {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* Class Navigation Buttons */
+        .class-nav-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-left: auto;
+        }
+        .class-nav-btn {
+            background: #1e293b;
+            border: 1px solid #3b82f6;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+        }
+        .class-nav-btn:hover {
+            background: #3b82f6;
+            transform: scale(0.98);
+        }
+        .class-nav-btn i {
+            font-size: 0.8rem;
+        }
+
+        .presentation-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.03);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .slide-area {
+            min-height: 600px;
+            background: #0f1119;
+            padding: 2rem;
+        }
+
+        .slide-card {
+            background: rgba(22, 26, 38, 0.98);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(72, 187, 255, 0.3);
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E0F2FE, #7AA9FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+        }
+
+        .slide-title i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #60a5fa;
+            font-size: 1.8rem;
+        }
+
+        .slide-sub {
+            color: #a0afc9;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .concept-box {
+            flex: 1;
+            min-width: 240px;
+            background: #1a1f2e;
+            border-radius: 1.5rem;
+            padding: 1.3rem;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        .concept-box:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .concept-box h3 {
+            color: #7aa9ff;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .concept-box h3 i {
+            color: #60a5fa;
+        }
+
+        .concept-box p, .concept-list, .concept-box li {
+            color: #e2e8f0;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        .tag {
+            background: #1e293b;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: #b9d0ff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .insight-card {
+            margin-top: 1.2rem;
+            background: #0f172a;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            color: #e2e8f0;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .qa-section {
+            margin-top: 1.5rem;
+            background: #0f172a;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid #334155;
+        }
+        .qa-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .qa-item {
+            background: #131b2e;
+            border-radius: 1rem;
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+            border: 1px solid #2d3a5e;
+        }
+        .qa-question {
+            padding: 1rem 1.2rem;
+            background: #1a2338;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #e2e8f0;
+            transition: background 0.2s;
+        }
+        .qa-question:hover {
+            background: #25334d;
+        }
+        .qa-question i {
+            color: #60a5fa;
+            transition: transform 0.3s;
+        }
+        .qa-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #0f172a;
+            color: #cbd5e6;
+            line-height: 1.5;
+        }
+        .qa-answer.show {
+            padding: 1rem 1.2rem;
+            max-height: 300px;
+        }
+        .qa-answer p {
+            margin: 0;
+            color: #cbd5e6;
+        }
+
+        .two-column-split {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .col {
+            flex: 1;
+            background: #131a2a;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #2d3a5e;
+        }
+        .col h4 {
+            color: #fbbf24;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        .col h4 i {
+            margin-right: 0.5rem;
+        }
+        .col p, .col li {
+            color: #e2e8f0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #334155;
+            padding: 0.6rem;
+            text-align: left;
+            color: #e2e8f0;
+        }
+        .comparison-table th {
+            background: #1e293b;
+            color: #fbbf24;
+        }
+
+        .engine-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.8rem 0;
+        }
+        .engine-card {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            border-left: 3px solid #3b82f6;
+            flex: 1;
+            min-width: 180px;
+            color: #e2e8f0;
+        }
+        .engine-card strong {
+            color: #fbbf24;
+        }
+        .engine-card i {
+            margin-right: 0.4rem;
+            color: #60a5fa;
+        }
+
+        .journey-box {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border: 1px solid #2d3a5e;
+            color: #e2e8f0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .journey-box i {
+            color: #60a5fa;
+            margin-right: 0.3rem;
+        }
+
+        .nav-bar {
+            background: #0b0e16;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #2a2f3f;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            background: #1e2a3a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            border: 1px solid #334155;
+        }
+
+        button i {
+            font-size: 0.9rem;
+        }
+
+        button:hover:not(:disabled) {
+            background: #2d3a4e;
+            transform: scale(0.97);
+            border-color: #3b82f6;
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            background: #1a1f2c;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            color: #a5b4fc;
+        }
+
+        .indicator-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #334155;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .dot.active {
+            background: #3b82f6;
+            width: 22px;
+        }
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.7rem;
+            background: #07090f;
+            color: #8ca3c7;
+        }
+        footer i {
+            color: #60a5fa;
+        }
+
+        @media (max-width: 700px) {
+            .slide-area { padding: 1rem; }
+            .slide-title { font-size: 1.4rem; }
+            .concept-box { min-width: 100%; }
+            .two-column-split { flex-direction: column; }
+            .class-nav-buttons { margin-left: 0; margin-top: 0.5rem; }
+            .curriculum-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="curriculum-header">
+    <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 1 · WEEK 1 · CLASS 1</span></div>
+    <div class="class-title"><i class="fas fa-chalkboard-user"></i> Introduction to Web Development</div>
+    <div class="duration"><i class="far fa-clock"></i> 3 Hours · Foundation Day</div>
+    <div class="class-nav-buttons">
+        <a href="class-2-how-web-works.htm" class="class-nav-btn"><i class="fas fa-arrow-right"></i> Go to Class 2</a>
+    </div>
+</div>
+
+<div class="presentation-container">
+    <div class="slide-area" id="slideArea"></div>
+    <div class="nav-bar">
+        <div class="indicator-dots" id="dotsContainer"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+            <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 13</span>
+            <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <footer>
+        <i class="fas fa-laptop-code"></i> Live Demo: Open DevTools (F12) | Click questions to toggle answers
+        <span style="margin-left: 1rem;"><i class="fas fa-arrow-right"></i> <a href="class-2-how-web-works.htm" style="color: #60a5fa; text-decoration: none;">Next Class: Development Environment Setup →</a></span>
+    </footer>
+</div>
+
+<script>
+    const slides = [
+        {
+            title: "<i class='fas fa-globe'></i> What is a Website?",
+            subtitle: "A collection of web pages accessible via a domain name",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-building"></i> Digital Building</h3><p>Think of a website as a <span class="highlight">digital building</span>, and each page is a different room inside that building.</p><p>Examples: church website, company site, blog, portfolio.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-file-alt"></i> Static Website</h3><p>Same content for every visitor. Fast loading, easy to host. Built with HTML/CSS.<br><span class="highlight">Example:</span> Personal portfolio, event landing page. 1,000 visitors see identical content.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-database"></i> Dynamic Website</h3><p>Content changes based on user/database. Connected to backend.<br><span class="highlight">Examples:</span> Facebook, Instagram, Netflix, Amazon. Each user sees personalized content.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <span class="tag">key insight</span> <span>Static = pre-built files delivered as-is. Dynamic = generated on the fly per user.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-info-circle'></i> Informational vs Interactive",
+            subtitle: "Purpose defines the experience",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-info-circle"></i> Informational Website</h4><p><strong>Purpose:</strong> Provide information.</p><p><strong>Examples:</strong> School website, church website, company profile, news site.</p><p>Users mostly <span class="highlight">read information</span>.</p></div>
+                    <div class="col"><h4><i class="fas fa-hand-pointer"></i> Interactive Website</h4><p><strong>Purpose:</strong> Allow users to perform actions.</p><p><strong>Examples:</strong> Facebook, Gmail, Online Banking, Jumia.</p><p>Users can: register, login, send messages, buy products, upload files.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-chart-simple"></i> <span>Many modern sites blend both — e.g., a news site with comments section.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-code-branch'></i> Website vs Web Application",
+            subtitle: "Clear distinction between them",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-globe"></i> Website</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li>Primarily provides <span class="highlight">information</span></li>
+                            <li>Less interaction (mostly reading)</li>
+                            <li>May not require login/authentication</li>
+                            <li>Can be static or dynamic</li>
+                            <li>Example: Blog, news site</li>
+                            <li>Analogy: A <strong>digital brochure</strong></li>
+                        </ul>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-rocket"></i> Web Application</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li>Allows users to <span class="highlight">perform tasks and actions</span></li>
+                            <li>Highly interactive (create, edit, delete)</li>
+                            <li>Almost always requires login</li>
+                            <li>Always dynamic with backend logic</li>
+                            <li>Example: Gmail, Facebook, Netflix</li>
+                            <li>Analogy: A <strong>digital tool</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <table class="comparison-table">
+                    <tr><th>Feature</th><th>Website</th><th>Web Application</th></tr>
+                    <tr><td>Primary purpose</td><td>Display information</td><td>Enable user actions</td></tr>
+                    <tr><td>Interaction level</td><td>Low (click links, read)</td><td>High (create, edit, delete)</td></tr>
+                    <tr><td>Authentication</td><td>Optional</td><td>Usually required</td></tr>
+                    <tr><td>Example</td><td>wikipedia.org</td><td>gmail.com</td></tr>
+                </table>
+                <div class="insight-card"><i class="fas fa-question-circle"></i> <strong>Simple test:</strong> Can users do something besides reading? If yes → likely a web app!</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-rocket'></i> Web Application Examples",
+            subtitle: "Gmail, Twitter, Netflix — software inside your browser",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-envelope"></i> Gmail</h3><p>Login, send/receive emails, delete, search — <span class="highlight">complex operations</span>.</p></div>
+                    <div class="concept-box"><h3><i class="fab fa-twitter"></i> Twitter/X</h3><p>Post tweets, follow, like, comment, upload media — full interactivity.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-film"></i> Netflix</h3><p>Profiles, streaming, recommendations, watchlists — personalized.</p></div>
+                    <div class="concept-box"><h3><i class="fab fa-google"></i> Google Docs</h3><p>Real-time collaboration, editing, saving — true web app.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-code-branch"></i> <span>Key distinction: Web apps feel like desktop software but run in a browser.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-laptop-code'></i> Frontend vs Backend",
+            subtitle: "The face vs the brain of every web application",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-laptop-code"></i> Frontend (What you see)</h4><p><strong>Built with:</strong> HTML, CSS, JavaScript, React, Vue</p><p><strong>Handles:</strong> buttons, forms, menus, animations</p><p class="highlight">Think of it as the "face" of the application.</p></div>
+                    <div class="col"><h4><i class="fas fa-server"></i> Backend (What powers it)</h4><p><strong>Built with:</strong> Python (Django), Node.js, Java, PHP</p><p><strong>Handles:</strong> authentication, databases, business logic, payments</p><p class="highlight">Think of it as the "brain" of the application.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-exchange-alt"></i> <strong>Login example:</strong> Frontend shows fields. Backend checks credentials, returns response.</div>
+                <div class="journey-box"><i class="fas fa-arrow-right"></i> User → Frontend → Backend → Database → Response → Rendered Page</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-network-wired'></i> How the Internet Works",
+            subtitle: "IP addresses · DNS · HTTP protocol",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-network-wired"></i> IP Address</h3><p>Every device has an address.<br>Examples: <span class="highlight">192.168.1.1, 142.250.190.78</span></p></div>
+                    <div class="concept-box"><h3><i class="fas fa-search"></i> DNS</h3><p>Translates <span class="highlight">google.com → 142.250.45.46</span><br>The internet's phonebook.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-globe"></i> HTTP / HTTPS</h3><p><strong>HTTP:</strong> Browser-server language.<br><strong>HTTPS:</strong> Secure encrypted version.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-chart-line"></i> <span>Without DNS you'd have to memorize numbers like 157.240.x.x</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-bolt'></i> How a Webpage Loads",
+            subtitle: "From URL to Rendered Page — the complete journey",
+            content: `
+                <div class="concept-box" style="margin-bottom:0.8rem;">
+                    <h3><i class="fas fa-route"></i> Typing a URL triggers:</h3>
+                    <ul class="step-list">
+                        <li><span class="step-num">1</span> <strong>Browser reads URL</strong></li>
+                        <li><span class="step-num">2</span> <strong>DNS Lookup</strong> — domain → IP address</li>
+                        <li><span class="step-num">3</span> <strong>Browser contacts server</strong> — sends request</li>
+                        <li><span class="step-num">4</span> <strong>Server processes request</strong> — queries database</li>
+                        <li><span class="step-num">5</span> <strong>Server sends response</strong> — HTML, CSS, JS</li>
+                        <li><span class="step-num">6</span> <strong>Browser renders page</strong> — parses, paints pixels</li>
+                    </ul>
+                </div>
+                <div class="journey-box"><i class="fas fa-arrow-right"></i> User → URL → DNS → IP → Server → HTML/CSS/JS → Browser → Rendered Page</div>
+                <div class="insight-card"><i class="fas fa-hourglass-half"></i> <span>All happens in milliseconds! DevTools Network tab shows timing.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-tag'></i> Domain Names",
+            subtitle: "Human-readable website names",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-sitemap"></i> Domain Structure</h3><p><span class="highlight">www.google.com</span><br>• subdomain: www<br>• domain: google<br>• TLD: .com</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-tags"></i> Common TLDs</h3><p>.com, .org, .net, .edu, .gov, .ng</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-gavel"></i> Ownership</h3><p>Purchased from registrars (Namecheap, GoDaddy). <span class="highlight">You rent them yearly.</span></p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-address-card"></i> <span>Without domain names we'd need to remember IP addresses.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-cloud-upload-alt'></i> Hosting",
+            subtitle: "Shared · VPS · Cloud · Static hosting",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-users"></i> Shared Hosting</h3><p>Many sites on one server. Cheap, less control.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-microchip"></i> VPS</h3><p>Virtual Private Server — more control, better performance.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-cloud-upload-alt"></i> Cloud</h3><p>AWS, Google Cloud — scalable, pay-as-you-go.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-file-archive"></i> Static Hosting</h3><p>Vercel, Netlify — perfect for frontend sites.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-chart-simple"></i> <span>Choose hosting based on traffic, budget, and tech stack.</span></div>
+            `
+        },
+        {
+            title: "<i class='fab fa-chrome'></i> Browsers, JS Engines & Node.js",
+            subtitle: "V8, JavaScriptCore, SpiderMonkey — and how Node.js fits in",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fab fa-chrome"></i> What Browsers Do</h3><p>Request, download, interpret HTML/CSS, execute JS, display pages.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-cogs"></i> Rendering Engines</h3><p>Chrome/Edge: Blink &nbsp;|&nbsp; Safari: WebKit &nbsp;|&nbsp; Firefox: Gecko</p></div>
+                </div>
+                <div class="engine-grid">
+                    <div class="engine-card"><i class="fab fa-chrome"></i> <strong>Google Chrome</strong><br>JS Engine: <span class="highlight">V8</span><br>Node.js is built on V8!</div>
+                    <div class="engine-card"><i class="fab fa-safari"></i> <strong>Apple Safari</strong><br>JS Engine: <span class="highlight">JavaScriptCore</span> (Nitro)</div>
+                    <div class="engine-card"><i class="fab fa-firefox"></i> <strong>Mozilla Firefox</strong><br>JS Engine: <span class="highlight">SpiderMonkey</span></div>
+                </div>
+                <div class="concept-box" style="margin-top:0.5rem;">
+                    <h3><i class="fab fa-node-js"></i> What is Node.js?</h3>
+                    <p><span class="highlight">Node.js is NOT a separate JavaScript engine.</span> It is a <strong>runtime environment</strong> that extracts Chrome's <strong>V8 engine</strong> out of the browser, allowing you to run JavaScript on your computer or server — outside of any browser.</p>
+                    <p style="margin-top:0.5rem;"><i class="fas fa-link"></i> <strong>Summary:</strong> V8 powers Chrome AND Node.js. JavaScriptCore powers Safari. SpiderMonkey powers Firefox.</p>
+                </div>
+                <div class="insight-card"><i class="fas fa-tools"></i> <strong>Why DevTools matters:</strong> Chrome DevTools uses V8 under the hood for powerful debugging.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-tools'></i> Developer Tools",
+            subtitle: "Elements · Console · Network — your daily toolkit",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-code"></i> Elements Panel</h3><p>Inspect/edit HTML/CSS live.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-terminal"></i> Console Tab</h3><p>Run JS, see errors/logs.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-chart-line"></i> Network Tab</h3><p>Monitor HTTP requests, timing, status codes.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <span>Use Network tab → "Timing" panel to see DNS, TCP, TLS handshake times.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-chart-line'></i> The Complete Web Journey",
+            subtitle: "From URL to visible page — unified flow",
+            content: `
+                <div class="journey-box" style="font-size:0.9rem;">
+                    <i class="fas fa-arrow-right"></i> User → Browser → Domain Name → DNS → IP Address → Web Server → Backend → Database<br>
+                    <i class="fas fa-arrow-down" style="margin-left:2rem;"></i> <span style="color:#fbbf24;">↓</span><br>
+                    <i class="fas fa-arrow-right"></i> Response: HTML + CSS + JavaScript <span style="color:#60a5fa;">(executed by V8/JavaScriptCore/SpiderMonkey)</span><br>
+                    <i class="fas fa-arrow-down" style="margin-left:2rem;"></i> <span style="color:#fbbf24;">↓</span><br>
+                    <i class="fas fa-arrow-right"></i> Browser Rendering Engine (DOM + CSSOM + JS execution)<br>
+                    <i class="fas fa-arrow-down" style="margin-left:2rem;"></i> <span style="color:#fbbf24;">↓</span><br>
+                    <i class="fas fa-arrow-right"></i> <span class="highlight">Visible Web Page</span>
+                </div>
+                <div class="insight-card"><i class="fas fa-graduation-cap"></i> <strong>Why this matters:</strong> Before writing code, every web developer must understand this complete journey — from URL to rendered webpage, including which JS engine runs their code.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-question-circle'></i> Knowledge Check",
+            subtitle: "10 questions — click to toggle answers",
+            content: `
+                <div class="qa-section">
+                    <div class="qa-title"><i class="fas fa-question-circle"></i> Toggle Questions (click to show/hide answer)</div>
+                    <div id="qa-container"></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Try answering before clicking! These reinforce key concepts.</div>
+            `
+        }
+    ];
+
+    const qaData = [
+        { q: "What is the main difference between a static and dynamic website?", a: "Static websites show the same content to every visitor (pre-built files). Dynamic websites generate content on the fly based on user, database, or actions — each user may see different content." },
+        { q: "Is Gmail a website or a web application? Why?", a: "Gmail is a web application because users can perform complex tasks (send, receive, delete, search emails), requires login, and has high interactivity." },
+        { q: "What does frontend development handle vs backend development?", a: "Frontend handles UI (buttons, forms, animations). Backend handles logic (databases, authentication, APIs, payments)." },
+        { q: "What is DNS and why is it important?", a: "DNS translates domain names (google.com) into IP addresses. Important because humans remember names, not numbers." },
+        { q: "What JavaScript engine does Google Chrome use? What about Safari and Firefox?", a: "Chrome uses V8, Safari uses JavaScriptCore (Nitro), Firefox uses SpiderMonkey." },
+        { q: "What is Node.js and how is it related to V8?", a: "Node.js is a runtime that extracts Chrome's V8 engine, allowing JavaScript to run on servers. Node.js uses V8 — it is not a separate engine." },
+        { q: "What's the difference between HTTP and HTTPS?", a: "HTTP is unencrypted. HTTPS adds SSL/TLS encryption to secure data (passwords, credit cards)." },
+        { q: "What are the 3 main panels in Chrome DevTools?", a: "Elements (inspect HTML/CSS), Console (run JS, see errors), Network (monitor HTTP requests)." },
+        { q: "What are the four main hosting types?", a: "Shared, VPS, Cloud (AWS/Google Cloud), Static (Netlify/Vercel)." },
+        { q: "What does a browser's rendering engine do?", a: "Converts HTML/CSS code into visual pixels. Examples: Blink (Chrome), WebKit (Safari), Gecko (Firefox). Different from JS engine." }
+    ];
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    const slideArea = document.getElementById('slideArea');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counterText = document.getElementById('counterText');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    function renderQA() {
+        const container = document.getElementById('qa-container');
+        if (!container) return;
+        container.innerHTML = '';
+        qaData.forEach((item, idx) => {
+            const qaDiv = document.createElement('div');
+            qaDiv.className = 'qa-item';
+            qaDiv.innerHTML = `
+                <div class="qa-question" data-idx="${idx}">
+                    <span><strong>${idx+1}.</strong> ${item.q}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="qa-answer" id="answer-${idx}">
+                    <p>${item.a}</p>
+                </div>
+            `;
+            container.appendChild(qaDiv);
+        });
+        document.querySelectorAll('.qa-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const idx = this.getAttribute('data-idx');
+                const answerDiv = document.getElementById(`answer-${idx}`);
+                const icon = this.querySelector('i');
+                answerDiv.classList.toggle('show');
+                icon.style.transform = answerDiv.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+    }
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        const html = `
+            <div class="slide-card">
+                <div class="slide-title">
+                    ${slide.title}
+                </div>
+                <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+                <div class="slide-content">
+                    ${slide.content}
+                </div>
+            </div>
+        `;
+        slideArea.innerHTML = html;
+        if (index === 12) renderQA();
+        counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === totalSlides-1);
+        updateDots(index);
+    }
+
+    function updateDots(activeIndex) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === activeIndex) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+    function handleKeyDown(e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    window.addEventListener('keydown', handleKeyDown);
+    renderSlide(0);
+</script>
+</body>
+</html>

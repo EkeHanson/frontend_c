@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlexStore – E‑commerce Flexbox Lab</title>
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            padding: 24px 20px 40px;
+        }
+
+        /* ---------- HEADER ---------- */
+        .store-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px 30px;
+            background: white;
+            padding: 16px 28px;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            margin-bottom: 28px;
+            border: 1px solid #e9edf2;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: #2563eb; }
+
+        .cart-summary {
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cart-summary .badge {
+            background: #2563eb;
+            color: white;
+            border-radius: 30px;
+            padding: 0 12px;
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        /* ---------- HERO BANNER (uses order) ---------- */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 28px 34px;
+            margin-bottom: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .hero-banner h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        .hero-banner p {
+            opacity: 0.8;
+            max-width: 380px;
+        }
+        .hero-banner .cta-btn {
+            background: #facc15;
+            color: #0f172a;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: default;
+            font-size: 1rem;
+        }
+
+        /* ---------- SECTION TITLES ---------- */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 36px 0 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title small {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 2px 14px;
+            border-radius: 30px;
+        }
+
+        /* ---------- FLEX CONTAINERS ---------- */
+        .flex-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 20px 18px;
+            border-radius: 20px;
+            border: 1px solid #e9edf2;
+            margin-bottom: 12px;
+        }
+
+        /* ---------- PRODUCT CARDS (base) ---------- */
+        .product-card {
+            background: #fafcff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px 14px 18px;
+            min-width: 140px;
+            flex: 0 1 auto;
+            text-align: center;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .product-card .emoji {
+            font-size: 2.8rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .product-card .name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .product-card .price {
+            color: #2563eb;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 4px 0 6px;
+        }
+        .product-card .tag {
+            font-size: 0.7rem;
+            background: #eef2ff;
+            padding: 2px 12px;
+            border-radius: 30px;
+            color: #4338ca;
+            display: inline-block;
+        }
+
+        /* ---------- 1. ALIGN-SELF : product cards ---------- */
+        .align-container {
+            align-items: flex-start;    /* container default */
+            min-height: 240px;
+        }
+
+        /* individual alignments */
+        .card-top    { align-self: flex-start; border-color: #86d9a4; background: #f6fef9; }
+        .card-center { align-self: center; border-color: #93b4f0; background: #f0f6ff; }
+        .card-bottom { align-self: flex-end; border-color: #f9a8a8; background: #fef6f6; }
+        .card-stretch{ align-self: stretch; border-color: #c4b5e3; background: #f8f5ff; }
+        .card-top2   { align-self: flex-start; border-color: #facc6f; background: #fefcf0; }
+
+        /* ---------- 2. FLEX-SHRINK : cart items ---------- */
+        .cart-container {
+            min-height: 120px;
+            gap: 10px 18px;
+            background: #f1f5f9;
+            border-color: #d1d9e6;
+        }
+
+        .cart-item {
+            background: white;
+            border-radius: 14px;
+            padding: 12px 18px;
+            border: 1px solid #dce1e8;
+            min-width: 130px;
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+        .cart-item .qty {
+            background: #e9edf2;
+            border-radius: 30px;
+            padding: 0 12px;
+            font-size: 0.85rem;
+        }
+
+        /* Item 3 shrinks 4× faster */
+        .shrink-fast {
+            flex-shrink: 4;
+            background: #fee2e2;
+            border-color: #f87171;
+        }
+        .shrink-normal {
+            flex-shrink: 1;
+        }
+
+        /* ---------- 3. ORDER : featured products ---------- */
+        .order-container {
+            gap: 12px;
+            background: #fafcff;
+        }
+
+        .feature-item {
+            min-width: 120px;
+            padding: 16px 12px;
+            border-radius: 16px;
+            background: #f8fafc;
+            border: 1px solid #dce1e8;
+            text-align: center;
+            font-weight: 500;
+        }
+        .feature-item .badge-sale {
+            background: #dc2626;
+            color: white;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            padding: 0 12px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        /* order values: visual order becomes 5 → 1 → 2 → 3 → 4 */
+        .order-0 { order: 0; background: #dbeafe; border-color: #60a5fa; }   /* 1st */
+        .order-1 { order: 1; background: #d1fae5; border-color: #34d399; }   /* 2nd */
+        .order-2 { order: 2; background: #fef3c7; border-color: #fbbf24; }   /* 3rd */
+        .order-3 { order: 3; background: #fce4ec; border-color: #f472b6; }   /* 4th */
+        .order-4 { order: 4; background: #e0e7ff; border-color: #818cf8; }   /* 5th */
+
+        /* ---------- HELPER / FOOTER ---------- */
+        .legend {
+            background: #f1f5f9;
+            border-radius: 14px;
+            padding: 16px 22px;
+            margin-top: 30px;
+            font-size: 0.92rem;
+            border-left: 5px solid #2563eb;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .legend code {
+            background: #e2e8f0;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+        .legend .badge-prop {
+            display: inline-block;
+            background: #2563eb10;
+            padding: 4px 14px;
+            border-radius: 30px;
+            border: 1px solid #2563eb30;
+        }
+
+        @media (max-width: 640px) {
+            .store-header { flex-direction: column; align-items: stretch; text-align: center; }
+            .hero-banner { flex-direction: column; text-align: center; }
+            .product-card { min-width: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================== -->
+    <!-- HEADER                                                     -->
+    <!-- ========================================================== -->
+    <header class="store-header">
+        <div class="logo">🛍️ <span>Flex</span>Store</div>
+        <div class="cart-summary">
+            🛒 Cart
+            <span class="badge">3 items</span>
+        </div>
+    </header>
+
+    <!-- ========================================================== -->
+    <!-- HERO BANNER (uses order – hidden example)                  -->
+    <!-- ========================================================== -->
+    <div class="hero-banner">
+        <div>
+            <h2>⚡ Today's Deals</h2>
+            <p>Use flexbox to arrange, align, and shrink — just like a real store layout.</p>
+        </div>
+        <button class="cta-btn">Shop Now →</button>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- SECTION 1 : ALIGN-SELF  (product cards)                    -->
+    <!-- ========================================================== -->
+    <div class="section-title">
+        📐 1. align-self
+        <small>each card aligns individually</small>
+    </div>
+    <div class="flex-row align-container">
+        <!-- card 1 : top -->
+        <div class="product-card card-top">
+            <span class="emoji">🎧</span>
+            <div class="name">Headphones</div>
+            <div class="price">$49</div>
+            <span class="tag">top</span>
+        </div>
+        <!-- card 2 : center -->
+        <div class="product-card card-center">
+            <span class="emoji">⌚</span>
+            <div class="name">Smart Watch</div>
+            <div class="price">$89</div>
+            <span class="tag">center</span>
+        </div>
+        <!-- card 3 : bottom -->
+        <div class="product-card card-bottom">
+            <span class="emoji">📱</span>
+            <div class="name">Phone Case</div>
+            <div class="price">$19</div>
+            <span class="tag">bottom</span>
+        </div>
+        <!-- card 4 : stretch -->
+        <div class="product-card card-stretch">
+            <span class="emoji">💻</span>
+            <div class="name">Laptop</div>
+            <div class="price">$999</div>
+            <span class="tag">stretch</span>
+        </div>
+        <!-- card 5 : top -->
+        <div class="product-card card-top2">
+            <span class="emoji">📷</span>
+            <div class="name">Camera</div>
+            <div class="price">$399</div>
+            <span class="tag">top</span>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- SECTION 2 : FLEX-SHRINK  (cart items)                      -->
+    <!-- ========================================================== -->
+    <div class="section-title">
+        📉 2. flex-shrink
+        <small>resize window → red item shrinks 4× faster</small>
+    </div>
+    <div class="flex-row cart-container">
+        <div class="cart-item shrink-normal">
+            🎧 Headphones
+            <span class="qty">×1</span>
+        </div>
+        <div class="cart-item shrink-normal">
+            ⌚ Watch
+            <span class="qty">×1</span>
+        </div>
+        <div class="cart-item shrink-fast">
+            💻 Laptop ⚡
+            <span class="qty">×2</span>
+        </div>
+        <div class="cart-item shrink-normal">
+            📱 Case
+            <span class="qty">×1</span>
+        </div>
+        <div class="cart-item shrink-normal">
+            📷 Camera
+            <span class="qty">×1</span>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- SECTION 3 : ORDER  (featured products)                     -->
+    <!-- ========================================================== -->
+    <div class="section-title">
+        🔢 3. order
+        <small>visual order: 5 → 1 → 2 → 3 → 4</small>
+    </div>
+    <div class="flex-row order-container">
+        <!-- source order: 1,2,3,4,5  but order values rearrange -->
+        <div class="feature-item order-0">
+            ⭐ #1
+            <div>Wireless Earbuds</div>
+            <span class="badge-sale">-20%</span>
+        </div>
+        <div class="feature-item order-1">
+            ⭐ #2
+            <div>Gaming Mouse</div>
+            <span class="badge-sale">-10%</span>
+        </div>
+        <div class="feature-item order-2">
+            ⭐ #3
+            <div>USB Hub</div>
+            <span class="badge-sale">-15%</span>
+        </div>
+        <div class="feature-item order-3">
+            ⭐ #4
+            <div>Monitor Stand</div>
+            <span class="badge-sale">-5%</span>
+        </div>
+        <div class="feature-item order-4">
+            ⭐ #5
+            <div>Keyboard</div>
+            <span class="badge-sale">-25%</span>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- LEGEND / STUDENT TASK                                      -->
+    <!-- ========================================================== -->
+    <div class="legend">
+        <div>
+            <span class="badge-prop">🧪 Student Task</span>
+            <span style="margin-left: 8px;">
+                <strong>1.</strong> Change <code>flex-shrink</code> values &amp; resize.
+                <strong>2.</strong> Swap <code>order</code> numbers.
+                <strong>3.</strong> Explain when to use <code>align-self</code> vs <code>align-items</code>.
+            </span>
+        </div>
+        <div style="font-size:0.85rem; color:#475569;">
+            🛒 <strong>FlexStore</strong> · e‑commerce flexbox lab
+        </div>
+    </div>
+
+</body>
+</html>

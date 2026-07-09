@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 JavaScript Quiz</h1>
+            <div class="score-display">
+                Score: <span id="scoreDisplay">0</span> / <span id="totalQuestions">0</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Start Screen -->
+            <div id="startScreen" class="screen active">
+                <h2>Welcome to the JavaScript Quiz!</h2>
+                <p>Test your knowledge of JavaScript basics.</p>
+                <p>You'll get <strong>10 questions</strong> covering variables, operators, conditionals, loops, and strings.</p>
+                <button id="startBtn">Start Quiz 🚀</button>
+            </div>
+
+            <!-- Question Screen -->
+            <div id="questionScreen" class="screen">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <div class="question-header">
+                    <span id="questionCounter">Question 1 of 10</span>
+                </div>
+                <h2 id="questionText">Loading question...</h2>
+                <div id="optionsContainer" class="options-grid">
+                    <!-- Options will be inserted by JavaScript -->
+                </div>
+                <button id="nextBtn" class="btn-next" disabled>Next →</button>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="resultsScreen" class="screen">
+                <div class="results-card">
+                    <h2>🎉 Quiz Complete!</h2>
+                    <div class="final-score">
+                        <span id="finalScore">0</span> / <span id="finalTotal">0</span>
+                    </div>
+                    <p id="resultMessage">Great job!</p>
+                    <div id="resultDetails"></div>
+                    <button id="restartBtn">🔄 Try Again</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with JavaScript ❤️</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

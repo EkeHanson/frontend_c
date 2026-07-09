@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/register" method="POST">
+  <fieldset>
+    <legend>Personal Information</legend>
+    <label for="fullname">Full Name *</label>
+    <input type="text" id="fullname" name="fullname" required>
+    
+    <label for="email">Email *</label>
+    <input type="email" id="email" name="email" required>
+    
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" name="dob">
+  </fieldset>
+  
+  <fieldset>
+    <legend>Course Selection</legend>
+    <select name="course">
+      <option value="">-- Select --</option>
+      <option value="frontend">Frontend</option>
+    </select>
+    
+    <p>Class Days:</p>
+    <label><input type="checkbox" name="days" value="mon"> Mon</label>
+    
+    <p>Experience:</p>
+    <label><input type="radio" name="level" value="beginner"> Beginner</label>
+  </fieldset>
+  
+  <label for="message">Questions:</label>
+  <textarea id="message" rows="4"></textarea>
+  
+  <button type="submit">Submit</button>
+  <button type="reset">Clear</button>
+</form>
+</body>
+</html>

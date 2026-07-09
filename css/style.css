@@ -1,0 +1,27 @@
+body{
+    background-color: #3C3C3C;
+}
+p.top_element{
+    text-align: right;
+}
+
+.top_right_item{
+    margin-right: 20px;
+}
+
+
+img.world_cup_img{
+
+    width:400px;
+    height:200px;
+margin: 40px 30px 30px 50px;
+}
+
+input.search_bar{
+    text-align: left;
+    border-radius: 20px;
+    margin-left: 100px;
+    width: 300px;
+    height: 40px;
+
+}

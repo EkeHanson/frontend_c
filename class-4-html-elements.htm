@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Class 4 · Text, Links & Images | Web Development Curriculum</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+            background: #05070f;
+            color: #eef2ff;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .class-header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid #2d3a5e;
+        }
+        .badge {
+            background: #2563eb;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #cbd5ff, #7aa9ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 0.8rem;
+        }
+        .nav-btn {
+            background: #1e293b;
+            border: 1px solid #3b82f6;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+        }
+        .nav-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .presentation-card {
+            background: #0b0f1a;
+            border-radius: 2rem;
+            border: 1px solid #253450;
+            overflow: hidden;
+        }
+        .slide-area {
+            min-height: 620px;
+            padding: 2rem;
+            background: #070b14;
+        }
+        .slide-card {
+            background: #0f1422e6;
+            backdrop-filter: blur(4px);
+            border-radius: 1.8rem;
+            padding: 2rem;
+            border: 1px solid #2a3958;
+        }
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0f9ff, #7aa2f7);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .slide-sub {
+            color: #9bb1d0;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+            margin-bottom: 1.8rem;
+            font-size: 0.9rem;
+        }
+        .grid-2col {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            margin: 1rem 0;
+        }
+        .info-panel {
+            flex: 1;
+            background: #0f1625;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid #253450;
+        }
+        .info-panel h3 {
+            color: #7aa9ff;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        pre {
+            background: #01050e;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #cddcff;
+            margin: 0.8rem 0;
+            border: 1px solid #2d3a5e;
+        }
+        .insight {
+            background: #0a1120;
+            border-left: 4px solid #3b82f6;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin-top: 1.2rem;
+        }
+        .nav-bottom {
+            background: #080c18;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #253450;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #1e2a3e;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            color: white;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+        .dot-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #334155;
+            border-radius: 10px;
+        }
+        .dot.active {
+            background: #3b82f6;
+            width: 22px;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 1rem;
+            color: #5f7f9e;
+            border-top: 1px solid #1e2a3a;
+        }
+        .site-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+        .site-badge {
+            background: #1e293b;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+        }
+        .checklist {
+            list-style: none;
+        }
+        .checklist li {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        @media (max-width: 700px) {
+            .slide-area { padding: 1rem; }
+            .slide-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="class-header">
+        <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 1 · WEEK 2 · CLASS 4</span></div>
+        <div class="class-title"><i class="fas fa-paragraph"></i> HTML Text, Links & Images</div>
+        <div class="nav-buttons">
+            <a href="class-3-html-tags-img.htm" class="nav-btn"><i class="fas fa-arrow-left"></i> Class 3</a>
+            <a href="#" class="nav-btn">Class 5 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <div class="presentation-card">
+        <div class="slide-area" id="slideContainer"></div>
+        <div class="nav-bottom">
+            <div class="dot-group" id="dotsPanel"></div>
+            <div style="display: flex; gap: 1rem;">
+                <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+                <span id="counter" style="background:#111827; padding:0.3rem 1rem; border-radius:30px;"><i class="far fa-file"></i> 1 / 8</span>
+                <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <footer>
+            <i class="fas fa-check-circle"></i> Always use alt text for images · 
+            <i class="fas fa-link"></i> Semantic links improve SEO · 
+            <i class="fas fa-heading"></i> Proper heading hierarchy
+        </footer>
+    </div>
+
+    <!-- Pure HTML sites showcase -->
+    <div style="margin-top: 2rem; background: #0f1422; border-radius: 1.5rem; padding: 1.2rem; border: 1px solid #253450;">
+        <h3 style="display: flex; gap: 0.6rem; align-items: center;"><i class="fas fa-globe"></i> Sites built with only HTML (no frameworks)</h3>
+        <div class="site-list">
+            <span class="site-badge"><i class="fas fa-link"></i> whitep4nth3r.com</span>
+            <span class="site-badge"><i class="fas fa-link"></i> motherfuckingwebsite.com</span>
+            <span class="site-badge"><i class="fas fa-link"></i> txti.es</span>
+            <span class="site-badge"><i class="fas fa-link"></i> html.energy</span>
+            <span class="site-badge"><i class="fas fa-link"></i> brutalistwebsites.com</span>
+            <span class="site-badge"><i class="fas fa-link"></i> 100r.co</span>
+            <span class="site-badge"><i class="fas fa-link"></i> danq.me</span>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem; color:#92a5d5;"><i class="fas fa-info-circle"></i> Pure HTML/CSS sites load instantly, work everywhere, and are accessible by default.</p>
+    </div>
+</div>
+
+<script>
+    const slides = [
+        {
+            title: "<i class='fas fa-heading'></i> Heading Hierarchy & Text Structure",
+            subtitle: "h1–h6 · paragraphs · formatting elements",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-heading"></i> Headings (h1 - h6)</h3><p><span style="color:#facc15;">ONE h1 per page</span> — main topic. Then h2, h3 in logical order. Critical for SEO & accessibility.</p><pre><code>&lt;h1&gt;Main Title&lt;/h1&gt;\n  &lt;h2&gt;Section&lt;/h2&gt;\n    &lt;h3&gt;Subsection&lt;/h3&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-bold"></i> Text Formatting</h3><p><strong>&lt;strong&gt;</strong> = strong importance · <em>&lt;em&gt;</em> = emphasis · <mark>&lt;mark&gt;</mark> = highlight · <del>&lt;del&gt;</del> deleted · <ins>&lt;ins&gt;</ins> inserted</p><pre><code>&lt;p&gt;This is &lt;strong&gt;very important&lt;/strong&gt; and &lt;em&gt;emphasized&lt;/em&gt;.&lt;/p&gt;</code></pre></div>
+            </div><div class="insight"><i class="fas fa-universal-access"></i> Accessibility: heading order must not skip levels (h1 → h2 → h3). Screen readers rely on this structure.</div>`
+        },
+        {
+            title: "<i class='fas fa-list'></i> Lists: Unordered, Ordered, Description",
+            subtitle: "ul · ol · li · dl · dt · dd",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-list-ul"></i> Unordered List</h3><pre><code>&lt;ul&gt;\n  &lt;li&gt;HTML&lt;/li&gt;\n  &lt;li&gt;CSS&lt;/li&gt;\n  &lt;li&gt;JavaScript&lt;/li&gt;\n&lt;/ul&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-list-ol"></i> Ordered List</h3><pre><code>&lt;ol&gt;\n  &lt;li&gt;Learn HTML&lt;/li&gt;\n  &lt;li&gt;Learn CSS&lt;/li&gt;\n  &lt;li&gt;Build projects&lt;/li&gt;\n&lt;/ol&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-list"></i> Description List</h3><pre><code>&lt;dl&gt;\n  &lt;dt&gt;HTML&lt;/dt&gt;&lt;dd&gt;Structure&lt;/dd&gt;\n  &lt;dt&gt;CSS&lt;/dt&gt;&lt;dd&gt;Styling&lt;/dd&gt;\n&lt;/dl&gt;</code></pre></div>
+            </div>`
+        },
+        {
+            title: "<i class='fas fa-link'></i> Anchor Tags: Links",
+            subtitle: "href · target · relative vs absolute · anchor links",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-external-link-alt"></i> External Links</h3><pre><code>&lt;a href="https://google.com" target="_blank" rel="noopener"&gt;Google&lt;/a&gt;</code></pre><p>Use <span style="color:#facc15;">rel="noopener"</span> for security with target="_blank".</p></div>
+                <div class="info-panel"><h3><i class="fas fa-folder-open"></i> Relative Paths</h3><pre><code>&lt;a href="about.html"&gt;About&lt;/a&gt;\n&lt;a href="../index.html"&gt;Home&lt;/a&gt;\n&lt;a href="images/photo.jpg"&gt;Download&lt;/a&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-anchor"></i> Anchor/Jump Links</h3><pre><code>&lt;a href="#contact"&gt;Jump to Contact&lt;/a&gt;\n&lt;h2 id="contact"&gt;Contact Section&lt;/h2&gt;</code></pre></div>
+            </div><div class="insight"><i class="fas fa-shield-alt"></i> Security: Always add rel="noopener noreferrer" when using target="_blank" to prevent tabnabbing.</div>`
+        },
+        {
+            title: "<i class='fas fa-image'></i> Images: img Tag",
+            subtitle: "src · alt · width · height · loading lazy · paths",
+            content: `<div class="info-panel"><h3><i class="fas fa-image"></i> Image Syntax & Best Practices</h3><pre><code>&lt;img src="images/hero.jpg" alt="Team working on laptops" width="800" height="500" loading="lazy"&gt;</code></pre><p><span style="color:#facc15;">alt attribute is MANDATORY</span> — describes image for screen readers & when image fails to load.</p><p><strong>Absolute path:</strong> https://example.com/pic.jpg · <strong>Relative:</strong> images/pic.jpg or ../assets/logo.png</p></div><div class="insight"><i class="fas fa-tachometer-alt"></i> Use loading="lazy" for images below the fold — improves page speed and saves bandwidth.</div>`
+        },
+        {
+            title: "<i class='fas fa-file-alt'></i> Practical Example: Personal Profile",
+            subtitle: "All elements combined in one page",
+            content: `<pre><code>&lt;!DOCTYPE html&gt;\n&lt;html lang="en"&gt;\n&lt;head&gt;\n  &lt;meta charset="UTF-8"&gt;\n  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;\n  &lt;title&gt;Alice Johnson | Frontend Developer&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;h1&gt;Alice Johnson&lt;/h1&gt;\n  &lt;p&gt;&lt;strong&gt;Junior Frontend Developer&lt;/strong&gt; · Lagos, Nigeria&lt;/p&gt;\n  &lt;img src="profile.jpg" alt="Alice Johnson profile photo" width="200" loading="lazy"&gt;\n  &lt;h2&gt;About Me&lt;/h2&gt;\n  &lt;p&gt;I build clean, user-friendly interfaces with semantic HTML &amp; CSS.&lt;/p&gt;\n  &lt;h2&gt;Skills&lt;/h2&gt;\n  &lt;ul&gt;&lt;li&gt;HTML5&lt;/li&gt;&lt;li&gt;CSS3&lt;/li&gt;&lt;li&gt;JavaScript (learning)&lt;/li&gt;&lt;/ul&gt;\n  &lt;h2&gt;Find Me&lt;/h2&gt;\n  &lt;ul&gt;\n    &lt;li&gt;&lt;a href="https://github.com/alice" target="_blank" rel="noopener"&gt;GitHub&lt;/a&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;a href="mailto:alice@example.com"&gt;Email Me&lt;/a&gt;&lt;/li&gt;\n  &lt;/ul&gt;\n  &lt;a href="about.html"&gt;Read more about me →&lt;/a&gt;\n&lt;/body&gt;\n&lt;/html&gt;</code></pre>`
+        },
+        {
+            title: "<i class='fas fa-hands-helping'></i> Common Mistakes & Fixes",
+            subtitle: "Links, images, and text errors",
+            content: `<ul class="checklist" style="list-style:none;">
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Missing alt text</strong> → ✅ Every &lt;img&gt; must have descriptive alt</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Broken image paths</strong> → ✅ Use relative paths correctly (check file location)</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>target="_blank" without rel</strong> → ✅ Add rel="noopener noreferrer"</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Empty or "#" links</strong> → ✅ Use meaningful href or remove if not needed</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Using &lt;br&gt; for spacing</strong> → ✅ Use CSS margin/padding instead</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Heading order skipped</strong> → ✅ h1 then h2 then h3, never jump levels</li>
+            </ul>`
+        },
+        {
+            title: "<i class='fas fa-tasks'></i> Assignment: Personal Profile Page",
+            subtitle: "Build complete profile + second page with relative linking",
+            content: `<div class="info-panel"><h3><i class="fas fa-check-circle"></i> Requirements</h3><ul class="checklist">
+                <li><i class="fas fa-check"></i> Profile page with real/placeholder image + correct alt text</li>
+                <li><i class="fas fa-check"></i> At least 2 external links (GitHub, LinkedIn, Twitter) with target="_blank"</li>
+                <li><i class="fas fa-check"></i> Both unordered AND ordered lists</li>
+                <li><i class="fas fa-check"></i> Relative link to a second page (about.html or portfolio.html)</li>
+                <li><i class="fas fa-check"></i> Second page must have a "Back to Home" link returning to index.html</li>
+                <li><i class="fas fa-check"></i> Proper heading hierarchy (h1, h2, h3)</li>
+                <li><i class="fas fa-star"></i> Bonus: Add an anchor/jump link to a specific section</li>
+            </ul></div><div class="insight"><i class="fas fa-cloud-upload-alt"></i> Submit: Both HTML files + screenshot showing working links in browser.</div>`
+        },
+        {
+            title: "<i class='fas fa-star-of-life'></i> Pure HTML Sites Showcase",
+            subtitle: "Minimal, fast, resilient web design",
+            content: `<div class="insight"><i class="fas fa-heart"></i> <strong>Inspiring websites built with only HTML/CSS (no JS frameworks):</strong></div>
+            <div class="site-list" style="margin-top:1rem;">
+                <span class="site-badge">whitep4nth3r.com</span>
+                <span class="site-badge">txti.es</span>
+                <span class="site-badge">html.energy</span>
+                <span class="site-badge">brutalistwebsites.com</span>
+                <span class="site-badge">100r.co</span>
+                <span class="site-badge">solar.lowtechmagazine.com</span>
+                <span class="site-badge">danq.me</span>
+                <span class="site-badge">motherfuckingwebsite.com</span>
+            </div>
+            <p style="margin-top:1rem;">These sites load instantly, work on any device, and are accessible to everyone — proving that sometimes less is more.</p>
+            <div class="insight" style="margin-top:1rem;"><i class="fas fa-lightbulb"></i> Challenge: Visit these sites, view source (Ctrl+U), and see how they structure content with pure HTML!</div>`
+        }
+    ];
+
+    let current = 0;
+    const container = document.getElementById('slideContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counterSpan = document.getElementById('counter');
+    const dotsDiv = document.getElementById('dotsPanel');
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        container.innerHTML = `<div class="slide-card"><div class="slide-title">${slide.title}</div><div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div><div class="slide-content">${slide.content}</div></div>`;
+        counterSpan.innerHTML = `<i class="far fa-file"></i> ${index+1} / ${slides.length}`;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === slides.length-1;
+        updateDots(index);
+    }
+
+    function updateDots(active) {
+        dotsDiv.innerHTML = '';
+        for (let i = 0; i < slides.length; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === active) dot.classList.add('active');
+            dotsDiv.appendChild(dot);
+        }
+    }
+
+    prevBtn.addEventListener('click', () => { if (current > 0) { current--; renderSlide(current); } });
+    nextBtn.addEventListener('click', () => { if (current < slides.length-1) { current++; renderSlide(current); } });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextBtn.click();
+        if (e.key === 'ArrowLeft') prevBtn.click();
+    });
+    renderSlide(0);
+</script>
+</body>
+</html>

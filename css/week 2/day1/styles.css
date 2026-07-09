@@ -1,0 +1,43 @@
+/* body{
+    background-color: red;
+} */
+
+/* h1{
+    color: aquamarine ;
+} */
+
+/* h1{border-style: dotted;} */
+/* h1{border-style: dashed;} */
+/* dotted - Defines a dotted border
+dashed - Defines a dashed border
+solid - Defines a solid border
+double - Defines a double border
+groove - Defines a 3D grooved border. The effect depends on the border-color value
+ridge - Defines a 3D ridged border. The effect depends on the border-color value
+inset - Defines a 3D inset border. The effect depends on the border-color value
+outset - Defines a 3D outset border. The effect depends on the border-color value
+none - Defines no border
+hidden - Defines a hidden border */
+
+h1{border-style: solid;}
+
+
+p{
+    border-style: double;
+    border-width:medium;
+    border-color: red;
+    border-radius: 15px;
+}
+
+p{margin-top: 100px;}
+
+p{
+    padding: 1px 20px 50px 100px;
+    text-align: center;
+}
+p.our_choice{
+    text-align: right;
+}
+/* h1 {
+  border: dotted solid red;
+} */

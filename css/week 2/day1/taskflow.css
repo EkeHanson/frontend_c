@@ -1,0 +1,70 @@
+body{
+    background-color: #F1ECDF;
+}
+
+div{
+    background-color: #FEF3E0;
+    width: 500px;
+    height: 600px;
+    margin-left: 225px;
+    margin-top: 210px;
+    border-radius: 20px;
+}
+
+h1.company_name{
+    text-align: center;
+}
+p.cto{
+    text-align: center;
+}
+
+label.email_label{
+    margin-left:40px ;
+}
+
+
+input.email_input{
+    padding: 10px 180px 15px 20px; /*TRBL*/
+    border-radius: 5px;
+    margin-left:40px ;
+    margin-bottom: 30px;
+}
+
+label.pass_label{
+    margin-left:40px ;
+}
+
+input.password_input{
+    padding: 10px 180px 15px 20px; /*TRBL*/
+    border-radius: 5px;
+    margin-left:40px ;
+}
+
+input.remeber_me_check{
+    margin-left:40px ;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+}
+
+label.otp_method_label{
+    
+    margin-left:40px ;
+}
+
+button.submit_btn{
+    background-color: #3A51CC;
+    padding: 10px 165px 15px 165px; /* TRBL */
+    border-radius: 5px;
+    margin-left:40px ;
+    margin-bottom: 30px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    
+    
+}
+
+p.demo_text{
+
+}

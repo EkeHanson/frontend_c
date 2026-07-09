@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position and Z-index</title>
+    <style>
+        div.static {
+        position: static;
+        border: 3px solid #73AD21;
+        background-color: bisque;
+        }
+
+        div.relative {
+            position: relative;
+            /* left: 30px; */
+            border: 3px solid #73AD21;
+            }
+
+            div.fixed {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            height: 200px;
+            border: 3px solid #73AD21;
+            }
+
+            div.sticky {
+            position: sticky;
+            top: 0;
+            padding: 5px;
+            background-color: #cae8ca;
+            border: 2px solid #4CAF50;
+            }
+
+            .container {
+            position: relative;
+            }
+
+            .topleft {
+                position: absolute;
+                top : 8px;
+                left: 16px;
+                font-size: 20px;
+                
+            }
+
+            img { 
+                width: 100%;
+                height: auto;
+                opacity: 0.5;
+            }
+
+    </style>
+</head>
+<body>
+
+
+    <h2>Using Position: Static</h2>
+
+
+
+    <p>An element with position: static; is always positioned
+         according to the normal flow of the page:
+    </p>
+
+    <div class="static">
+        This div element has position: static;
+    </div>
+
+        <div class="relative">
+            This div element has position: relative;
+        </div>
+
+
+        <h2>Using position: fixed;</h2>
+
+        <p>An element with position: fixed; is positioned relative to the viewport,
+             which means it always stays in the same place even if the page is scrolled:</p>
+
+
+        <div class="fixed">
+             This div element has position: fixed;
+        </div>
+
+
+
+        
+<h2>Using position: sticky;</h2>
+
+<p>Try to scroll this page to understand how sticky works.</p>
+
+<p>Here, when the sticky element reach the top of the page (top: 0), it sticks to this position!</p>
+
+<div class="sticky">I have position sticky!</div>
+
+<div style="padding-bottom:2000px">
+<p>Scroll back up to remove the stickyness!</p>
+<p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+<p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+<p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+</div>
+
+<h2>Position Text on Image</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quos quae, quo, consequatur fugiat veritatis perspiciatis repellendus neque cupiditate, voluptatem tenetur? Aliquid quam earum a, corporis, ad provident nulla esse id, veritatis natus obcaecati corrupti hic libero itaque. Omnis rem repudiandae soluta optio dolorem deleniti amet, id numquam quisquam corrupti adipisci aut quia? Perferendis porro reprehenderit ad dolor itaque cum, exercitationem dignissimos repudiandae illo distinctio? Placeat veritatis consectetur ad quia aperiam aspernatur sequi iste necessitatibus! Voluptates quibusdam exercitationem odit esse maiores quas mollitia vero unde. Sequi sit quos, adipisci iure eaque consequuntur ad nesciunt dolores quaerat magnam iste quis cupiditate.</p>
+
+<p>Position a text on an image in the top left corner:</p>
+
+<div class="container">
+<img src="download.gif" alt="Cinque Terre" width="1000" height="300">
+<div class="topleft">Top Left</div>
+</div>
+
+
+
+</body>
+</html>

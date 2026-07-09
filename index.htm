@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Web Development Course - Class Navigation</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0a0c15 0%, #111827 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 2rem;
+            border: 1px solid #334155;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E0F2FE, #7AA9FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            color: #a0afc9;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #1e293b;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge i {
+            color: #60a5fa;
+        }
+
+        /* Course Progress */
+        .progress-section {
+            background: #0f172a;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #334155;
+        }
+
+        .progress-title {
+            color: #fbbf24;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-bar-container {
+            background: #1e293b;
+            border-radius: 1rem;
+            height: 1rem;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            width: 6%;
+            height: 100%;
+            border-radius: 1rem;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .class-card {
+            background: rgba(22, 26, 38, 0.95);
+            backdrop-filter: blur(4px);
+            border-radius: 1.8rem;
+            padding: 1.8rem;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .class-card h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+        }
+
+        .class-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .meta-item {
+            background: #1e293b;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .meta-item i {
+            color: #60a5fa;
+            font-size: 0.7rem;
+        }
+
+        .card-description {
+            color: #cbd5e6;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .topics-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .topics-list li {
+            color: #a0afc9;
+            font-size: 0.85rem;
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .topics-list li i {
+            color: #3b82f6;
+            font-size: 0.7rem;
+            width: 1.2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #1e2a3a, #1a2338);
+            padding: 0.7rem 1.5rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border: 1px solid #334155;
+            margin-top: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #2d3a4e, #25334d);
+            border-color: #3b82f6;
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-color: #3b82f6;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e293b;
+            margin-top: 1rem;
+        }
+
+        footer i {
+            color: #60a5fa;
+        }
+
+        /* Instructions box */
+        .instructions {
+            background: #0f172a;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .instructions h3 {
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .instructions p {
+            color: #cbd5e6;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1><i class="fas fa-code"></i> Web Development Fundamentals</h1>
+            <p>Month 1 · Week 1 · Interactive Class Slides</p>
+            <div class="badge-container">
+                <span class="badge"><i class="fas fa-calendar-alt"></i> 2 Classes Completed</span>
+                <span class="badge"><i class="fas fa-clock"></i> 6 Hours Total</span>
+                <span class="badge"><i class="fas fa-chalkboard-user"></i> Interactive Q&A</span>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-title">
+                <i class="fas fa-chart-line"></i> Course Progress
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 6%;"></div>
+            </div>
+            <div class="progress-text">2 of 36 classes completed</div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> How to Navigate</h3>
+            <p>Click on any class card below to open the interactive slide deck. Each presentation includes <strong>Prev/Next buttons</strong>, <strong>keyboard arrow navigation</strong>, and <strong>toggleable Q&A questions</strong>. Use them in your browser — no internet connection needed after loading.</p>
+        </div>
+
+        <!-- Class Cards Grid -->
+        <div class="cards-grid">
+            <!-- Class 1 Card -->
+            <div class="class-card" onclick="openClass1()">
+                <div class="card-icon">
+                    <i class="fas fa-globe" style="color: #60a5fa;"></i>
+                </div>
+                <h2>Class 1: How the Web Works</h2>
+                <div class="class-meta">
+                    <span class="meta-item"><i class="fas fa-hourglass-half"></i> 3 Hours</span>
+                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 1 · Day 1</span>
+                    <span class="meta-item"><i class="fas fa-chart-line"></i> Foundation</span>
+                </div>
+                <p class="card-description">
+                    From URL to rendered page — demystify the entire web. Students learn about websites vs web apps, frontend vs backend, DNS, HTTP, hosting, browsers, and Chrome DevTools.
+                </p>
+                <ul class="topics-list">
+                    <li><i class="fas fa-check-circle"></i> Static vs Dynamic Websites</li>
+                    <li><i class="fas fa-check-circle"></i> Web Apps: Gmail, Twitter, Netflix</li>
+                    <li><i class="fas fa-check-circle"></i> Frontend vs Backend split</li>
+                    <li><i class="fas fa-check-circle"></i> IP addresses, DNS, HTTP/HTTPS</li>
+                    <li><i class="fas fa-check-circle"></i> Full page load journey</li>
+                    <li><i class="fas fa-check-circle"></i> Domain names & hosting types</li>
+                    <li><i class="fas fa-check-circle"></i> Browsers, rendering engines, DevTools</li>
+                </ul>
+                <div class="btn btn-primary">
+                    <i class="fas fa-play"></i> Launch Class 1
+                </div>
+            </div>
+
+            <!-- Class 2 Card -->
+            <div class="class-card" onclick="openClass2()">
+                <div class="card-icon">
+                    <i class="fab fa-visual-studio" style="color: #007ACC;"></i>
+                </div>
+                <h2>Class 2: Development Environment Setup</h2>
+                <div class="class-meta">
+                    <span class="meta-item"><i class="fas fa-hourglass-half"></i> 3 Hours</span>
+                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 1 · Day 2</span>
+                    <span class="meta-item"><i class="fas fa-tools"></i> Hands-on</span>
+                </div>
+                <p class="card-description">
+                    Set up a professional development workstation. Install VS Code, essential extensions, learn folder structure, Emmet shortcuts, Live Server, and integrated terminal.
+                </p>
+                <ul class="topics-list">
+                    <li><i class="fas fa-check-circle"></i> What is a Development Environment</li>
+                    <li><i class="fas fa-check-circle"></i> VS Code Features & Shortcuts</li>
+                    <li><i class="fas fa-check-circle"></i> 8 Essential Extensions</li>
+                    <li><i class="fas fa-check-circle"></i> Professional Folder Structure</li>
+                    <li><i class="fas fa-check-circle"></i> Emmet Abbreviations (Superpower!)</li>
+                    <li><i class="fas fa-check-circle"></i> Live Server & Hot Reload</li>
+                    <li><i class="fas fa-check-circle"></i> Integrated Terminal</li>
+                </ul>
+                <div class="btn btn-primary">
+                    <i class="fas fa-play"></i> Launch Class 2
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Classes Preview -->
+        <div style="margin-top: 1rem; padding: 1rem; background: #0f172a; border-radius: 1.2rem; border: 1px solid #1e293b;">
+            <h3 style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;"><i class="fas fa-calendar-alt"></i> Coming Up in Month 1</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <div style="background: #1a1f2e; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.8rem; color: #cbd5e6;"><i class="fab fa-html5"></i> Class 3: HTML Foundations</div>
+                <div style="background: #1a1f2e; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.8rem; color: #cbd5e6;"><i class="fab fa-css3-alt"></i> Class 4: CSS Styling</div>
+                <div style="background: #1a1f2e; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.8rem; color: #cbd5e6;"><i class="fas fa-mobile-alt"></i> Class 5: Responsive Design</div>
+                <div style="background: #1a1f2e; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.8rem; color: #cbd5e6;"><i class="fab fa-js"></i> Class 6: JavaScript Basics</div>
+            </div>
+        </div>
+
+        <footer>
+            <i class="fas fa-arrow-left"></i> <i class="fas fa-arrow-right"></i> Navigate slides with arrow keys · 
+            <i class="fas fa-question-circle"></i> Click questions to reveal answers ·
+            <i class="fas fa-mouse-pointer"></i> Built for interactive learning
+        </footer>
+    </div>
+
+    <script>
+        // File names for the two class files
+        const CLASS_1_FILE = "class-1-how-web-works.htm";
+        const CLASS_2_FILE = "class-2-how-web-works.htm";
+
+        function openClass1() {
+            window.location.href = CLASS_1_FILE;
+        }
+
+        function openClass2() {
+            window.location.href = CLASS_2_FILE;
+        }
+
+        // Also allow clicking on the button area - prevent double triggers
+        document.querySelectorAll('.class-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't trigger if clicking on the button specifically (bubbling fine)
+                // The onclick is already on the card
+            });
+        });
+
+        // Check if files exist and show warning if not (helpful for local development)
+        async function checkFileExists(filename) {
+            try {
+                const response = await fetch(filename, { method: 'HEAD' });
+                return response.ok;
+            } catch {
+                return false;
+            }
+        }
+
+        // Optional: display a helpful message if files are missing
+        async function checkAllFiles() {
+            const class1Exists = await checkFileExists(CLASS_1_FILE);
+            const class2Exists = await checkFileExists(CLASS_2_FILE);
+            
+            if (!class1Exists) {
+                console.warn(`⚠️ ${CLASS_1_FILE} not found in the same directory. Make sure the file exists.`);
+                const instructions = document.querySelector('.instructions');
+                if (instructions && !document.getElementById('file-warning')) {
+                    const warning = document.createElement('div');
+                    warning.id = 'file-warning';
+                    warning.style.background = '#7f1d1d';
+                    warning.style.marginTop = '0.5rem';
+                    warning.style.padding = '0.5rem 1rem';
+                    warning.style.borderRadius = '0.8rem';
+                    warning.style.fontSize = '0.8rem';
+                    warning.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Note: ${CLASS_1_FILE} not detected. Place the class files in the same folder as this navigation page.`;
+                    instructions.appendChild(warning);
+                }
+            }
+            if (!class2Exists) {
+                console.warn(`⚠️ ${CLASS_2_FILE} not found in the same directory. Make sure the file exists.`);
+                const instructions = document.querySelector('.instructions');
+                if (instructions && !document.getElementById('file-warning-2')) {
+                    const warning = document.createElement('div');
+                    warning.id = 'file-warning-2';
+                    warning.style.background = '#7f1d1d';
+                    warning.style.marginTop = '0.5rem';
+                    warning.style.padding = '0.5rem 1rem';
+                    warning.style.borderRadius = '0.8rem';
+                    warning.style.fontSize = '0.8rem';
+                    warning.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Note: ${CLASS_2_FILE} not detected. Place the class files in the same folder as this navigation page.`;
+                    instructions.appendChild(warning);
+                }
+            }
+        }
+
+        // Run check silently (doesn't block navigation)
+        checkAllFiles();
+    </script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>JS Mastery · 4‑Week Bootcamp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fcf9f5;
+      background-image: radial-gradient(circle at 10% 20%, rgba(230, 220, 210, 0.2) 0%, rgba(255, 248, 240, 0) 80%);
+      color: #1e1b13;
+      line-height: 1.5;
+    }
+    .progress-container {
+      position: fixed;
+      top: 0; left:0;
+      width:100%; height:4px;
+      background:#e5ddd2;
+      z-index:1100;
+    }
+    .progress-bar {
+      height:4px;
+      background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777);
+      width:0%;
+      transition: width 0.2s;
+    }
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 2rem;
+      background: rgba(255, 251, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #ece3d7;
+      position: sticky;
+      top:0;
+      z-index:100;
+      flex-wrap:wrap;
+    }
+    .logo {
+      font-size:1.5rem;
+      font-weight:800;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      background-clip:text;
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+    .logo i { color:#2563eb; margin-right:6px; }
+    .nav-buttons { display:flex; gap:0.8rem; align-items:center; }
+    .outline-btn {
+      background:transparent;
+      border:1px solid #b9b0a4;
+      padding:0.4rem 1.2rem;
+      border-radius:40px;
+      font-weight:500;
+      font-size:0.8rem;
+      color:#3d342b;
+      cursor:pointer;
+      transition:0.2s;
+    }
+    .outline-btn:hover { background:#f0e9e0; border-color:#7c6b5a; }
+    .primary-btn {
+      background:#2563eb;
+      border:none;
+      padding:0.5rem 1.4rem;
+      border-radius:40px;
+      font-weight:600;
+      font-size:0.85rem;
+      color:white;
+      cursor:pointer;
+      transition:0.2s;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.25);
+    }
+    .primary-btn:hover { background:#1d4ed8; transform:scale(1.02); }
+    .hero {
+      padding:2rem 2rem 0.8rem;
+      text-align:center;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .hero h1 {
+      font-size:2.8rem;
+      font-weight:900;
+      background: linear-gradient(135deg, #1e293b, #2563eb, #7c3aed);
+      background-clip:text;
+      -webkit-background-clip:text;
+      color:transparent;
+      margin-bottom:0.5rem;
+    }
+    .hero-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#e6edfb;
+      border-radius:100px;
+      padding:0.2rem 1.2rem;
+      font-size:0.8rem;
+      font-weight:500;
+      color:#1e4b8a;
+      margin-bottom:0.8rem;
+    }
+    .desc { max-width:650px; margin:0.5rem auto; color:#4d3f30; font-size:1.05rem; }
+    .highlight-strip {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:1rem;
+      margin:1.5rem 0;
+    }
+    .pill-card {
+      background:white;
+      border-radius:40px;
+      padding:0.4rem 1.4rem;
+      box-shadow:0 2px 8px rgba(0,0,0,0.02);
+      border:1px solid #e5ddd2;
+      font-weight:500;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:0.9rem;
+    }
+    .stats-modern {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+      gap:1.2rem;
+      margin:1.5rem 0;
+    }
+    .stat-item {
+      background:white;
+      border-radius:1.5rem;
+      padding:1rem;
+      text-align:center;
+      box-shadow:0 4px 12px rgba(0,0,0,0.02);
+      border:1px solid #ece3d7;
+    }
+    .stat-item i { font-size:1.8rem; color:#2563eb; display:block; margin-bottom:0.2rem; }
+    .stat-number { font-size:2rem; font-weight:800; color:#2563eb; }
+    .container { max-width:1400px; margin:0 auto; padding:0 1.8rem 1.5rem; }
+    .week-section {
+      margin-bottom:1rem;
+      background:white;
+      border-radius:1.5rem;
+      border:1px solid #ece3d7;
+      overflow:hidden;
+      transition:0.2s;
+    }
+    .week-header {
+      background:#f8f4ef;
+      padding:0.9rem 1.8rem;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      transition:0.2s;
+    }
+    .week-header:hover { background:#f2ece4; }
+    .week-header h3 {
+      font-size:1.1rem;
+      display:flex;
+      align-items:center;
+      gap:0.6rem;
+      flex-wrap:wrap;
+    }
+    .week-badge {
+      background:#e6edfb;
+      border-radius:30px;
+      padding:0.15rem 0.8rem;
+      font-size:0.7rem;
+      font-weight:500;
+      color:#1e4b8a;
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+    }
+    .week-content {
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .week-content.active { max-height:4000px; }
+    .days-grid {
+      padding:1.2rem;
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(300px,1fr));
+      gap:1rem;
+    }
+    .day-card {
+      background:#fefcf9;
+      border-radius:1rem;
+      padding:0.9rem 1rem;
+      border-left:4px solid #7c9bf0;
+      transition:0.15s;
+    }
+    .day-card:hover { transform:translateX(4px); box-shadow:0 4px 12px rgba(0,0,0,0.04); }
+    .day-title {
+      font-weight:700;
+      color:#1e3a8a;
+      margin-bottom:6px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .topics-text {
+      font-size:0.82rem;
+      color:#3d342b;
+      margin:0.3rem 0;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .lab-text {
+      font-size:0.75rem;
+      background:#eef3fc;
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:0.15rem 0.7rem;
+      border-radius:30px;
+      margin:0.3rem 0 0.2rem;
+      color:#1e4b8a;
+    }
+    .btn-class {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#2563eb;
+      padding:0.3rem 1.1rem;
+      border-radius:30px;
+      font-size:0.75rem;
+      margin-top:0.6rem;
+      text-decoration:none;
+      font-weight:600;
+      transition:0.2s;
+      color:white;
+      border:none;
+      cursor:pointer;
+    }
+    .btn-class:hover { background:#1d4ed8; transform:translateY(-2px); }
+    .completion-note {
+      background:#f4f7fd;
+      border-radius:1.5rem;
+      padding:1.2rem 1.8rem;
+      margin-top:1.8rem;
+      border:1px solid #dce3ef;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    footer {
+      text-align:center;
+      padding:1.5rem;
+      border-top:1px solid #ece3d7;
+      margin-top:1.5rem;
+      color:#7a6b5a;
+      font-size:0.8rem;
+    }
+    @media (max-width:680px) {
+      .hero h1 { font-size:2rem; }
+      .container { padding:0 0.8rem 0.8rem; }
+      .days-grid { grid-template-columns:1fr; }
+    }
+    .toolkit-modal {
+      display:none;
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.6);
+      backdrop-filter:blur(4px);
+      z-index:2000;
+      align-items:center;
+      justify-content:center;
+    }
+    .modal-card {
+      background:#fffaf5;
+      max-width:500px;
+      width:92%;
+      border-radius:2rem;
+      padding:2rem;
+      position:relative;
+      border:1px solid #d4c9bc;
+    }
+    .modal-card .close-modal {
+      position:absolute;
+      right:1rem; top:1rem;
+      background:#ede6dd;
+      border:none;
+      border-radius:50%;
+      width:32px; height:32px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    .modal-card ul { list-style:none; margin-top:0.8rem; }
+    .modal-card li { margin-bottom:8px; }
+  </style>
+</head>
+<body>
+<div class="progress-container"><div class="progress-bar" id="progressFill"></div></div>
+
+<div class="nav-bar">
+  <div class="logo"><i class="fas fa-code"></i> CodeForge · JS</div>
+  <div class="nav-buttons">
+    <button class="outline-btn" id="scrollToCourses"><i class="fas fa-calendar-week"></i> Curriculum</button>
+    <button class="primary-btn" id="openToolkitBtn"><i class="fas fa-toolbox"></i> Resources</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-badge"><i class="fas fa-js"></i> 4‑week intensive · JavaScript mastery</div>
+  <h1>JavaScript · from zero <br>to real‑world</h1>
+  <p class="desc">Learn the language of the web. 3 classes per week, 2h each. Build projects, master the DOM, and become job‑ready.</p>
+  <div class="highlight-strip">
+    <span class="pill-card"><i class="fas fa-check-circle"></i> 12 sessions</span>
+    <span class="pill-card"><i class="fas fa-laptop-code"></i> 3 mini‑projects</span>
+    <span class="pill-card"><i class="fas fa-certificate"></i> certificate</span>
+  </div>
+</section>
+
+<div class="container">
+  <div class="stats-modern">
+    <div class="stat-item"><i class="fas fa-clock"></i><div class="stat-number">24+</div><div>class hours</div></div>
+    <div class="stat-item"><i class="fas fa-calendar-day"></i><div class="stat-number">12</div><div>sessions</div></div>
+    <div class="stat-item"><i class="fas fa-layer-group"></i><div class="stat-number">4</div><div>weeks</div></div>
+    <div class="stat-item"><i class="fas fa-file-code"></i><div class="stat-number">6</div><div>projects</div></div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:8px; margin: 1.5rem 0 0.5rem;">
+    <i class="fas fa-calendar-alt" style="font-size:1.6rem; color:#2563eb;"></i>
+    <h2 style="font-weight:800;">4‑week schedule · 3 days / week</h2>
+  </div>
+  <div id="weeksContainer"></div>
+
+  <div class="completion-note">
+    <i class="fas fa-graduation-cap" style="font-size:1.4rem; color:#2563eb;"></i>
+    <span><strong>Graduation:</strong> complete 80% of assignments + final project. Earn a verified certificate.</span>
+  </div>
+</div>
+
+<footer>
+  <i class="fas fa-code"></i> JavaScript Bootcamp — 2026<br>
+  <i class="fas fa-book-open"></i> all code examples · interactive
+</footer>
+
+<!-- Modal -->
+<div id="toolkitModal" class="toolkit-modal">
+  <div class="modal-card">
+    <button class="close-modal" id="closeToolkit"><i class="fas fa-times"></i></button>
+    <h2 style="color:#1e3a8a;"><i class="fas fa-toolbox"></i> JS Developer Kit</h2>
+    <p><i class="fas fa-check-circle" style="color:#2563eb;"></i> Everything you need for this course</p>
+    <ul>
+      <li><i class="fab fa-chrome"></i> Chrome DevTools (built‑in)</li>
+      <li><i class="fas fa-code"></i> VS Code (free)</li>
+      <li><i class="fas fa-file-alt"></i> MDN Web Docs</li>
+      <li><i class="fas fa-terminal"></i> Node.js (optional)</li>
+      <li><i class="fas fa-puzzle-piece"></i> ESLint / Prettier</li>
+    </ul>
+    <button id="closeToolkitBtn" class="primary-btn" style="margin-top:1.2rem; width:100%;"><i class="fas fa-check"></i> Got it</button>
+  </div>
+</div>
+
+<script>
+  // -------------------------------------------------------------
+  // 4 weeks · 3 days per week · structure matches your folder pattern
+  // folder: week1/day1.html , week2/day1.html , etc.
+  // -------------------------------------------------------------
+  const weeksData = [
+    {
+      name: "Week 1: Foundations & DOM",
+      weekFolder: "week1",
+      days: [
+        { day: "Day 1 · JS basics", topics: "Variables, data types, operators, console.log", lab: "Write your first script", filename: "day1.html" },
+        { day: "Day 2 · Functions & events", topics: "Functions, parameters, onclick, DOM selection", lab: "Button click counter", filename: "day2.html" },
+        { day: "Day 3 · Conditions & loops", topics: "if/else, for/while, array basics", lab: "FizzBuzz + array filter", filename: "day3.html" }
+      ]
+    },
+    {
+      name: "Week 2: DOM Manipulation & Events",
+      weekFolder: "week2",
+      days: [
+        { day: "Day 1 · DOM methods", topics: "getElementById, querySelector, innerHTML", lab: "Dynamic list builder", filename: "day1.html" },
+        { day: "Day 2 · Event listeners", topics: "addEventListener, form events, input", lab: "Live character counter", filename: "day2.html" },
+        { day: "Day 3 · Styles & classes", topics: "className, classList, style property", lab: "Dark mode toggle", filename: "day3.html" }
+      ]
+    },
+    {
+      name: "Week 3: Objects, Arrays & Advanced",
+      weekFolder: "week3",
+      days: [
+        { day: "Day 1 · Objects & JSON", topics: "Objects, keys/values, JSON.parse", lab: "Movie catalog object", filename: "day1.html" },
+        { day: "Day 2 · Array methods", topics: "map, filter, reduce, forEach", lab: "Transform data pipeline", filename: "day2.html" },
+        { day: "Day 3 · Timing & async", topics: "setTimeout, setInterval, fetch intro", lab: "Countdown timer", filename: "day3.html" }
+      ]
+    },
+    {
+      name: "Week 4: Projects & Real‑world",
+      weekFolder: "week4",
+      days: [
+        { day: "Day 1 · Todo app", topics: "CRUD operations, local storage", lab: "Build a todo list", filename: "day1.html" },
+        { day: "Day 2 · API calls", topics: "fetch, then/catch, display data", lab: "Weather app", filename: "day2.html" },
+        { day: "Day 3 · Final project", topics: "Portfolio piece: quiz app or game", lab: "Present & polish", filename: "day3.html" }
+      ]
+    }
+  ];
+
+  function getFilePath(weekFolder, filename) {
+    return `${weekFolder}/${filename}`;
+  }
+
+  function renderWeeks() {
+    const container = document.getElementById('weeksContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    weeksData.forEach((week, idx) => {
+      const weekDiv = document.createElement('div');
+      weekDiv.className = 'week-section';
+
+      const totalDays = week.days.length;
+      weekDiv.innerHTML = `
+        <div class="week-header" data-weekidx="${idx}">
+          <h3><i class="fas fa-folder-open"></i> ${week.name} <span class="week-badge"><i class="far fa-clock"></i> 0/${totalDays} completed</span></h3>
+          <i class="fas fa-chevron-down chev-icon" style="transition:transform 0.2s;"></i>
+        </div>
+        <div class="week-content" id="weekContent-${idx}">
+          <div class="days-grid">
+            ${week.days.map((day, dayIdx) => {
+              const filePath = getFilePath(week.weekFolder, day.filename);
+              return `
+                <div class="day-card" data-week="${idx}" data-day="${dayIdx}" data-path="${filePath}">
+                  <div class="day-title">
+                    <span><i class="fas fa-laptop-code"></i> ${day.day}</span>
+                    <i class="fas fa-circle status-icon" style="font-size:0.65rem; color:#cbd5e1;"></i>
+                  </div>
+                  <div class="topics-text"><i class="fas fa-lightbulb"></i> ${day.topics}</div>
+                  <div class="lab-text"><i class="fas fa-flask"></i> ${day.lab}</div>
+                  <a href="${filePath}" class="btn-class" data-week="${idx}" data-day="${dayIdx}">
+                    <i class="fas fa-play-circle"></i> Open class
+                  </a>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+      container.appendChild(weekDiv);
+    });
+
+    // load completion status from localStorage
+    loadCompletionStatus();
+
+    // week header toggle
+    document.querySelectorAll('.week-header').forEach(header => {
+      header.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = header.getAttribute('data-weekidx');
+        const content = document.getElementById(`weekContent-${idx}`);
+        const chev = header.querySelector('.chev-icon');
+        if (content) {
+          const active = content.classList.contains('active');
+          content.classList.toggle('active');
+          chev.style.transform = active ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      });
+    });
+
+    // open first week by default
+    const firstContent = document.getElementById('weekContent-0');
+    if (firstContent) {
+      firstContent.classList.add('active');
+      const firstChev = document.querySelector('.week-header[data-weekidx="0"] .chev-icon');
+      if (firstChev) firstChev.style.transform = 'rotate(180deg)';
+    }
+  }
+
+  // --- completion tracking ---
+  function markClassCompleted(weekIdx, dayIdx) {
+    let completed = JSON.parse(localStorage.getItem('jsCourseCompleted') || '{}');
+    if (!completed[weekIdx]) completed[weekIdx] = {};
+    completed[weekIdx][dayIdx] = true;
+    localStorage.setItem('jsCourseCompleted', JSON.stringify(completed));
+    updateCompletionDisplay(weekIdx, dayIdx);
+    updateWeekBadges();
+  }
+
+  function updateCompletionDisplay(weekIdx, dayIdx) {
+    const card = document.querySelector(`.day-card[data-week="${weekIdx}"][data-day="${dayIdx}"]`);
+    if (card) {
+      const icon = card.querySelector('.status-icon');
+      if (icon) {
+        icon.style.color = '#16a34a';
+        icon.className = 'fas fa-check-circle status-icon';
+      }
+    }
+  }
+
+  function updateWeekBadges() {
+    const completed = JSON.parse(localStorage.getItem('jsCourseCompleted') || '{}');
+    weeksData.forEach((week, weekIdx) => {
+      let cnt = 0;
+      week.days.forEach((_, dayIdx) => {
+        if (completed[weekIdx] && completed[weekIdx][dayIdx]) cnt++;
+      });
+      const section = document.querySelectorAll('.week-section')[weekIdx];
+      if (section) {
+        const badge = section.querySelector('.week-badge');
+        if (badge) {
+          const total = week.days.length;
+          badge.innerHTML = `<i class="fas ${cnt === total ? 'fa-check-circle' : 'fa-clock'}"></i> ${cnt}/${total} completed`;
+          badge.style.background = cnt === total ? '#dcfce7' : '#e6edfb';
+          badge.style.color = cnt === total ? '#166534' : '#1e4b8a';
+        }
+      }
+    });
+  }
+
+  function loadCompletionStatus() {
+    const completed = JSON.parse(localStorage.getItem('jsCourseCompleted') || '{}');
+    for (let w in completed) {
+      for (let d in completed[w]) {
+        if (completed[w][d]) updateCompletionDisplay(parseInt(w), parseInt(d));
+      }
+    }
+    updateWeekBadges();
+  }
+
+  // attach click handlers to track completion
+  function attachCompletionTracking() {
+    document.querySelectorAll('.btn-class').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const weekIdx = this.getAttribute('data-week');
+        const dayIdx = this.getAttribute('data-day');
+        if (weekIdx && dayIdx) {
+          markClassCompleted(parseInt(weekIdx), parseInt(dayIdx));
+        }
+        // link works as usual
+      });
+    });
+  }
+
+  // scroll progress
+  function updateProgress() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+    const prog = document.getElementById('progressFill');
+    if (prog) prog.style.width = scrolled + '%';
+  }
+  window.addEventListener('scroll', updateProgress);
+  window.addEventListener('resize', updateProgress);
+
+  // modal
+  const modal = document.getElementById('toolkitModal');
+  const openBtn = document.getElementById('opnToolkitBtn');
+  const closeBtn = document.getElementById('closeToolkit');
+  const closeBtn2 = document.getElementById('closeToolkitBtn');
+
+  function openModal() { modal.style.display = 'flex'; }
+  function closeModal() { modal.style.display = 'none'; }
+  if (openBtn) openBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (closeBtn2) closeBtn2.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+  document.getElementById('scrollToCourses')?.addEventListener('click', () => {
+    document.getElementById('weeksContainer').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // init
+  renderWeeks();
+  setTimeout(attachCompletionTracking, 120);
+  updateProgress();
+</script>
+</body>
+</html>

@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Class 2 - Development Environment Setup | VS Code + Extensions</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0a0c15 0%, #111827 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .curriculum-header {
+            max-width: 1300px;
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 1.5rem;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+        }
+        .badge {
+            background: #3b82f6;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .duration {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* Class Navigation Buttons */
+        .class-nav-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-left: auto;
+        }
+        .class-nav-btn {
+            background: #1e293b;
+            border: 1px solid #3b82f6;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+        }
+        .class-nav-btn:hover {
+            background: #3b82f6;
+            transform: scale(0.98);
+        }
+        .class-nav-btn i {
+            font-size: 0.8rem;
+        }
+
+        .presentation-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.03);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .slide-area {
+            min-height: 600px;
+            background: #0f1119;
+            padding: 2rem;
+        }
+
+        .slide-card {
+            background: rgba(22, 26, 38, 0.98);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(72, 187, 255, 0.3);
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E0F2FE, #7AA9FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+        }
+
+        .slide-title i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #60a5fa;
+            font-size: 1.8rem;
+        }
+
+        .slide-sub {
+            color: #a0afc9;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .concept-box {
+            flex: 1;
+            min-width: 240px;
+            background: #1a1f2e;
+            border-radius: 1.5rem;
+            padding: 1.3rem;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        .concept-box:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .concept-box h3 {
+            color: #7aa9ff;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .concept-box h3 i {
+            color: #60a5fa;
+        }
+
+        .concept-box p, .concept-list, .concept-box li {
+            color: #e2e8f0;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        .tag {
+            background: #1e293b;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: #b9d0ff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .insight-card {
+            margin-top: 1.2rem;
+            background: #0f172a;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            color: #e2e8f0;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .two-column-split {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .col {
+            flex: 1;
+            background: #131a2a;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #2d3a5e;
+        }
+        .col h4 {
+            color: #fbbf24;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        .col h4 i {
+            margin-right: 0.5rem;
+        }
+        .col p, .col li {
+            color: #e2e8f0;
+        }
+
+        .extensions-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.8rem 0;
+        }
+        .ext-card {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            border-left: 3px solid #3b82f6;
+            flex: 1;
+            min-width: 200px;
+            color: #e2e8f0;
+        }
+        .ext-card strong {
+            color: #fbbf24;
+        }
+        .ext-card i {
+            margin-right: 0.5rem;
+            color: #60a5fa;
+        }
+
+        pre {
+            background: #0a0e18;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            margin: 0.8rem 0;
+            border: 1px solid #334155;
+            font-family: 'Fira Code', monospace;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            color: #cbd5e6;
+        }
+
+        .folder-structure {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #a5b4fc;
+            border: 1px solid #2d3a5e;
+            line-height: 1.6;
+        }
+        .folder-structure i {
+            color: #60a5fa;
+            width: 1.5rem;
+        }
+
+        .shortcut-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        .shortcut {
+            background: #1a2338;
+            border-radius: 0.8rem;
+            padding: 0.5rem 1rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #fbbf24;
+            border: 1px solid #3b5a8c;
+        }
+
+        .qa-section {
+            margin-top: 1.5rem;
+            background: #0f172a;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid #334155;
+        }
+        .qa-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .qa-item {
+            background: #131b2e;
+            border-radius: 1rem;
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+            border: 1px solid #2d3a5e;
+        }
+        .qa-question {
+            padding: 1rem 1.2rem;
+            background: #1a2338;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #e2e8f0;
+            transition: background 0.2s;
+        }
+        .qa-question:hover {
+            background: #25334d;
+        }
+        .qa-question i {
+            color: #60a5fa;
+            transition: transform 0.3s;
+        }
+        .qa-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #0f172a;
+            color: #cbd5e6;
+            line-height: 1.5;
+        }
+        .qa-answer.show {
+            padding: 1rem 1.2rem;
+            max-height: 300px;
+        }
+        .qa-answer p {
+            margin: 0;
+            color: #cbd5e6;
+        }
+
+        .nav-bar {
+            background: #0b0e16;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #2a2f3f;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            background: #1e2a3a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            border: 1px solid #334155;
+        }
+
+        button i {
+            font-size: 0.9rem;
+        }
+
+        button:hover:not(:disabled) {
+            background: #2d3a4e;
+            transform: scale(0.97);
+            border-color: #3b82f6;
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            background: #1a1f2c;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            color: #a5b4fc;
+        }
+
+        .indicator-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #334155;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .dot.active {
+            background: #3b82f6;
+            width: 22px;
+        }
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.7rem;
+            background: #07090f;
+            color: #8ca3c7;
+        }
+        footer i {
+            color: #60a5fa;
+        }
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 700px) {
+            .slide-area { padding: 1rem; }
+            .slide-title { font-size: 1.4rem; }
+            .concept-box { min-width: 100%; }
+            .two-column-split { flex-direction: column; }
+            .class-nav-buttons { margin-left: 0; margin-top: 0.5rem; }
+            .curriculum-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="curriculum-header">
+    <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 1 · WEEK 1 · CLASS 2</span></div>
+    <div class="class-title"><i class="fas fa-laptop-code"></i> Development Environment Setup</div>
+    <div class="duration"><i class="far fa-clock"></i> 3 Hours · Build Your Dev Workstation</div>
+    <div class="class-nav-buttons">
+        <a href="class-1-how-web-works.htm" class="class-nav-btn"><i class="fas fa-arrow-left"></i> Class 1</a>
+        <a href="class-3-html-tags-img.htm" class="class-nav-btn"><i class="fas fa-arrow-right"></i> Class 3 →</a>
+    </div>
+</div>
+
+<div class="presentation-container">
+    <div class="slide-area" id="slideArea"></div>
+    <div class="nav-bar">
+        <div class="indicator-dots" id="dotsContainer"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+            <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 12</span>
+            <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <footer>
+        <i class="fas fa-keyboard"></i> Shortcuts: Ctrl+Shift+P | Ctrl+Backtick | Alt+Click | Emmet: ! + Tab
+        <span style="margin-left: 1rem;">| <a href="class-1-how-web-works.htm"><i class="fas fa-arrow-left"></i> Class 1</a> | <a href="class-3-html-tags-img.htm">Class 3 <i class="fas fa-arrow-right"></i></a></span>
+    </footer>
+</div>
+
+<script>
+    const slides = [
+        {
+            title: "<i class='fas fa-toolbox'></i> What is a Development Environment?",
+            subtitle: "Your developer workstation — like a carpenter's toolbox",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-code"></i> Development Environment</h3><p>Everything you need to write, run, and test code: <span class="highlight">VS Code, extensions, folder structure, terminal, browser preview</span>.</p><p>Without a proper setup, coding becomes slow, messy, and confusing.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-wrench"></i> Why It Matters</h3><p>A proper environment catches typos in seconds vs hours debugging. Professional developers invest in their setup because it saves <span class="highlight">real time every single day</span>.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <span class="tag">key insight</span> <span>Your environment is NOT a luxury — it's the difference between 10-second fixes and 2-hour debugging sessions.</span></div>
+            `
+        },
+        {
+            title: "<i class='fab fa-visual-studio'></i> Visual Studio Code Features",
+            subtitle: "The most popular code editor in the world",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-magic"></i> Essential Features</h4>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><span class="highlight">Command Palette (Ctrl+Shift+P)</span> — search every command</li>
+                            <li><span class="highlight">Multi-Cursor (Alt+Click)</span> — type in multiple places</li>
+                            <li><span class="highlight">Integrated Terminal (Ctrl+Backtick)</span> — never leave VS Code</li>
+                            <li><span class="highlight">Emmet Abbreviations</span> — write shortcuts, expand with Tab</li>
+                            <li><span class="highlight">Git Integration</span> — source control built-in</li>
+                            <li><span class="highlight">Snippets</span> — custom shortcuts for repeated code</li>
+                            <li><span class="highlight">Find & Replace (Ctrl+H)</span> — across files or projects</li>
+                            <li><span class="highlight">Peek Definition (Alt+F12)</span> — view code inline</li>
+                        </ul>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-bolt"></i> VS Code Settings</h4>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><span class="highlight">Auto Save</span> — never lose work</li>
+                            <li><span class="highlight">Format on Save</span> — Prettier runs automatically</li>
+                            <li><span class="highlight">Tab Size</span> — standard: 2 spaces</li>
+                            <li><span class="highlight">Theme</span> — dark mode preferred by pros</li>
+                        </ul>
+                        <div class="shortcut-grid" style="margin-top:0.8rem;">
+                            <span class="shortcut">Ctrl+Shift+P</span>
+                            <span class="shortcut">Ctrl+Backtick</span>
+                            <span class="shortcut">Alt+Click</span>
+                            <span class="shortcut">Alt+F12</span>
+                            <span class="shortcut">Ctrl+H</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-star"></i> <strong>Command Palette first:</strong> Learn Ctrl+Shift+P — it unlocks everything in VS Code.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-puzzle-piece'></i> Essential Extensions",
+            subtitle: "8 extensions that transform VS Code into a professional IDE",
+            content: `
+                <div class="extensions-grid">
+                    <div class="ext-card"><i class="fas fa-sync-alt"></i> <strong>Live Server</strong><br>Auto-refreshes browser on save — hot reload at localhost:5500</div>
+                    <div class="ext-card"><i class="fas fa-magic"></i> <strong>Prettier</strong><br>Auto-formats code — eliminates style debates</div>
+                    <div class="ext-card"><i class="fas fa-exclamation-triangle"></i> <strong>ESLint</strong><br>Catches JavaScript errors before you run code</div>
+                    <div class="ext-card"><i class="fas fa-tag"></i> <strong>Auto Rename Tag</strong><br>Updates matching HTML closing tag automatically</div>
+                    <div class="ext-card"><i class="fab fa-git-alt"></i> <strong>GitLens</strong><br>Inline Git blame — who wrote each line and when</div>
+                    <div class="ext-card"><i class="fas fa-road"></i> <strong>Path Intellisense</strong><br>Auto-completes file paths — prevents broken links</div>
+                    <div class="ext-card"><i class="fas fa-icons"></i> <strong>Material Icon Theme</strong><br>File-type icons — HTML orange, CSS blue, JS yellow</div>
+                    <div class="ext-card"><i class="fas fa-palette"></i> <strong>Color Highlight</strong><br>Shows color squares next to hex/rgb values</div>
+                </div>
+                <div class="insight-card"><i class="fas fa-download"></i> <strong>Install:</strong> Ctrl+Shift+X → search each extension → Install → Reload</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-folder-tree'></i> Professional Folder Structure",
+            subtitle: "What separates beginners from professionals",
+            content: `
+                <div class="folder-structure">
+                    <i class="fas fa-folder-open"></i> my-project/<br>
+                    <i class="fas fa-file-code"></i> ├── index.html          <span style="color:#7aa9ff;">← Main entry point</span><br>
+                    <i class="fas fa-file-code"></i> ├── about.html<br>
+                    <i class="fas fa-file-code"></i> ├── contact.html<br>
+                    <i class="fas fa-folder"></i> ├── css/<br>
+                    <i class="fas fa-file-css"></i> │   ├── style.css<br>
+                    <i class="fas fa-file-css"></i> │   └── responsive.css<br>
+                    <i class="fas fa-folder"></i> ├── js/<br>
+                    <i class="fas fa-file-js"></i> │   └── main.js<br>
+                    <i class="fas fa-folder"></i> ├── images/<br>
+                    <i class="fas fa-image"></i> │   ├── hero.jpg<br>
+                    <i class="fas fa-image"></i> │   └── logo.png<br>
+                    <i class="fas fa-file-alt"></i> └── README.md
+                </div>
+                <div class="content-grid" style="margin-top:1rem;">
+                    <div class="concept-box"><h3><i class="fas fa-sitemap"></i> Why Structure Matters</h3><p><span class="highlight">Organization</span> — everything has a place.<br><span class="highlight">Scalability</span> — grow from 3 to 3,000 files.<br><span class="highlight">Team collaboration</span> — others understand instantly.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-info-circle"></i> Folder Meaning</h3><p>index.html = entry point<br>css/ = all styles<br>js/ = all logic<br>images/ = media assets<br>README.md = project description</p></div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-bolt'></i> Emmet — The Superpower",
+            subtitle: "Write shortcuts → press Tab → full HTML appears",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-shortcut"></i> Most Useful Emmet Shortcuts</h3>
+                        <pre><code>!                    → HTML5 boilerplate
+div.container         → &lt;div class="container"&gt;&lt;/div&gt;
+ul>li*5               → List with 5 items
+.header+.main+.footer → Three divs with classes
+nav>ul>li*4>a        → Full navigation structure
+input:email          → &lt;input type="email"&gt;
+section#hero>h1+p    → Section with id, h1, paragraph
+lorem10              → 10 words of placeholder text</code></pre>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-play-circle"></i> How to Use Emmet</h3>
+                        <p>Type the abbreviation → press <span class="highlight">Tab</span> → expands instantly.</p>
+                        <p>Built into VS Code — no installation needed.</p>
+                        <p class="highlight" style="margin-top:0.5rem;">This saves HOURS of typing HTML boilerplate!</p>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-rocket"></i> <strong>Practice:</strong> Create a new HTML file, type "!" and press Tab — instant DOCTYPE!</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-play'></i> Live Server & Hot Reload",
+            subtitle: "Save → Browser updates instantly",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-server"></i> How Live Server Works</h4>
+                        <p>Creates a local web server at <span class="highlight">http://127.0.0.1:5500</span></p>
+                        <p>Watches all your files for changes</p>
+                        <p>When you save HTML/CSS/JS → <span class="highlight">browser auto-refreshes</span></p>
+                        <p>Without Live Server: you press F5 manually every time → hundreds of seconds wasted per session</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-step-forward"></i> Steps to Use</h4>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li>1. Install Live Server extension</li>
+                            <li>2. Right-click on index.html</li>
+                            <li>3. Select <span class="highlight">"Open with Live Server"</span></li>
+                            <li>4. Edit any file → save → browser updates!</li>
+                        </ul>
+                        <div class="tag" style="margin-top:0.8rem;"><i class="fas fa-fire"></i> Hot Reload = Instant Preview</div>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-save"></i> <strong>Pro tip:</strong> Enable Auto Save (File > Auto Save) so you never forget to save!</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-terminal'></i> Integrated Terminal",
+            subtitle: "Run commands without leaving VS Code",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-keyboard"></i> Open Terminal</h3>
+                        <p>Shortcut: <span class="highlight">Ctrl + Backtick</span> (the key above Tab)</p>
+                        <p>Or: View → Terminal</p>
+                        <p>Multiple terminals: click + icon</p>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-terminal"></i> What You Can Run</h3>
+                        <pre><code>git init          → Initialize Git repo
+npm install       → Install packages
+python -m http.server → Start Python server
+ls / dir          → List files
+node app.js       → Run JavaScript</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-exchange-alt"></i> <span>Never alt-tab to an external terminal again — everything inside VS Code.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-project-diagram'></i> Creating Your First Project",
+            subtitle: "Step-by-step hands-on setup",
+            content: `
+                <div class="folder-structure" style="margin-bottom:1rem;">
+                    <i class="fas fa-folder-open"></i> my-first-site/<br>
+                    <i class="fas fa-file-code"></i> ├── index.html<br>
+                    <i class="fas fa-folder"></i> ├── css/<br>
+                    <i class="fas fa-file-css"></i> │   └── style.css<br>
+                    <i class="fas fa-folder"></i> └── js/<br>
+                    <i class="fas fa-file-js"></i>     └── main.js
+                </div>
+                <div class="concept-box">
+                    <h3><i class="fas fa-list-ol"></i> Setup Steps</h3>
+                    <ul style="margin-left:1.5rem; color:#e2e8f0;">
+                        <li>1. Create folder called <span class="highlight">my-first-site</span></li>
+                        <li>2. Open folder in VS Code (File → Open Folder)</li>
+                        <li>3. Create index.html, css/style.css, js/main.js</li>
+                        <li>4. Write basic HTML in index.html</li>
+                        <li>5. Right-click index.html → Open with Live Server</li>
+                        <li>6. Make changes → save → watch browser auto-refresh!</li>
+                    </ul>
+                </div>
+                <div class="insight-card"><i class="fas fa-check-circle"></i> <strong>Success:</strong> You now have a professional development workflow!</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-tasks'></i> Assignment: Environment Setup",
+            subtitle: "Basic tasks to complete this class",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-check-square"></i> Basic Tasks</h3>
+                        <ul style="margin-left:1.2rem;">
+                            <li>✓ Install VS Code</li>
+                            <li>✓ Install all 8 extensions listed</li>
+                            <li>✓ Create folder structure for 'my-first-site'</li>
+                            <li>✓ Create index.html, style.css, main.js</li>
+                            <li>✓ Run Live Server → confirm auto-refresh works</li>
+                        </ul>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-star"></i> Bonus Tasks</h3>
+                        <ul style="margin-left:1.2rem;">
+                            <li>⭐ Customize VS Code theme (File > Preferences > Color Theme)</li>
+                            <li>⭐ Configure Auto Save and Format on Save</li>
+                            <li>⭐ Practice Emmet shortcuts in a practice file</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-camera"></i> <strong>Submit:</strong> Screenshot of VS Code with your folder structure visible in Explorer panel.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-challenge'></i> Extended Challenge",
+            subtitle: "Professional practice tasks",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-folder-tree"></i> Task 1: Full Project</h4>
+                        <p>Create <span class="highlight">my-portfolio/</span> with complete structure: css/, js/, images/, fonts/, README.md</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-magic"></i> Task 2: Emmet Practice</h4>
+                        <p>Create emmet_practice.html using: !, ul>li*5, nav>ul>li*4>a, .container>.row>.col</p>
+                    </div>
+                </div>
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-bug"></i> Task 3: Extension Test</h4>
+                        <p>Write <code>color: redd;</code> in CSS — confirm ESLint/Prettier flags the error.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-code"></i> Task 4: Prettier Setup</h4>
+                        <p>Create .prettierrc: <code>{ "singleQuote": true, "tabWidth": 2, "semi": false }</code></p>
+                    </div>
+                </div>
+                <div class="concept-box"><h3><i class="fas fa-mouse-pointer"></i> Task 5: Multi-Cursor</h3>
+                    <p>Use <span class="highlight">Alt+Click</span> to add class="list-item" to 5 list items simultaneously. Screenshot result.</p>
+                    <p><span class="highlight">⭐ BONUS:</span> Create custom snippet: 'mypage' expands to HTML boilerplate with your name + stylesheet link.</p>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-list-check'></i> Extension Checklist",
+            subtitle: "Verify everything is installed and working",
+            content: `
+                <div class="extensions-grid">
+                    <div class="ext-card"><i class="fas fa-sync-alt"></i> Live Server ✓</div>
+                    <div class="ext-card"><i class="fas fa-magic"></i> Prettier ✓</div>
+                    <div class="ext-card"><i class="fas fa-exclamation-triangle"></i> ESLint ✓</div>
+                    <div class="ext-card"><i class="fas fa-tag"></i> Auto Rename Tag ✓</div>
+                    <div class="ext-card"><i class="fab fa-git-alt"></i> GitLens ✓</div>
+                    <div class="ext-card"><i class="fas fa-road"></i> Path Intellisense ✓</div>
+                    <div class="ext-card"><i class="fas fa-icons"></i> Material Icon Theme ✓</div>
+                    <div class="ext-card"><i class="fas fa-palette"></i> Color Highlight ✓</div>
+                </div>
+                <div class="insight-card"><i class="fas fa-check-circle" style="color:#22c55e;"></i> <strong>Verification:</strong> Open a file → right-click → "Open with Live Server" should appear. Write messy code → right-click → "Format Document" should use Prettier.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-question-circle'></i> Knowledge Check",
+            subtitle: "10 questions — click to toggle answers",
+            content: `
+                <div class="qa-section">
+                    <div class="qa-title"><i class="fas fa-question-circle"></i> Toggle Questions (click to show/hide answer)</div>
+                    <div id="qa-container"></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Try answering before clicking! These reinforce environment setup concepts.</div>
+            `
+        }
+    ];
+
+    const qaData = [
+        { q: "What is the shortcut to open the Command Palette in VS Code?", a: "Ctrl+Shift+P (or Cmd+Shift+P on Mac). This is the most important shortcut — it gives you access to every VS Code command." },
+        { q: "What does the Live Server extension do?", a: "Creates a local development server at localhost:5500 and auto-refreshes the browser whenever you save any file (HTML, CSS, JS). This is called 'hot reload'." },
+        { q: "Name three essential VS Code extensions and what each does.", a: "Live Server (auto-refresh browser), Prettier (auto-format code), ESLint (catch JS errors), Auto Rename Tag (syncs closing tags), GitLens (Git history)." },
+        { q: "What is the correct professional folder structure for a web project?", a: "index.html at root, css/ folder for stylesheets, js/ folder for JavaScript, images/ folder for media, and README.md for documentation." },
+        { q: "What Emmet shortcut creates a full HTML5 boilerplate?", a: "Type '!' (exclamation mark) and press Tab. This expands to DOCTYPE, html, head, body, and meta tags." },
+        { q: "How do you use multi-cursor editing in VS Code?", a: "Hold Alt (Option on Mac) and click in multiple places to create multiple cursors. Type once and all cursors type simultaneously." },
+        { q: "What is the shortcut to open the integrated terminal in VS Code?", a: "Ctrl + Backtick (the key above Tab). This opens a terminal inside VS Code so you can run Git, npm, or other commands without leaving the editor." },
+        { q: "What is the purpose of the .prettierrc file?", a: "It configures Prettier formatting rules: single vs double quotes, tab width, semicolons, etc. Ensures consistent code style across a team." },
+        { q: "What does 'format on save' do in VS Code settings?", a: "Automatically runs Prettier (or your default formatter) every time you save a file — keeping code clean without manual formatting." },
+        { q: "What is the difference between index.html and other HTML files?", a: "index.html is the default entry point — when a browser visits a folder, it automatically looks for and loads index.html first." }
+    ];
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    const slideArea = document.getElementById('slideArea');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counterText = document.getElementById('counterText');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    function renderQA() {
+        const container = document.getElementById('qa-container');
+        if (!container) return;
+        container.innerHTML = '';
+        qaData.forEach((item, idx) => {
+            const qaDiv = document.createElement('div');
+            qaDiv.className = 'qa-item';
+            qaDiv.innerHTML = `
+                <div class="qa-question" data-idx="${idx}">
+                    <span><strong>${idx+1}.</strong> ${item.q}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="qa-answer" id="answer-${idx}">
+                    <p>${item.a}</p>
+                </div>
+            `;
+            container.appendChild(qaDiv);
+        });
+        document.querySelectorAll('.qa-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const idx = this.getAttribute('data-idx');
+                const answerDiv = document.getElementById(`answer-${idx}`);
+                const icon = this.querySelector('i');
+                answerDiv.classList.toggle('show');
+                icon.style.transform = answerDiv.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+    }
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        const html = `
+            <div class="slide-card">
+                <div class="slide-title">
+                    ${slide.title}
+                </div>
+                <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+                <div class="slide-content">
+                    ${slide.content}
+                </div>
+            </div>
+        `;
+        slideArea.innerHTML = html;
+        if (index === 11) renderQA();
+        counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === totalSlides-1);
+        updateDots(index);
+    }
+
+    function updateDots(activeIndex) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === activeIndex) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+    function handleKeyDown(e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    window.addEventListener('keydown', handleKeyDown);
+    renderSlide(0);
+</script>
+</body>
+</html>

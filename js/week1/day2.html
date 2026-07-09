@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Day 1 · Intro to JavaScript | JS Bootcamp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fcf9f5;
+      color: #1e1b13;
+      line-height:1.6;
+    }
+    .progress-container {
+      position:fixed; top:0; left:0; width:100%; height:4px; background:#e5ddd2; z-index:1100;
+    }
+    .progress-bar {
+      height:4px; background: linear-gradient(90deg, #2563eb, #7c3aed); width:0%; transition: width 0.2s;
+    }
+    .nav-bar {
+      display:flex; justify-content:space-between; align-items:center; padding:0.8rem 2rem;
+      background:rgba(255,251,245,0.92); backdrop-filter:blur(10px);
+      border-bottom:1px solid #ece3d7; position:sticky; top:0; z-index:100; flex-wrap:wrap;
+    }
+    .logo a {
+      font-size:1.4rem; font-weight:800; background:linear-gradient(135deg,#2563eb,#7c3aed);
+      background-clip:text; -webkit-background-clip:text; color:transparent; text-decoration:none;
+    }
+    .logo i { color:#2563eb; margin-right:6px; }
+    .back-btn {
+      background:#f0ebe4; border:1px solid #cbc1b4; padding:0.4rem 1.2rem; border-radius:40px;
+      text-decoration:none; color:#2d241c; font-weight:500; font-size:0.8rem; transition:0.2s;
+    }
+    .back-btn:hover { background:#e3dad0; }
+    .hero-class {
+      background: linear-gradient(145deg, #1e293b, #2d3b52);
+      padding:2rem 2rem 1.8rem; text-align:center; color:white;
+    }
+    .hero-class h1 { font-size:2.4rem; font-weight:800; margin-bottom:0.3rem; }
+    .meta-info {
+      display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin-top:0.8rem;
+    }
+    .meta-info span {
+      background:rgba(255,255,255,0.12); padding:0.2rem 1rem; border-radius:40px; font-size:0.75rem;
+    }
+    .container { max-width:1100px; margin:0 auto; padding:1.8rem; }
+    .section-card {
+      background:white; border-radius:1.5rem; padding:1.8rem; margin-bottom:1.8rem;
+      box-shadow:0 4px 16px rgba(0,0,0,0.03); border:1px solid #ece3d7;
+    }
+    .section-title {
+      font-size:1.6rem; font-weight:700; margin-bottom:0.8rem; color:#1e3a8a;
+      border-left:5px solid #2563eb; padding-left:1rem;
+    }
+    .info-box {
+      background:#f4f7fd; border-left:4px solid #2563eb; padding:1rem; margin:1rem 0; border-radius:0.8rem;
+    }
+    .two-columns { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin:1rem 0; }
+    .code-block {
+      background:#1e293b; color:#e2e8f0; padding:1rem; border-radius:1rem; overflow-x:auto; font-family:monospace;
+    }
+    .code-block .comment { color:#94a3b8; }
+    .code-block .keyword { color:#c084fc; }
+    .code-block .string { color:#facc15; }
+    .code-block .func { color:#60a5fa; }
+    .btn-toggle {
+      background:#2563eb; color:white; border:none; padding:0.4rem 1.2rem; border-radius:40px;
+      cursor:pointer; font-weight:600; margin-top:0.8rem;
+    }
+    .btn-toggle:hover { background:#1d4ed8; }
+    .exercise-box {
+      background:#f0f7fe; border-radius:1.2rem; padding:1.2rem; margin:1rem 0;
+      border:1px solid #dce3ef;
+    }
+    .footer-nav {
+      display:flex; justify-content:space-between; margin-top:2rem; padding-top:1rem;
+      border-top:1px solid #ece3d7;
+    }
+    .next-btn {
+      background:#2563eb; color:white; padding:0.6rem 1.5rem; border-radius:40px;
+      text-decoration:none; font-weight:600;
+    }
+    .next-btn:hover { background:#1d4ed8; }
+    @media (max-width:700px) { .two-columns { grid-template-columns:1fr; } .hero-class h1 { font-size:1.8rem; } }
+    .output-demo {
+      background:#f1f5f9; padding:0.8rem; border-radius:0.8rem; margin:0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+<div class="progress-container"><div class="progress-bar" id="progressFill"></div></div>
+
+<div class="nav-bar">
+  <div class="logo"><a href="index.html"><i class="fas fa-code"></i> CodeForge · JS</a></div>
+  <a href="../index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Hub</a>
+</div>
+
+<div class="hero-class">
+  <h1><i class="fab fa-js"></i> Day 1 · JavaScript Foundations</h1>
+  <p>What is JavaScript? Variables, data types, and your first script</p>
+  <div class="meta-info">
+    <span><i class="far fa-clock"></i> 2 hours · theory + lab</span>
+    <span><i class="fas fa-signal"></i> Beginner</span>
+    <span><i class="fas fa-tools"></i> browser + DevTools</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- SECTION 1: What is JavaScript? -->
+  <div class="section-card">
+    <div class="section-title"><i class="fas fa-globe"></i> What is JavaScript?</div>
+    <p><strong>JavaScript</strong> is the programming language of the web. It brings pages to life — handling user interactions, updating content, and communicating with servers.</p>
+    <div class="info-box">
+      <i class="fas fa-check-circle" style="color:#2563eb;"></i> <strong>Key fact:</strong> JavaScript is one of the three core technologies of the web, alongside <strong>HTML</strong> (structure) and <strong>CSS</strong> (style).
+    </div>
+    <p>Today we’ll write our first JavaScript, learn about variables, and see how the browser executes code.</p>
+  </div>
+
+  <!-- SECTION 2: Your first script -->
+  <div class="section-card">
+    <div class="section-title"><i class="fas fa-play"></i> Your first script</div>
+    <p>JavaScript can be written directly inside HTML using the <code>&lt;script&gt;</code> tag. Let’s say "Hello, World!"</p>
+    <div class="code-block">
+      <span class="comment">&lt;!-- inside your HTML --&gt;</span><br>
+      &lt;script&gt;<br>
+      &nbsp;&nbsp;<span class="func">console.log</span>(<span class="string">"Hello, World!"</span>);<br>
+      &lt;/script&gt;
+    </div>
+    <div class="output-demo">
+      <i class="fas fa-terminal"></i> <strong>Output in DevTools console:</strong> <span style="background:#1e293b; color:#facc15; padding:0.1rem 0.6rem; border-radius:20px;">Hello, World!</span>
+    </div>
+    <p><i class="fas fa-lightbulb" style="color:#eab308;"></i> <strong>Pro tip:</strong> Open DevTools (F12) → Console tab to see the output.</p>
+  </div>
+
+  <!-- SECTION 3: Variables -->
+  <div class="section-card">
+    <div class="section-title"><i class="fas fa-box"></i> Variables: storing data</div>
+    <p>Variables are containers for values. In JavaScript, we use <code>let</code>, <code>const</code>, and <code>var</code> (we focus on <code>let</code> and <code>const</code>).</p>
+    <div class="two-columns">
+      <div>
+        <h4><i class="fas fa-pen"></i> let (mutable)</h4>
+        <div class="code-block" style="font-size:0.9rem;">
+          <span class="keyword">let</span> age = <span class="string">25</span>;<br>
+          age = <span class="string">26</span>; <span class="comment">// ✅ allowed</span>
+        </div>
+      </div>
+      <div>
+        <h4><i class="fas fa-lock"></i> const (immutable)</h4>
+        <div class="code-block" style="font-size:0.9rem;">
+          <span class="keyword">const</span> birthday = <span class="string">"1999-01-01"</span>;<br>
+          <span class="comment">// birthday = "2000-01-01"; ❌ error</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">
+      <i class="fas fa-database"></i> <strong>Data types:</strong> number, string, boolean, null, undefined, object, array.
+    </div>
+  </div>
+
+  <!-- SECTION 4: Interactive example -->
+  <div class="section-card">
+    <div class="section-title"><i class="fas fa-hand-pointer"></i> Interactive demo</div>
+    <p>Click the button — the script reads your name and greets you.</p>
+    <div style="background:#f8fafc; padding:1.2rem; border-radius:1rem;">
+      <p><label for="nameInput"><i class="fas fa-user"></i> Your name:</label>
+      <input type="text" id="nameInput" placeholder="e.g. Ada" style="padding:0.3rem 0.8rem; border-radius:30px; border:1px solid #cbd5e1; margin-left:6px;"></p>
+      <button id="greetBtn" class="btn-toggle"><i class="fas fa-hand-peace"></i> Greet me</button>
+      <p id="greetOutput" style="margin-top:0.6rem; font-weight:500; color:#1e3a8a;"></p>
+    </div>
+    <div class="code-block" style="margin-top:0.8rem;">
+      <span class="comment">// JavaScript behind the button</span><br>
+      <span class="keyword">const</span> btn = <span class="func">document.getElementById</span>(<span class="string">"greetBtn"</span>);<br>
+      btn.<span class="func">addEventListener</span>(<span class="string">"click"</span>, <span class="keyword">function</span>() {<br>
+      &nbsp;&nbsp;<span class="keyword">let</span> name = <span class="func">document.getElementById</span>(<span class="string">"nameInput"</span>).<span class="func">value</span>;<br>
+      &nbsp;&nbsp;<span class="func">document.getElementById</span>(<span class="string">"greetOutput"</span>).<span class="func">innerText</span> = <span class="string">"👋 Hello, "</span> + name;<br>
+      });
+    </div>
+  </div>
+
+  <!-- SECTION 5: Hands-on lab -->
+  <div class="section-card">
+    <div class="section-title"><i class="fas fa-flask"></i> Lab: build a simple counter</div>
+    <div class="exercise-box">
+      <p><i class="fas fa-tasks"></i> <strong>Task:</strong> create a button that increments a number and displays it.</p>
+      <ul style="margin:0.5rem 0 0.5rem 1.2rem;">
+        <li>Use <code>let counter = 0;</code></li>
+        <li>On button click, increase counter and update the display</li>
+        <li>Bonus: add a reset button</li>
+      </ul>
+      <div style="background:white; padding:1rem; border-radius:1rem; border:1px solid #e2e8f0; margin-top:0.5rem;">
+        <p><strong>Live counter:</strong> <span id="counterDisplay" style="font-size:1.8rem; font-weight:700; color:#2563eb;">0</span></p>
+        <button id="incBtn" class="btn-toggle" style="background:#2563eb;"><i class="fas fa-plus"></i> Increment</button>
+        <button id="resetBtn" class="btn-toggle" style="background:#64748b; margin-left:6px;"><i class="fas fa-undo"></i> Reset</button>
+        <p style="margin-top:0.5rem; font-size:0.8rem; color:#475569;"><i class="fas fa-code"></i> This is your first interactive JS component!</p>
+      </div>
+    </div>
+    <div class="code-block">
+      <span class="comment">// counter logic</span><br>
+      <span class="keyword">let</span> count = <span class="string">0</span>;<br>
+      <span class="keyword">const</span> display = <span class="func">document.getElementById</span>(<span class="string">"counterDisplay"</span>);<br>
+      <span class="func">document.getElementById</span>(<span class="string">"incBtn"</span>).<span class="func">addEventListener</span>(<span class="string">"click"</span>, () => {<br>
+      &nbsp;&nbsp;count++; display.<span class="func">innerText</span> = count;<br>
+      });<br>
+      <span class="func">document.getElementById</span>(<span class="string">"resetBtn"</span>).<span class="func">addEventListener</span>(<span class="string">"click"</span>, () => {<br>
+      &nbsp;&nbsp;count = <span class="string">0</span>; display.<span class="func">innerText</span> = count;<br>
+      });
+    </div>
+  </div>
+
+  <!-- SECTION 6: Assessment / key takeaways -->
+  <div class="section-card">
+    <div class="section-title"><i class="fas fa-clipboard-check"></i> Key takeaways</div>
+    <div class="two-columns">
+      <div>
+        <h4><i class="fas fa-check-circle" style="color:#2563eb;"></i> Concepts</h4>
+        <ul style="margin-left:1.2rem;">
+          <li>JavaScript adds interactivity</li>
+          <li>Variables with <code>let</code> and <code>const</code></li>
+          <li>Data types: string, number, boolean</li>
+          <li><code>console.log()</code> for debugging</li>
+        </ul>
+      </div>
+      <div>
+        <h4><i class="fas fa-tools" style="color:#2563eb;"></i> Tools</h4>
+        <ul style="margin-left:1.2rem;">
+          <li>Browser DevTools (F12)</li>
+          <li><code>&lt;script&gt;</code> tag placement</li>
+          <li><code>getElementById</code></li>
+          <li><code>addEventListener</code></li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:0.8rem;">
+      <i class="fas fa-graduation-cap"></i> <strong>Homework:</strong> write a script that asks for two numbers and displays their sum. Use <code>prompt()</code> and <code>alert()</code>.
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="footer-nav">
+    <span></span>
+    <a href="day2.html" class="next-btn"><i class="fas fa-arrow-right"></i> Next: Day 2 · Functions & Events</a>
+  </div>
+</div>
+
+<footer style="text-align:center; padding:1.5rem; border-top:1px solid #ece3d7; margin-top:0.5rem; color:#7a6b5a; font-size:0.8rem;">
+  <i class="fas fa-code"></i> JavaScript Bootcamp · Day 1 complete
+</footer>
+
+<script>
+  // progress
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+    document.getElementById('progressFill').style.width = scrolled + '%';
+  });
+
+  // greet button
+  document.getElementById('greetBtn').addEventListener('click', function() {
+    const name = document.getElementById('nameInput').value.trim() || 'friend';
+    document.getElementById('greetOutput').innerText = `👋 Hello, ${name}!`;
+  });
+
+  // counter lab
+  let count = 0;
+  const display = document.getElementById('counterDisplay');
+  document.getElementById('incBtn').addEventListener('click', () => {
+    count++;
+    display.innerText = count;
+  });
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    count = 0;
+    display.innerText = count;
+  });
+
+  // auto-mark completion (simulate tracking on this page)
+  // we store completion in localStorage so the index shows progress
+  (function markDay1() {
+    try {
+      const completed = JSON.parse(localStorage.getItem('jsCourseCompleted') || '{}');
+      if (!completed[0]) completed[0] = {};
+      completed[0][0] = true; // week0, day0
+      localStorage.setItem('jsCourseCompleted', JSON.stringify(completed));
+    } catch(e) {}
+  })();
+</script>
+</body>
+</html>

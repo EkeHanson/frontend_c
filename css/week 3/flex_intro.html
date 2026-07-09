@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: flex;
+  height: 200px;
+  /* flex-direction: column; */
+  /* flex-direction: column-reverse; */
+  background-color: rgb(30, 240, 255);
+  /* flex-wrap: wrap; */
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  /* justify-content: start; */
+  /* justify-content: flex-end; */
+  /* justify-content: space-around; */
+  /* justify-content: space-between;  */
+  /* justify-content: space-evenly; */
+
+  align-items: center;
+  /* align-items: flex-start; */
+  /* align-items: flex-end; */
+}
+.container div {
+  background-color: #e6dada;
+  margin: 10px;  
+  padding: 20px;
+  font-size: 24px;
+}
+</style>
+</head>
+<body>
+
+<h1>Create a Flex Container</h1>
+
+<div class="container">
+  <div>Butter</div>
+  <div>Suya</div>
+  <div>Salad</div>
+  <div>Macroni</div>  
+  <div>Lobster  </div>
+  <!-- <div>Pea not  </div>
+  <div>Ccucumber  </div>
+  <div>Oyster  </div>
+  <div>Sushi</div>
+  <div>Item 5</div> -->
+</div>
+
+<p>Flexbox must have a parent element with 
+    the display property set to flex or inline-flex.</p>
+<p>Direct child elements of the flex
+     container automatically becomes flex items.</p>
+
+</body>
+</html>
+

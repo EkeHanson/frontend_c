@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  display: flex;
+  background-color: dodgerblue;
+}
+.container div {
+  background-color: #f1f1f1;
+  color:#000;
+  width: 100px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 30px;}
+</style>
+</head>
+<body>
+<h1>The flex-grow Property</h1>
+<p>Make the third flex item grow four times faster
+     than the other flex items:</p>
+<div class="container">
+  <div style="flex-grow: 1">Cake</div>
+  <div style="flex-grow: 2">Sushi</div>
+  <div style="flex-grow: 4">Harmbrger</div>
+</div>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox Classwork – Align, Shrink & Order</title>
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fc;
+            padding: 30px 20px;
+            color: #1e293b;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #475569;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        /* ---------- SECTION CARD ---------- */
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 30px 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border: 1px solid #e9edf2;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            background: #dbeafe;
+            color: #1e4b7a;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+        }
+
+        .section-desc {
+            color: #475569;
+            margin-bottom: 18px;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- FLEX CONTAINERS ---------- */
+        .flex-container {
+            display: flex;
+            background: #eef2f6;
+            border-radius: 14px;
+            padding: 16px 12px;
+            min-height: 180px;
+            gap: 10px;
+            flex-wrap: wrap;
+            transition: all 0.1s;
+        }
+
+        /* ----- FLEX ITEMS (base) ----- */
+        .flex-item {
+            background: white;
+            border-radius: 12px;
+            padding: 14px 12px;
+            min-width: 90px;
+            flex: 0 0 auto;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            border: 1px solid #dce1e8;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.1s;
+        }
+
+        /* make items a bit bigger for profile cards */
+        .profile-item {
+            min-width: 110px;
+            padding: 18px 8px;
+        }
+
+        .profile-item .avatar {
+            font-size: 2.6rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .profile-item .name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .profile-item .role {
+            font-size: 0.75rem;
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        /* ----- custom backgrounds for clarity ----- */
+        .item-highlight {
+            background: #fef9e7;
+            border-color: #f5c542;
+        }
+
+        /* ---------- SECTION 1 : ALIGN-SELF ---------- */
+        .align-container {
+            min-height: 240px;
+            align-items: flex-start;   /* container default */
+        }
+
+        /* each item gets its own align-self */
+        .align-item-1 { align-self: flex-start; background: #f0fdf4; border-color: #86d9a4; }
+        .align-item-2 { align-self: center; background: #eff6ff; border-color: #93b4f0; }
+        .align-item-3 { align-self: flex-end; background: #fef2f2; border-color: #f9a8a8; }
+        .align-item-4 { align-self: stretch; background: #faf5ff; border-color: #c4b5e3; }
+        .align-item-5 { align-self: flex-start; background: #fefce8; border-color: #facc6f; }
+
+        /* ---------- SECTION 2 : FLEX-SHRINK ---------- */
+        .shrink-container {
+            min-height: 140px;
+            gap: 12px;
+        }
+
+        .shrink-item {
+            flex: 0 0 auto;
+            min-width: 120px;
+        }
+
+        /* Item 3 shrinks 4× faster than others */
+        .shrink-fast {
+            flex-shrink: 4;
+            background: #fee2e2;
+            border-color: #f87171;
+            font-weight: 600;
+        }
+
+        /* normal items shrink at default rate (1) */
+        .shrink-normal {
+            flex-shrink: 1;
+        }
+
+        /* ---------- SECTION 3 : ORDER ---------- */
+        .order-container {
+            gap: 12px;
+        }
+
+        .order-item {
+            min-width: 100px;
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* each item gets an explicit order */
+        .order-1 { order: 1; background: #dbeafe; border-color: #60a5fa; }  /* appears 2nd */
+        .order-2 { order: 2; background: #d1fae5; border-color: #34d399; }  /* appears 3rd */
+        .order-3 { order: 3; background: #fef3c7; border-color: #fbbf24; }  /* appears 4th */
+        .order-4 { order: 4; background: #fce4ec; border-color: #f472b6; }  /* appears 5th */
+        .order-0 { order: 0; background: #e0e7ff; border-color: #818cf8; }  /* appears 1st */
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 600px) {
+            .section-card { padding: 18px; }
+            .flex-item { min-width: 70px; font-size: 0.85rem; }
+            .profile-item { min-width: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== MAIN HEADER ====== -->
+    <h1>🧩 Flexbox Classwork</h1>
+    <p class="subtitle">
+        Apply <strong>align-self</strong>, <strong>flex-shrink</strong>, and <strong>order</strong>
+        — open DevTools to inspect each container.
+    </p>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1 : ALIGN-SELF (profile cards)                       -->
+    <!-- ============================================================ -->
+    <div class="section-card">
+        <div class="section-title">
+            🧑‍💻 1. align-self
+            <span>individual alignment</span>
+        </div>
+        <p class="section-desc">
+            Each card uses a different <code>align-self</code> value:
+            <strong>flex-start</strong> (cards 1 &amp; 5),
+            <strong>center</strong> (card 2),
+            <strong>flex-end</strong> (card 3),
+            <strong>stretch</strong> (card 4).
+        </p>
+
+        <div class="flex-container align-container">
+            <!-- card 1 -->
+            <div class="flex-item profile-item align-item-1">
+                <span class="avatar">🧑</span>
+                <div class="name">Alex</div>
+                <div class="role">Designer</div>
+            </div>
+            <!-- card 2 -->
+            <div class="flex-item profile-item align-item-2">
+                <span class="avatar">👩</span>
+                <div class="name">Jordan</div>
+                <div class="role">Developer</div>
+            </div>
+            <!-- card 3 -->
+            <div class="flex-item profile-item align-item-3">
+                <span class="avatar">👨</span>
+                <div class="name">Taylor</div>
+                <div class="role">Manager</div>
+            </div>
+            <!-- card 4 -->
+            <div class="flex-item profile-item align-item-4">
+                <span class="avatar">🧔</span>
+                <div class="name">Riley</div>
+                <div class="role">Analyst</div>
+            </div>
+            <!-- card 5 -->
+            <div class="flex-item profile-item align-item-5">
+                <span class="avatar">👧</span>
+                <div class="name">Morgan</div>
+                <div class="role">Intern</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2 : FLEX-SHRINK                                      -->
+    <!-- ============================================================ -->
+    <div class="section-card">
+        <div class="section-title">
+            📉 2. flex-shrink
+            <span>shrink rate</span>
+        </div>
+        <p class="section-desc">
+            Resize the browser window. The <strong>red item (#3)</strong> has
+            <code>flex-shrink: 4</code> — it shrinks <strong>4× faster</strong>
+            than the others (which have <code>flex-shrink: 1</code>).
+        </p>
+
+        <div class="flex-container shrink-container">
+            <div class="flex-item shrink-item shrink-normal">1</div>
+            <div class="flex-item shrink-item shrink-normal">2</div>
+            <div class="flex-item shrink-item shrink-fast">3 ⚡</div>
+            <div class="flex-item shrink-item shrink-normal">4</div>
+            <div class="flex-item shrink-item shrink-normal">5</div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3 : ORDER                                            -->
+    <!-- ============================================================ -->
+    <div class="section-card">
+        <div class="section-title">
+            🔢 3. order
+            <span>rearrange visually</span>
+        </div>
+        <p class="section-desc">
+            The numbers inside the boxes show their <strong>source order</strong> (1–5).
+            But using <code>order</code>, they appear as:
+            <strong>5 → 1 → 2 → 3 → 4</strong> (left to right).
+        </p>
+
+        <div class="flex-container order-container">
+            <!-- source order: 1,2,3,4,5  but we map order values to rearrange -->
+            <div class="flex-item order-item order-0">1</div>   <!-- order:0 → appears 1st -->
+            <div class="flex-item order-item order-1">2</div>   <!-- order:1 → appears 2nd -->
+            <div class="flex-item order-item order-2">3</div>   <!-- order:2 → appears 3rd -->
+            <div class="flex-item order-item order-3">4</div>   <!-- order:3 → appears 4th -->
+            <div class="flex-item order-item order-4">5</div>   <!-- order:4 → appears 5th -->
+        </div>
+
+        <p style="margin-top: 14px; font-size: 0.9rem; color: #475569;">
+            💡 <strong>Tip:</strong> The visual order is <strong>5 → 1 → 2 → 3 → 4</strong>.
+            Item “5” has <code>order: 0</code>, so it jumps to the front.
+        </p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER / INSTRUCTION for students                            -->
+    <!-- ============================================================ -->
+    <div style="background: #e6f0fa; border-radius: 16px; padding: 20px 26px; border-left: 6px solid #2563eb; margin-top: 10px;">
+        <p style="font-weight: 600; font-size: 1.05rem; margin-bottom: 4px;">✏️ Student Task</p>
+        <ul style="margin-left: 20px; color: #1e293b; line-height: 1.7;">
+            <li><strong>Observe</strong> how each property changes the layout.</li>
+            <li><strong>Modify</strong> the values (e.g. change <code>flex-shrink</code> to 10, or swap <code>order</code> numbers) and see what happens.</li>
+            <li><strong>Explain</strong> in your own words: <em>“When would you use align-self instead of align-items?”</em></li>
+        </ul>
+    </div>
+
+</body>
+</html>

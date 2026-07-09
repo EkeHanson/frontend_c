@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 HTML Mastery Lab | All Tags Showcase</title>
+    <!-- This page uses ONLY HTML. No CSS, no JS — pure semantic structure for student replication -->
+</head>
+<body>
+
+    <!-- ==================== SECTION 1: DOCUMENT METADATA & STRUCTURE ==================== -->
+    <header>
+        <h1>🏷️ HTML Elements Showcase</h1>
+        <h2>Complete reference of semantic & classic tags</h2>
+        <p><strong>Objective:</strong> Replicate this page using <em>only HTML</em>. Every tag you see below must appear in your version.<br>
+        <mark>Challenge:</mark> Preserve nesting, attributes, and inline/block behaviour.</p>
+        <hr>
+    </header>
+
+    <!-- main content wrapper -->
+    <main>
+        <!-- BLOCK-LEVEL ELEMENTS + TEXT FORMATTING -->
+        <article>
+            <h3>📄 1. Text & Formatting tags</h3>
+            <p>This paragraph demonstrates <b>bold</b>, <strong>strong importance</strong>, <i>italic</i>, <em>emphasized</em>, <u>underlined</u>, <ins>inserted</ins>, <del>deleted</del>, <s>strikethrough</s>, <mark>marked/highlighted</mark>, <small>small print</small>, <big>big (obsolete but still works)</big>, <sub>subscript</sub> and <sup>superscript</sup>.</p>
+            <p>Inline code: <code>console.log("Hello, class!");</code> — and keyboard input: <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy. <br>
+            Abbreviation: <abbr title="HyperText Markup Language">HTML</abbr> is fundamental. <dfn>Semantic HTML</dfn> gives meaning to content.
+            <var>x</var> = <var>y</var> + 2. Sample output: <samp>Error 404</samp>.
+            </p>
+            <pre>Preformatted text: 
+    Line 1:    student { 
+        display: block; 
+    } 
+    Line 2:    ♥ tags are fun</pre>
+            <blockquote cite="https://developer.mozilla.org/en-US/docs/Web/HTML">
+                "HTML (HyperText Markup Language) is the most basic building block of the Web." 
+                <footer>— <cite>MDN Web Docs</cite></footer>
+            </blockquote>
+            <p>Quote inline: <q>Learning by replicating is powerful</q> — every student should try.</p>
+        </article>
+
+        <!-- HEADINGS hierarchy (all levels) -->
+        <section>
+            <h3>📐 2. Headings (H1 to H6)</h3>
+            <h1>This is H1 heading</h1>
+            <h2>This is H2 heading</h2>
+            <h3>This is H3 heading</h3>
+            <h4>This is H4 heading</h4>
+            <h5>This is H5 heading</h5>
+            <h6>This is H6 heading</h6>
+            <hr>
+        </section>
+
+        <!-- LISTS: ordered, unordered, description, nested -->
+        <section>
+            <h3>📋 3. List tags</h3>
+            <h4>Unordered list (ul) with nested list:</h4>
+            <ul>
+                <li>Apple</li>
+                <li>Banana
+                    <ul>
+                        <li>Ripe banana</li>
+                        <li>Green banana</li>
+                    </ul>
+                </li>
+                <li>Cherry</li>
+            </ul>
+
+            <h4>Ordered list (ol) — with type & start attribute:</h4>
+            <ol type="A" start="3">
+                <li>Third step</li>
+                <li>Fourth step</li>
+                <li value="10">Jump to 10</li>
+            </ol>
+
+            <h4>Description list (dl) / definition list:</h4>
+            <dl>
+                <dt>HTML</dt>
+                <dd>HyperText Markup Language — structures content.</dd>
+                <dt>CSS</dt>
+                <dd>Styles presentation layer.</dd>
+                <dt>JavaScript</dt>
+                <dd>Adds interactivity.</dd>
+            </dl>
+        </section>
+
+        <!-- TABLES: full table with caption, thead, tbody, tfoot, rowspan, colspan -->
+        <section>
+            <h3>📊 4. Table tags (complex example)</h3>
+            <table border="1" cellpadding="5" cellspacing="0">   <!-- border is presentational, but allowed in pure HTML -->
+                <caption>Student progress demo — HTML tag mastery</caption>
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Topic</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">Alex</td>
+                        <td>HTML Basics</td>
+                        <td>95%</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                    <tr>
+                        <td>Forms & Tables</td>
+                        <td>88%</td>
+                        <td>✅ Pass</td>
+                    </tr>
+                    <tr>
+                        <td>Jordan</td>
+                        <td colspan="2">All topics (average)</td>
+                        <td>🟡 Review</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">* Final assessment: replicate all tags</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- FORMS & INPUT TYPES: showcases all major interactive tags -->
+        <section>
+            <h3>📝 5. Forms & input elements (pure HTML, no backend)</h3>
+            <form action="#" method="get">
+                <fieldset>
+                    <legend>📌 Student details & replication test</legend>
+
+                    <label for="name">Full name:</label>
+                    <input type="text" id="name" name="name" placeholder="e.g., Taylor Chen" required><br><br>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="student@example.com"><br><br>
+
+                    <label for="pwd">Password (dummy):</label>
+                    <input type="password" id="pwd" name="pwd"><br><br>
+
+                    <label for="age">Age (number):</label>
+                    <input type="number" id="age" name="age" min="12" max="99"><br><br>
+
+                    <label>Favorite HTML tag:</label><br>
+                    <input type="radio" id="tag_div" name="fav_tag" value="div">
+                    <label for="tag_div">&lt;div&gt;</label>
+                    <input type="radio" id="tag_span" name="fav_tag" value="span">
+                    <label for="tag_span">&lt;span&gt;</label>
+                    <input type="radio" id="tag_button" name="fav_tag" value="button">
+                    <label for="tag_button">&lt;button&gt;</label><br><br>
+
+                    <label>Select topics mastered:</label><br>
+                    <input type="checkbox" id="chk_headings" name="topics" value="headings">
+                    <label for="chk_headings">Headings</label>
+                    <input type="checkbox" id="chk_lists" name="topics" value="lists">
+                    <label for="chk_lists">Lists</label>
+                    <input type="checkbox" id="chk_tables" name="topics" value="tables">
+                    <label for="chk_tables">Tables</label><br><br>
+
+                    <label for="birthday">Birthday (date):</label>
+                    <input type="date" id="birthday" name="birthday"><br><br>
+
+                    <label for="course">Course level (range):</label>
+                    <input type="range" id="course" name="course" min="0" max="100" value="70"><br><br>
+
+                    <label for="color_choice">Favourite colour:</label>
+                    <input type="color" id="color_choice" name="favcolor" value="#3c78d0"><br><br>
+
+                    <label for="comment">Comments / observations:</label><br>
+                    <textarea id="comment" name="comment" rows="3" cols="40" placeholder="I replicated all tags!"></textarea><br><br>
+
+                    <label for="browser">Choose your main browser (datalist + select demonstration):</label>
+                    <input list="browsers" id="browser" name="browser">
+                    <datalist id="browsers">
+                        <option value="Chrome">
+                        <option value="Firefox">
+                        <option value="Edge">
+                        <option value="Safari">
+                    </datalist>
+                    <br><br>
+
+                    <label for="dropdown">Select your skill level (select):</label>
+                    <select id="dropdown" name="skill">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate" selected>Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                    <br><br>
+
+                    <button type="submit">✉️ Submit dummy form</button>
+                    <button type="reset">🗑️ Reset all fields</button>
+                </fieldset>
+            </form>
+            <p><small>*Note: form action="#" will reload the page. No data is sent.</small></p>
+        </section>
+
+        <!-- MEDIA & EMBEDDED CONTENT tags -->
+        <section>
+            <h3>🎬 6. Media & embedded elements (img, audio, video, iframe, embed, object, canvas, svg)</h3>
+            <figure>
+                <img src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" alt="HTML5 Logo" width="100" height="100">
+                <figcaption>Fig.1 — HTML5 Badge (image via external URL)</figcaption>
+            </figure>
+            
+            <!-- Audio with controls (simple sample using external audio from sample website, works without network? but we use a safe placeholder if internet accessible, else it's fine) -->
+            <audio controls>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <br>
+
+            <!-- Video with controls (placeholder video) -->
+            <video width="320" height="240" controls poster="https://www.w3schools.com/html/pic_mountain.jpg">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <br>
+
+            <!-- Embedded iframe (YouTube demo but safe without autoplay) -->
+            <iframe width="300" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=abc123&autoplay=0" title="YouTube demo video" frameborder="0" allowfullscreen></iframe>
+            <br>
+
+            <!-- embed tag (deprecated but still valid HTML) -->
+            <embed type="image/jpg" src="https://www.w3.org/People/mimasa/test/imgformat/img/w3c_home.png" width="150" height="80">
+            <br>
+            
+            <!-- object element -->
+            <object data="https://www.w3.org/WAI/wcag2AAA-B" width="200" height="40"></object>
+            <br>
+
+            <!-- canvas & svg (inline graphics) -->
+            <canvas id="demoCanvas" width="150" height="100" style="border:1px solid #000;"></canvas>
+            <svg width="100" height="100" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+                <text x="50" y="55" font-size="12" text-anchor="middle" fill="black">SVG</text>
+            </svg>
+            <br>
+            <!-- note: canvas requires scripting for dynamic drawing, but tag itself is pure HTML -->
+            <noscript>Your browser does not support JavaScript — canvas will remain empty (but tag is present).</noscript>
+        </section>
+
+        <!-- HYPERLINKS & NAVIGATION TAGS -->
+        <nav>
+            <h3>🔗 7. Navigation & link tags</h3>
+            <a href="#">Placeholder anchor link (same page)</a><br>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element" target="_blank" rel="noopener">MDN HTML elements reference (new tab)</a><br>
+            <a href="#top">Jump to top of page (using anchor #top)</a><br>
+            <a href="mailto:teacher@example.com">Send email (mailto link)</a><br>
+            <a href="tel:+1234567890">Call +1 234 567 890</a>
+            <hr>
+        </nav>
+
+        <!-- PHRASE & SEMANTIC BLOCKS: details, summary, meter, progress, time, address, etc -->
+        <section>
+            <h3>🆕 8. Interactive & semantic HTML5 tags</h3>
+            <details>
+                <summary>📌 Click to reveal hidden content (details + summary)</summary>
+                <p>🎉 Congratulations! You found the hidden message. This demonstrates the <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> tags.</p>
+                <p>Also here is a <mark>meter</mark> element: Storage usage: <meter value="0.6" min="0" max="1">60%</meter> and <progress value="75" max="100">75%</progress> progress bar.</p>
+            </details>
+            <p>The <time datetime="2026-06-09">June 9, 2026</time> is the mock date of this lab.</p>
+            <p><ruby>漢<rt>かん</rt>字<rt>じ</rt></ruby> demonstrates ruby annotation.</p>
+            <bdi>محمد</bdi> — bdi tag isolates name direction.
+            <p><bdo dir="rtl">This text is reversed using bdo</bdo></p>
+            <address>
+                Written by: HTML Instructor<br>
+                Visit us at: <a href="#">HTML Mastery Hub</a><br>
+                123 Code Lane, Webville
+            </address>
+        </section>
+
+        <!-- ADDITIONAL ELEMENTS: button, div, span, wbr, etc -->
+        <div style="border:1px dotted gray; padding: 8px;">
+            <h3>➕ 9. Container and generic tags</h3>
+            <div>This is a block-level <code>&lt;div&gt;</code> container.</div>
+            <span>This is an inline <code>&lt;span&gt;</code> element. </span>
+            <span>Spans are great for <span style="background-color: lightblue;">inline grouping</span>.</span>
+            <p>Long word with possible break: supercalifragilisticexpialidocious<wbr>andmoretext — wbr suggests line break opportunity.</p>
+        </div>
+
+        <!-- if students are to replicate, also include HR, BR already used -->
+        <hr>
+
+        <!-- extra tags: main, aside, footer, header already used -->
+        <aside>
+            <h4>💡 Teacher's note:</h4>
+            <p>This page includes more than <strong>60+ unique HTML tags</strong>! Students must replicate each one as seen in source order. Check for <code>&lt;header&gt;, &lt;footer&gt;, &lt;main&gt;, &lt;section&gt;, &lt;article&gt;, &lt;nav&gt;, &lt;aside&gt;, &lt;figure&gt;, &lt;figcaption&gt;, &lt;details&gt;, &lt;summary&gt;, &lt;mark&gt;, &lt;time&gt;, &lt;ruby&gt;, &lt;bdo&gt;, &lt;bdi&gt;, &lt;address&gt;</code> and all form inputs.</p>
+            <p><b>Note:</b> Some elements like <code>&lt;embed&gt;, &lt;object&gt;</code> are older but part of full HTML coverage.</p>
+        </aside>
+
+        <!-- FOOTER with extra semantic and copyright -->
+        <footer>
+            <hr>
+            <p>🏁 <strong>Replication test checklist</strong> — student version must include: all headings, lists, tables, forms (all input types), media (img, audio, video, iframe, embed, object, canvas, svg), semantic tags, phrase tags, and interactive details.</p>
+            <p>© 2026 HTML Mastery Challenge — built with 💯% pure HTML. No CSS or JS used. </p>
+            <p><small>Last update: <time datetime="2026-06-09">June 9, 2026</time></small></p>
+        </footer>
+    </main>
+
+    <!-- hidden comment example for demonstration (students don't have to replicate comments, but we show it here) -->
+    <!-- This is an HTML comment. Students can see it when they view page source! -->
+</body>
+</html>

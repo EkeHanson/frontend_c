@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odering of Flex Items</title>
+
+    <style>
+        .container{
+            display: flex;
+            background-color: darkgoldenrod;
+        }
+        .container div{
+            background-color: #f1f1f1;
+            color:#000;
+            width: 100px;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            font-size: 30px;  
+        }
+    </style>
+</head>
+<body>
+    <h1>The Order Property of Flex Box</h1>
+    <p>
+        We use the Order proerty of flex box to specify
+        the order of the flex items inside the flex container
+    </p>
+
+    <div class="container">
+        <div style="order: 3;">This will take order 1</div>
+        <div style="order: 2;">This will take order 2</div>
+        <div style="order: 4;">This will take order 3</div>
+        <div style="order: 1;" >This will take order 4</div>
+    </div>
+    
+</body>
+</html>
+

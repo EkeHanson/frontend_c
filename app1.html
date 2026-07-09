@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HTML Deep Dive: Quotations, Colors, CSS & Links | Interactive Lesson</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0a0c15 0%, #111827 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .curriculum-header {
+            max-width: 1300px;
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 1.5rem;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+        }
+        .badge {
+            background: #3b82f6;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .duration {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .presentation-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.03);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .slide-area {
+            min-height: 600px;
+            background: #0f1119;
+            padding: 2rem;
+        }
+
+        .slide-card {
+            background: rgba(22, 26, 38, 0.98);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(72, 187, 255, 0.3);
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E0F2FE, #7AA9FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+        }
+
+        .slide-title i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #60a5fa;
+            font-size: 1.8rem;
+        }
+
+        .slide-sub {
+            color: #a0afc9;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1.2rem;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .concept-box {
+            flex: 1;
+            min-width: 240px;
+            background: #1a1f2e;
+            border-radius: 1.5rem;
+            padding: 1.3rem;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        .concept-box:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        .concept-box h3 {
+            color: #7aa9ff;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .concept-box p, .concept-list, .concept-box li {
+            color: #e2e8f0;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+        .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        .tag {
+            background: #1e293b;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: #b9d0ff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .insight-card {
+            margin-top: 1.2rem;
+            background: #0f172a;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            color: #e2e8f0;
+            border-left: 3px solid #3b82f6;
+        }
+        .two-column-split {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .col {
+            flex: 1;
+            background: #131a2a;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #2d3a5e;
+        }
+        .col h4 {
+            color: #fbbf24;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        pre {
+            background: #0a0e18;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            margin: 0.8rem 0;
+            border: 1px solid #334155;
+            font-family: 'Fira Code', monospace;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            color: #cbd5e6;
+        }
+        .color-demo {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 0.8rem;
+            margin: 0.3rem;
+            font-weight: bold;
+        }
+        .entity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+        .entity-table th, .entity-table td {
+            border: 1px solid #334155;
+            padding: 0.5rem;
+            text-align: left;
+            color: #e2e8f0;
+        }
+        .entity-table th {
+            background: #1e293b;
+            color: #fbbf24;
+        }
+        button {
+            background: #1e2a3a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            border: 1px solid #334155;
+        }
+        button:hover:not(:disabled) {
+            background: #2d3a4e;
+            transform: scale(0.97);
+            border-color: #3b82f6;
+        }
+        .nav-bar {
+            background: #0b0e16;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #2a2f3f;
+            flex-wrap: wrap;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .slide-counter {
+            font-size: 0.9rem;
+            background: #1a1f2c;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            color: #a5b4fc;
+        }
+        .indicator-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #334155;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .dot.active {
+            background: #3b82f6;
+            width: 22px;
+        }
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.7rem;
+            background: #07090f;
+            color: #8ca3c7;
+        }
+        @media (max-width: 700px) {
+            .slide-area { padding: 1rem; }
+            .slide-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="curriculum-header">
+    <div><span class="badge"><i class="fas fa-code"></i> ADVANCED HTML MODULE</span></div>
+    <div class="class-title"><i class="fas fa-quote-right"></i> Quotations, Colors, CSS & Links</div>
+    <div class="duration"><i class="far fa-clock"></i> Complete Reference + Interactive Demos</div>
+</div>
+
+<div class="presentation-container">
+    <div class="slide-area" id="slideArea"></div>
+    <div class="nav-bar">
+        <div class="indicator-dots" id="dotsContainer"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+            <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 12</span>
+            <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <footer><i class="fas fa-graduation-cap"></i> HTML Quotations | Color Models (RGB, HEX, HSL) | CSS Basics | Links & Bookmarks</footer>
+</div>
+
+<script>
+    // slides array combining all requested topics: quotations, colors (RGB/HEX/HSL), CSS, links, bookmarks
+    const slides = [
+        { title: "<i class='fas fa-quote-left'></i> HTML Quotation & Citation", subtitle: "blockquote, q, abbr, address, cite, bdo — semantic text elements",
+          content: `<div class="two-column-split"><div class="col"><h4><i class="fas fa-quote-right"></i> Key Elements</h4>
+          <ul style="color:#e2e8f0; margin-left:1.2rem;"><li><code>&lt;blockquote&gt;</code> → long quotation, browser indents</li>
+          <li><code>&lt;q&gt;</code> → short inline quotation, adds quotes</li><li><code>&lt;abbr&gt;</code> → abbreviation + title attribute</li>
+          <li><code>&lt;address&gt;</code> → contact info</li><li><code>&lt;cite&gt;</code> → title of a work</li>
+          <li><code>&lt;bdo&gt;</code> → bi-directional override</li></ul></div>
+          <div class="col"><h4><i class="fas fa-eye"></i> Live Demo</h4>
+          <p>WWF's goal: <q>Build a future where people live in harmony with nature.</q></p>
+          <blockquote style="border-left: 4px solid #3b82f6; margin:0.8rem 0; padding-left:1rem;">For 60 years, WWF has worked to help people and nature thrive.</blockquote>
+          <p><abbr title="World Health Organization">WHO</abbr> was founded in 1948.</p>
+          <address>Written by Chidi Okafor<br>Visit us at example.com</address>
+          <p><cite>The Scream</cite> by Edvard Munch. Painted in 1893.</p>
+          <bdo dir="rtl">This text will be written from right to left</bdo>
+          </div></div><div class="insight-card"><i class="fas fa-lightbulb"></i> Use <code>&lt;blockquote&gt;</code> with <code>cite</code> attribute for source URL. Browsers style these semantically!</div>`
+        },
+        { title: "<i class='fas fa-palette'></i> HTML Colors: Named Colors & Backgrounds", subtitle: "140 standard color names + inline styles",
+          content: `<div class="content-grid"><div class="concept-box"><h3><i class="fas fa-fill-drip"></i> Color Names</h3>
+          <p>Tomato, DodgerBlue, MediumSeaGreen, SlateBlue, Violet, LightGray ...</p>
+          <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1rem;"><span class="color-demo" style="background:Tomato; color:white;">Tomato</span>
+          <span class="color-demo" style="background:Orange;">Orange</span><span class="color-demo" style="background:DodgerBlue;">DodgerBlue</span>
+          <span class="color-demo" style="background:MediumSeaGreen;">SeaGreen</span><span class="color-demo" style="background:SlateBlue;">SlateBlue</span>
+          <span class="color-demo" style="background:Violet;">Violet</span></div></div>
+          <div class="concept-box"><h3><i class="fas fa-highlighter"></i> Background & Text</h3>
+          <p style="background-color:DodgerBlue; padding:0.3rem;">Hello World (bg blue)</p>
+          <p style="color:Tomato;">Red text example</p>
+          <h1 style="border:2px solid Violet; display:inline-block; padding:0.3rem;">Border Color</h1>
+          </div></div><div class="insight-card"><i class="fas fa-check-circle"></i> Inline CSS: <code>style="background-color:Tomato;"</code> is powerful for quick demos.</div>`
+        },
+        { title: "<i class='fas fa-chart-line'></i> RGB & RGBA Colors", subtitle: "Red, Green, Blue channels | Opacity with Alpha",
+          content: `<div class="two-column-split"><div class="col"><h4>RGB Values</h4><pre><code>rgb(255,0,0) → Red
+rgb(0,255,0) → Green
+rgb(60,179,113) → MediumSeaGreen</code></pre>
+          <div style="background:rgb(255,99,71); padding:0.5rem; border-radius:0.8rem; color:white;">rgb(255, 99, 71) Tomato</div>
+          <div style="background:rgb(106,90,205); margin-top:0.5rem; padding:0.5rem;">SlateBlue</div>
+          </div><div class="col"><h4>RGBA (Alpha = transparency)</h4><pre><code>rgba(255,99,71,0.2) → 20% opacity
+rgba(255,99,71,0.6) → 60%</code></pre>
+          <div style="background:rgba(255,99,71,0.3); padding:0.5rem;">Semi-transparent Tomato</div>
+          <div style="background:rgba(0,0,255,0.7); color:white; margin-top:0.5rem;">Blue with 0.7 alpha</div>
+          </div></div><div class="insight-card"><i class="fas fa-chart-simple"></i> Shades of gray: rgb(60,60,60), rgb(180,180,180) — equal values.</div>`
+        },
+        { title: "<i class='fas fa-hashtag'></i> HEX Colors (#RRGGBB)", subtitle: "Hexadecimal values from 00 to ff",
+          content: `<div class="content-grid"><div class="concept-box"><h3><i class="fas fa-code"></i> HEX Syntax</h3>
+          <pre><code>#ff0000 → Red
+#00ff00 → Green
+#3cb371 → MediumSeaGreen
+#ee82ee → Violet</code></pre>
+          <div style="display:flex; gap:0.8rem; flex-wrap:wrap;"><div style="background:#ff6347; width:70px; height:70px; border-radius:12px;"></div>
+          <div style="background:#6a5acd; width:70px; height:70px; border-radius:12px;"></div><div style="background:#ffa500; width:70px; height:70px; border-radius:12px;"></div>
+          </div></div><div class="concept-box"><h3><i class="fas fa-moon"></i> Gray Shades</h3>
+          <pre><code>#404040, #686868, #a0a0a0, #dcdcdc</code></pre>
+          <div style="background:#686868; color:white; padding:0.5rem;">Dark Gray</div><div style="background:#dcdcdc; margin-top:0.5rem;">Light Gray</div>
+          </div></div><div class="insight-card"><i class="fas fa-eye-dropper"></i> HEX is most common in web design; shorthand like <code>#f90</code> = <code>#ff9900</code>.</div>`
+        },
+        { title: "<i class='fas fa-chart-pie'></i> HSL & HSLA Colors", subtitle: "Hue (0-360), Saturation%, Lightness% + Alpha",
+          content: `<div class="two-column-split"><div class="col"><h4>HSL Model</h4>
+          <pre><code>hsl(0,100%,50%) → Red
+hsl(240,100%,50%) → Blue
+hsl(147,50%,47%) → Greenish</code></pre>
+          <div style="background:hsl(9,100%,64%); padding:0.5rem;">hsl(9,100%,64%)</div>
+          <div style="background:hsl(0,0%,20%); color:white; margin-top:0.5rem;">Dark gray (0% sat, 20% light)</div>
+          </div><div class="col"><h4>HSLA (transparency)</h4><pre><code>hsla(9,100%,64%,0.5)</code></pre>
+          <div style="background:hsla(9,100%,64%,0.3); padding:0.5rem;">30% opacity</div>
+          <div style="background:hsla(120,100%,50%,0.6); margin-top:0.5rem;">Green with 60% opacity</div>
+          </div></div><div class="insight-card"><i class="fas fa-adjust"></i> Saturation 0% = gray, 100% = full color. Lightness 0% = black, 100% = white.</div>`
+        },
+        { title: "<i class='fab fa-css3-alt'></i> CSS Basics: Inline, Internal, External", subtitle: "Cascading Style Sheets control layout & design",
+          content: `<div class="concept-box"><h3><i class="fas fa-code-branch"></i> 3 Ways to Add CSS</h3>
+          <ul style="margin-left:1.2rem; color:#e2e8f0;"><li><span class="highlight">Inline:</span> <code>style="color:blue;"</code> — specific element</li>
+          <li><span class="highlight">Internal:</span> <code>&lt;style&gt;</code> in &lt;head&gt; — single page</li>
+          <li><span class="highlight">External:</span> <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code> — reusable</li></ul>
+          <pre><code>&lt;style&gt;
+  body { background-color: powderblue; }
+  h1 { color: blue; }
+  p { color: red; }
+&lt;/style&gt;</code></pre>
+          <div style="background:powderblue; padding:0.8rem; border-radius:0.8rem; margin-top:0.5rem;">Example: powderblue background, blue headings, red paragraphs (internal CSS concept).</div>
+          </div><div class="insight-card"><i class="fas fa-globe"></i> External CSS is best for multi-page websites — one change updates everything.</div>`
+        },
+        { title: "<i class='fas fa-link'></i> HTML Links: Hyperlinks & target", subtitle: "Absolute vs Relative URLs, target attributes",
+          content: `<div class="two-column-split"><div class="col"><h4><i class="fas fa-external-link-alt"></i> Link Syntax</h4>
+          <pre><code>&lt;a href="https://example.com"&gt;Visit&lt;/a&gt;</code></pre>
+          <p><a href="https://www.w3schools.com/" target="_blank" style="color:#60a5fa;">Visit W3Schools (new tab)</a></p>
+          <p><strong>target</strong> values: _blank, _self, _parent, _top</p>
+          <p><a href="mailto:someone@example.com" style="color:#60a5fa;">Send email</a> (mailto:)</p>
+          </div><div class="col"><h4><i class="fas fa-folder-open"></i> Relative URLs</h4>
+          <pre><code>&lt;a href="/css/default.asp"&gt;CSS Tutorial&lt;/a&gt;
+&lt;a href="about.html"&gt;About&lt;/a&gt;</code></pre>
+          <p><a href="#" style="color:#60a5fa;">Relative link demo (same folder)</a></p>
+          <button onclick="alert('JavaScript link example')" style="margin-top:0.5rem;">Button as Link</button>
+          </div></div><div class="insight-card"><i class="fas fa-info-circle"></i> Use <code>title</code> attribute for tooltip: <code>&lt;a title="Go to HTML section"&gt;</code></div>`
+        },
+        { title: "<i class='fas fa-paint-brush'></i> Styling Links & Link Buttons", subtitle: "a:link, a:visited, a:hover, a:active — CSS pseudo-classes",
+          content: `<div class="concept-box"><h3><i class="fas fa-mouse-pointer"></i> Link States</h3>
+          <pre><code>a:link { color: green; text-decoration: none; }
+a:visited { color: pink; }
+a:hover { color: red; text-decoration: underline; }
+a:active { color: yellow; }</code></pre>
+          <p><a href="#" id="demoLink" style="color:green; text-decoration:none;">Hover over me (green → red)</a></p>
+          <style>#demoLink:hover { color: red !important; text-decoration: underline; }</style>
+          <h4>Link Button Style</h4>
+          <pre><code>a { background-color: #f44336; padding: 15px 25px; display: inline-block; }</code></pre>
+          <a href="#" style="background-color:#f44336; color:white; padding:0.6rem 1.2rem; border-radius:2rem; text-decoration:none; display:inline-block;">This is a link button</a>
+          </div><div class="insight-card"><i class="fas fa-css3"></i> CSS transforms links into modern UI components.</div>`
+        },
+        { title: "<i class='fas fa-bookmark'></i> HTML Bookmarks (Jump Links)", subtitle: "Using id attribute to create page fragments",
+          content: `<div class="content-grid"><div class="concept-box"><h3><i class="fas fa-anchor"></i> Create bookmark</h3>
+          <pre><code>&lt;h2 id="C4"&gt;Chapter 4&lt;/h2&gt;
+&lt;a href="#C4"&gt;Jump to Chapter 4&lt;/a&gt;</code></pre>
+          <p><strong>Demo:</strong> <a href="#special-section" style="color:#fbbf24;">Jump to hidden bookmark section below</a> (this page scrolls)</p>
+          <div id="special-section" style="margin-top:1rem; background:#1e293b; padding:1rem; border-radius:1rem; scroll-margin-top:2rem;">
+            📍 <span class="highlight">You found the bookmark!</span> This is the target section. Bookmarks work within the same page or across pages: <code>page.html#C4</code>
+          </div>
+          </div><div class="concept-box"><h3><i class="fas fa-share-alt"></i> Cross-page bookmarks</h3>
+          <pre><code>&lt;a href="otherpage.html#section2"&gt;Go to Section 2&lt;/a&gt;</code></pre>
+          <p>Perfect for long documentation, FAQs, table of contents.</p>
+          </div></div><div class="insight-card"><i class="fas fa-lightbulb"></i> Use <code>scroll-margin-top</code> CSS to avoid fixed header overlap.</div>`
+        },
+        { title: "<i class='fas fa-chalkboard'></i> Complete Examples: Color & Quotes", subtitle: "Live demo combining blockquote, colors, RGB",
+          content: `<div class="concept-box"><h3><i class="fas fa-code"></i> Interactive snippet</h3>
+          <pre><code>&lt;blockquote style="background:rgba(59,130,246,0.2); border-left:4px solid #3b82f6;"&gt;
+  "The only limit is your imagination." — HTML/CSS
+&lt;/blockquote&gt;</code></pre>
+          <blockquote style="background:rgba(59,130,246,0.2); border-left:4px solid #3b82f6; padding:1rem; border-radius:0.8rem;">"The only limit is your imagination." — HTML/CSS</blockquote>
+          <div style="background:hsl(200,100%,50%); padding:0.5rem; margin-top:0.5rem;">HSL Blue background</div>
+          <div style="background:#ffaa66; padding:0.5rem; margin-top:0.5rem;">HEX #ffaa66 (warm tone)</div>
+          </div><div class="insight-card"><i class="fas fa-hand-peace"></i> Combine quotation elements with CSS for beautiful typography.</div>`
+        },
+        { title: "<i class='fas fa-question-circle'></i> Knowledge Check: Quotations & Colors", subtitle: "10 questions to test your understanding",
+          content: `<div class="qa-section" id="knowledge-qa" style="background:#0f172a; border-radius:1.5rem; padding:1rem;"><div class="qa-title"><i class="fas fa-puzzle-piece"></i> Click to reveal answers</div><div id="checkContainer"></div></div>`
+        },
+        { title: "<i class='fas fa-star-of-life'></i> Summary & Resources", subtitle: "What you've mastered",
+          content: `<div class="two-column-split"><div class="col"><h4>✅ Quotation Elements</h4><p>&lt;blockquote&gt;, &lt;q&gt;, &lt;abbr&gt;, &lt;address&gt;, &lt;cite&gt;, &lt;bdo&gt;</p><h4>🎨 Color Systems</h4><p>Color Names, RGB, RGBA, HEX, HSL, HSLA — all with alpha transparency support</p></div><div class="col"><h4>🔗 Links & CSS</h4><p>Absolute/relative URLs, target attribute, link pseudo-classes, button styling, bookmarks (fragment identifiers).</p><h4>📘 Next steps</h4><p>Practice building a colored navigation bar with bookmarks!</p></div></div><div class="insight-card"><i class="fas fa-check-circle"></i> Validate your HTML and experiment with DevTools.</div>`
+        }
+    ];
+
+    // Knowledge check questions (quotations, colors, links, css)
+    const qaChecklist = [
+        { q: "Which HTML element defines a long quotation that is indented by browsers?", a: "&lt;blockquote&gt; — use with optional cite attribute for source URL." },
+        { q: "What does RGB stand for and which values range (0-? )?", a: "Red, Green, Blue — each value 0-255. Example: rgb(255,0,0) is red." },
+        { q: "How to make a link open in a new browser tab?", a: "Add target='_blank' to the &lt;a&gt; tag: &lt;a href='url' target='_blank'&gt;" },
+        { q: "Which CSS property sets the background color of an element?", a: "background-color (or background shorthand). Example: style='background-color:Tomato;'" },
+        { q: "What is the difference between HEX #ff0000 and rgb(255,0,0)?", a: "They represent the same pure red color. HEX is base-16, RGB is decimal." },
+        { q: "What does the &lt;abbr&gt; element do?", a: "Defines abbreviation; title attribute provides full expansion on hover." },
+        { q: "Write an HSLA value with 50% opacity and pure red.", a: "hsla(0, 100%, 50%, 0.5) — hue 0 is red, saturation 100%, lightness 50%, alpha 0.5." },
+        { q: "What is a relative URL vs absolute URL?", a: "Absolute = full path (https://example.com/page). Relative = path within same site (images/logo.png)." },
+        { q: "How can you create a bookmark inside a webpage?", a: "Assign an id to an element (e.g., &lt;h2 id='tips'&gt;) and link using &lt;a href='#tips'&gt;." },
+        { q: "Which HTML entity would you use to display the ampersand (&) in text?", a: "&amp;amp; — because bare & could break HTML parsing." }
+    ];
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    const slideArea = document.getElementById('slideArea');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counterText = document.getElementById('counterText');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    function renderKnowledgeCheck() {
+        const container = document.getElementById('checkContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        qaChecklist.forEach((item, idx) => {
+            const qaDiv = document.createElement('div');
+            qaDiv.className = 'qa-item';
+            qaDiv.style.marginBottom = '0.8rem';
+            qaDiv.style.background = '#131b2e';
+            qaDiv.style.borderRadius = '1rem';
+            qaDiv.style.overflow = 'hidden';
+            qaDiv.innerHTML = `
+                <div class="qa-question" data-idx="${idx}" style="background:#1a2338; cursor:pointer; padding:0.8rem 1rem; display:flex; justify-content:space-between;">
+                    <span><strong>${idx+1}.</strong> ${item.q}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="qa-answer" id="knowledge-ans-${idx}" style="max-height:0; overflow:hidden; transition:0.3s; padding:0 1rem; background:#0f172a;">
+                    <p style="padding:0.6rem 0;">✅ <span class="highlight">Answer:</span> ${item.a}</p>
+                </div>
+            `;
+            container.appendChild(qaDiv);
+        });
+        document.querySelectorAll('#checkContainer .qa-question').forEach(q => {
+            q.addEventListener('click', (e) => {
+                const idx = q.getAttribute('data-idx');
+                const ansDiv = document.getElementById(`knowledge-ans-${idx}`);
+                const icon = q.querySelector('i');
+                if (ansDiv.classList.contains('show')) {
+                    ansDiv.classList.remove('show');
+                    ansDiv.style.maxHeight = '0';
+                    ansDiv.style.padding = '0 1rem';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    ansDiv.classList.add('show');
+                    ansDiv.style.maxHeight = '300px';
+                    ansDiv.style.padding = '0.5rem 1rem';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    }
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        const html = `<div class="slide-card"><div class="slide-title">${slide.title}</div><div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div><div class="slide-content">${slide.content}</div></div>`;
+        slideArea.innerHTML = html;
+        if (index === 10) renderKnowledgeCheck();
+        if (index === 8) {
+            // ensure bookmark section visible but no extra action needed
+            const special = document.getElementById('special-section');
+            if(special) special.scrollIntoView({behavior: 'smooth', block: 'center'});
+        }
+        counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === totalSlides-1);
+        updateDots(index);
+    }
+
+    function updateDots(activeIndex) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === activeIndex) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+    }
+    function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+    window.addEventListener('keydown', (e) => { if(e.key === 'ArrowRight') nextSlide(); if(e.key === 'ArrowLeft') prevSlide(); });
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    renderSlide(0);
+</script>
+</body>
+</html>

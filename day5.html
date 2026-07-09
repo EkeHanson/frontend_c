@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Week 6 · Day 1: HTML Forms + Character Entities | Data Analyst Program</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #0a0f1c;
+            color: #eef2ff;
+            line-height: 1.5;
+        }
+
+        .slide-container {
+            max-width: 100%;
+            padding: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .slide-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 1rem;
+            }
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: none;
+            padding: 0.5rem 0 5rem 0;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide-card {
+            background: #0f172ad9;
+            backdrop-filter: blur(2px);
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            border: 1px solid #334155;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
+        }
+
+        @media (min-width: 640px) {
+            .slide-card {
+                padding: 1.75rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .slide-card {
+                padding: 2rem;
+            }
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            word-break: break-word;
+        }
+
+        @media (min-width: 640px) {
+            h1 { font-size: 1.8rem; }
+        }
+
+        @media (min-width: 1024px) {
+            h1 { font-size: 2.2rem; }
+        }
+
+        h1 i { color: #8b5cf6; }
+
+        h2 {
+            font-size: 1.25rem;
+            margin: 1rem 0 0.75rem;
+            border-left: 4px solid #8b5cf6;
+            padding-left: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            word-break: break-word;
+        }
+
+        @media (min-width: 640px) {
+            h2 { font-size: 1.4rem; }
+        }
+
+        @media (min-width: 1024px) {
+            h2 { font-size: 1.6rem; }
+        }
+
+        h2 i { color: #8b5cf6; }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1.2rem 0;
+        }
+
+        .feature-card {
+            background: #1e293b;
+            border-radius: 1rem;
+            padding: 0.75rem;
+            flex: 1 1 calc(50% - 0.75rem);
+            min-width: 120px;
+            text-align: center;
+            border: 1px solid #334155;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 500px) {
+            .feature-card { flex: 1 1 calc(33.33% - 0.75rem); }
+        }
+
+        @media (min-width: 768px) {
+            .feature-card { font-size: 1rem; padding: 0.8rem; }
+        }
+
+        .feature-card i {
+            font-size: 1.3rem;
+            color: #8b5cf6;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .data-table {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 350px;
+            font-size: 0.75rem;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #8b5cf6;
+            padding: 0.5rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        @media (min-width: 640px) {
+            .data-table table { min-width: 400px; font-size: 0.8rem; }
+            .data-table th, .data-table td { padding: 0.6rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .data-table table { font-size: 0.9rem; }
+        }
+
+        .step-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .step-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.6rem;
+            position: relative;
+            font-size: 0.85rem;
+            word-break: break-word;
+        }
+
+        @media (min-width: 640px) {
+            .step-list li { font-size: 0.9rem; padding-left: 1.8rem; }
+        }
+
+        .step-list li i {
+            position: absolute;
+            left: 0;
+            top: 0.15rem;
+            color: #8b5cf6;
+        }
+
+        .warning-box {
+            background: #1a1a2a;
+            border-left: 5px solid #8b5cf6;
+            padding: 0.75rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            font-size: 0.8rem;
+            word-break: break-word;
+        }
+
+        @media (min-width: 640px) {
+            .warning-box { font-size: 0.85rem; padding: 0.8rem; }
+        }
+
+        .activity {
+            background: #1e293b;
+            border-radius: 1rem;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            border-left: 3px solid #8b5cf6;
+            font-size: 0.8rem;
+            word-break: break-word;
+        }
+
+        .formula-box {
+            background: #111827;
+            border-radius: 0.8rem;
+            padding: 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: #c4b5fd;
+            margin: 0.75rem 0;
+            border: 1px solid #8b5cf6;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        @media (min-width: 640px) {
+            .formula-box { font-size: 0.8rem; padding: 0.75rem 1rem; }
+        }
+
+        .demo-form {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #8b5cf6;
+        }
+
+        .demo-form input, .demo-form select, .demo-form textarea {
+            background: #1e293b;
+            color: white;
+            border: 1px solid #8b5cf6;
+            padding: 10px 12px;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 6px;
+            font-size: 0.9rem;
+        }
+
+        .demo-form label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .demo-form > div {
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .demo-form .form-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .demo-form .form-row > div {
+                flex: 1;
+                min-width: 180px;
+            }
+        }
+
+        .qa-card {
+            background: #111827;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #2d3a5e;
+        }
+
+        .qa-question {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            word-break: break-word;
+        }
+
+        .qa-question i { color: #8b5cf6; }
+
+        .toggle-answer {
+            background: #1e293b;
+            border: none;
+            color: #c4b5fd;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .toggle-answer:hover { background: #8b5cf6; color: white; }
+
+        .answer-text {
+            display: none;
+            background: #0f172a;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #10b981;
+            font-size: 0.8rem;
+            word-break: break-word;
+        }
+
+        .answer-text.show { display: block; }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            background: #0f172ad9;
+            backdrop-filter: blur(12px);
+            border-radius: 3rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #334155;
+            z-index: 20;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media (min-width: 640px) {
+            .nav-controls { gap: 0.8rem; padding: 0.5rem 1rem; }
+        }
+
+        .nav-btn {
+            background: #1e293b;
+            border: none;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.7rem;
+        }
+
+        @media (min-width: 640px) {
+            .nav-btn { padding: 0.5rem 1rem; font-size: 0.8rem; gap: 0.4rem; }
+        }
+
+        .nav-btn:hover { background: #8b5cf6; }
+
+        .slide-counter {
+            background: #111827;
+            padding: 0.25rem 0.6rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .complete-area {
+            position: fixed;
+            bottom: 4.5rem;
+            left: 0.5rem;
+            right: 0.5rem;
+            background: #0f172ad9;
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 0.5rem;
+            font-size: 0.6rem;
+            z-index: 20;
+            border: 1px solid #8b5cf6;
+            text-align: center;
+            max-width: calc(100% - 1rem);
+        }
+
+        @media (min-width: 640px) {
+            .complete-area { left: 1rem; right: auto; max-width: 220px; bottom: 5rem; }
+        }
+
+        .complete-btn {
+            background: #8b5cf6;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            color: white;
+            font-size: 0.65rem;
+            margin-top: 4px;
+        }
+
+        .diacritic-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: space-between;
+            background: #111827;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .diacritic-card {
+            background: #1e293b;
+            padding: 0.6rem;
+            border-radius: 1rem;
+            text-align: center;
+            flex: 1 1 calc(33% - 0.75rem);
+            min-width: 70px;
+            font-size: 0.8rem;
+        }
+
+        code {
+            background: #00000055;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.4rem;
+            font-size: 0.8em;
+            word-break: break-word;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.65rem;
+            color: #6c7a9e;
+            margin-top: 1rem;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container" id="slideContainer">
+    <!-- SLIDE 1: Introduction -->
+    <div class="slide active" data-slide="0">
+        <div class="slide-card">
+            <div style="background:#1e293b; display:inline-block; padding:0.2rem 0.8rem; border-radius:2rem; margin-bottom:1rem; font-size:0.7rem;">
+                <i class="fas fa-calendar-week"></i> Week 6 · Day 1 | HTML Forms
+            </div>
+            <h1><i class="fas fa-window-maximize"></i> HTML Forms: Collecting User Input</h1>
+            <p style="font-size:0.9rem; margin:0.8rem 0;"><strong>An HTML form is used to collect user input. The user input is most often sent to a server for processing.</strong></p>
+            <div class="demo-form">
+                <div style="display:flex; flex-direction:column; gap:0.8rem;">
+                    <div><label>First name:</label> <input type="text" value="John" style="width:100%;"></div>
+                    <div><label>Last name:</label> <input type="text" value="Doe" style="width:100%;"></div>
+                </div>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card"><i class="fas fa-code"></i> &lt;form&gt;</div>
+                <div class="feature-card"><i class="fas fa-keyboard"></i> &lt;input&gt;</div>
+                <div class="feature-card"><i class="fas fa-cog"></i> Attributes</div>
+                <div class="feature-card"><i class="fas fa-list"></i> Elements</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: The <form> Element -->
+    <div class="slide" data-slide="1">
+        <div class="slide-card">
+            <h2><i class="fas fa-code"></i> The &lt;form&gt; Element</h2>
+            <p>The HTML <code>&lt;form&gt;</code> element is used to create an HTML form for user input:</p>
+            <div class="formula-box">
+                &lt;form&gt;<br>
+                &nbsp;&nbsp;. form elements .<br>
+                &lt;/form&gt;
+            </div>
+            <p>The <code>&lt;form&gt;</code> element is a <strong>container</strong> for different types of input elements, such as: text fields, checkboxes, radio buttons, submit buttons, etc.</p>
+            <div class="warning-box">
+                <i class="fas fa-info-circle"></i> All the different form elements are covered in this chapter: HTML Form Elements.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: The <input> Element -->
+    <div class="slide" data-slide="2">
+        <div class="slide-card">
+            <h2><i class="fas fa-keyboard"></i> The &lt;input&gt; Element</h2>
+            <p>The HTML <code>&lt;input&gt;</code> element is the <strong>most used form element</strong>.</p>
+            <p>An <code>&lt;input&gt;</code> element can be displayed in many ways, depending on the <strong>type</strong> attribute.</p>
+            <div class="data-table">
+                <table>
+                    <tr><th>Type</th><th>Description</th></tr>
+                    <tr>&lt;input type="text"&gt;</td><td>Single-line text input</div> </div>
+                    <tr>&lt;input type="radio"&gt;</td><td>Radio button (one of many)</div> </div>
+                    <tr>&lt;input type="checkbox"&gt;</td><td>Checkbox (zero or more)</div> </div>
+                    <tr>&lt;input type="submit"&gt;</td><td>Submit button</div> </div>
+                    <tr>&lt;input type="button"&gt;</td><td>Clickable button</div> </div>
+                </table>
+            </div>
+            <div class="activity">All the different input types are covered in the next chapter: HTML Input Types.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Form Attributes - Action -->
+    <div class="slide" data-slide="3">
+        <div class="slide-card">
+            <h2><i class="fas fa-cog"></i> The Action Attribute</h2>
+            <p>The <strong>action</strong> attribute defines where to send form data when submitted.</p>
+            <div class="formula-box">
+                &lt;form action="/action_page.php"&gt;<br>
+                &nbsp;&nbsp;&lt;label for="fname"&gt;First name:&lt;/label&gt;<br>
+                &nbsp;&nbsp;&lt;input type="text" id="fname" name="fname"&gt;<br>
+                &nbsp;&nbsp;&lt;input type="submit" value="Submit"&gt;<br>
+                &lt;/form&gt;
+            </div>
+            <div class="warning-box">Tip: If the action attribute is omitted, the action is set to the current page.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: Form Attributes - Target -->
+    <div class="slide" data-slide="4">
+        <div class="slide-card">
+            <h2><i class="fas fa-cog"></i> The Target Attribute</h2>
+            <p>The <strong>target</strong> attribute specifies where to display the response after submitting the form.</p>
+            <div class="data-table">
+                <table>
+                    <tr><th>Value</th><th>Description</th></tr>
+                    <td>_blank</div> </div><td>New window or tab</div> </div>
+                    <td>_self</div> </div><td>Current window (default)</div> </div>
+                    <td>_parent</div> </div><td>Parent frame</div> </div>
+                    <td>_top</div> </div><td>Full body of window</div> </div>
+                </table>
+            </div>
+            <div class="formula-box">&lt;form action="/action_page.php" target="_blank"&gt;</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: Form Attributes - Method -->
+    <div class="slide" data-slide="5">
+        <div class="slide-card">
+            <h2><i class="fas fa-cog"></i> The Method Attribute</h2>
+            <p>The <strong>method</strong> attribute specifies the HTTP method (GET or POST).</p>
+            <div class="formula-box">&lt;form method="get"&gt;</div>
+            <div class="formula-box">&lt;form method="post"&gt;</div>
+            <div class="warning-box">
+                <strong>📌 GET:</strong> Appends data to URL (visible, 2048 char limit, bookmarkable)<br><br>
+                <strong>📌 POST:</strong> Sends data in HTTP body (invisible, no size limit, more secure)
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: The <label> and <select> Elements -->
+    <div class="slide" data-slide="6">
+        <div class="slide-card">
+            <h2><i class="fas fa-tags"></i> The &lt;label&gt; Element</h2>
+            <p>The <code>&lt;label&gt;</code> element defines a label for form elements, improving accessibility and click area.</p>
+            
+            <h2 style="margin-top:1rem;">The &lt;select&gt; Element</h2>
+            <p>The <code>&lt;select&gt;</code> element defines a drop-down list:</p>
+            <div class="formula-box">
+                &lt;label for="cars"&gt;Choose a car:&lt;/label&gt;<br>
+                &lt;select id="cars" name="cars"&gt;<br>
+                &nbsp;&nbsp;&lt;option value="volvo"&gt;Volvo&lt;/option&gt;<br>
+                &nbsp;&nbsp;&lt;option value="saab" selected&gt;Saab&lt;/option&gt;<br>
+                &lt;/select&gt;
+            </div>
+            <div class="warning-box">
+                • Use <strong>selected</strong> for pre-selected options<br>
+                • Use <strong>size</strong> for number of visible values<br>
+                • Use <strong>multiple</strong> for multi-select
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: The <textarea> and <button> -->
+    <div class="slide" data-slide="7">
+        <div class="slide-card">
+            <h2><i class="fas fa-edit"></i> The &lt;textarea&gt; Element</h2>
+            <p>The <code>&lt;textarea&gt;</code> defines a multi-line input field:</p>
+            <div class="formula-box">
+                &lt;textarea name="message" rows="4" cols="30"&gt;Text here...&lt;/textarea&gt;
+            </div>
+            <h2>The &lt;button&gt; Element</h2>
+            <p>The <code>&lt;button&gt;</code> defines a clickable button:</p>
+            <div class="formula-box">
+                &lt;button type="button" onclick="alert('Hello!')"&gt;Click Me&lt;/button&gt;
+            </div>
+            <div class="warning-box">
+                <strong>Important:</strong> Always specify the <strong>type</strong> attribute for buttons.
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: The <fieldset>, <legend>, <datalist> -->
+    <div class="slide" data-slide="8">
+        <div class="slide-card">
+            <h2><i class="fas fa-layer-group"></i> Grouping & Advanced Elements</h2>
+            <p><code>&lt;fieldset&gt;</code> groups related data, <code>&lt;legend&gt;</code> provides a caption. <code>&lt;datalist&gt;</code> offers autocomplete options.</p>
+            <div class="formula-box">
+                &lt;fieldset&gt;<br>
+                &nbsp;&nbsp;&lt;legend&gt;Personal Info&lt;/legend&gt;<br>
+                &nbsp;&nbsp;&lt;input list="browsers"&gt;<br>
+                &nbsp;&nbsp;&lt;datalist id="browsers"&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Chrome&lt;/option&gt;<br>
+                &nbsp;&nbsp;&lt;/datalist&gt;<br>
+                &lt;/fieldset&gt;
+            </div>
+            <div class="activity">The <code>&lt;output&gt;</code> element represents the result of a calculation.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: HTML Form Elements Reference -->
+    <div class="slide" data-slide="9">
+        <div class="slide-card">
+            <h2><i class="fas fa-list"></i> Form Elements Reference</h2>
+            <div class="data-table">
+                <table>
+                    <tr><th>Tag</th><th>Description</th></tr>
+                    <td>&lt;form&gt;</div> <td>Defines a form</div> </div>
+                    <td>&lt;input&gt;</div> <td>Input control</div> </div>
+                    <td>&lt;textarea&gt;</div> <td>Multi-line input</div> </div>
+                    <td>&lt;label&gt;</div> <td>Label for input</div> </div>
+                    <td>&lt;fieldset&gt;</div> <td>Groups elements</div> </div>
+                    <td>&lt;select&gt;</div> <td>Drop-down list</div> </div>
+                    <td>&lt;button&gt;</div> <td>Clickable button</div> </div>
+                    <td>&lt;datalist&gt;</div> <td>Pre-defined options</div> </div>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: Complete Form Example -->
+    <div class="slide" data-slide="10">
+        <div class="slide-card">
+            <h2><i class="fas fa-file-code"></i> Complete Form Example</h2>
+            <div class="demo-form">
+                <form action="#" method="post">
+                    <div><label>First name:</label> <input type="text" value="John"></div>
+                    <div><label>Last name:</label> <input type="text" value="Doe"></div>
+                    <div><label>Email:</label> <input type="email" placeholder="john@example.com"></div>
+                    <div><label>Choose a car:</label>
+                        <select>
+                            <option>Volvo</option>
+                            <option selected>Fiat</option>
+                        </select>
+                    </div>
+                    <div><label>Message:</label> <textarea rows="3" placeholder="Type here..."></textarea></div>
+                    <div class="btn-group">
+                        <input type="submit" value="Submit" style="background:#8b5cf6; width:auto;">
+                        <input type="reset" value="Reset" style="background:#e53e3e; width:auto;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: 10 Questions -->
+    <div class="slide" data-slide="11">
+        <div class="slide-card">
+            <h2><i class="fas fa-question-circle"></i> Knowledge Check: 10 Questions</h2>
+            <div id="qa-list"></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 13: HTML Character Entities (APPENDED) -->
+    <div class="slide" data-slide="12">
+        <div class="slide-card">
+            <h2><i class="fas fa-symbol"></i> HTML Character Entities</h2>
+            <div class="data-table">
+                <table>
+                    <thead><tr><th>Result</th><th>Description</th><th>Name</th><th>Number</th></tr></thead>
+                    <tbody>
+                        <tr><td>&nbsp;</td><td>non-breaking space</td><td>&amp;nbsp;</td><td>&amp;#160;</td></tr>
+                        <tr><td>&lt;</td><td>less than</td><td>&amp;lt;</td><td>&amp;#60;</td></tr>
+                        <tr><td>&gt;</td><td>greater than</td><td>&amp;gt;</td><td>&amp;#62;</td></tr>
+                        <tr><td>&amp;</td><td>ampersand</td><td>&amp;amp;</td><td>&amp;#38;</td></tr>
+                        <tr><td>&quot;</td><td>double quote</td><td>&amp;quot;</td><td>&amp;#34;</td></tr>
+                        <tr><td>&apos;</td><td>single quote</td><td>&amp;apos;</td><td>&amp;#39;</td></tr>
+                        <tr><td>&cent;</td><td>cent</td><td>&amp;cent;</td><td>&amp;#162;</td></tr>
+                        <tr><td>&pound;</td><td>pound</td><td>&amp;pound;</td><td>&amp;#163;</td></tr>
+                        <tr><td>&yen;</td><td>yen</td><td>&amp;yen;</td><td>&amp;#165;</td></tr>
+                        <tr><td>&euro;</td><td>euro</td><td>&amp;euro;</td><td>&amp;#8364;</td></tr>
+                        <tr><td>&copy;</td><td>copyright</td><td>&amp;copy;</td><td>&amp;#169;</td></tr>
+                        <tr><td>&reg;</td><td>registered</td><td>&amp;reg;</td><td>&amp;#174;</td></tr>
+                        <tr><td>&trade;</td><td>trademark</td><td>&amp;trade;</td><td>&amp;#8482;</td></tr>
+                    </tbody>
+                </div>
+            </div>
+            <div class="warning-box"><i class="fas fa-exclamation-triangle"></i> <strong>Note:</strong> Entity names are case sensitive.</div>
+            <div class="demo-form">Live: &copy; 2025 | &euro; 49.99 | &trade; Premium</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 14: Combining Diacritical Marks (APPENDED) -->
+    <div class="slide" data-slide="13">
+        <div class="slide-card">
+            <h2><i class="fas fa-diacritic"></i> Combining Diacritical Marks</h2>
+            <p>Diacritical marks can be combined with letters to produce characters not in the basic character set.</p>
+            <div class="data-table">
+                <table>
+                    <thead><tr><th>Mark</th><th>Character</th><th>Construct</th><th>Result</th></tr></thead>
+                    <tbody>
+                        <tr><td>&#768;</td><td>a</td><td>a&amp;#768;</td><td>à</td></tr>
+                        <tr><td>&#769;</td><td>a</td><td>a&amp;#769;</td><td>á</td></tr>
+                        <tr><td>&#770;</td><td>a</td><td>a&amp;#770;</td><td>â</td></tr>
+                        <tr><td>&#771;</td><td>a</td><td>a&amp;#771;</td><td>ã</td></tr>
+                        <tr><td>&#768;</td><td>O</td><td>O&amp;#768;</td><td>Ò</td></tr>
+                        <tr><td>&#769;</td><td>O</td><td>O&amp;#769;</td><td>Ó</td></tr>
+                        <tr><td>&#770;</td><td>O</td><td>O&amp;#770;</td><td>Ô</td></tr>
+                        <tr><td>&#771;</td><td>O</td><td>O&amp;#771;</td><td>Õ</td></tr>
+                    </tbody>
+                </div>
+            </div>
+            <div class="activity">
+                <strong>Examples:</strong> Caff&amp;egrave; = Caffè | Expos&amp;eacute; = Exposé<br>
+                <strong>Combining:</strong> a&amp;#768; = à &nbsp; e&amp;#769; = é
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 15: Completion -->
+    <div class="slide" data-slide="14">
+        <div class="slide-card">
+            <h2><i class="fas fa-flag-checkered"></i> Week 6 · Day 1 Completed! 🎉</h2>
+            <p>You have successfully learned:</p>
+            <ul class="step-list">
+                <li><i class="fas fa-check-circle"></i> The &lt;form&gt; element and how it collects user input</li>
+                <li><i class="fas fa-check-circle"></i> Form attributes: action, target, method</li>
+                <li><i class="fas fa-check-circle"></i> All form elements: input, label, select, textarea, button, fieldset</li>
+                <li><i class="fas fa-check-circle"></i> GET vs POST methods</li>
+                <li><i class="fas fa-check-circle"></i> <strong>HTML Character Entities</strong> (&copy;, &euro;, &lt;, &gt;)</li>
+                <li><i class="fas fa-check-circle"></i> <strong>Combining Diacritical Marks</strong> (à, á, â, ã, Ò, Ó)</li>
+            </ul>
+            <div id="completionStatusMsg" style="background:#1e293b; border-radius:1rem; padding:1rem; text-align:center; margin-top:1rem;">
+                <button id="slideCompleteBtn" class="complete-btn"><i class="fas fa-check-double"></i> Mark Day Completed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation -->
+<div class="nav-controls">
+    <button class="nav-btn" id="prevSlideBtn"><i class="fas fa-arrow-left"></i> Prev</button>
+    <div class="slide-counter" id="slideCounter">1 / 15</div>
+    <button class="nav-btn" id="nextSlideBtn">Next <i class="fas fa-arrow-right"></i></button>
+</div>
+<div class="complete-area">
+    <i class="fas fa-info-circle"></i> ← → keys to navigate
+</div>
+
+<script>
+    const questionsData = [
+        { q: "What is an HTML form used for?", a: "Collecting user input, sent to a server for processing." },
+        { q: "What does the 'action' attribute do?", a: "Specifies where to send form-data when submitted." },
+        { q: "Difference between GET and POST?", a: "GET appends to URL (visible, limited). POST sends in body (invisible, no limit)." },
+        { q: "What does 'target=\"_blank\"' do?", a: "Opens response in a new tab or window." },
+        { q: "What does 'novalidate' do?", a: "Prevents browser form validation on submit." },
+        { q: "Which element creates multi-line input?", a: "The &lt;textarea&gt; element." },
+        { q: "Purpose of &lt;label&gt;?", a: "Labels form elements, improves accessibility and click area." },
+        { q: "How to create a drop-down list?", a: "Use &lt;select&gt; with &lt;option&gt; elements." },
+        { q: "What does &amp;euro; display?", a: "The euro symbol (€)." },
+        { q: "How to make an 'e' with acute accent using diacritic?", a: "e&amp;#769; produces é" }
+    ];
+
+    const qaContainer = document.getElementById("qa-list");
+    if (qaContainer) {
+        questionsData.forEach((item, idx) => {
+            const qaDiv = document.createElement("div");
+            qaDiv.className = "qa-card";
+            qaDiv.innerHTML = `
+                <div class="qa-question"><i class="fas fa-question-circle"></i> ${idx+1}. ${item.q}</div>
+                <button class="toggle-answer" data-idx="${idx}"><i class="fas fa-eye"></i> Show answer</button>
+                <div class="answer-text" id="answer-${idx}">${item.a}</div>
+            `;
+            qaContainer.appendChild(qaDiv);
+        });
+        document.querySelectorAll('.toggle-answer').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = btn.getAttribute('data-idx');
+                const ans = document.getElementById(`answer-${idx}`);
+                if (ans) {
+                    ans.classList.toggle('show');
+                    btn.innerHTML = ans.classList.contains('show') ? '<i class="fas fa-eye-slash"></i> Hide' : '<i class="fas fa-eye"></i> Show answer';
+                }
+            });
+        });
+    }
+
+    const slides = document.querySelectorAll('.slide');
+    let currentIdx = 0;
+    const totalSlides = slides.length;
+    function updateSlides() {
+        slides.forEach((s, i) => i === currentIdx ? s.classList.add('active') : s.classList.remove('active'));
+        document.getElementById('slideCounter').innerText = `${currentIdx+1} / ${totalSlides}`;
+    }
+    document.getElementById('nextSlideBtn')?.addEventListener('click', () => { if (currentIdx < totalSlides-1) { currentIdx++; updateSlides(); } });
+    document.getElementById('prevSlideBtn')?.addEventListener('click', () => { if (currentIdx > 0) { currentIdx--; updateSlides(); } });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); if (currentIdx < totalSlides-1) { currentIdx++; updateSlides(); } }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); if (currentIdx > 0) { currentIdx--; updateSlides(); } }
+    });
+
+    const LESSON_ID = 16;
+    const STORAGE_KEY = "data_analyst_visited";
+    function getVisitedSet() { const stored = localStorage.getItem(STORAGE_KEY); return stored ? new Set(JSON.parse(stored)) : new Set(); }
+    function markCompleted() {
+        const visited = getVisitedSet();
+        if (!visited.has(LESSON_ID)) {
+            visited.add(LESSON_ID);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify([...visited]));
+            alert("✅ Week 6 Day 1 completed!");
+            if (confirm("Return to landing page?")) window.location.href = "index.html";
+        } else alert("You already completed this lesson.");
+    }
+    document.getElementById('slideCompleteBtn')?.addEventListener('click', markCompleted);
+    updateSlides();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator Project!!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="calc-card">
+      <h1 class="title">Calculator<span>r</span> Project!</h1>
+     
+      <div class="calc-row">
+        <label>Enter the first number Here</label>
+        <input type="text" id="first_number" class="calc-input" placeholder="0">
+      </div>
+
+      <div class="calc-row operator-row">
+        <label>Choose an Operator</label>
+        <select class="calc-select" id="operatorSelect">
+          <option value="+">Plus (+)</option>
+          <option value="-">Minus (-)</option>
+          <option value="*">Times (*)</option>
+          <option value="/">Divide (/)</option>
+          <option value="%">Modulus (%)</option>
+        </select>
+      </div>
+
+      <div class="calc-row">
+        <label>Enter the Second number Here</label>
+        <input type="text" id="second_number" class="calc-input" placeholder="0">
+      </div>
+
+      <div class="calc-row">
+        <input type="submit" id="send" class="calc-submit" value="=">
+      </div>
+
+      <p id="currentTime"></p>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

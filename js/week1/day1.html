@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1: Introduction to JavaScript | JS Bootcamp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f5;
+            color: #1e1b13;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .slide-deck {
+            max-width: 1200px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .progress-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 12.5%;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .slide-counter {
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .slide-content {
+            min-height: 400px;
+            padding: 0.5rem 0;
+        }
+
+        .slide-tag {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #475569;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+        }
+
+        .slide-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+        }
+
+        .slide-title i {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-right: 0.6rem;
+        }
+
+        .slide-desc {
+            font-size: 1.05rem;
+            color: #334155;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.4rem 0;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .feature-list li i {
+            color: #2563eb;
+            width: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid #e2e8f0;
+            color: #475569;
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover { border-color: #2563eb; color: #0f172a; background: #f8fafc; }
+        .nav-btn.primary {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: #ffffff;
+        }
+        .nav-btn.primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+        .nav-btn:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .dot-indicators {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: #2563eb;
+            width: 28px;
+            border-radius: 20px;
+        }
+
+        .code-block {
+            background: #1e293b;
+            border-radius: 0.8rem;
+            padding: 1rem 1.2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            overflow-x: auto;
+            margin: 0.75rem 0 0.5rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.6;
+        }
+
+        .code-block .c { color: #94a3b8; }
+        .code-block .k { color: #c084fc; }
+        .code-block .s { color: #facc15; }
+        .code-block .f { color: #60a5fa; }
+        .code-block .n { color: #f472b6; }
+        .code-block .v { color: #34d399; }
+        .code-block .b { color: #a78bfa; }
+        .code-block .o { color: #fbbf24; }
+        .code-block .t { color: #f87171; }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .comparison-box {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .comparison-box h4 {
+            color: #0f172a;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-box h4 i {
+            color: #2563eb;
+            margin-right: 0.5rem;
+        }
+
+        .comparison-box .result {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .comparison-box .label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 0.3rem;
+        }
+
+        .comparison-box .code-snippet {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 0.5rem 0.8rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            margin: 0.3rem 0;
+        }
+
+        .comparison-box .what-it-does {
+            background: #f1f5f9;
+            padding: 0.5rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            margin: 0.3rem 0;
+            border-left: 3px solid #2563eb;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .info-box {
+            background: #f4f7fd;
+            border-left: 4px solid #2563eb;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.8rem;
+        }
+
+        .info-box i {
+            color: #2563eb;
+        }
+
+        .highlight-box {
+            background: #fef9e7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.8rem;
+        }
+
+        .highlight-box i {
+            color: #f59e0b;
+        }
+
+        .interactive-area {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            margin: 0.5rem 0;
+        }
+
+        .interactive-area button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0.2rem;
+            transition: 0.2s;
+        }
+
+        .interactive-area button:hover {
+            background: #1d4ed8;
+        }
+
+        .interactive-area button.reset-btn {
+            background: #64748b;
+        }
+
+        .interactive-area button.reset-btn:hover {
+            background: #475569;
+        }
+
+        .interactive-area input[type="text"] {
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            border: 1px solid #cbd5e1;
+            width: 200px;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fefaf5;
+            border-radius: 1rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.6rem;
+            text-align: left;
+            border-bottom: 1px solid #ece3d7;
+            font-size: 0.85rem;
+        }
+
+        .comparison-table th {
+            background: #f0f7fe;
+            color: #1e3a8a;
+        }
+
+        .keyword-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .keyword-grid span {
+            background: #f1f5f9;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .quiz-question {
+            background: #fef9f2;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 1rem;
+            border: 1px solid #fce4c1;
+        }
+
+        .quiz-question label {
+            display: block;
+            margin: 0.2rem 0;
+        }
+
+        .exercise-box {
+            background: #f0f7fe;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #dce3ef;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .output-demo {
+            background: #f1f5f9;
+            padding: 0.6rem 1rem;
+            border-radius: 0.8rem;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        .light-bulb-demo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .light-bulb-demo img {
+            width: 80px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            padding: 0.5rem;
+        }
+
+        .light-bulb-demo .bulb-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #2563eb20;
+            color: #2563eb;
+            padding: 0.1rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.3rem;
+        }
+
+        .badge-warning {
+            background: #f59e0b20;
+            color: #b45309;
+        }
+
+        .badge-success {
+            background: #10b98120;
+            color: #065f46;
+        }
+
+        .answer-key {
+            background: #f0f7ff;
+            padding: 1rem;
+            border-radius: 1rem;
+            display: none;
+            margin-top: 0.5rem;
+        }
+
+        .slide-footer {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #ece3d7;
+            margin-top: 1rem;
+            color: #7a6b5a;
+            font-size: 0.8rem;
+        }
+
+        .demo-box {
+            background: #ffffff;
+            border: 2px dashed #2563eb;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            min-height: 80px;
+        }
+
+        .demo-box .label {
+            font-size: 0.7rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .multi-action-demo {
+            background: #f0f7fe;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: 1px solid #dce3ef;
+        }
+
+        .multi-action-demo .action-result {
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            min-height: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .slide-deck { padding: 1.2rem; }
+            .slide-title { font-size: 1.6rem; }
+            .two-columns { grid-template-columns: 1fr; }
+            .three-columns { grid-template-columns: 1fr; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .slide-desc { font-size: 0.95rem; }
+        }
+
+        @media (max-width: 450px) {
+            .slide-deck { padding: 0.8rem; }
+            .slide-title { font-size: 1.3rem; }
+            .nav-btn { padding: 0.4rem 1rem; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-deck">
+        <div class="progress-row">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="slide-counter" id="slideCounter">1 / 15</span>
+        </div>
+        <div class="slide-content" id="slideContent"></div>
+        <div class="nav-buttons">
+            <button class="nav-btn" id="prevBtn"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="dot-indicators" id="dotContainer"></div>
+            <button class="nav-btn primary" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="slide-footer">
+            <i class="fas fa-code"></i> JavaScript Bootcamp — Day 1
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // Slide Data - Day 1: Introduction to JavaScript
+        // ============================================================
+        var slides = [
+            {
+                tag: 'Day 1 · Introduction',
+                title: 'Welcome to JavaScript!',
+                desc: 'The programming language of the web. Let\'s start your journey to becoming a JavaScript developer.',
+                icon: 'fa-js-square',
+                features: [
+                    'What is JavaScript and why it matters',
+                    'JavaScript syntax and statements',
+                    'Multi-Action Syntax — executing multiple statements in one event',
+                    'Variables: let, const, and var',
+                    'Data types and output methods',
+                    'innerHTML vs innerText — understand the difference',
+                    'Hands-on labs and interactive demos'
+                ],
+                extra: '<a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Bootcamp Hub</a>'
+            },
+            {
+                tag: 'What is JavaScript?',
+                title: 'What is JavaScript?',
+                desc: 'JavaScript is the programming language of the web. It brings pages to life — handling user interactions, updating content dynamically, and communicating with servers.',
+                icon: 'fa-globe',
+                features: [
+                    'One of the 3 core technologies of the web (with HTML and CSS)',
+                    'Invented by Brendan Eich in 1995',
+                    'Became an ECMA standard in 1997',
+                    'JavaScript and Java are completely different languages'
+                ],
+                info: 'You don\'t have to get or download JavaScript. It\'s already running in your browser!'
+            },
+            {
+                tag: 'Why Study JavaScript?',
+                title: 'Why Study JavaScript?',
+                desc: 'Understanding why JavaScript is one of the most important languages to learn.',
+                icon: 'fa-rocket',
+                features: [
+                    'It\'s Everywhere — Runs in every browser on every device',
+                    'High Demand — Among the most sought-after skills in the industry',
+                    'Versatile — Web apps, mobile apps, desktop apps, and server-side',
+                    'Beginner Friendly — Forgiving and you see results immediately'
+                ],
+                extra: 'The only way to become a clever programmer is to: <strong style="color:#2563eb;">Practice coding! Practice coding! Practice coding!</strong>'
+            },
+            {
+                tag: 'JavaScript Syntax',
+                title: 'JavaScript Syntax',
+                desc: 'Syntax are the rules how programs must be constructed.',
+                icon: 'fa-code',
+                code: '// How to Declare variables:\nlet x = 5;\nlet y = 6;\n\n// How to Compute values:\nlet z = x + y;\n\n// I am a Comment. I do Nothing',
+                features: [
+                    'JavaScript Values: Literals (fixed values) and Variables (containers)',
+                    'Numbers can be written with or without decimals: 10.50, 1001',
+                    'Strings are text within double or single quotes: "John Doe", \'John Doe\'',
+                    'JavaScript is Case Sensitive — lastName and lastname are different'
+                ]
+            },
+            {
+                tag: 'JavaScript Statements',
+                title: 'JavaScript Statements',
+                desc: 'A computer program is a list of "instructions" to be "executed" by a computer. These programming instructions are called statements.',
+                icon: 'fa-list',
+                code: 'let x, y, z;    // Statement 1\nx = 5;          // Statement 2\ny = 6;          // Statement 3\nz = x + y;      // Statement 4',
+                features: [
+                    'Semicolons separate JavaScript statements',
+                    'Code blocks group statements inside { } curly brackets',
+                    'JavaScript keywords identify the action to be performed'
+                ],
+                keywords: ['var', 'let', 'const', 'if', 'switch', 'for', 'function', 'return', 'try']
+            },
+            {
+                tag: 'Multi-Action Syntax',
+                title: 'Multi-Action Syntax',
+                desc: 'You can execute multiple JavaScript statements in a single event using semicolons to separate them.',
+                icon: 'fa-arrow-trend-up',
+                multi_action: true,
+                features: [
+                    'Multiple statements can be executed in one onclick event',
+                    'Statements are separated by semicolons (;)',
+                    'All statements run in order from left to right',
+                    'Useful for performing multiple actions with one click'
+                ],
+                code: '<button onclick="statement1; statement2; statement3">Click Me</button>',
+                info: 'Statements run sequentially — each statement completes before the next begins.'
+            },
+            {
+                tag: 'JavaScript Comments',
+                title: 'JavaScript Comments',
+                desc: 'Comments explain code and make it more readable. They can also prevent execution when testing.',
+                icon: 'fa-comment',
+                code: '// Change heading:\ndocument.getElementById("myH").innerHTML = "My First Page";\n\n// Change paragraph:\ndocument.getElementById("myP").innerHTML = "My first paragraph.";\n\n/*\nThe code below will change\nthe heading with id = "myH"\nand the paragraph with id = "myP"\n*/',
+                features: [
+                    'Single line comments start with //',
+                    'Multi-line comments start with /* and end with */',
+                    'Most common to use single line comments',
+                    'Block comments are often used for formal documentation'
+                ]
+            },
+            {
+                tag: 'What Can JavaScript Do?',
+                title: 'What Can JavaScript Do?',
+                desc: 'JavaScript can calculate, manipulate and validate data. It can update and change both HTML and CSS.',
+                icon: 'fa-magic',
+                features: [
+                    'Change HTML content: document.getElementById("demo").innerHTML = "Hello"',
+                    'Change CSS styles: document.getElementById("demo").style.fontSize = "35px"',
+                    'Hide/Show elements: display = "none" or "block"',
+                    'Change image sources: document.getElementById("myImage").src = "pic_bulbon.gif"'
+                ],
+                interactive: 'lightbulb'
+            },
+            {
+                tag: 'Output Methods',
+                title: 'JavaScript Output Methods',
+                desc: 'JavaScript can "display" data in different ways.',
+                icon: 'fa-display',
+                output_table: true,
+                features: [
+                    'innerHTML — Changes HTML content of an element',
+                    'innerText — Changes only plain text (no HTML)',
+                    'document.write() — Writes directly to the HTML document',
+                    'window.alert() — Shows a pop-up alert box',
+                    'console.log() — Outputs to browser console (for debugging)'
+                ],
+                extra: 'Using document.write() after the page loads will overwrite the entire page!'
+            },
+            {
+                tag: 'innerHTML vs innerText',
+                title: 'innerHTML vs innerText',
+                desc: 'Understanding the key difference between these two commonly used properties.',
+                icon: 'fa-code-compare',
+                comparison_demo: true,
+                features: [
+                    'innerHTML parses strings as working HTML elements',
+                    'innerText treats everything strictly as literal, unformatted plain text',
+                    'innerHTML can render HTML tags (like <b>, <i>, <h1>)',
+                    'innerText displays the exact text including the tags as plain text'
+                ],
+                info: 'Visual Comparison — Same input string: "Hello <b>World</b>"'
+            },
+            {
+                tag: 'Variables',
+                title: 'JavaScript Variables',
+                desc: 'JavaScript variables are containers for data. Variables can be declared in 4 ways.',
+                icon: 'fa-box',
+                code: '// Using let (Modern - Recommended)\nlet x = 5;\nlet y = 6;\nlet z = x + y;\n\n// Using const (Modern - Recommended)\nconst PI = 3.14159;\n\n// Using var (Older - Not Recommended)\nvar x = 5;\n\n// Automatically (Not Recommended)\nx = 5;',
+                features: [
+                    'Always declare variables',
+                    'Always use const if the value should not be changed',
+                    'Always use const if the type should not be changed (Arrays and Objects)',
+                    'Only use let if you cannot use const',
+                    'Avoid using var'
+                ]
+            },
+            {
+                tag: 'let vs const',
+                title: 'let vs const vs var',
+                desc: 'Understanding the differences between variable declarations in JavaScript.',
+                icon: 'fa-let',
+                comparison_table: true,
+                features: [
+                    'let — Block scope, can be updated, cannot be redeclared',
+                    'const — Block scope, cannot be updated, cannot be redeclared',
+                    'var — Function scope, can be updated, can be redeclared'
+                ]
+            },
+            {
+                tag: 'Data Types',
+                title: 'JavaScript Data Types',
+                desc: 'JavaScript has 8 data types. A variable can hold any of these types.',
+                icon: 'fa-database',
+                data_types: true,
+                features: [
+                    'String — Text in quotes: "Hello"',
+                    'Number — Mathematical values: 16, 3.14',
+                    'Boolean — true or false',
+                    'Object — Key-value pairs: {firstName:"John"}',
+                    'Undefined — Variable with no value',
+                    'Null — Represents object absence'
+                ],
+                extra: 'Use the typeof operator to find the type: typeof "" returns "string"'
+            },
+            {
+                tag: 'Labs & Exercises',
+                title: 'Hands-on Labs',
+                desc: 'Practice what you\'ve learned with these interactive labs.',
+                icon: 'fa-flask',
+                labs: true,
+                features: [
+                    'Lab 1: Greeting App — Ask for name and display greeting',
+                    'Lab 2: Simple Counter — Increment and reset counter',
+                    'Lab 3: Variables & Data Types — Declare variables with different types',
+                    'Lab 4: Multi-Action Demo — Execute multiple statements with one click'
+                ]
+            },
+            {
+                tag: 'Assessment',
+                title: 'Module 1 Assessment',
+                desc: 'Test your understanding of JavaScript basics.',
+                icon: 'fa-clipboard-list',
+                quiz: true,
+                features: [
+                    'Answer the quiz questions',
+                    'Check your answers with the answer key',
+                    'Complete the take-home assignment',
+                    'Ready for Day 2: Functions & Events!'
+                ]
+            }
+        ];
+
+        var currentIndex = 0;
+        var totalSlides = slides.length;
+
+        function renderSlide(index) {
+            var slide = slides[index];
+            var contentDiv = document.getElementById('slideContent');
+            var progressFill = document.getElementById('progressFill');
+            var counterSpan = document.getElementById('slideCounter');
+
+            var html = '';
+
+            // Tag
+            html += '<div class="slide-tag">' + slide.tag + '</div>';
+
+            // Title with icon
+            var title = slide.title;
+            if (slide.icon) {
+                title = '<i class="fab ' + slide.icon + '"></i> ' + slide.title;
+            }
+            html += '<div class="slide-title">' + title + '</div>';
+
+            // Description
+            html += '<div class="slide-desc">' + slide.desc + '</div>';
+
+            // Features list
+            if (slide.features) {
+                html += '<ul class="feature-list">';
+                for (var f = 0; f < slide.features.length; f++) {
+                    html += '<li><i class="fas fa-check-circle"></i> ' + slide.features[f] + '</li>';
+                }
+                html += '</ul>';
+            }
+
+            // Extra text
+            if (slide.extra) {
+                html += '<div class="info-box"><i class="fas fa-info-circle"></i> ' + slide.extra + '</div>';
+            }
+
+            // Info box
+            if (slide.info) {
+                html += '<div class="info-box"><i class="fas fa-lightbulb"></i> ' + slide.info + '</div>';
+            }
+
+            // Code block
+            if (slide.code) {
+                var lines = slide.code.split('\n');
+                var result = [];
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+                    var processed = line;
+                    processed = processed.replace(/^( +)?(#.*)$/, function(match, spaces, comment) {
+                        return (spaces || '') + '<span class="c">' + comment + '</span>';
+                    });
+                    processed = processed.replace(/\b(let|const|var|function|return|if|else|for|while|typeof|new|class|try|catch|finally|throw|switch|case|break|continue|import|export|default|from|as|extends|super|static|get|set)\b/g,
+                        '<span class="k">$1</span>');
+                    processed = processed.replace(/"(.*?)"/g, '<span class="s">"$1"</span>');
+                    processed = processed.replace(/'(.*?)'/g, '<span class="s">\'$1\'</span>');
+                    processed = processed.replace(/\b(\d+\.?\d*)\b/g, '<span class="n">$1</span>');
+                    processed = processed.replace(/\b(document|console|window|alert|prompt|getElementById|innerHTML|innerText|style|addEventListener)\b/g,
+                        '<span class="f">$1</span>');
+                    processed = processed.replace(/\b(true|false|null|undefined)\b/g, '<span class="b">$1</span>');
+                    result.push(processed);
+                }
+                html += '<div class="code-block">' + result.join('\n') + '</div>';
+            }
+
+            // Multi-Action Syntax Demo
+            if (slide.multi_action) {
+                html += '<div class="code-block">';
+                html += '&lt;button onclick="statement1; statement2; statement3"&gt;Click Me&lt;/button&gt;';
+                html += '</div>';
+
+                html += '<div class="multi-action-demo">';
+                html += '<h4><i class="fas fa-play-circle"></i> Live Demo: Multi-Action Button</h4>';
+                html += '<p style="font-size:0.9rem; color:#64748b; margin-bottom:0.5rem;">Click the button to execute multiple statements at once:</p>';
+                html += '<div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.5rem;">';
+                html += '<button onclick="multiActionDemo()" style="background:#2563eb; color:white; border:none; padding:0.5rem 1.5rem; border-radius:30px; cursor:pointer; font-weight:600;">';
+                html += '<i class="fas fa-bolt"></i> Multi-Action Button';
+                html += '</button>';
+                html += '<button onclick="resetMultiAction()" class="reset-btn" style="background:#64748b; color:white; border:none; padding:0.5rem 1.5rem; border-radius:30px; cursor:pointer; font-weight:600;">';
+                html += '<i class="fas fa-undo"></i> Reset';
+                html += '</button>';
+                html += '</div>';
+                html += '<div class="action-result" id="multiActionResult">';
+                html += 'Click the button to see multiple actions in sequence.';
+                html += '</div>';
+                html += '<div class="code-block" style="font-size:0.75rem; margin-top:0.5rem;">';
+                html += '// The code behind this button:\n';
+                html += 'function multiActionDemo() {\n';
+                html += '  document.getElementById("demo1").innerHTML = "Step 1: Hello!";\n';
+                html += '  document.getElementById("demo2").innerHTML = "Step 2: World!";\n';
+                html += '  document.getElementById("demo3").innerHTML = "Step 3: Done!";\n';
+                html += '}';
+                html += '</div>';
+                html += '<div class="three-columns" style="margin-top:0.5rem;">';
+                html += '<div class="info-box" style="margin:0;"><i class="fas fa-1"></i> <span id="demo1">Waiting...</span></div>';
+                html += '<div class="info-box" style="margin:0;"><i class="fas fa-2"></i> <span id="demo2">Waiting...</span></div>';
+                html += '<div class="info-box" style="margin:0;"><i class="fas fa-3"></i> <span id="demo3">Waiting...</span></div>';
+                html += '</div>';
+                html += '</div>';
+
+                html += '<div class="highlight-box">';
+                html += '<i class="fas fa-lightbulb"></i> <strong>Key Takeaway:</strong> ';
+                html += 'Multi-action syntax lets you execute multiple statements in one event. ';
+                html += 'Each statement runs in order, separated by semicolons.';
+                html += '</div>';
+            }
+
+            // Keywords grid
+            if (slide.keywords) {
+                html += '<div class="keyword-grid">';
+                for (var k = 0; k < slide.keywords.length; k++) {
+                    html += '<span>' + slide.keywords[k] + '</span>';
+                }
+                html += '</div>';
+            }
+
+            // Comparison table
+            if (slide.comparison_table) {
+                html += '<div class="comparison-table"><table>';
+                html += '<thead><tr><th>Feature</th><th>var</th><th>let</th><th>const</th></tr></thead><tbody>';
+                html += '<tr><td>Scope</td><td>Function/Global</td><td>Block { }</td><td>Block { }</td></tr>';
+                html += '<tr><td>Reassignment</td><td>Can update</td><td>Can update</td><td>Cannot update</td></tr>';
+                html += '<tr><td>Redeclaration</td><td>Can redeclare</td><td>Cannot redeclare</td><td>Cannot redeclare</td></tr>';
+                html += '<tr><td>Hoisting</td><td>Undefined</td><td>Not initialized</td><td>Not initialized</td></tr>';
+                html += '</tbody></table></div>';
+            }
+
+            // Output table
+            if (slide.output_table) {
+                html += '<div class="comparison-table"><table>';
+                html += '<thead><tr><th>Method</th><th>Description</th></tr></thead><tbody>';
+                html += '<tr><td><strong>innerHTML</strong></td><td>Changes HTML content of an element (parses HTML tags)</td></tr>';
+                html += '<tr><td><strong>innerText</strong></td><td>Changes only plain text (shows tags as text)</td></tr>';
+                html += '<tr><td><strong>document.write()</strong></td><td>Writes directly to HTML document</td></tr>';
+                html += '<tr><td><strong>window.alert()</strong></td><td>Shows a pop-up alert box</td></tr>';
+                html += '<tr><td><strong>console.log()</strong></td><td>Outputs to browser console</td></tr>';
+                html += '</tbody></table></div>';
+                html += '<div class="highlight-box"><i class="fas fa-exclamation-triangle"></i> <strong>Caution:</strong> Using document.write() after page load overwrites the entire page!</div>';
+            }
+
+            // innerHTML vs innerText Comparison Demo
+            if (slide.comparison_demo) {
+                html += '<div class="comparison-grid">';
+
+                // innerHTML Column
+                html += '<div class="comparison-box">';
+                html += '<h4><i class="fas fa-code"></i> element.innerHTML</h4>';
+                html += '<div class="code-snippet">element.innerHTML = "Hello &lt;b&gt;World&lt;/b&gt;";</div>';
+                html += '<div class="result" id="innerHTMLDemo"><b>World</b></div>';
+                html += '<div class="what-it-does">';
+                html += '<strong>What it does:</strong> Parses <b> as an actual HTML tag and bolds the word.';
+                html += '</div>';
+                html += '<div class="label"><i class="fas fa-check-circle" style="color:#10b981;"></i> Renders HTML elements</div>';
+                html += '</div>';
+
+                // innerText Column
+                html += '<div class="comparison-box">';
+                html += '<h4><i class="fas fa-font"></i> element.innerText</h4>';
+                html += '<div class="code-snippet">element.innerText = "Hello &lt;b&gt;World&lt;/b&gt;";</div>';
+                html += '<div class="result" id="innerTextDemo">Hello <b>World</b></div>';
+                html += '<div class="what-it-does">';
+                html += '<strong>What it does:</strong> Treats <b> as literal text. It literally prints out the tags on screen.';
+                html += '</div>';
+                html += '<div class="label"><i class="fas fa-info-circle" style="color:#64748b;"></i> Shows raw text including tags</div>';
+                html += '</div>';
+
+                html += '</div>';
+
+                // Interactive Demo
+                html += '<div class="interactive-area">';
+                html += '<h4><i class="fas fa-play-circle"></i> Try it yourself!</h4>';
+                html += '<p style="font-size:0.9rem; color:#64748b; margin-bottom:0.5rem;">Enter text with HTML tags and see the difference:</p>';
+                html += '<input type="text" id="htmlInput" value="Hello <b>World</b>" style="padding:0.4rem 0.8rem; border-radius:30px; border:1px solid #cbd5e1; width:100%; max-width:400px;">';
+                html += '<div style="margin-top:0.5rem;">';
+                html += '<button onclick="updateDemos()"><i class="fas fa-sync"></i> Update Both</button>';
+                html += '<button onclick="updateInnerHTML()" style="background:#f59e0b;"><i class="fas fa-code"></i> innerHTML</button>';
+                html += '<button onclick="updateInnerText()" style="background:#64748b;"><i class="fas fa-font"></i> innerText</button>';
+                html += '</div>';
+                html += '<div class="two-columns" style="margin-top:0.5rem;">';
+                html += '<div><div class="label" style="font-size:0.7rem; color:#64748b;">innerHTML result:</div><div id="demoInnerHTML" style="background:white; padding:0.5rem; border-radius:0.5rem; border:1px solid #e2e8f0; min-height:40px;"><b>World</b></div></div>';
+                html += '<div><div class="label" style="font-size:0.7rem; color:#64748b;">innerText result:</div><div id="demoInnerText" style="background:white; padding:0.5rem; border-radius:0.5rem; border:1px solid #e2e8f0; min-height:40px;">Hello <b>World</b></div></div>';
+                html += '</div>';
+                html += '</div>';
+
+                // Summary
+                html += '<div class="highlight-box">';
+                html += '<i class="fas fa-lightbulb"></i> <strong>Key Takeaway:</strong> ';
+                html += 'Use <code>innerHTML</code> when you want to render HTML elements. ';
+                html += 'Use <code>innerText</code> when you want to display raw text without formatting.';
+                html += '</div>';
+            }
+
+            // Data types
+            if (slide.data_types) {
+                html += '<div class="comparison-table"><table>';
+                html += '<thead><tr><th>Type</th><th>Description</th><th>Example</th></tr></thead><tbody>';
+                html += '<tr><td><strong>String</strong></td><td>Text in quotes</td><td><code>let color = "Yellow";</code></td></tr>';
+                html += '<tr><td><strong>Number</strong></td><td>Mathematical values</td><td><code>let length = 16;</code></td></tr>';
+                html += '<tr><td><strong>Boolean</strong></td><td>true or false</td><td><code>let x = true;</code></td></tr>';
+                html += '<tr><td><strong>Object</strong></td><td>Key-value pairs</td><td><code>const person = {firstName:"John"};</code></td></tr>';
+                html += '<tr><td><strong>Undefined</strong></td><td>No assigned value</td><td><code>let x;</code></td></tr>';
+                html += '<tr><td><strong>Null</strong></td><td>Object absence</td><td><code>let x = null;</code></td></tr>';
+                html += '</tbody></table></div>';
+            }
+
+            // Interactive - Lightbulb
+            if (slide.interactive === 'lightbulb') {
+                html += '<div class="interactive-area">';
+                html += '<h4><i class="fas fa-lightbulb"></i> Live Demo: Light Bulb</h4>';
+                html += '<p style="font-size:0.9rem; color:#64748b;">JavaScript can change HTML attribute values — like the src of an image.</p>';
+                html += '<div class="light-bulb-demo">';
+                html += '<img id="bulbImage" src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'40\' fill=\'%23e2e8f0\' stroke=\'%2394a3b8\' stroke-width=\'2\'/%3E%3C/svg%3E" alt="Light Bulb">';
+                html += '<div class="bulb-buttons">';
+                html += '<button onclick="turnOnBulb()" style="background:#f59e0b;"><i class="fas fa-power-off"></i> Turn On</button>';
+                html += '<button onclick="turnOffBulb()" style="background:#64748b;"><i class="fas fa-power-off"></i> Turn Off</button>';
+                html += '</div></div>';
+                html += '<div class="output-demo"><i class="fas fa-code"></i> <code>document.getElementById("bulbImage").src = "pic_bulbon.gif";</code></div>';
+                html += '</div>';
+
+                html += '<div class="interactive-area">';
+                html += '<h4><i class="fas fa-edit"></i> Try it: Change Text</h4>';
+                html += '<p id="demoText" style="font-size:1.1rem; font-weight:500; color:#1e293b; padding:0.5rem 0;">JavaScript can change HTML content.</p>';
+                html += '<button onclick="changeText()"><i class="fas fa-pen"></i> Change Text</button>';
+                html += '<button class="reset-btn" onclick="resetText()"><i class="fas fa-undo"></i> Reset</button>';
+                html += '<div class="output-demo"><i class="fas fa-code"></i> <code>document.getElementById("demoText").innerHTML = "Hello JavaScript!";</code></div>';
+                html += '</div>';
+
+                html += '<div class="interactive-area">';
+                html += '<h4><i class="fas fa-bell"></i> Alert Demo</h4>';
+                html += '<button onclick="showAlert()"><i class="fas fa-exclamation-triangle"></i> Try Alert</button>';
+                html += '<div class="output-demo"><i class="fas fa-code"></i> <code>alert("Hello from JavaScript!");</code></div>';
+                html += '</div>';
+            }
+
+            // Labs
+            if (slide.labs) {
+                html += '<div class="exercise-box">';
+                html += '<h3><i class="fas fa-tasks"></i> Lab 1: Greeting App</h3>';
+                html += '<p>Write a script that asks for the user\'s name and displays a greeting.</p>';
+                html += '<div class="code-block">';
+                html += '// Ask for name and display greeting\n';
+                html += 'let userName = prompt("What is your name?");\n';
+                html += 'alert("Hello, " + userName + "! Welcome to JavaScript!");\n';
+                html += 'console.log("User: " + userName);';
+                html += '</div>';
+                html += '<div class="interactive-area">';
+                html += '<p><strong>Try it:</strong></p>';
+                html += '<input type="text" id="greetNameInput" placeholder="Enter your name">';
+                html += '<button onclick="greetUser()"><i class="fas fa-hand-peace"></i> Greet Me</button>';
+                html += '<p id="greetOutput" style="margin-top:0.5rem; font-weight:600; color:#1e3a8a;"></p>';
+                html += '</div></div>';
+
+                html += '<div class="exercise-box">';
+                html += '<h3><i class="fas fa-calculator"></i> Lab 2: Simple Counter</h3>';
+                html += '<p>Build a counter that increments when you click a button.</p>';
+                html += '<div class="interactive-area">';
+                html += '<p><strong>Counter:</strong> <span id="counterDisplay" style="font-size:2rem; font-weight:700; color:#2563eb;">0</span></p>';
+                html += '<button onclick="incrementCounter()"><i class="fas fa-plus"></i> Increment</button>';
+                html += '<button class="reset-btn" onclick="resetCounter()"><i class="fas fa-undo"></i> Reset</button>';
+                html += '</div></div>';
+
+                html += '<div class="exercise-box">';
+                html += '<h3><i class="fas fa-cube"></i> Lab 3: Variables & Data Types</h3>';
+                html += '<p>Practice declaring variables with different data types.</p>';
+                html += '<div class="interactive-area">';
+                html += '<button onclick="showDataTypes()"><i class="fas fa-database"></i> Show Data Types</button>';
+                html += '<div id="dataTypeOutput" style="margin-top:0.5rem; font-weight:500; color:#1e3a8a;"></div>';
+                html += '</div></div>';
+
+                html += '<div class="exercise-box">';
+                html += '<h3><i class="fas fa-bolt"></i> Lab 4: Multi-Action Demo</h3>';
+                html += '<p>Practice using multi-action syntax to execute multiple statements at once.</p>';
+                html += '<div class="code-block">';
+                html += '// Multi-action demo\n';
+                html += 'function updateAll() {\n';
+                html += '  document.getElementById("output1").innerHTML = "Action 1";\n';
+                html += '  document.getElementById("output2").innerHTML = "Action 2";\n';
+                html += '  document.getElementById("output3").innerHTML = "Action 3";\n';
+                html += '  console.log("All actions completed!");\n';
+                html += '}';
+                html += '</div>';
+                html += '<div class="interactive-area">';
+                html += '<button onclick="multiActionDemo()"><i class="fas fa-bolt"></i> Run Multi-Action</button>';
+                html += '<button class="reset-btn" onclick="resetMultiAction()"><i class="fas fa-undo"></i> Reset</button>';
+                html += '<div class="three-columns" style="margin-top:0.5rem;">';
+                html += '<div class="info-box" style="margin:0;"><i class="fas fa-1"></i> <span id="lab4demo1">Waiting...</span></div>';
+                html += '<div class="info-box" style="margin:0;"><i class="fas fa-2"></i> <span id="lab4demo2">Waiting...</span></div>';
+                html += '<div class="info-box" style="margin:0;"><i class="fas fa-3"></i> <span id="lab4demo3">Waiting...</span></div>';
+                html += '</div></div></div>';
+            }
+
+            // Quiz
+            if (slide.quiz) {
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q1:</strong> What is the correct syntax for assigning a value to a variable?</p>';
+                html += '<label><input type="radio" name="q1" value="A"> A) x : 5</label>';
+                html += '<label><input type="radio" name="q1" value="B"> B) x = 5</label>';
+                html += '<label><input type="radio" name="q1" value="C"> C) x == 5</label>';
+                html += '<label><input type="radio" name="q1" value="D"> D) x -> 5</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q2:</strong> In HTML, JavaScript code must be inserted inside which tags?</p>';
+                html += '<label><input type="radio" name="q2" value="A"> A) &lt;script&gt; and &lt;/script&gt;</label>';
+                html += '<label><input type="radio" name="q2" value="B"> B) &lt;javascript&gt; and &lt;/javascript&gt;</label>';
+                html += '<label><input type="radio" name="q2" value="C"> C) &lt;head&gt; and &lt;/head&gt;</label>';
+                html += '<label><input type="radio" name="q2" value="D"> D) &lt;js&gt; and &lt;/js&gt;</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q3:</strong> What is NOT a correct syntax for writing output in JavaScript?</p>';
+                html += '<label><input type="radio" name="q3" value="A"> A) window.alert()</label>';
+                html += '<label><input type="radio" name="q3" value="B"> B) console.log()</label>';
+                html += '<label><input type="radio" name="q3" value="C"> C) body.html()</label>';
+                html += '<label><input type="radio" name="q3" value="D"> D) document.write()</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q4:</strong> Which property parses HTML tags and renders them as elements?</p>';
+                html += '<label><input type="radio" name="q4" value="A"> A) innerText</label>';
+                html += '<label><input type="radio" name="q4" value="B"> B) innerHTML</label>';
+                html += '<label><input type="radio" name="q4" value="C"> C) textContent</label>';
+                html += '<label><input type="radio" name="q4" value="D"> D) outerText</label>';
+                html += '</div>';
+
+                html += '<div class="quiz-question">';
+                html += '<p><i class="fas fa-question-circle"></i> <strong>Q5:</strong> How do you separate multiple statements in a single onclick event?</p>';
+                html += '<label><input type="radio" name="q5" value="A"> A) Using commas (,) </label>';
+                html += '<label><input type="radio" name="q5" value="B"> B) Using semicolons (;)</label>';
+                html += '<label><input type="radio" name="q5" value="C"> C) Using colons (:)</label>';
+                html += '<label><input type="radio" name="q5" value="D"> D) Using periods (.)</label>';
+                html += '</div>';
+
+                html += '<button class="btn-toggle" id="revealAnswersBtn"><i class="fas fa-key"></i> Reveal Answer Key</button>';
+                html += '<div id="answerKey" class="answer-key">';
+                html += '<i class="fas fa-check-double"></i> <strong>ANSWER KEY</strong><br>';
+                html += '<strong>Q1:</strong> B) x = 5<br>';
+                html += '<strong>Q2:</strong> A) &lt;script&gt; and &lt;/script&gt;<br>';
+                html += '<strong>Q3:</strong> C) body.html()<br>';
+                html += '<strong>Q4:</strong> B) innerHTML<br>';
+                html += '<strong>Q5:</strong> B) Using semicolons (;)<br>';
+                html += '</div>';
+            }
+
+            contentDiv.innerHTML = html;
+
+            // Initialize innerHTML/innerText demos
+            if (slide.comparison_demo) {
+                setTimeout(function() {
+                    document.getElementById('innerHTMLDemo').innerHTML = '<b>World</b>';
+                    document.getElementById('innerTextDemo').innerText = 'Hello <b>World</b>';
+                    document.getElementById('demoInnerHTML').innerHTML = '<b>World</b>';
+                    document.getElementById('demoInnerText').innerText = 'Hello <b>World</b>';
+                }, 50);
+            }
+
+            // Update progress
+            var progress = ((index + 1) / totalSlides) * 100;
+            progressFill.style.width = progress + '%';
+            counterSpan.textContent = (index + 1) + ' / ' + totalSlides;
+
+            // Update dots
+            var dots = document.querySelectorAll('.dot');
+            for (var d = 0; d < dots.length; d++) {
+                dots[d].className = 'dot' + (d === index ? ' active' : '');
+            }
+
+            // Update buttons
+            document.getElementById('prevBtn').disabled = (index === 0);
+            document.getElementById('nextBtn').disabled = (index === totalSlides - 1);
+            var nextBtn = document.getElementById('nextBtn');
+            if (index === totalSlides - 1) {
+                nextBtn.innerHTML = 'Done <i class="fas fa-check"></i>';
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+            }
+
+            currentIndex = index;
+        }
+
+        function goToSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= totalSlides) index = totalSlides - 1;
+            renderSlide(index);
+        }
+
+        function nextSlide() {
+            if (currentIndex < totalSlides - 1) {
+                goToSlide(currentIndex + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                goToSlide(currentIndex - 1);
+            }
+        }
+
+        // Initialize dots
+        function initDots() {
+            var container = document.getElementById('dotContainer');
+            container.innerHTML = '';
+            for (var i = 0; i < totalSlides; i++) {
+                var dot = document.createElement('span');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.onclick = (function(idx) {
+                    return function() {
+                        goToSlide(idx);
+                    };
+                })(i);
+                container.appendChild(dot);
+            }
+        }
+
+        // Set up event listeners
+        document.getElementById('prevBtn').onclick = prevSlide;
+        document.getElementById('nextBtn').onclick = nextSlide;
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // ============================================================
+        // Interactive Functions
+        // ============================================================
+
+        // Light Bulb
+        var bulbOn = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="40" fill="%23facc15" stroke="%23eab308" stroke-width="2"/%3E%3Cline x1="40" y1="70" x2="60" y2="70" stroke="%2394a3b8" stroke-width="2"/%3E%3C/svg%3E';
+        var bulbOff = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="40" fill="%23e2e8f0" stroke="%2394a3b8" stroke-width="2"/%3E%3C/svg%3E';
+
+        window.turnOnBulb = function() {
+            var img = document.getElementById('bulbImage');
+            if (img) img.src = bulbOn;
+            console.log('💡 Bulb turned ON');
+        };
+
+        window.turnOffBulb = function() {
+            var img = document.getElementById('bulbImage');
+            if (img) img.src = bulbOff;
+            console.log('💡 Bulb turned OFF');
+        };
+
+        // Change Text
+        window.changeText = function() {
+            var el = document.getElementById('demoText');
+            if (el) el.innerHTML = 'Hello JavaScript! 🎉';
+            console.log('📝 Text changed');
+        };
+
+        window.resetText = function() {
+            var el = document.getElementById('demoText');
+            if (el) el.innerHTML = 'JavaScript can change HTML content.';
+            console.log('📝 Text reset');
+        };
+
+        // Alert
+        window.showAlert = function() {
+            alert('Hello from JavaScript! 👋');
+            console.log('🔔 Alert shown');
+        };
+
+        // Greeting
+        window.greetUser = function() {
+            var input = document.getElementById('greetNameInput');
+            var output = document.getElementById('greetOutput');
+            var name = input ? input.value.trim() : '';
+            name = name || 'friend';
+            if (output) {
+                output.innerText = '👋 Hello, ' + name + '! Welcome to JavaScript!';
+            }
+            console.log('👤 User greeted: ' + name);
+        };
+
+        // Counter
+        var counter = 0;
+
+        window.incrementCounter = function() {
+            counter++;
+            var display = document.getElementById('counterDisplay');
+            if (display) display.innerText = counter;
+            console.log('🔢 Counter: ' + counter);
+        };
+
+        window.resetCounter = function() {
+            counter = 0;
+            var display = document.getElementById('counterDisplay');
+            if (display) display.innerText = counter;
+            console.log('🔄 Counter reset');
+        };
+
+        // Data Types
+        window.showDataTypes = function() {
+            var output = document.getElementById('dataTypeOutput');
+            var data = [
+                { name: 'name', value: 'Alice', type: typeof 'Alice' },
+                { name: 'age', value: 25, type: typeof 25 },
+                { name: 'isStudent', value: true, type: typeof true },
+                { name: 'favoriteColor', value: undefined, type: typeof undefined },
+                { name: 'car', value: null, type: typeof null }
+            ];
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+                html += data[i].name + ': "' + data[i].value + '" → ' + data[i].type + '<br>';
+            }
+            if (output) output.innerHTML = html;
+            console.log('📊 Data types shown');
+        };
+
+        // Multi-Action Demo
+        window.multiActionDemo = function() {
+            var demo1 = document.getElementById('demo1');
+            var demo2 = document.getElementById('demo2');
+            var demo3 = document.getElementById('demo3');
+            var result = document.getElementById('multiActionResult');
+            var lab1 = document.getElementById('lab4demo1');
+            var lab2 = document.getElementById('lab4demo2');
+            var lab3 = document.getElementById('lab4demo3');
+
+            if (demo1) demo1.innerHTML = 'Step 1: Hello!';
+            if (demo2) demo2.innerHTML = 'Step 2: World!';
+            if (demo3) demo3.innerHTML = 'Step 3: Done!';
+            if (result) result.innerHTML = '✅ All 3 actions completed in sequence!';
+            if (lab1) lab1.innerHTML = 'Action 1: Started';
+            if (lab2) lab2.innerHTML = 'Action 2: Processing';
+            if (lab3) lab3.innerHTML = 'Action 3: Complete!';
+
+            console.log('⚡ Multi-action executed: Step 1, Step 2, Step 3');
+        };
+
+        window.resetMultiAction = function() {
+            var demo1 = document.getElementById('demo1');
+            var demo2 = document.getElementById('demo2');
+            var demo3 = document.getElementById('demo3');
+            var result = document.getElementById('multiActionResult');
+            var lab1 = document.getElementById('lab4demo1');
+            var lab2 = document.getElementById('lab4demo2');
+            var lab3 = document.getElementById('lab4demo3');
+
+            if (demo1) demo1.innerHTML = 'Waiting...';
+            if (demo2) demo2.innerHTML = 'Waiting...';
+            if (demo3) demo3.innerHTML = 'Waiting...';
+            if (result) result.innerHTML = 'Click the button to see multiple actions in sequence.';
+            if (lab1) lab1.innerHTML = 'Waiting...';
+            if (lab2) lab2.innerHTML = 'Waiting...';
+            if (lab3) lab3.innerHTML = 'Waiting...';
+
+            console.log('🔄 Multi-action reset');
+        };
+
+        // innerHTML vs innerText Demo Functions
+        window.updateDemos = function() {
+            var input = document.getElementById('htmlInput');
+            var val = input ? input.value : 'Hello <b>World</b>';
+            var innerHTMLdemo = document.getElementById('demoInnerHTML');
+            var innerTextdemo = document.getElementById('demoInnerText');
+            if (innerHTMLdemo) innerHTMLdemo.innerHTML = val;
+            if (innerTextdemo) innerTextdemo.innerText = val;
+            console.log('🔄 Updated both demos with: ' + val);
+        };
+
+        window.updateInnerHTML = function() {
+            var input = document.getElementById('htmlInput');
+            var val = input ? input.value : 'Hello <b>World</b>';
+            var demo = document.getElementById('demoInnerHTML');
+            if (demo) demo.innerHTML = val;
+            console.log('📝 innerHTML updated with: ' + val);
+        };
+
+        window.updateInnerText = function() {
+            var input = document.getElementById('htmlInput');
+            var val = input ? input.value : 'Hello <b>World</b>';
+            var demo = document.getElementById('demoInnerText');
+            if (demo) demo.innerText = val;
+            console.log('📝 innerText updated with: ' + val);
+        };
+
+        // Reveal Answer Key
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.id === 'revealAnswersBtn') {
+                var key = document.getElementById('answerKey');
+                var btn = document.getElementById('revealAnswersBtn');
+                if (key) {
+                    if (key.style.display === 'none' || key.style.display === '') {
+                        key.style.display = 'block';
+                        if (btn) btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Answer Key';
+                    } else {
+                        key.style.display = 'none';
+                        if (btn) btn.innerHTML = '<i class="fas fa-key"></i> Reveal Answer Key';
+                    }
+                }
+            }
+        });
+
+        // Initialize
+        initDots();
+        renderSlide(0);
+
+        // Mark completion
+        (function() {
+            try {
+                var completed = JSON.parse(localStorage.getItem('jsCourseCompleted') || '{}');
+                if (!completed[0]) completed[0] = {};
+                completed[0][0] = true;
+                localStorage.setItem('jsCourseCompleted', JSON.stringify(completed));
+                console.log('✅ Day 1 marked complete');
+            } catch (e) {
+                console.warn('⚠️ localStorage not available');
+            }
+        })();
+
+        console.log('👋 Welcome to JavaScript Bootcamp — Day 1!');
+        console.log('📚 Use arrow keys or click Next/Back to navigate.');
+        console.log('💡 New: Multi-Action Syntax slide added!');
+    </script>
+</body>
+</html>
