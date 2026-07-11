@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Todo App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>
+            <i class="fas fa-list-check"></i>
+            My Todo List
+        </h1>
+
+        <div class="input-group">
+            <input type="text" id="todoInput" placeholder="Enter a task..." maxlength="100">
+            <button id="addBtn">
+                <i class="fas fa-plus"></i> Add
+            </button>
+        </div>
+
+        <div class="stats">
+            <span>Total: <span id="totalCount">0</span></span>
+            <span>Done: <span id="doneCount">0</span></span>
+            <span>Pending: <span id="pendingCount">0</span></span>
+        </div>
+
+        <ul class="todo-list" id="todoList">
+            <!-- Todos will be rendered here -->
+        </ul>
+
+        <div class="footer">
+            <div>Built with Arrays, Objects, DOM, Loops &amp; String Methods</div>
+            <div class="tags">
+                <span><i class="fas fa-cube"></i> Arrays</span>
+                <span><i class="fas fa-cube"></i> Objects</span>
+                <span><i class="fas fa-code"></i> DOM</span>
+                <span><i class="fas fa-rotate"></i> Loops</span>
+                <span><i class="fas fa-font"></i> String Methods</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
