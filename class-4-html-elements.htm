@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Class 4 · Text, Links & Images | Web Development Curriculum</title>
     <!-- Font Awesome 6 -->
+      <!-- 32x32 (most common) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="tracking.png">
+    
+    <!-- 16x16 (for older browsers) -->
+    <link rel="icon" type="image/png" sizes="16x16" href="tracking.png">
+    
+    <!-- Fallback for very old browsers -->
+    <link rel="shortcut icon" href="tracking.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -139,6 +148,11 @@
             align-items: center;
             gap: 0.6rem;
         }
+        .info-panel h4 {
+            color: #9bb1d0;
+            font-size: 1.1rem;
+            margin: 1rem 0 0.5rem 0;
+        }
         pre {
             background: #01050e;
             padding: 1rem;
@@ -156,6 +170,13 @@
             padding: 0.8rem 1.2rem;
             border-radius: 1rem;
             margin-top: 1.2rem;
+        }
+        .warning-box {
+            background: #1a0a0a;
+            border-left: 4px solid #ef4444;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
         }
         .nav-bottom {
             background: #080c18;
@@ -225,6 +246,45 @@
             align-items: center;
             gap: 0.6rem;
         }
+        .dom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.8rem 0;
+            font-size: 0.85rem;
+        }
+        .dom-table th {
+            background: #1a2744;
+            color: #7aa9ff;
+            padding: 0.6rem;
+            text-align: left;
+            border: 1px solid #2d3a5e;
+        }
+        .dom-table td {
+            padding: 0.6rem;
+            border: 1px solid #2d3a5e;
+            color: #c8d6e8;
+        }
+        .dom-table tr:nth-child(even) {
+            background: #0a1120;
+        }
+        .dom-list {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0 1rem 0;
+        }
+        .dom-list li {
+            margin: 0.3rem 0;
+            color: #c8d6e8;
+            line-height: 1.7;
+        }
+        .code-inline {
+            background: #01050e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.4rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #cddcff;
+            border: 1px solid #2d3a5e;
+        }
         @media (max-width: 700px) {
             .slide-area { padding: 1rem; }
             .slide-title { font-size: 1.4rem; }
@@ -238,7 +298,7 @@
         <div class="class-title"><i class="fas fa-paragraph"></i> HTML Text, Links & Images</div>
         <div class="nav-buttons">
             <a href="class-3-html-tags-img.htm" class="nav-btn"><i class="fas fa-arrow-left"></i> Class 3</a>
-            <a href="#" class="nav-btn">Class 5 <i class="fas fa-arrow-right"></i></a>
+            <a href="class5.html" class="nav-btn">Class 5 <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 
@@ -248,7 +308,7 @@
             <div class="dot-group" id="dotsPanel"></div>
             <div style="display: flex; gap: 1rem;">
                 <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
-                <span id="counter" style="background:#111827; padding:0.3rem 1rem; border-radius:30px;"><i class="far fa-file"></i> 1 / 8</span>
+                <span id="counter" style="background:#111827; padding:0.3rem 1rem; border-radius:30px;"><i class="far fa-file"></i> 1 / 18</span>
                 <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
@@ -277,6 +337,7 @@
 
 <script>
     const slides = [
+        // Original slides
         {
             title: "<i class='fas fa-heading'></i> Heading Hierarchy & Text Structure",
             subtitle: "h1–h6 · paragraphs · formatting elements",
@@ -337,6 +398,150 @@
                 <li><i class="fas fa-check"></i> Proper heading hierarchy (h1, h2, h3)</li>
                 <li><i class="fas fa-star"></i> Bonus: Add an anchor/jump link to a specific section</li>
             </ul></div><div class="insight"><i class="fas fa-cloud-upload-alt"></i> Submit: Both HTML files + screenshot showing working links in browser.</div>`
+        },
+
+        // DOM Content Slides (chronologically integrated)
+        {
+            title: "<i class='fas fa-code'></i> Introduction to the HTML DOM",
+            subtitle: "What is the Document Object Model?",
+            content: `<div class="info-panel"><h3><i class="fas fa-sitemap"></i> The HTML DOM</h3><p>The HTML DOM (HTML Document Object Model) is an Object Model for HTML Documents.</p><p>When a web page loads, the browser creates a tree-like representation of the HTML document.</p><p>Each part of the document are nodes in the tree:</p></div>
+            <table class="dom-table">
+                <tr><th>Node</th><th>Description</th></tr>
+                <tr><td><span class="code-inline">Document</span></td><td>Owner of all nodes in the document</td></tr>
+                <tr><td><span class="code-inline">&lt;html&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">&lt;head&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">&lt;body&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">&lt;a&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">href</span></td><td>Attribute Node</td></tr>
+                <tr><td><span class="code-inline">&lt;h1&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">My Header</span></td><td>Text Node</td></tr>
+            </table>
+            <div class="insight"><i class="fas fa-globe"></i> The DOM is a W3C Standard: "The W3C Document Object Model (DOM) is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document."</div>`
+        },
+        {
+            title: "<i class='fas fa-hand-pointer'></i> Accessing HTML Elements",
+            subtitle: "Methods to find and select elements",
+            content: `<div class="info-panel"><h3><i class="fas fa-search"></i> Accessing Elements</h3><p>The most common way to access an HTML element is to use the <span class="code-inline">id</span> of the element:</p><pre><code>const myPara = document.getElementById("demo");\nmyPara.innerHTML = "Hello World!";</code></pre><p><span class="code-inline">id="demo"</span> is an HTML property · <span class="code-inline">getElementById()</span> is a DOM Method · <span class="code-inline">innerHTML</span> is a DOM Property</p></div>
+            <div class="insight"><i class="fas fa-graduation-cap"></i> <strong>What You Will Learn:</strong> How to change content, style, add/delete elements, and react to events.</div>`
+        },
+        {
+            title: "<i class='fas fa-cogs'></i> HTML DOM API",
+            subtitle: "Methods, Properties, and Abilities",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-tools"></i> API Methods & Properties</h3><p><strong>API Method</strong> = Action you can do on an element</p><p><strong>API Property</strong> = Value you can access on an element</p><pre><code>// Access a paragraph Element\nconst myPara = document.getElementById("demo");\n// Change the content of the Element\nmyPara.innerHTML = "Hello World!";</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-bolt"></i> DOM API Abilities</h3><ul class="dom-list"><li>Find and select elements</li><li>Change element content and attributes</li><li>Add, remove, or modify elements</li><li>Change CSS styles</li><li>Add event listeners to react to user input</li></ul></div>
+            </div>
+            <div class="insight"><i class="fas fa-info-circle"></i> The DOM API is a standard. JavaScript is the language used in browsers to access the DOM through the API.</div>`
+        },
+        {
+            title: "<i class='fas fa-table'></i> Selecting HTML Elements",
+            subtitle: "All the selection methods",
+            content: `<div class="info-panel"><h3><i class="fas fa-list"></i> Selection Methods</h3>
+            <table class="dom-table">
+                <tr><th>Method</th><th>Description</th></tr>
+                <tr><td><span class="code-inline">document.getElementById(id)</span></td><td>Find an element by element id</td></tr>
+                <tr><td><span class="code-inline">document.getElementsByTagName(name)</span></td><td>Find elements by tag name</td></tr>
+                <tr><td><span class="code-inline">document.getElementsByClassName(name)</span></td><td>Find elements by class name</td></tr>
+                <tr><td><span class="code-inline">document.querySelector(selector)</span></td><td>Find the first element that matches a CSS selector</td></tr>
+                <tr><td><span class="code-inline">document.querySelectorAll(selector)</span></td><td>Find all elements that match a CSS selector</td></tr>
+            </table>
+            <p>The document object is the owner of all other objects in your web page.</p></div>`
+        },
+        {
+            title: "<i class='fas fa-edit'></i> Changing HTML Content",
+            subtitle: "innerHTML, attributes, and dynamic content",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-pen"></i> innerHTML Property</h3><pre><code>document.getElementById(id).innerHTML = new HTML</code></pre><p>Useful for getting or replacing the content of HTML elements.</p></div>
+                <div class="info-panel"><h3><i class="fas fa-attribute"></i> Changing Attributes</h3><pre><code>document.getElementById(id).attribute = new value</code></pre><pre><code>document.getElementById("myImage").src = "landscape.jpg";</code></pre></div>
+            </div>
+            <div class="warning-box"><i class="fas fa-exclamation-triangle"></i> <strong>Common Mistakes:</strong> Trying to access a DOM element before it exists · Forgetting quotes in an id like "demo"</div>
+            <div class="info-panel"><h3><i class="fas fa-clock"></i> Dynamic HTML Content</h3><pre><code>document.getElementById("demo").innerHTML = "Date : " + Date();</code></pre></div>
+            <div class="warning-box"><i class="fas fa-exclamation-circle"></i> <strong>Warning!</strong> Never use <span class="code-inline">document.write()</span> after the document is loaded. It will overwrite the document.</div>`
+        },
+        {
+            title: "<i class='fas fa-paint-brush'></i> Changing CSS with JavaScript",
+            subtitle: "Style manipulation and events",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-palette"></i> Changing Style</h3><pre><code>document.getElementById(id).style.property = new style</code></pre><pre><code>document.getElementById("p2").style.color = "blue";</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-mouse-pointer"></i> Using Events</h3><p>Events are generated when:</p><ul class="dom-list"><li>An element is clicked on</li><li>The page has loaded</li><li>Input fields are changed</li></ul><pre><code>onclick="document.getElementById('id1').style.color = 'red'"</code></pre></div>
+            </div>
+            <div class="info-panel"><h3><i class="fas fa-eye-slash"></i> Show/Hide Elements</h3><pre><code>document.getElementById('p1').style.visibility='hidden'\ndocument.getElementById('p1').style.visibility='visible'</code></pre></div>`
+        },
+        {
+            title: "<i class='fas fa-check-circle'></i> HTML Form Validation",
+            subtitle: "JavaScript and automatic validation",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-code"></i> JavaScript Validation</h3><pre><code>function validateForm() {\n  let x = document.forms["myForm"]["fname"].value;\n  if (x == "") {\n    alert("Name must be filled out");\n    return false;\n  }\n}</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-shield-alt"></i> Automatic Validation</h3><pre><code>&lt;input type="text" name="fname" required&gt;</code></pre><div class="warning-box"><i class="fas fa-exclamation-triangle"></i> Automatic HTML form validation does not work in Internet Explorer 9 or earlier.</div></div>
+            </div>
+            <div class="info-panel"><h3><i class="fas fa-tasks"></i> Data Validation Tasks</h3><ul class="dom-list"><li>Has the user filled in all required fields?</li><li>Has the user entered a valid date?</li><li>Has the user entered text in a numeric field?</li></ul></div>`
+        },
+        {
+            title: "<i class='fas fa-list'></i> HTML Constraint Validation",
+            subtitle: "Input attributes and CSS pseudo-selectors",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-tag"></i> Input Attributes</h3>
+                <table class="dom-table">
+                    <tr><th>Attribute</th><th>Description</th></tr>
+                    <tr><td><span class="code-inline">disabled</span></td><td>Disables the input</td></tr>
+                    <tr><td><span class="code-inline">max</span></td><td>Maximum value</td></tr>
+                    <tr><td><span class="code-inline">min</span></td><td>Minimum value</td></tr>
+                    <tr><td><span class="code-inline">pattern</span></td><td>Value pattern</td></tr>
+                    <tr><td><span class="code-inline">required</span></td><td>Required field</td></tr>
+                    <tr><td><span class="code-inline">type</span></td><td>Input type</td></tr>
+                </table></div>
+                <div class="info-panel"><h3><i class="fas fa-css3"></i> CSS Pseudo Selectors</h3>
+                <table class="dom-table">
+                    <tr><th>Selector</th><th>Description</th></tr>
+                    <tr><td><span class="code-inline">:disabled</span></td><td>Disabled elements</td></tr>
+                    <tr><td><span class="code-inline">:invalid</span></td><td>Invalid values</td></tr>
+                    <tr><td><span class="code-inline">:optional</span></td><td>Not required</td></tr>
+                    <tr><td><span class="code-inline">:required</span></td><td>Required elements</td></tr>
+                    <tr><td><span class="code-inline">:valid</span></td><td>Valid values</td></tr>
+                </table></div>
+            </div>`
+        },
+        {
+            title: "<i class='fas fa-film'></i> HTML DOM Animation",
+            subtitle: "Creating animations with JavaScript",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-cube"></i> Animation Setup</h3><pre><code>&lt;div id="container"&gt;\n  &lt;div id="animate"&gt;My animation will go here&lt;/div&gt;\n&lt;/div&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-paint-brush"></i> CSS Styling</h3><pre><code>#container {\n  width: 400px; height: 400px;\n  position: relative;\n  background: yellow;\n}\n#animate {\n  width: 50px; height: 50px;\n  position: absolute;\n  background: red;\n}</code></pre></div>
+            </div>
+            <div class="info-panel"><h3><i class="fas fa-play"></i> Animation Code</h3><pre><code>function myMove() {\n  let id = null;\n  const elem = document.getElementById("animate");\n  let pos = 0;\n  id = setInterval(frame, 5);\n  function frame() {\n    if (pos == 350) clearInterval(id);\n    else { pos++; elem.style.top = pos + 'px'; elem.style.left = pos + 'px'; }\n  }\n}</code></pre></div>`
+        },
+        {
+            title: "<i class='fas fa-file'></i> HTML DOM Document",
+            subtitle: "Document properties and methods reference",
+            content: `<div class="info-panel"><h3><i class="fas fa-list"></i> Key Document Properties & Methods</h3>
+            <table class="dom-table">
+                <tr><th>Name</th><th>Description</th></tr>
+                <tr><td><span class="code-inline">document.body</span></td><td>Sets or returns the document's body</td></tr>
+                <tr><td><span class="code-inline">document.createElement()</span></td><td>Creates an Element node</td></tr>
+                <tr><td><span class="code-inline">document.getElementById()</span></td><td>Returns element by ID</td></tr>
+                <tr><td><span class="code-inline">document.querySelector()</span></td><td>Returns first element matching CSS selector</td></tr>
+                <tr><td><span class="code-inline">document.querySelectorAll()</span></td><td>Returns all elements matching CSS selector</td></tr>
+                <tr><td><span class="code-inline">document.title</span></td><td>Sets or returns the title of the document</td></tr>
+                <tr><td><span class="code-inline">document.write()</span></td><td>Writes HTML to a document</td></tr>
+            </table>
+            <div class="insight"><i class="fas fa-question-circle"></i> <strong>Exercise:</strong> What is NOT a legal HTML DOM document method?<br>❌ getElementsByClassName() · ❌ getElementsByTagName() · ✅ <strong>getElementsByAttributeName()</strong></div></div>`
+        },
+        {
+            title: "<i class='fas fa-cube'></i> HTML DOM Element Reference",
+            subtitle: "Element properties and methods",
+            content: `<div class="info-panel"><h3><i class="fas fa-list"></i> Common Element Properties & Methods</h3>
+            <table class="dom-table">
+                <tr><th>Name</th><th>Description</th></tr>
+                <tr><td><span class="code-inline">element.innerHTML</span></td><td>Sets or returns the content of an element</td></tr>
+                <tr><td><span class="code-inline">element.className</span></td><td>Sets or returns class attribute</td></tr>
+                <tr><td><span class="code-inline">element.style</span></td><td>Sets or returns style attribute</td></tr>
+                <tr><td><span class="code-inline">element.addEventListener()</span></td><td>Attaches an event handler</td></tr>
+                <tr><td><span class="code-inline">element.appendChild()</span></td><td>Adds a new child node</td></tr>
+                <tr><td><span class="code-inline">element.remove()</span></td><td>Removes an element from the DOM</td></tr>
+                <tr><td><span class="code-inline">element.setAttribute()</span></td><td>Sets or changes an attribute's value</td></tr>
+                <tr><td><span class="code-inline">element.getAttribute()</span></td><td>Returns the value of an attribute</td></tr>
+            </table>
+            <div class="insight"><i class="fas fa-book"></i> For all DOM properties, refer to the complete HTML DOM Reference.</div></div>`
         },
         {
             title: "<i class='fas fa-star-of-life'></i> Pure HTML Sites Showcase",

@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Class 3 - Introduction to HTML | The Skeleton of Every Webpage (Fixed)</title>
+    <title>Class 4 · Text, Links & Images | Web Development Curriculum</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Favicon -->
+    <!-- <link rel="icon" type="image/png" sizes="32x32" href="tracking.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="tracking.png">
+    <link rel="shortcut icon" href="tracking.png"> -->
+
+     <!-- 32x32 (most common) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="tracking.png">
+    
+    <!-- 16x16 (for older browsers) -->
+    <link rel="icon" type="image/png" sizes="16x16" href="tracking.png">
+    
+    <!-- Fallback for very old browsers -->
+    <link rel="shortcut icon" href="tracking.png">
+
+    
     <style>
         * {
             margin: 0;
@@ -14,148 +30,124 @@
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #0a0c15 0%, #111827 100%);
-            min-height: 100vh;
+            font-family: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+            background: #05070f;
+            color: #eef2ff;
             padding: 1.5rem;
         }
 
-        .curriculum-header {
-            max-width: 1300px;
-            margin: 0 auto 1rem auto;
-            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
-            border-radius: 1.5rem;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .class-header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
             padding: 1rem 2rem;
+            margin-bottom: 2rem;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
             gap: 1rem;
-            border: 1px solid #334155;
-            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+            border: 1px solid #2d3a5e;
         }
         .badge {
-            background: #3b82f6;
+            background: #2563eb;
             padding: 0.3rem 1rem;
             border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .class-title {
             font-size: 1.3rem;
-            font-weight: 600;
-            color: #e2e8f0;
-        }
-        .duration {
-            color: #94a3b8;
-            font-size: 0.85rem;
-        }
-
-        .class-nav-buttons {
-            display: flex;
-            gap: 0.8rem;
-        }
-        .class-nav-btn {
-            background: #1e293b;
-            border: 1px solid #3b82f6;
-            padding: 0.4rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #e2e8f0;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            text-decoration: none;
-        }
-        .class-nav-btn:hover {
-            background: #3b82f6;
-            transform: scale(0.98);
-        }
-        .class-nav-btn i {
-            font-size: 0.8rem;
-        }
-
-        .presentation-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.03);
-            border-radius: 2rem;
-            backdrop-filter: blur(2px);
-            box-shadow: 0 25px 45px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
-            overflow: hidden;
-        }
-
-        .slide-area {
-            min-height: 600px;
-            background: #0f1119;
-            padding: 2rem;
-        }
-
-        .slide-card {
-            background: rgba(22, 26, 38, 0.98);
-            backdrop-filter: blur(4px);
-            border-radius: 2rem;
-            padding: 2rem 2.2rem;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
-            border: 1px solid rgba(72, 187, 255, 0.3);
-        }
-
-        .slide-title {
-            font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #E0F2FE, #7AA9FF);
+            background: linear-gradient(135deg, #cbd5ff, #7aa9ff);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            margin-bottom: 0.5rem;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 0.8rem;
+        }
+        .nav-btn {
+            background: #1e293b;
+            border: 1px solid #3b82f6;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+        }
+        .nav-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .presentation-card {
+            background: #0b0f1a;
+            border-radius: 2rem;
+            border: 1px solid #253450;
+            overflow: hidden;
+        }
+        .slide-area {
+            min-height: 620px;
+            padding: 2rem;
+            background: #070b14;
+        }
+        .slide-card {
+            background: #0f1422e6;
+            backdrop-filter: blur(4px);
+            border-radius: 1.8rem;
+            padding: 2rem;
+            border: 1px solid #2a3958;
+        }
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0f9ff, #7aa2f7);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
             display: flex;
             align-items: center;
             gap: 0.8rem;
             border-left: 5px solid #3b82f6;
             padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
         }
-
-        .slide-title i {
-            background: none;
-            -webkit-background-clip: unset;
-            color: #60a5fa;
-            font-size: 1.8rem;
-        }
-
         .slide-sub {
-            color: #a0afc9;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+            color: #9bb1d0;
             border-left: 5px solid #3b82f6;
             padding-left: 1.2rem;
+            margin-bottom: 1.8rem;
+            font-size: 0.9rem;
         }
-
-        .content-grid {
+        .grid-2col {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            gap: 1.6rem;
+            margin: 1rem 0;
         }
-
-        .concept-box {
+        .info-panel {
             flex: 1;
-            min-width: 240px;
-            background: #1a1f2e;
+            background: #0f1625;
             border-radius: 1.5rem;
-            padding: 1.3rem;
-            border: 1px solid #334155;
-            transition: all 0.2s;
+            padding: 1.2rem;
+            border: 1px solid #253450;
         }
-        .concept-box:hover {
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-        }
-
-        .concept-box h3 {
+        .info-panel h3 {
             color: #7aa9ff;
             font-size: 1.3rem;
             margin-bottom: 0.8rem;
@@ -163,255 +155,70 @@
             align-items: center;
             gap: 0.6rem;
         }
-
-        .concept-box h3 i {
-            color: #60a5fa;
+        .info-panel h4 {
+            color: #9bb1d0;
+            font-size: 1.1rem;
+            margin: 1rem 0 0.5rem 0;
         }
-
-        .concept-box p, .concept-list, .concept-box li {
-            color: #e2e8f0;
-            line-height: 1.55;
-            font-size: 0.95rem;
-        }
-
-        .highlight {
-            color: #fbbf24;
-            font-weight: 600;
-        }
-
-        .tag {
-            background: #1e293b;
-            padding: 0.25rem 0.9rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-family: monospace;
-            color: #b9d0ff;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .insight-card {
-            margin-top: 1.2rem;
-            background: #0f172a;
-            padding: 0.9rem 1.2rem;
-            border-radius: 1rem;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            color: #e2e8f0;
-            border-left: 3px solid #3b82f6;
-        }
-
-        .two-column-split {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin: 1rem 0;
-        }
-        .col {
-            flex: 1;
-            background: #131a2a;
-            border-radius: 1.2rem;
-            padding: 1.2rem;
-            border: 1px solid #2d3a5e;
-        }
-        .col h4 {
-            color: #fbbf24;
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-        }
-        .col h4 i {
-            margin-right: 0.5rem;
-        }
-        .col p, .col li {
-            color: #e2e8f0;
-        }
-
         pre {
-            background: #0a0e18;
+            background: #01050e;
             padding: 1rem;
             border-radius: 1rem;
             overflow-x: auto;
+            font-family: 'Fira Code', monospace;
             font-size: 0.8rem;
-            color: #e2e8f0;
+            color: #cddcff;
             margin: 0.8rem 0;
-            border: 1px solid #334155;
-            font-family: 'Fira Code', monospace;
-        }
-        code {
-            font-family: 'Fira Code', monospace;
-            color: #cbd5e6;
-        }
-
-        .dom-tree {
-            background: #0f172a;
-            border-radius: 1rem;
-            padding: 1rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: #a5b4fc;
-            border: 1px solid #2d3a5e;
-            line-height: 1.6;
-        }
-
-        .entity-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0.5rem 0;
-            font-size: 0.8rem;
-        }
-        .entity-table th, .entity-table td {
-            border: 1px solid #334155;
-            padding: 0.5rem;
-            text-align: left;
-            color: #e2e8f0;
-        }
-        .entity-table th {
-            background: #1e293b;
-            color: #fbbf24;
-        }
-
-        .mistake-list {
-            list-style: none;
-        }
-        .mistake-list li {
-            margin: 0.6rem 0;
-            padding: 0.8rem 1rem;
-            background: #1a1f2e;
-            border-radius: 0.8rem;
-            border-left: 4px solid #f97316;
-            color: #e2e8f0;
-            font-size: 0.9rem;
-        }
-        .mistake-list li strong {
-            color: #fbbf24;
-            font-weight: 600;
-        }
-        .mistake-list code {
-            background: #0f172a;
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.3rem;
-            color: #cbd5e6;
-        }
-
-        .qa-section {
-            margin-top: 1.5rem;
-            background: #0f172a;
-            border-radius: 1.5rem;
-            padding: 1.2rem;
-            border: 1px solid #334155;
-        }
-        .qa-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #fbbf24;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .qa-item {
-            background: #131b2e;
-            border-radius: 1rem;
-            margin-bottom: 0.8rem;
-            overflow: hidden;
             border: 1px solid #2d3a5e;
         }
-        .qa-question {
-            padding: 1rem 1.2rem;
-            background: #1a2338;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: #e2e8f0;
-            transition: background 0.2s;
+        .insight {
+            background: #0a1120;
+            border-left: 4px solid #3b82f6;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin-top: 1.2rem;
         }
-        .qa-question:hover {
-            background: #25334d;
+        .warning-box {
+            background: #1a0a0a;
+            border-left: 4px solid #ef4444;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
         }
-        .qa-question i {
-            color: #60a5fa;
-            transition: transform 0.3s;
+        .success-box {
+            background: #0a1a0a;
+            border-left: 4px solid #22c55e;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
         }
-        .qa-answer {
-            padding: 0 1.2rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            background: #0f172a;
-            color: #cbd5e6;
-            line-height: 1.5;
-        }
-        .qa-answer.show {
-            padding: 1rem 1.2rem;
-            max-height: 400px;
-        }
-        .qa-answer p {
-            margin: 0;
-            color: #cbd5e6;
-        }
-
-        .nav-bar {
-            background: #0b0e16;
+        .nav-bottom {
+            background: #080c18;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #2a2f3f;
+            border-top: 1px solid #253450;
             flex-wrap: wrap;
-            gap: 0.8rem;
         }
-
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
         button {
-            background: #1e2a3a;
+            background: #1e2a3e;
             border: none;
-            font-size: 1rem;
-            font-weight: 600;
             padding: 0.5rem 1.5rem;
             border-radius: 2rem;
-            color: #e2e8f0;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
+            color: white;
+            font-weight: 600;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: inherit;
-            border: 1px solid #334155;
+            cursor: pointer;
+            transition: 0.2s;
         }
-
-        button i {
-            font-size: 0.9rem;
-        }
-
-        button:hover:not(:disabled) {
-            background: #2d3a4e;
-            transform: scale(0.97);
-            border-color: #3b82f6;
-        }
-
         button:disabled {
             opacity: 0.4;
-            cursor: not-allowed;
+            cursor: default;
         }
-
-        .slide-counter {
-            font-size: 0.9rem;
-            background: #1a1f2c;
-            padding: 0.4rem 1rem;
-            border-radius: 2rem;
-            color: #a5b4fc;
-        }
-
-        .indicator-dots {
+        .dot-group {
             display: flex;
             gap: 0.5rem;
         }
@@ -420,353 +227,422 @@
             height: 8px;
             background: #334155;
             border-radius: 10px;
-            transition: 0.2s;
         }
         .dot.active {
             background: #3b82f6;
             width: 22px;
         }
         footer {
-            font-size: 0.7rem;
             text-align: center;
-            padding: 0.7rem;
-            background: #07090f;
-            color: #8ca3c7;
+            font-size: 0.7rem;
+            padding: 1rem;
+            color: #5f7f9e;
+            border-top: 1px solid #1e2a3a;
         }
-        footer i {
-            color: #60a5fa;
+        .site-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.8rem;
         }
-        footer a {
-            color: #60a5fa;
-            text-decoration: none;
+        .site-badge {
+            background: #1e293b;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
         }
-        footer a:hover {
-            text-decoration: underline;
+        .checklist {
+            list-style: none;
         }
-
+        .checklist li {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .dom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.8rem 0;
+            font-size: 0.85rem;
+        }
+        .dom-table th {
+            background: #1a2744;
+            color: #7aa9ff;
+            padding: 0.6rem;
+            text-align: left;
+            border: 1px solid #2d3a5e;
+        }
+        .dom-table td {
+            padding: 0.6rem;
+            border: 1px solid #2d3a5e;
+            color: #c8d6e8;
+        }
+        .dom-table tr:nth-child(even) {
+            background: #0a1120;
+        }
+        .dom-list {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0 1rem 0;
+        }
+        .dom-list li {
+            margin: 0.3rem 0;
+            color: #c8d6e8;
+            line-height: 1.7;
+        }
+        .code-inline {
+            background: #01050e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.4rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #cddcff;
+            border: 1px solid #2d3a5e;
+        }
+        .favicon-demo {
+            background: #0f1625;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #253450;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .favicon-demo img {
+            background: #1a2744;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            max-width: 100px;
+        }
         @media (max-width: 700px) {
             .slide-area { padding: 1rem; }
             .slide-title { font-size: 1.4rem; }
-            .concept-box { min-width: 100%; }
-            .two-column-split { flex-direction: column; }
-            .class-nav-buttons { margin-top: 0.5rem; }
-            .curriculum-header { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-
-<div class="curriculum-header">
-    <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 1 · WEEK 1 · CLASS 3</span></div>
-    <div class="class-title"><i class="fab fa-html5"></i> Introduction to HTML</div>
-    <div class="duration"><i class="far fa-clock"></i> 3 Hours · The Skeleton of Every Webpage</div>
-    <div class="class-nav-buttons">
-        <a href="#" class="class-nav-btn"><i class="fas fa-arrow-left"></i> Class 2</a>
-        <a href="#" class="class-nav-btn"><i class="fas fa-arrow-right"></i> Class 4 →</a>
-    </div>
-</div>
-
-<div class="presentation-container">
-    <div class="slide-area" id="slideArea"></div>
-    <div class="nav-bar">
-        <div class="indicator-dots" id="dotsContainer"></div>
+<div class="container">
+    <div class="class-header">
+        <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 1 · WEEK 2 · CLASS 4</span></div>
+        <div class="class-title"><i class="fas fa-paragraph"></i> HTML Text, Links & Images</div>
         <div class="nav-buttons">
-            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
-            <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 15</span>
-            <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+            <a href="class-3-html-tags-img.htm" class="nav-btn"><i class="fas fa-arrow-left"></i> Class 3</a>
+            <a href="class5.html" class="nav-btn">Class 5 <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
-    <footer>
-        <i class="fab fa-html5"></i> HTML Basics | <i class="fas fa-tree"></i> DOM Tree | <i class="fas fa-check-circle"></i> Validate at validator.w3.org
-        <span style="margin-left: 1rem;">| <a href="#"><i class="fas fa-arrow-left"></i> Class 2</a> | <a href="#">Class 4 <i class="fas fa-arrow-right"></i></a></span>
-    </footer>
+
+    <div class="presentation-card">
+        <div class="slide-area" id="slideContainer"></div>
+        <div class="nav-bottom">
+            <div class="dot-group" id="dotsPanel"></div>
+            <div style="display: flex; gap: 1rem;">
+                <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+                <span id="counter" style="background:#111827; padding:0.3rem 1rem; border-radius:30px;"><i class="far fa-file"></i> 1 / 19</span>
+                <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <footer>
+            <i class="fas fa-check-circle"></i> Always use alt text for images · 
+            <i class="fas fa-link"></i> Semantic links improve SEO · 
+            <i class="fas fa-heading"></i> Proper heading hierarchy
+        </footer>
+    </div>
+
+    <!-- Pure HTML sites showcase -->
+    <div style="margin-top: 2rem; background: #0f1422; border-radius: 1.5rem; padding: 1.2rem; border: 1px solid #253450;">
+        <h3 style="display: flex; gap: 0.6rem; align-items: center;"><i class="fas fa-globe"></i> Sites built with only HTML (no frameworks)</h3>
+        <div class="site-list">
+            <span class="site-badge"><i class="fas fa-link"></i> whitep4nth3r.com</span>
+            <span class="site-badge"><i class="fas fa-link"></i> motherfuckingwebsite.com</span>
+            <span class="site-badge"><i class="fas fa-link"></i> txti.es</span>
+            <span class="site-badge"><i class="fas fa-link"></i> html.energy</span>
+            <span class="site-badge"><i class="fas fa-link"></i> brutalistwebsites.com</span>
+            <span class="site-badge"><i class="fas fa-link"></i> 100r.co</span>
+            <span class="site-badge"><i class="fas fa-link"></i> danq.me</span>
+        </div>
+        <p style="margin-top: 0.5rem; font-size: 0.75rem; color:#92a5d5;"><i class="fas fa-info-circle"></i> Pure HTML/CSS sites load instantly, work everywhere, and are accessible by default.</p>
+    </div>
 </div>
 
 <script>
-    // ======================== FIXED & COMPLETE KNOWLEDGE CHECK (10 questions, accurate answers) =================
-    // Each question is complete, answers are verified and corrected.
- const fixedKnowledgeCheck = [
-    { q: "What does the acronym HTML stand for?", 
-      a: "<strong>HyperText Markup Language</strong> — It describes the structure of web pages using markup tags, not a programming language." },
-    
-    { q: "Which meta tag is essential for proper mobile responsiveness and scaling?", 
-      a: "&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt; — Without this meta tag, responsive CSS media queries will NOT work correctly on mobile devices." },
-    
-    { q: "What is the main semantic difference between &lt;strong&gt; and &lt;b&gt; tags?", 
-      a: "&lt;strong&gt; indicates <strong>strong importance</strong> (screen readers emphasize it, SEO relevance), while &lt;b&gt; is <strong>purely visual bold</strong> with no semantic weight." },
-    
-    { q: "Where is the best practice location to place &lt;script&gt; tags for better performance?", 
-      a: "<strong>Just before the closing &lt;/body&gt; tag</strong> — This ensures HTML/CSS loads first, preventing render-blocking and 'element not found' errors." },
-    
-    { q: "What is the role of DNS in web browsing?", 
-      a: "<strong>Domain Name System</strong> — Translates human-friendly domain names (like google.com) into IP addresses (like 142.250.190.46) that computers use to communicate." },
-    
-    { q: "What does the Live Server extension do in VS Code?", 
-      a: "Launches a <strong>local development server with hot reload</strong> — automatically refreshes the browser every time you save a file, eliminating manual F5 refreshing." },
-    
-    { q: "Explain block-level vs inline elements with an example.", 
-      a: "<strong>Block elements</strong> take full width and start on new lines (e.g., &lt;div&gt;, &lt;p&gt;, &lt;h1&gt;). <strong>Inline elements</strong> take only needed width and flow with text (e.g., &lt;span&gt;, &lt;a&gt;, &lt;strong&gt;). Inline elements cannot contain block elements." },
-    
-    { q: "What HTML entity should you use to display the Nigerian Naira symbol (₦) reliably?", 
-      a: "<strong>&amp;#8358;</strong> or <strong>&amp;#x20A6;</strong> — The numeric entity works across all modern browsers. &amp;naira; is NOT a standard HTML entity." },
-    
-    { q: "What HTTP status code indicates a successful request?", 
-      a: "<strong>200 OK</strong> — Other common codes: 404 (Not Found), 403 (Forbidden), 500 (Internal Server Error), 301 (Redirect)." },
-    
-    { q: "What is the DOM and why do developers care about it?", 
-      a: "<strong>Document Object Model</strong> — An in-memory tree representation of the HTML document. JavaScript interacts with the DOM (not the HTML file) to dynamically change content, styles, and structure." }
-];
-
-    // Week 1 Assessment Quiz (10 questions covering Classes 1-3, accurate and clear)
-    const fixedQuizData = [
-        { q: "HTML is considered a programming language.", a: "False. HTML is a markup language — it structures content, but lacks logic and control flow of programming languages." },
-        { q: "Which of the following is the correct HTML5 doctype declaration?", a: "<!DOCTYPE html> — It triggers standards mode and is case-insensitive." },
-        { q: "What attribute must every <img> tag contain for accessibility and SEO?", a: "alt attribute (e.g., alt='description of image'). It provides text for screen readers and appears if image fails to load." },
-        { q: "What is the difference between frontend and backend?", a: "Frontend refers to everything users see and interact with in the browser (HTML/CSS/JS). Backend involves server-side code, databases, and application logic (Node.js, Python, PHP)." },
-        { q: "Why should you avoid using <br> tags for layout spacing?", a: "<br> is for line breaks within text, not for margins/padding. Use CSS margin and padding for spacing between elements to maintain clean, maintainable code." },
-        { q: "Which HTML element is used to define the main navigation links on a page?", a: "<nav> — a semantic tag that wraps primary navigation menus, improving accessibility and SEO structure." },
-        { q: "What is the purpose of the 'lang' attribute in the <html> tag?", a: "Specifies the primary language of the document (e.g., lang='en' for English). Helps search engines and screen readers for pronunciation and translation." },
-        { q: "Which HTTP status code means 'Page Not Found'?", a: "404 — indicates the requested resource does not exist on the server." },
-        { q: "What does CSS media query do in relation to viewport meta tag?", a: "Media queries apply responsive CSS rules based on screen size. The viewport meta tag ensures the layout respects device width; without it, media queries may behave incorrectly on mobile devices." },
-        { q: "What symbol should you use to represent an ampersand (&) inside HTML text content?", a: "&amp; — using a raw '&' can break HTML parsing because it's the start of an entity. Always write &amp; to display & correctly." }
-    ];
-
-    // Slides content (unchanged but slide 8 uses fixedKnowledgeCheck, slide9 uses fixedQuizData)
     const slides = [
+        // Original slides
         {
-            title: "<i class='fab fa-html5'></i> What is HTML?",
-            subtitle: "HyperText Markup Language — the skeleton of every webpage",
-            content: `
-                <div class="content-grid">
-                    <div class="concept-box"><h3><i class="fas fa-code"></i> HTML Defined</h3><p><span class="highlight">HyperText Markup Language</span> — not a programming language, but a <strong>markup language</strong>. It structures content using tags.</p><p>HTML tells the browser: "This is a heading", "This is a paragraph", "This is a link".</p></div>
-                    <div class="concept-box"><h3><i class="fas fa-puzzle-piece"></i> Elements, Tags & Attributes</h3>
-                        <pre><code>&lt;tagname attribute="value"&gt;Content&lt;/tagname&gt;
+            title: "<i class='fas fa-heading'></i> Heading Hierarchy & Text Structure",
+            subtitle: "h1–h6 · paragraphs · formatting elements",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-heading"></i> Headings (h1 - h6)</h3><p><span style="color:#facc15;">ONE h1 per page</span> — main topic. Then h2, h3 in logical order. Critical for SEO & accessibility.</p><pre><code>&lt;h1&gt;Main Title&lt;/h1&gt;\n  &lt;h2&gt;Section&lt;/h2&gt;\n    &lt;h3&gt;Subsection&lt;/h3&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-bold"></i> Text Formatting</h3><p><strong>&lt;strong&gt;</strong> = strong importance · <em>&lt;em&gt;</em> = emphasis · <mark>&lt;mark&gt;</mark> = highlight · <del>&lt;del&gt;</del> deleted · <ins>&lt;ins&gt;</ins> inserted</p><pre><code>&lt;p&gt;This is &lt;strong&gt;very important&lt;/strong&gt; and &lt;em&gt;emphasized&lt;/em&gt;.&lt;/p&gt;</code></pre></div>
+            </div><div class="insight"><i class="fas fa-universal-access"></i> Accessibility: heading order must not skip levels (h1 → h2 → h3). Screen readers rely on this structure.</div>`
+        },
+        {
+            title: "<i class='fas fa-list'></i> Lists: Unordered, Ordered, Description",
+            subtitle: "ul · ol · li · dl · dt · dd",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-list-ul"></i> Unordered List</h3><pre><code>&lt;ul&gt;\n  &lt;li&gt;HTML&lt;/li&gt;\n  &lt;li&gt;CSS&lt;/li&gt;\n  &lt;li&gt;JavaScript&lt;/li&gt;\n&lt;/ul&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-list-ol"></i> Ordered List</h3><pre><code>&lt;ol&gt;\n  &lt;li&gt;Learn HTML&lt;/li&gt;\n  &lt;li&gt;Learn CSS&lt;/li&gt;\n  &lt;li&gt;Build projects&lt;/li&gt;\n&lt;/ol&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-list"></i> Description List</h3><pre><code>&lt;dl&gt;\n  &lt;dt&gt;HTML&lt;/dt&gt;&lt;dd&gt;Structure&lt;/dd&gt;\n  &lt;dt&gt;CSS&lt;/dt&gt;&lt;dd&gt;Styling&lt;/dd&gt;\n&lt;/dl&gt;</code></pre></div>
+            </div>`
+        },
+        {
+            title: "<i class='fas fa-link'></i> Anchor Tags: Links",
+            subtitle: "href · target · relative vs absolute · anchor links",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-external-link-alt"></i> External Links</h3><pre><code>&lt;a href="https://google.com" target="_blank" rel="noopener"&gt;Google&lt;/a&gt;</code></pre><p>Use <span style="color:#facc15;">rel="noopener"</span> for security with target="_blank".</p></div>
+                <div class="info-panel"><h3><i class="fas fa-folder-open"></i> Relative Paths</h3><pre><code>&lt;a href="about.html"&gt;About&lt;/a&gt;\n&lt;a href="../index.html"&gt;Home&lt;/a&gt;\n&lt;a href="images/photo.jpg"&gt;Download&lt;/a&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-anchor"></i> Anchor/Jump Links</h3><pre><code>&lt;a href="#contact"&gt;Jump to Contact&lt;/a&gt;\n&lt;h2 id="contact"&gt;Contact Section&lt;/h2&gt;</code></pre></div>
+            </div><div class="insight"><i class="fas fa-shield-alt"></i> Security: Always add rel="noopener noreferrer" when using target="_blank" to prevent tabnabbing.</div>`
+        },
+        {
+            title: "<i class='fas fa-image'></i> Images: img Tag",
+            subtitle: "src · alt · width · height · loading lazy · paths",
+            content: `<div class="info-panel"><h3><i class="fas fa-image"></i> Image Syntax & Best Practices</h3><pre><code>&lt;img src="images/hero.jpg" alt="Team working on laptops" width="800" height="500" loading="lazy"&gt;</code></pre><p><span style="color:#facc15;">alt attribute is MANDATORY</span> — describes image for screen readers & when image fails to load.</p><p><strong>Absolute path:</strong> https://example.com/pic.jpg · <strong>Relative:</strong> images/pic.jpg or ../assets/logo.png</p></div><div class="insight"><i class="fas fa-tachometer-alt"></i> Use loading="lazy" for images below the fold — improves page speed and saves bandwidth.</div>`
+        },
+        {
+            title: "<i class='fas fa-file-alt'></i> Practical Example: Personal Profile",
+            subtitle: "All elements combined in one page",
+            content: `<pre><code>&lt;!DOCTYPE html&gt;\n&lt;html lang="en"&gt;\n&lt;head&gt;\n  &lt;meta charset="UTF-8"&gt;\n  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;\n  &lt;title&gt;Alice Johnson | Frontend Developer&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;h1&gt;Alice Johnson&lt;/h1&gt;\n  &lt;p&gt;&lt;strong&gt;Junior Frontend Developer&lt;/strong&gt; · Lagos, Nigeria&lt;/p&gt;\n  &lt;img src="profile.jpg" alt="Alice Johnson profile photo" width="200" loading="lazy"&gt;\n  &lt;h2&gt;About Me&lt;/h2&gt;\n  &lt;p&gt;I build clean, user-friendly interfaces with semantic HTML &amp; CSS.&lt;/p&gt;\n  &lt;h2&gt;Skills&lt;/h2&gt;\n  &lt;ul&gt;&lt;li&gt;HTML5&lt;/li&gt;&lt;li&gt;CSS3&lt;/li&gt;&lt;li&gt;JavaScript (learning)&lt;/li&gt;&lt;/ul&gt;\n  &lt;h2&gt;Find Me&lt;/h2&gt;\n  &lt;ul&gt;\n    &lt;li&gt;&lt;a href="https://github.com/alice" target="_blank" rel="noopener"&gt;GitHub&lt;/a&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;a href="mailto:alice@example.com"&gt;Email Me&lt;/a&gt;&lt;/li&gt;\n  &lt;/ul&gt;\n  &lt;a href="about.html"&gt;Read more about me →&lt;/a&gt;\n&lt;/body&gt;\n&lt;/html&gt;</code></pre>`
+        },
+        {
+            title: "<i class='fas fa-hands-helping'></i> Common Mistakes & Fixes",
+            subtitle: "Links, images, and text errors",
+            content: `<ul class="checklist" style="list-style:none;">
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Missing alt text</strong> → ✅ Every &lt;img&gt; must have descriptive alt</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Broken image paths</strong> → ✅ Use relative paths correctly (check file location)</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>target="_blank" without rel</strong> → ✅ Add rel="noopener noreferrer"</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Empty or "#" links</strong> → ✅ Use meaningful href or remove if not needed</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Using &lt;br&gt; for spacing</strong> → ✅ Use CSS margin/padding instead</li>
+                <li><i class="fas fa-times-circle" style="color:#ef4444;"></i> <strong>Heading order skipped</strong> → ✅ h1 then h2 then h3, never jump levels</li>
+            </ul>`
+        },
+        {
+            title: "<i class='fas fa-tasks'></i> Assignment: Personal Profile Page",
+            subtitle: "Build complete profile + second page with relative linking",
+            content: `<div class="info-panel"><h3><i class="fas fa-check-circle"></i> Requirements</h3><ul class="checklist">
+                <li><i class="fas fa-check"></i> Profile page with real/placeholder image + correct alt text</li>
+                <li><i class="fas fa-check"></i> At least 2 external links (GitHub, LinkedIn, Twitter) with target="_blank"</li>
+                <li><i class="fas fa-check"></i> Both unordered AND ordered lists</li>
+                <li><i class="fas fa-check"></i> Relative link to a second page (about.html or portfolio.html)</li>
+                <li><i class="fas fa-check"></i> Second page must have a "Back to Home" link returning to index.html</li>
+                <li><i class="fas fa-check"></i> Proper heading hierarchy (h1, h2, h3)</li>
+                <li><i class="fas fa-star"></i> Bonus: Add an anchor/jump link to a specific section</li>
+            </ul></div><div class="insight"><i class="fas fa-cloud-upload-alt"></i> Submit: Both HTML files + screenshot showing working links in browser.</div>`
+        },
 
-&lt;p class="intro"&gt;Hello World&lt;/p&gt;
-&lt;a href="https://google.com"&gt;Google&lt;/a&gt;
-&lt;img src="photo.jpg" alt="Description"&gt;</code></pre>
-                    </div>
+        // NEW SLIDE: Favicon Lesson
+        {
+            title: "<i class='fas fa-star'></i> Adding a Favicon to Your Website",
+            subtitle: "The small icon that appears in browser tabs",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-image"></i> What is a Favicon?</h3><p>A <strong>favicon</strong> (favorites icon) is the small icon that appears in:</p><ul class="dom-list"><li>Browser tabs next to your page title</li><li>Bookmarks and favorites</li><li>History entries</li><li>Address bar (some browsers)</li></ul><p>It helps users quickly identify your site.</p></div>
+                <div class="info-panel"><h3><i class="fas fa-code"></i> How to Add a Favicon</h3><p>Add this code inside the <span class="code-inline">&lt;head&gt;</span> section:</p><pre><code>&lt;!-- 32x32 (most common) --&gt;\n&lt;link rel="icon" type="image/png" sizes="32x32" href="tracking.png"&gt;\n\n&lt;!-- 16x16 (for older browsers) --&gt;\n&lt;link rel="icon" type="image/png" sizes="16x16" href="tracking.png"&gt;\n\n&lt;!-- Fallback for very old browsers --&gt;\n&lt;link rel="shortcut icon" href="tracking.png"&gt;</code></pre></div>
+            </div>
+            <div class="favicon-demo">
+                <p style="color:#9bb1d0; margin-bottom:0.5rem;"><i class="fas fa-chrome"></i> How it looks in your browser tab:</p>
+                <div style="display:flex; align-items:center; justify-content:center; gap:1rem; background:#1a2744; padding:0.8rem; border-radius:0.8rem;">
+                    <span style="background:#2d3a5e; padding:0.3rem 0.8rem; border-radius:0.3rem; font-size:0.8rem;">📄</span>
+                    <span style="color:#e2e8f0; font-size:0.9rem;">tracking.png</span>
+                    <span style="color:#7aa9ff; font-size:0.7rem; background:#0f1625; padding:0.2rem 0.6rem; border-radius:0.3rem;">32×32</span>
+                    <span style="color:#7aa9ff; font-size:0.7rem; background:#0f1625; padding:0.2rem 0.6rem; border-radius:0.3rem;">16×16</span>
                 </div>
-                <div class="insight-card"><i class="fas fa-lightbulb"></i> <span class="tag">key insight</span> <span>Bad HTML = accessibility failures, SEO penalties, CSS nightmares. Good HTML is the foundation of everything.</span></div>
-            `
+            </div>
+            <div class="success-box"><i class="fas fa-check-circle"></i> <strong>Best Practice:</strong> Always include multiple sizes for cross-browser compatibility. The <span class="code-inline">shortcut icon</span> is a fallback for older browsers like IE.</div>
+            <div class="insight"><i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Use <a href="https://favicon.io" style="color:#60a5fa;" target="_blank">favicon.io</a> or <a href="https://realfavicongenerator.net" style="color:#60a5fa;" target="_blank">realfavicongenerator.net</a> to create favicons in all required sizes from text or images.</div>`
+        },
+
+        // DOM Content Slides (chronologically integrated)
+        {
+            title: "<i class='fas fa-code'></i> Introduction to the HTML DOM",
+            subtitle: "What is the Document Object Model?",
+            content: `<div class="info-panel"><h3><i class="fas fa-sitemap"></i> The HTML DOM</h3><p>The HTML DOM (HTML Document Object Model) is an Object Model for HTML Documents.</p><p>When a web page loads, the browser creates a tree-like representation of the HTML document.</p><p>Each part of the document are nodes in the tree:</p></div>
+            <table class="dom-table">
+                <tr><th>Node</th><th>Description</th></tr>
+                <tr><td><span class="code-inline">Document</span></td><td>Owner of all nodes in the document</td></tr>
+                <tr><td><span class="code-inline">&lt;html&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">&lt;head&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">&lt;body&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">&lt;a&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">href</span></td><td>Attribute Node</td></tr>
+                <tr><td><span class="code-inline">&lt;h1&gt;</span></td><td>Element Node</td></tr>
+                <tr><td><span class="code-inline">My Header</span></td><td>Text Node</td></tr>
+            </table>
+            <div class="insight"><i class="fas fa-globe"></i> The DOM is a W3C Standard: "The W3C Document Object Model (DOM) is a platform and language-neutral interface that allows programs and scripts to dynamically access and update the content, structure, and style of a document."</div>`
         },
         {
-            title: "<i class='fas fa-sitemap'></i> The DOM: What the Browser Builds",
-            subtitle: "Document Object Model — the tree structure in memory",
-            content: `
-                <div class="dom-tree">
-                    Document<br>
-                    └── html<br>
-                        ├── head<br>
-                        │   └── title → "My Page"<br>
-                        └── body<br>
-                            ├── h1 → "Hello World"<br>
-                            └── p.intro → "Welcome to my page"
-                </div>
-                <div class="concept-box" style="margin-top:0.8rem;">
-                    <h3><i class="fas fa-code-branch"></i> Why the DOM Matters</h3>
-                    <p>When a browser receives HTML, it parses it into a <span class="highlight">tree-like structure in memory</span> called the DOM. JavaScript reads and modifies this tree — not the HTML file directly.</p>
-                    <pre><code>// JavaScript can query and modify the DOM:
-document.querySelector('h1').textContent = 'New Title';
-document.querySelector('.intro').style.color = 'blue';</code></pre>
-                </div>
-            `
+            title: "<i class='fas fa-hand-pointer'></i> Accessing HTML Elements",
+            subtitle: "Methods to find and select elements",
+            content: `<div class="info-panel"><h3><i class="fas fa-search"></i> Accessing Elements</h3><p>The most common way to access an HTML element is to use the <span class="code-inline">id</span> of the element:</p><pre><code>const myPara = document.getElementById("demo");\nmyPara.innerHTML = "Hello World!";</code></pre><p><span class="code-inline">id="demo"</span> is an HTML property · <span class="code-inline">getElementById()</span> is a DOM Method · <span class="code-inline">innerHTML</span> is a DOM Property</p></div>
+            <div class="insight"><i class="fas fa-graduation-cap"></i> <strong>What You Will Learn:</strong> How to change content, style, add/delete elements, and react to events.</div>`
         },
         {
-            title: "<i class='fas fa-file-code'></i> HTML5 Boilerplate",
-            subtitle: "Every line explained — why removing any causes problems",
-            content: `
-                <pre><code>&lt;!DOCTYPE html&gt;           ← Triggers HTML5 standards mode (NO quirks mode!)
-&lt;html lang="en"&gt;          ← Root element + tells screen readers language
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;   ← Supports all characters (emojis, ₦, accents)
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;  ← CRITICAL for mobile!
-  &lt;meta name="description" content="... "&gt;   ← Google search result text
-  &lt;title&gt;Page Title&lt;/title&gt;                 ← Browser tab + SEO
-  &lt;link rel="stylesheet" href="css/style.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Hello World&lt;/h1&gt;
-  &lt;script src="js/main.js"&gt;&lt;/script&gt;      ← Before closing body!
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                <div class="insight-card"><i class="fas fa-mobile-alt"></i> <strong>Without viewport meta tag:</strong> Your responsive CSS media queries will NOT work on mobile. This is the #1 beginner mistake.</div>
-            `
+            title: "<i class='fas fa-cogs'></i> HTML DOM API",
+            subtitle: "Methods, Properties, and Abilities",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-tools"></i> API Methods & Properties</h3><p><strong>API Method</strong> = Action you can do on an element</p><p><strong>API Property</strong> = Value you can access on an element</p><pre><code>// Access a paragraph Element\nconst myPara = document.getElementById("demo");\n// Change the content of the Element\nmyPara.innerHTML = "Hello World!";</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-bolt"></i> DOM API Abilities</h3><ul class="dom-list"><li>Find and select elements</li><li>Change element content and attributes</li><li>Add, remove, or modify elements</li><li>Change CSS styles</li><li>Add event listeners to react to user input</li></ul></div>
+            </div>
+            <div class="insight"><i class="fas fa-info-circle"></i> The DOM API is a standard. JavaScript is the language used in browsers to access the DOM through the API.</div>`
         },
         {
-            title: "<i class='fas fa-arrows-alt'></i> Block vs Inline Elements",
-            subtitle: "The rule that governs layout",
-            content: `
-                <div class="two-column-split">
-                    <div class="col"><h4><i class="fas fa-square"></i> BLOCK Elements</h4>
-                        <ul style="margin-left:1.2rem;">
-                            <li>Take up <span class="highlight">full width</span> of parent</li>
-                            <li>Always start on a <span class="highlight">new line</span></li>
-                            <li>Can have width, height, margin, padding</li>
-                            <li>Examples: <code>&lt;div&gt;, &lt;p&gt;, &lt;h1&gt;–&lt;h6&gt;, &lt;ul&gt;, &lt;section&gt;</code></li>
-                        </ul>
-                    </div>
-                    <div class="col"><h4><i class="fas fa-align-left"></i> INLINE Elements</h4>
-                        <ul style="margin-left:1.2rem;">
-                            <li>Take only <span class="highlight">as much width as content</span></li>
-                            <li><span class="highlight">Flow inline</span> with surrounding text</li>
-                            <li>width/height have no effect</li>
-                            <li>Examples: <code>&lt;span&gt;, &lt;a&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;img&gt;</code></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="insight-card"><i class="fas fa-exclamation-triangle"></i> <strong>Common mistake:</strong> Putting a block element inside an inline element (e.g., &lt;div&gt; inside &lt;span&gt;) is invalid HTML!</div>
-            `
+            title: "<i class='fas fa-table'></i> Selecting HTML Elements",
+            subtitle: "All the selection methods",
+            content: `<div class="info-panel"><h3><i class="fas fa-list"></i> Selection Methods</h3>
+            <table class="dom-table">
+                <tr><th>Method</th><th>Description</th></tr>
+                <tr><td><span class="code-inline">document.getElementById(id)</span></td><td>Find an element by element id</td></tr>
+                <tr><td><span class="code-inline">document.getElementsByTagName(name)</span></td><td>Find elements by tag name</td></tr>
+                <tr><td><span class="code-inline">document.getElementsByClassName(name)</span></td><td>Find elements by class name</td></tr>
+                <tr><td><span class="code-inline">document.querySelector(selector)</span></td><td>Find the first element that matches a CSS selector</td></tr>
+                <tr><td><span class="code-inline">document.querySelectorAll(selector)</span></td><td>Find all elements that match a CSS selector</td></tr>
+            </table>
+            <p>The document object is the owner of all other objects in your web page.</p></div>`
         },
         {
-            title: "<i class='fas fa-table'></i> HTML Entities",
-            subtitle: "Characters you cannot type directly",
-            content: `
-                <table class="entity-table">
-                    <tr><th>Entity</th><th>Result</th><th>Description</th></tr>
-                    <tr><td>&amp;amp;</td><td>&amp;</td><td>Ampersand — use instead of bare &</td></tr>
-                    <tr><td>&amp;lt;</td><td>&lt;</td><td>Less-than</td></tr>
-                    <tr><td>&amp;gt;</td><td>&gt;</td><td>Greater-than</td></tr>
-                    <tr><td>&amp;nbsp;</td><td>&nbsp;</td><td>Non-breaking space</td></tr>
-                    <tr><td>&amp;copy;</td><td>&copy;</td><td>Copyright</td></tr>
-                    <tr><td>&amp;#8358;</td><td>&#8358;</td><td>Nigerian Naira symbol</td></tr>
-                </table>
-                <div class="insight-card"><i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Writing a bare & in text will break HTML. Always use <code>&amp;amp;</code> instead!</div>
-            `
+            title: "<i class='fas fa-edit'></i> Changing HTML Content",
+            subtitle: "innerHTML, attributes, and dynamic content",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-pen"></i> innerHTML Property</h3><pre><code>document.getElementById(id).innerHTML = new HTML</code></pre><p>Useful for getting or replacing the content of HTML elements.</p></div>
+                <div class="info-panel"><h3><i class="fas fa-attribute"></i> Changing Attributes</h3><pre><code>document.getElementById(id).attribute = new value</code></pre><pre><code>document.getElementById("myImage").src = "landscape.jpg";</code></pre></div>
+            </div>
+            <div class="warning-box"><i class="fas fa-exclamation-triangle"></i> <strong>Common Mistakes:</strong> Trying to access a DOM element before it exists · Forgetting quotes in an id like "demo"</div>
+            <div class="info-panel"><h3><i class="fas fa-clock"></i> Dynamic HTML Content</h3><pre><code>document.getElementById("demo").innerHTML = "Date : " + Date();</code></pre></div>
+            <div class="warning-box"><i class="fas fa-exclamation-circle"></i> <strong>Warning!</strong> Never use <span class="code-inline">document.write()</span> after the document is loaded. It will overwrite the document.</div>`
         },
         {
-            title: "<i class='fas fa-exclamation-triangle'></i> 10 Most Common HTML Mistakes",
-            subtitle: "And how to fix them — high contrast version",
-            content: `
-                <ul class="mistake-list">
-                    <li><strong>❌ Missing or wrong DOCTYPE</strong> — ✅ Always <code>&lt;!DOCTYPE html&gt;</code> as the very first line</li>
-                    <li><strong>❌ Missing viewport meta tag</strong> — ✅ Add <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></li>
-                    <li><strong>❌ Images without alt text</strong> — ✅ Every <code>&lt;img&gt;</code> must have descriptive <code>alt</code> attribute</li>
-                    <li><strong>❌ Unclosed tags</strong> — ✅ Validate at validator.w3.org</li>
-                    <li><strong>❌ Using &lt;br&gt; for spacing</strong> — ✅ Use CSS margin/padding instead</li>
-                    <li><strong>❌ Skipping heading levels</strong> — ✅ Use <code>&lt;h1&gt;</code> → <code>&lt;h2&gt;</code> → <code>&lt;h3&gt;</code> in order</li>
-                    <li><strong>❌ Using bare & in text</strong> — ✅ Write <code>&amp;amp;</code> for ampersand</li>
-                    <li><strong>❌ Nesting block inside inline</strong> — ✅ Never put <code>&lt;div&gt;</code> inside <code>&lt;span&gt;</code></li>
-                    <li><strong>❌ Missing labels on form inputs</strong> — ✅ Every input needs associated <code>&lt;label&gt;</code></li>
-                    <li><strong>❌ JS in &lt;head&gt; without defer</strong> — ✅ Place script before closing <code>&lt;/body&gt;</code> or add <code>defer</code></li>
-                </ul>
-                <div class="insight-card"><i class="fas fa-check-circle" style="color:#22c55e;"></i> <strong>Pro tip:</strong> Use the W3C validator (validator.w3.org) to catch these mistakes automatically!</div>
-            `
+            title: "<i class='fas fa-paint-brush'></i> Changing CSS with JavaScript",
+            subtitle: "Style manipulation and events",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-palette"></i> Changing Style</h3><pre><code>document.getElementById(id).style.property = new style</code></pre><pre><code>document.getElementById("p2").style.color = "blue";</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-mouse-pointer"></i> Using Events</h3><p>Events are generated when:</p><ul class="dom-list"><li>An element is clicked on</li><li>The page has loaded</li><li>Input fields are changed</li></ul><pre><code>onclick="document.getElementById('id1').style.color = 'red'"</code></pre></div>
+            </div>
+            <div class="info-panel"><h3><i class="fas fa-eye-slash"></i> Show/Hide Elements</h3><pre><code>document.getElementById('p1').style.visibility='hidden'\ndocument.getElementById('p1').style.visibility='visible'</code></pre></div>`
         },
         {
-            title: "<i class='fas fa-eye'></i> Complete Example: Personal Portfolio",
-            subtitle: "Every concept from Class 3 in one page",
-            content: `<pre><code>&lt;!DOCTYPE html&gt;... (full portfolio example with semantic HTML and meta tags)...&lt;/code&gt;</pre><div class="insight-card"><i class="fas fa-code"></i> Full example includes proper headings, alt attributes, semantic structure.</div>`
+            title: "<i class='fas fa-check-circle'></i> HTML Form Validation",
+            subtitle: "JavaScript and automatic validation",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-code"></i> JavaScript Validation</h3><pre><code>function validateForm() {\n  let x = document.forms["myForm"]["fname"].value;\n  if (x == "") {\n    alert("Name must be filled out");\n    return false;\n  }\n}</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-shield-alt"></i> Automatic Validation</h3><pre><code>&lt;input type="text" name="fname" required&gt;</code></pre><div class="warning-box"><i class="fas fa-exclamation-triangle"></i> Automatic HTML form validation does not work in Internet Explorer 9 or earlier.</div></div>
+            </div>
+            <div class="info-panel"><h3><i class="fas fa-tasks"></i> Data Validation Tasks</h3><ul class="dom-list"><li>Has the user filled in all required fields?</li><li>Has the user entered a valid date?</li><li>Has the user entered text in a numeric field?</li></ul></div>`
         },
         {
-            title: "<i class='fas fa-tasks'></i> Assignment: Build Your First Webpage",
-            subtitle: "Hands-on tasks to complete this class",
-            content: `<div class="concept-box"><h3>📝 Assignment Tasks</h3><ul><li>✓ Create index.html with full boilerplate</li><li>✓ Add meta description, viewport, charset</li><li>✓ Validate with W3C validator</li></ul></div>`
+            title: "<i class='fas fa-list'></i> HTML Constraint Validation",
+            subtitle: "Input attributes and CSS pseudo-selectors",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-tag"></i> Input Attributes</h3>
+                <table class="dom-table">
+                    <tr><th>Attribute</th><th>Description</th></tr>
+                    <tr><td><span class="code-inline">disabled</span></td><td>Disables the input</td></tr>
+                    <tr><td><span class="code-inline">max</span></td><td>Maximum value</td></tr>
+                    <tr><td><span class="code-inline">min</span></td><td>Minimum value</td></tr>
+                    <tr><td><span class="code-inline">pattern</span></td><td>Value pattern</td></tr>
+                    <tr><td><span class="code-inline">required</span></td><td>Required field</td></tr>
+                    <tr><td><span class="code-inline">type</span></td><td>Input type</td></tr>
+                </table></div>
+                <div class="info-panel"><h3><i class="fas fa-css3"></i> CSS Pseudo Selectors</h3>
+                <table class="dom-table">
+                    <tr><th>Selector</th><th>Description</th></tr>
+                    <tr><td><span class="code-inline">:disabled</span></td><td>Disabled elements</td></tr>
+                    <tr><td><span class="code-inline">:invalid</span></td><td>Invalid values</td></tr>
+                    <tr><td><span class="code-inline">:optional</span></td><td>Not required</td></tr>
+                    <tr><td><span class="code-inline">:required</span></td><td>Required elements</td></tr>
+                    <tr><td><span class="code-inline">:valid</span></td><td>Valid values</td></tr>
+                </table></div>
+            </div>`
         },
         {
-            title: "<i class='fas fa-question-circle'></i> Knowledge Check",
-            subtitle: "10 complete questions — click to toggle verified answers",
-            content: `<div class="qa-section"><div class="qa-title"><i class="fas fa-question-circle"></i> 10 Essential HTML Questions (Click each to reveal correct answer)</div><div id="qa-container"></div></div>`
+            title: "<i class='fas fa-film'></i> HTML DOM Animation",
+            subtitle: "Creating animations with JavaScript",
+            content: `<div class="grid-2col">
+                <div class="info-panel"><h3><i class="fas fa-cube"></i> Animation Setup</h3><pre><code>&lt;div id="container"&gt;\n  &lt;div id="animate"&gt;My animation will go here&lt;/div&gt;\n&lt;/div&gt;</code></pre></div>
+                <div class="info-panel"><h3><i class="fas fa-paint-brush"></i> CSS Styling</h3><pre><code>#container {\n  width: 400px; height: 400px;\n  position: relative;\n  background: yellow;\n}\n#animate {\n  width: 50px; height: 50px;\n  position: absolute;\n  background: red;\n}</code></pre></div>
+            </div>
+            <div class="info-panel"><h3><i class="fas fa-play"></i> Animation Code</h3><pre><code>function myMove() {\n  let id = null;\n  const elem = document.getElementById("animate");\n  let pos = 0;\n  id = setInterval(frame, 5);\n  function frame() {\n    if (pos == 350) clearInterval(id);\n    else { pos++; elem.style.top = pos + 'px'; elem.style.left = pos + 'px'; }\n  }\n}</code></pre></div>`
         },
         {
-            title: "<i class='fas fa-clipboard-list'></i> Week 1 Assessment Quiz",
-            subtitle: "10 questions covering Classes 1-3 — accurate & verified",
-            content: `<div class="qa-section"><div class="qa-title"><i class="fas fa-pen"></i> Assessment Quiz (click to check answers)</div><div id="quiz-container"></div></div>`
+            title: "<i class='fas fa-file'></i> HTML DOM Document",
+            subtitle: "Document properties and methods reference",
+            content: `<div class="info-panel"><h3><i class="fas fa-list"></i> Key Document Properties & Methods</h3>
+            <table class="dom-table">
+                <tr><th>Name</th><th>Description</th></tr>
+                <tr><td><span class="code-inline">document.body</span></td><td>Sets or returns the document's body</td></tr>
+                <tr><td><span class="code-inline">document.createElement()</span></td><td>Creates an Element node</td></tr>
+                <tr><td><span class="code-inline">document.getElementById()</span></td><td>Returns element by ID</td></tr>
+                <tr><td><span class="code-inline">document.querySelector()</span></td><td>Returns first element matching CSS selector</td></tr>
+                <tr><td><span class="code-inline">document.querySelectorAll()</span></td><td>Returns all elements matching CSS selector</td></tr>
+                <tr><td><span class="code-inline">document.title</span></td><td>Sets or returns the title of the document</td></tr>
+                <tr><td><span class="code-inline">document.write()</span></td><td>Writes HTML to a document</td></tr>
+            </table>
+            <div class="insight"><i class="fas fa-question-circle"></i> <strong>Exercise:</strong> What is NOT a legal HTML DOM document method?<br>❌ getElementsByClassName() · ❌ getElementsByTagName() · ✅ <strong>getElementsByAttributeName()</strong></div></div>`
+        },
+        {
+            title: "<i class='fas fa-cube'></i> HTML DOM Element Reference",
+            subtitle: "Element properties and methods",
+            content: `<div class="info-panel"><h3><i class="fas fa-list"></i> Common Element Properties & Methods</h3>
+            <table class="dom-table">
+                <tr><th>Name</th><th>Description</th></tr>
+                <tr><td><span class="code-inline">element.innerHTML</span></td><td>Sets or returns the content of an element</td></tr>
+                <tr><td><span class="code-inline">element.className</span></td><td>Sets or returns class attribute</td></tr>
+                <tr><td><span class="code-inline">element.style</span></td><td>Sets or returns style attribute</td></tr>
+                <tr><td><span class="code-inline">element.addEventListener()</span></td><td>Attaches an event handler</td></tr>
+                <tr><td><span class="code-inline">element.appendChild()</span></td><td>Adds a new child node</td></tr>
+                <tr><td><span class="code-inline">element.remove()</span></td><td>Removes an element from the DOM</td></tr>
+                <tr><td><span class="code-inline">element.setAttribute()</span></td><td>Sets or changes an attribute's value</td></tr>
+                <tr><td><span class="code-inline">element.getAttribute()</span></td><td>Returns the value of an attribute</td></tr>
+            </table>
+            <div class="insight"><i class="fas fa-book"></i> For all DOM properties, refer to the complete HTML DOM Reference.</div></div>`
+        },
+        {
+            title: "<i class='fas fa-star-of-life'></i> Pure HTML Sites Showcase",
+            subtitle: "Minimal, fast, resilient web design",
+            content: `<div class="insight"><i class="fas fa-heart"></i> <strong>Inspiring websites built with only HTML/CSS (no JS frameworks):</strong></div>
+            <div class="site-list" style="margin-top:1rem;">
+                <span class="site-badge">whitep4nth3r.com</span>
+                <span class="site-badge">txti.es</span>
+                <span class="site-badge">html.energy</span>
+                <span class="site-badge">brutalistwebsites.com</span>
+                <span class="site-badge">100r.co</span>
+                <span class="site-badge">solar.lowtechmagazine.com</span>
+                <span class="site-badge">danq.me</span>
+                <span class="site-badge">motherfuckingwebsite.com</span>
+            </div>
+            <p style="margin-top:1rem;">These sites load instantly, work on any device, and are accessible to everyone — proving that sometimes less is more.</p>
+            <div class="insight" style="margin-top:1rem;"><i class="fas fa-lightbulb"></i> Challenge: Visit these sites, view source (Ctrl+U), and see how they structure content with pure HTML!</div>`
         }
     ];
 
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    const slideArea = document.getElementById('slideArea');
+    let current = 0;
+    const container = document.getElementById('slideContainer');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const counterText = document.getElementById('counterText');
-    const dotsContainer = document.getElementById('dotsContainer');
-
-    function renderKnowledgeCheck() {
-        const container = document.getElementById('qa-container');
-        if (!container) return;
-        container.innerHTML = '';
-        fixedKnowledgeCheck.forEach((item, idx) => {
-            const div = document.createElement('div');
-            div.className = 'qa-item';
-            div.innerHTML = `
-                <div class="qa-question" data-idx="${idx}">
-                    <span><strong>${idx+1}.</strong> ${item.q}</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="qa-answer" id="knowledge-answer-${idx}">
-                    <p>✅ <span class="highlight">Correct answer:</span> ${item.a}</p>
-                </div>
-            `;
-            container.appendChild(div);
-        });
-        document.querySelectorAll('#qa-container .qa-question').forEach(q => {
-            q.addEventListener('click', (e) => {
-                const idx = q.getAttribute('data-idx');
-                const ansDiv = document.getElementById(`knowledge-answer-${idx}`);
-                const icon = q.querySelector('i');
-                ansDiv.classList.toggle('show');
-                icon.style.transform = ansDiv.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-        });
-    }
-
-    function renderQuizAssessment() {
-        const container = document.getElementById('quiz-container');
-        if (!container) return;
-        container.innerHTML = '';
-        fixedQuizData.forEach((item, idx) => {
-            const div = document.createElement('div');
-            div.className = 'qa-item';
-            div.innerHTML = `
-                <div class="qa-question" data-idx="${idx}">
-                    <span><strong>${idx+1}.</strong> ${item.q}</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="qa-answer" id="quiz-ans-${idx}">
-                    <p>📘 <span class="highlight">Answer:</span> ${item.a}</p>
-                </div>
-            `;
-            container.appendChild(div);
-        });
-        document.querySelectorAll('#quiz-container .qa-question').forEach(q => {
-            q.addEventListener('click', () => {
-                const idx = q.getAttribute('data-idx');
-                const ansDiv = document.getElementById(`quiz-ans-${idx}`);
-                const icon = q.querySelector('i');
-                ansDiv.classList.toggle('show');
-                icon.style.transform = ansDiv.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-        });
-    }
+    const counterSpan = document.getElementById('counter');
+    const dotsDiv = document.getElementById('dotsPanel');
 
     function renderSlide(index) {
         const slide = slides[index];
-        const html = `<div class="slide-card"><div class="slide-title">${slide.title}</div><div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div><div class="slide-content">${slide.content}</div></div>`;
-        slideArea.innerHTML = html;
-        if (index === 8) renderKnowledgeCheck();
-        if (index === 9) renderQuizAssessment();
-        counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
-        prevBtn.disabled = (index === 0);
-        nextBtn.disabled = (index === totalSlides-1);
+        container.innerHTML = `<div class="slide-card"><div class="slide-title">${slide.title}</div><div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div><div class="slide-content">${slide.content}</div></div>`;
+        counterSpan.innerHTML = `<i class="far fa-file"></i> ${index+1} / ${slides.length}`;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === slides.length-1;
         updateDots(index);
     }
 
-    function updateDots(activeIndex) {
-        dotsContainer.innerHTML = '';
-        for (let i = 0; i < totalSlides; i++) {
+    function updateDots(active) {
+        dotsDiv.innerHTML = '';
+        for (let i = 0; i < slides.length; i++) {
             const dot = document.createElement('div');
             dot.classList.add('dot');
-            if (i === activeIndex) dot.classList.add('active');
-            dotsContainer.appendChild(dot);
+            if (i === active) dot.classList.add('active');
+            dotsDiv.appendChild(dot);
         }
     }
-    function nextSlide() { if (currentIndex < totalSlides-1) { currentIndex++; renderSlide(currentIndex); } }
-    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
-    window.addEventListener('keydown', (e) => { if(e.key === 'ArrowRight') nextSlide(); if(e.key === 'ArrowLeft') prevSlide(); });
-    prevBtn.addEventListener('click', prevSlide);
-    nextBtn.addEventListener('click', nextSlide);
+
+    prevBtn.addEventListener('click', () => { if (current > 0) { current--; renderSlide(current); } });
+    nextBtn.addEventListener('click', () => { if (current < slides.length-1) { current++; renderSlide(current); } });
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextBtn.click();
+        if (e.key === 'ArrowLeft') prevBtn.click();
+    });
     renderSlide(0);
 </script>
 </body>

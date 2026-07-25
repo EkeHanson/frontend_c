@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Web Development Projects - Navigation</title>
+    <title>Web Development Curriculum - Complete Navigation Hub</title>
+    
+
+
+  <!-- 32x32 (most common) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="tracking.png">
+  
+  <!-- 16x16 (for older browsers) -->
+  <link rel="icon" type="image/png" sizes="16x16" href="tracking.png">
+  
+  <!-- Fallback for very old browsers -->
+  <link rel="shortcut icon" href="tracking.png">
+
+
+
+
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -21,15 +36,15 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         /* Header Section */
         .hero {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
+            margin-bottom: 2.5rem;
+            padding: 2.5rem;
             background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
             border-radius: 2rem;
             border: 1px solid #334155;
@@ -37,9 +52,9 @@
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #E0F2FE, #7AA9FF);
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #E0F2FE, #7AA9FF, #a78bfa);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
@@ -56,13 +71,13 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 1.2rem;
             flex-wrap: wrap;
         }
 
         .badge {
             background: #1e293b;
-            padding: 0.3rem 1rem;
+            padding: 0.3rem 1.2rem;
             border-radius: 40px;
             font-size: 0.8rem;
             color: #94a3b8;
@@ -75,163 +90,306 @@
             color: #60a5fa;
         }
 
-        /* Section heading */
-        .section-title {
-            color: #fbbf24;
-            font-size: 1.5rem;
-            margin: 2.5rem 0 1.5rem;
+        /* Week Section */
+        .week-section {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #1e293b;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .week-section:hover {
+            border-color: #334155;
+        }
+
+        .week-header {
+            background: linear-gradient(95deg, #0f172a 0%, #1a2338 100%);
+            padding: 1.2rem 1.8rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .week-header:hover {
+            background: #1a2338;
+        }
+
+        .week-header.active {
+            border-bottom-color: #334155;
+        }
+
+        .week-title {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-        }
-
-        .section-title .count {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            background: #1e293b;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1rem;
-            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
-        .class-card {
+        .week-title h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        .week-title h2 i {
+            color: #60a5fa;
+            margin-right: 0.5rem;
+        }
+
+        .week-badge {
+            background: #1e293b;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .week-badge i {
+            color: #60a5fa;
+        }
+
+        .week-chevron {
+            color: #64748b;
+            transition: transform 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .week-chevron.rotated {
+            transform: rotate(180deg);
+        }
+
+        .week-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .week-body.open {
+            max-height: 2000px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            padding: 1.2rem 1.8rem 1.8rem;
+        }
+
+        .day-card {
             background: rgba(22, 26, 38, 0.95);
             backdrop-filter: blur(4px);
             border-radius: 1.2rem;
             padding: 1.1rem;
-            border: 1px solid #334155;
+            border: 1px solid #2d3748;
             transition: all 0.3s ease;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        .class-card:hover {
-            transform: translateY(-5px);
+        .day-card:hover {
+            transform: translateY(-4px);
             border-color: #3b82f6;
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
-        .card-icon {
-            font-size: 1.7rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .class-card h2 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #e2e8f0;
+        .day-card .day-number {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #60a5fa;
+            font-weight: 600;
             margin-bottom: 0.4rem;
         }
 
-        .class-meta {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 0.6rem;
+        .day-card .day-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
         }
 
-        .meta-item {
+        .day-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 0.3rem;
+        }
+
+        .day-card .day-desc {
+            color: #94a3b8;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            margin-bottom: 0.6rem;
+            flex: 1;
+        }
+
+        .day-card .day-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .day-card .topic-tag {
             background: #1e293b;
-            padding: 0.15rem 0.55rem;
-            border-radius: 30px;
+            padding: 0.1rem 0.5rem;
+            border-radius: 20px;
             font-size: 0.62rem;
             color: #94a3b8;
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.2rem;
         }
 
-        .meta-item i {
+        .day-card .topic-tag i {
             color: #60a5fa;
-            font-size: 0.62rem;
+            font-size: 0.55rem;
         }
 
-        .card-description {
-            color: #cbd5e6;
-            line-height: 1.4;
-            margin-bottom: 0.8rem;
-            font-size: 0.78rem;
-        }
-
-        .topics-list {
-            display: none;
-        }
-
-        .btn-row {
+        .day-card .btn-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.6rem;
+            gap: 0.5rem;
             margin-top: auto;
         }
 
-        .btn {
+        .day-card .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
             background: linear-gradient(135deg, #1e2a3a, #1a2338);
-            padding: 0.45rem 0.9rem;
+            padding: 0.4rem 0.9rem;
             border-radius: 2rem;
             color: #e2e8f0;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             transition: all 0.2s;
             border: 1px solid #334155;
-            cursor: pointer;
-            flex: 1 1 auto;
+            flex: 1;
             justify-content: center;
         }
 
-        .btn:hover {
+        .day-card .btn:hover {
             background: linear-gradient(135deg, #2d3a4e, #25334d);
             border-color: #3b82f6;
             transform: scale(0.98);
         }
 
-        .btn-primary {
+        .day-card .btn-primary {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             border-color: #3b82f6;
         }
 
-        .btn-primary:hover {
+        .day-card .btn-primary:hover {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
         }
 
-        .btn-secondary {
+        .day-card .btn-secondary {
             flex: 0 1 auto;
-            font-size: 0.7rem;
-            padding: 0.4rem 0.7rem;
+            font-size: 0.65rem;
+            padding: 0.35rem 0.6rem;
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #6b7280;
+        /* Bonus Section */
+        .bonus-section {
+            margin-top: 0.5rem;
+        }
+
+        .bonus-section .bonus-header {
+            background: linear-gradient(95deg, #0f172a 0%, #1a2338 100%);
+            border-radius: 1.5rem;
+            padding: 1rem 1.8rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #1e293b;
+        }
+
+        .bonus-section .bonus-header:hover {
+            border-color: #334155;
+        }
+
+        .bonus-section .bonus-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bonus-section .bonus-body.open {
+            max-height: 2000px;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.8rem;
+            padding: 1.2rem 0 0.5rem;
+        }
+
+        .bonus-card {
+            background: rgba(22, 26, 38, 0.9);
+            border-radius: 1rem;
+            padding: 0.9rem;
+            border: 1px solid #2d3748;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bonus-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-3px);
+        }
+
+        .bonus-card h4 {
             font-size: 0.85rem;
-            border-top: 1px solid #1e293b;
-            margin-top: 1rem;
+            color: #e2e8f0;
+            margin-bottom: 0.3rem;
         }
 
-        footer i {
-            color: #60a5fa;
+        .bonus-card p {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            margin-bottom: 0.6rem;
+            flex: 1;
         }
 
-        /* Instructions box */
+        .bonus-card .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: #1e293b;
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.68rem;
+            transition: all 0.2s;
+            border: 1px solid #334155;
+            align-self: flex-start;
+        }
+
+        .bonus-card .btn:hover {
+            border-color: #8b5cf6;
+            background: #2d3a4e;
+        }
+
+        /* Instructions */
         .instructions {
             background: #0f172a;
             border-radius: 1.2rem;
-            padding: 1.2rem;
+            padding: 1.2rem 1.5rem;
             margin-bottom: 2rem;
             border-left: 4px solid #3b82f6;
         }
@@ -241,7 +399,8 @@
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            font-size: 1.1rem;
         }
 
         .instructions p {
@@ -250,15 +409,69 @@
             line-height: 1.5;
         }
 
+        .instructions .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        .instructions .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .instructions .legend-item i {
+            color: #60a5fa;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .status-dot.html { background: #f97316; }
+        .status-dot.css { background: #3b82f6; }
+        .status-dot.js { background: #eab308; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e293b;
+            margin-top: 1.5rem;
+        }
+
+        footer i {
+            color: #60a5fa;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
             }
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
             .hero h1 {
                 font-size: 1.8rem;
+            }
+            .days-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            .week-header {
+                padding: 1rem;
+            }
+            .week-title h2 {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -267,11 +480,13 @@
     <div class="container">
         <!-- Hero Section -->
         <div class="hero">
-            <h1><i class="fas fa-code"></i> Web Development Projects</h1>
-            <p>JavaScript &amp; CSS Practice · Week 1 – Week 3 · Interactive Projects</p>
+            <h1><i class="fas fa-code"></i> Web Development Curriculum</h1>
+            <p>Complete Frontend Course · 6 Weeks · 3 Classes per Week · Interactive Slides &amp; Projects</p>
             <div class="badge-container">
-                <span class="badge"><i class="fas fa-layer-group"></i> 20+ Pages</span>
-                <span class="badge"><i class="fas fa-folder-open"></i> Hands-on Coding</span>
+                <span class="badge"><i class="fas fa-layer-group"></i> 50+ Pages</span>
+                <span class="badge"><i class="fab fa-html5"></i> HTML</span>
+                <span class="badge"><i class="fab fa-css3-alt"></i> CSS</span>
+                <span class="badge"><i class="fab fa-js"></i> JavaScript</span>
                 <span class="badge"><i class="fas fa-rocket"></i> Click to Launch</span>
             </div>
         </div>
@@ -279,306 +494,240 @@
         <!-- Instructions -->
         <div class="instructions">
             <h3><i class="fas fa-info-circle"></i> How to Navigate</h3>
-            <p>Click on any project card below to open it in your browser. Each project is a self-contained web page you can explore and interact with. Cards may contain multiple links to related pages.</p>
+            <p>Click on any day card below to open the class slides or project. Each week has 3 days of content. Use the arrow keys or navigation buttons within each slide deck to move through lessons.</p>
+            <div class="legend">
+                <span class="legend-item"><span class="status-dot html"></span> HTML Content</span>
+                <span class="legend-item"><span class="status-dot css"></span> CSS Content</span>
+                <span class="legend-item"><span class="status-dot js"></span> JavaScript Content</span>
+                <span class="legend-item"><i class="fas fa-chevron-down"></i> Click week headers to expand/collapse</span>
+            </div>
         </div>
 
-        <!-- ===================== JAVASCRIPT SECTION ===================== -->
-        <div class="section-title">
-            <i class="fab fa-js"></i> JavaScript Projects
-            <span class="count">Week 1</span>
-        </div>
-
-        <div class="cards-grid">
-            <!-- JS Project 1 -->
-            <div class="class-card" onclick="window.location.href='js/week1/day2.html'">
-                <div class="card-icon">
-                    <i class="fas fa-book-open" style="color: #60a5fa;"></i>
+        <!-- ===================== WEEK 1 ===================== -->
+        <div class="week-section">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-title">
+                    <h2><i class="fas fa-globe"></i> Week 1: Web Foundations</h2>
+                    <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
                 </div>
-                <h2>Day 2: JavaScript Basics</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 1 · Day 2</span>
-                    <span class="meta-item"><i class="fas fa-code"></i> Fundamentals</span>
-                </div>
-                <p class="card-description">
-                    Introductory JavaScript exercises covering core language fundamentals, syntax, and working examples from day 2 of the course.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Variables &amp; data types</li>
-                    <li><i class="fas fa-check-circle"></i> Functions &amp; control flow</li>
-                    <li><i class="fas fa-check-circle"></i> Interactive examples</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="js/week1/day2.html"><i class="fas fa-play"></i> Open Project</a>
-                </div>
+                <i class="fas fa-chevron-down week-chevron"></i>
             </div>
-
-            <!-- JS Project 2 -->
-            <div class="class-card" onclick="window.location.href='js/week1/day2/index.html'">
-                <div class="card-icon">
-                    <i class="fas fa-folder-tree" style="color: #34d399;"></i>
-                </div>
-                <h2>Day 2: Project Folder</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 1 · Day 2</span>
-                    <span class="meta-item"><i class="fas fa-folder"></i> Project Index</span>
-                </div>
-                <p class="card-description">
-                    The day 2 project landing page that ties together the exercises and mini-projects built during the session.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Organized project structure</li>
-                    <li><i class="fas fa-check-circle"></i> Linked demos &amp; examples</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="js/week1/day2/index.html"><i class="fas fa-play"></i> Open Project</a>
-                </div>
-            </div>
-
-            <!-- JS Project 3 -->
-            <div class="class-card" onclick="window.location.href='js/week1/day2/calc_project/index.html'">
-                <div class="card-icon">
-                    <i class="fas fa-calculator" style="color: #fbbf24;"></i>
-                </div>
-                <h2>Calculator Project</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 1 · Day 2</span>
-                    <span class="meta-item"><i class="fas fa-square-root-variable"></i> App</span>
-                </div>
-                <p class="card-description">
-                    A fully functional calculator web app built with HTML, CSS, and JavaScript. Perform arithmetic operations with a clean interactive UI.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Add, subtract, multiply, divide</li>
-                    <li><i class="fas fa-check-circle"></i> Live display &amp; input handling</li>
-                    <li><i class="fas fa-check-circle"></i> Responsive button layout</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="js/week1/day2/calc_project/index.html"><i class="fas fa-play"></i> Open Calculator</a>
-                </div>
-            </div>
-
-            <!-- JS Project 4 -->
-            <div class="class-card" onclick="window.location.href='js/week1/day4/todo.html'">
-                <div class="card-icon">
-                    <i class="fas fa-list-check" style="color: #f472b6;"></i>
-                </div>
-                <h2>To-Do App</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 1 · Day 4</span>
-                    <span class="meta-item"><i class="fas fa-clipboard-check"></i> App</span>
-                </div>
-                <p class="card-description">
-                    A to-do list application to add, complete, and remove tasks. Great practice for DOM manipulation and event handling.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Add &amp; delete tasks</li>
-                    <li><i class="fas fa-check-circle"></i> Mark tasks complete</li>
-                    <li><i class="fas fa-check-circle"></i> Dynamic list rendering</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="js/week1/day4/todo.html"><i class="fas fa-play"></i> Open To-Do App</a>
+            <div class="week-body open">
+                <div class="days-grid">
+                    <!-- Day 1 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot html"></span> Week 1 · Day 1</div>
+                        <div class="day-icon"><i class="fas fa-network-wired" style="color: #60a5fa;"></i></div>
+                        <h3>How the Web Works</h3>
+                        <p class="day-desc">Internet fundamentals, browsers, DNS, HTTP/HTTPS, frontend vs backend, and developer tools.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> IP &amp; DNS</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> HTTP Protocol</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Hosting</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="class-1-how-web-works.htm"><i class="fas fa-play"></i> Open Class 1</a>
+                        </div>
+                    </div>
+                    <!-- Day 2 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot html"></span> Week 1 · Day 2</div>
+                        <div class="day-icon"><i class="fas fa-laptop-code" style="color: #34d399;"></i></div>
+                        <h3>Development Environment</h3>
+                        <p class="day-desc">VS Code setup, essential extensions, folder structure, Emmet shortcuts, and Live Server.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> VS Code</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Extensions</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Emmet</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="class-2-how-web-works.htm"><i class="fas fa-play"></i> Open Class 2</a>
+                        </div>
+                    </div>
+                    <!-- Day 3 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot html"></span> Week 1 · Day 3</div>
+                        <div class="day-icon"><i class="fab fa-html5" style="color: #f97316;"></i></div>
+                        <h3>Introduction to HTML</h3>
+                        <p class="day-desc">HTML elements, tags, attributes, DOM tree, boilerplate, block vs inline, entities, and common mistakes.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> HTML Structure</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> DOM</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Boilerplate</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="class-3-html-tags-img.htm"><i class="fas fa-play"></i> Open Class 3</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ===================== CSS SECTION ===================== -->
-        <div class="section-title">
-            <i class="fab fa-css3-alt"></i> CSS Projects
-            <span class="count">Week 2 – Week 3</span>
-        </div>
-
-        <div class="cards-grid">
-            <!-- CSS: Chrome replica -->
-            <div class="class-card" onclick="window.location.href='css/google_chrome_broswer_home_page.html'">
-                <div class="card-icon">
-                    <i class="fab fa-chrome" style="color: #60a5fa;"></i>
+        <!-- ===================== WEEK 2 ===================== -->
+        <div class="week-section">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-title">
+                    <h2><i class="fab fa-html5"></i> Week 2: HTML Deep Dive</h2>
+                    <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
                 </div>
-                <h2>Chrome Browser Home Page</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-palette"></i> Layout &amp; Styling</span>
-                </div>
-                <p class="card-description">
-                    A static replica of the Google Chrome new-tab home page, built to practice layout, spacing, and visual design with CSS.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Search bar &amp; shortcuts</li>
-                    <li><i class="fas fa-check-circle"></i> Centered layout</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="css/google_chrome_broswer_home_page.html"><i class="fas fa-play"></i> Open Page</a>
-                </div>
+                <i class="fas fa-chevron-down week-chevron"></i>
             </div>
-
-            <!-- CSS Week 2 Day 1 -->
-            <div class="class-card" onclick="window.location.href='css/week 2/day1/index.html'">
-                <div class="card-icon">
-                    <i class="fas fa-paint-brush" style="color: #a78bfa;"></i>
-                </div>
-                <h2>Week 2 · Day 1: CSS Foundations</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 2 · Day 1</span>
-                    <span class="meta-item"><i class="fas fa-code"></i> Internal / Inline / External</span>
-                </div>
-                <p class="card-description">
-                    Introduction to CSS — styling approaches, the taskflow demo, and a hands-on day 1 exercise page.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Inline &amp; internal styles</li>
-                    <li><i class="fas fa-check-circle"></i> External stylesheet (styles.css)</li>
-                    <li><i class="fas fa-check-circle"></i> Taskflow demo page</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="css/week 2/day1/index.html"><i class="fas fa-play"></i> Day 1 Index</a>
-                    <a class="btn btn-secondary" href="css/week 2/day1/day1.html"><i class="fas fa-file"></i> day1</a>
-                    <a class="btn btn-secondary" href="css/week 2/day1/inline.html"><i class="fas fa-file"></i> inline</a>
-                    <a class="btn btn-secondary" href="css/week 2/day1/taskflow.html"><i class="fas fa-file"></i> taskflow</a>
-                </div>
-            </div>
-
-            <!-- CSS Week 2 Day 2 -->
-            <div class="class-card" onclick="window.location.href='css/week 2/day2/outline.html'">
-                <div class="card-icon">
-                    <i class="fas fa-draw-polygon" style="color: #38bdf8;"></i>
-                </div>
-                <h2>Week 2 · Day 2: Outline</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 2 · Day 2</span>
-                    <span class="meta-item"><i class="fas fa-border-style"></i> Borders &amp; Outline</span>
-                </div>
-                <p class="card-description">
-                    Practice page exploring the CSS <code>outline</code> property and how it differs from borders.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Outline vs border</li>
-                    <li><i class="fas fa-check-circle"></i> Outline offset &amp; style</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="css/week 2/day2/outline.html"><i class="fas fa-play"></i> Open Page</a>
-                </div>
-            </div>
-
-            <!-- CSS Week 2 Day 3 -->
-            <div class="class-card" onclick="window.location.href='css/week 2/day3/index.html'">
-                <div class="card-icon">
-                    <i class="fas fa-layer-group" style="color: #f472b6;"></i>
-                </div>
-                <h2>Week 2 · Day 3: Z-Index &amp; Positioning</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 2 · Day 3</span>
-                    <span class="meta-item"><i class="fas fa-arrows-up-down-left-right"></i> Position</span>
-                </div>
-                <p class="card-description">
-                    Explore CSS positioning and stacking contexts with the <code>z-index</code> property through interactive examples.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Relative / absolute positioning</li>
-                    <li><i class="fas fa-check-circle"></i> Stacking order with z-index</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="css/week 2/day3/index.html"><i class="fas fa-play"></i> Day 3 Index</a>
-                    <a class="btn btn-secondary" href="css/week 2/day3/z_index.html"><i class="fas fa-file"></i> z_index</a>
-                </div>
-            </div>
-
-            <!-- CSS Week 3 Day 1 -->
-            <div class="class-card" onclick="window.location.href='css/week 3/day1.html'">
-                <div class="card-icon">
-                    <i class="fas fa-align-center" style="color: #34d399;"></i>
-                </div>
-                <h2>Week 3 · Day 1: Flexbox Layout</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 3 · Day 1</span>
-                    <span class="meta-item"><i class="fab fa-css3-alt"></i> Flexbox</span>
-                </div>
-                <p class="card-description">
-                    Introduction to the CSS Flexbox layout model for building responsive, flexible component layouts.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Flex containers &amp; items</li>
-                    <li><i class="fas fa-check-circle"></i> Alignment &amp; distribution</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="css/week 3/day1.html"><i class="fas fa-play"></i> Open Day 1</a>
-                </div>
-            </div>
-
-            <!-- CSS Week 3 Flexbox demos -->
-            <div class="class-card" onclick="window.location.href='css/week 3/flex_intro.html'">
-                <div class="card-icon">
-                    <i class="fas fa-grip" style="color: #fbbf24;"></i>
-                </div>
-                <h2>Week 3: Flexbox Demos</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 3</span>
-                    <span class="meta-item"><i class="fab fa-css3-alt"></i> Flex Properties</span>
-                </div>
-                <p class="card-description">
-                    A set of focused demos covering individual Flexbox properties: grow, shrink, order, and self-alignment.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> flex-grow &amp; flex-shrink</li>
-                    <li><i class="fas fa-check-circle"></i> flex-order &amp; align-self</li>
-                    <li><i class="fas fa-check-circle"></i> Flexbox intro</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="css/week 3/flex_intro.html"><i class="fas fa-play"></i> Flex Intro</a>
-                    <a class="btn btn-secondary" href="css/week 3/flex_grow.html"><i class="fas fa-file"></i> grow</a>
-                    <a class="btn btn-secondary" href="css/week 3/flex_shrink.html"><i class="fas fa-file"></i> shrink</a>
-                    <a class="btn btn-secondary" href="css/week 3/flex_order.html"><i class="fas fa-file"></i> order</a>
-                    <a class="btn btn-secondary" href="css/week 3/self_align.html"><i class="fas fa-file"></i> self-align</a>
-                </div>
-            </div>
-
-            <!-- CSS Week 3 Day 3 -->
-            <div class="class-card" onclick="window.location.href='css/week 3/day3.html'">
-                <div class="card-icon">
-                    <i class="fas fa-calendar-day" style="color: #60a5fa;"></i>
-                </div>
-                <h2>Week 3 · Day 3</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 3 · Day 3</span>
-                    <span class="meta-item"><i class="fas fa-puzzle-piece"></i> Practice</span>
-                </div>
-                <p class="card-description">
-                    Day 3 CSS practice page applying the layout and styling techniques covered earlier in week 3.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Combined layout practice</li>
-                    <li><i class="fas fa-check-circle"></i> Styling exercises</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="css/week 3/day3.html"><i class="fas fa-play"></i> Open Day 3</a>
-                </div>
-            </div>
-
-            <!-- CSS Week 3 Class Work -->
-            <div class="class-card" onclick="window.location.href='css/week 3/class_work.html'">
-                <div class="card-icon">
-                    <i class="fas fa-chalkboard-user" style="color: #a78bfa;"></i>
-                </div>
-                <h2>Week 3: Class Work</h2>
-                <div class="class-meta">
-                    <span class="meta-item"><i class="fas fa-calendar-week"></i> Week 3</span>
-                    <span class="meta-item"><i class="fas fa-users"></i> In-class</span>
-                </div>
-                <p class="card-description">
-                    Classwork examples completed during week 3 lessons, consolidating CSS layout and design skills.
-                </p>
-                <ul class="topics-list">
-                    <li><i class="fas fa-check-circle"></i> Guided exercises</li>
-                    <li><i class="fas fa-check-circle"></i> Reference layouts</li>
-                </ul>
-                <div class="btn-row">
-                    <a class="btn btn-primary" href="css/week 3/class_work.html"><i class="fas fa-play"></i> Open Class Work</a>
+            <div class="week-body">
+                <div class="days-grid">
+                    <!-- Day 1 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot html"></span> Week 2 · Day 1</div>
+                        <div class="day-icon"><i class="fas fa-paragraph" style="color: #60a5fa;"></i></div>
+                        <h3>Text, Links &amp; Images</h3>
+                        <p class="day-desc">Heading hierarchy, lists, anchor tags (absolute/relative), img tag, alt text, and semantic formatting.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Headings</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Links</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Images</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="class-4-html-elements.htm"><i class="fas fa-play"></i> Open Class 4</a>
+                        </div>
+                    </div>
+                    <!-- Day 2 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot html"></span> Week 2 · Day 2</div>
+                        <div class="day-icon"><i class="fas fa-file-alt" style="color: #fbbf24;"></i></div>
+                        <h3>HTML Forms</h3>
+                        <p class="day-desc">Form elements, input types, labels, select, radio, checkbox, textarea, validation attributes, GET vs POST.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Form Elements</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Input Types</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Validation</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="class5.html"><i class="fas fa-play"></i> Open Class 5</a>
+                        </div>
+                    </div>
+                    <!-- Day 3 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot html"></span> Week 2 · Day 3</div>
+                        <div class="day-icon"><i class="fas fa-globe" style="color: #a78bfa;"></i></div>
+                        <h3>Semantic HTML5 &amp; SEO</h3>
+                        <p class="day-desc">Semantic elements (header, nav, main, article, aside), accessibility, ARIA, Open Graph tags, and SEO basics.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Semantic HTML</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Accessibility</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> SEO Basics</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="class6.html"><i class="fas fa-play"></i> Open Class 6</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <footer>
-            <i class="fas fa-mouse-pointer"></i> Click any card to open the project ·
-            <i class="fas fa-home"></i> This is your navigation hub ·
-            <i class="fas fa-code"></i> Built for interactive learning
-        </footer>
-    </div>
-</body>
-</html>
+        <!-- ===================== WEEK 3 ===================== -->
+        <div class="week-section">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-title">
+                    <h2><i class="fab fa-css3-alt"></i> Week 3: CSS Styling</h2>
+                    <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
+                </div>
+                <i class="fas fa-chevron-down week-chevron"></i>
+            </div>
+            <div class="week-body">
+                <div class="days-grid">
+                    <!-- Day 1 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot css"></span> Week 3 · Day 1</div>
+                        <div class="day-icon"><i class="fas fa-palette" style="color: #3b82f6;"></i></div>
+                        <h3>CSS Complete Course</h3>
+                        <p class="day-desc">CSS syntax, selectors, 3 methods (inline/internal/external), cascade, colors (RGB/HEX/HSL), backgrounds, borders, box model, margins, padding, and quiz.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Selectors</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Colors</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Box Model</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="css/week 2/day1/day1.html"><i class="fas fa-play"></i> Open Day 1</a>
+                            <a class="btn btn-secondary" href="css/week 2/day1/index.html"><i class="fas fa-file"></i> index</a>
+                            <a class="btn btn-secondary" href="css/week 2/day1/inline.html"><i class="fas fa-file"></i> inline</a>
+                            <a class="btn btn-secondary" href="css/week 2/day1/taskflow.html"><i class="fas fa-file"></i> taskflow</a>
+                        </div>
+                    </div>
+                    <!-- Day 2 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot css"></span> Week 3 · Day 2</div>
+                        <div class="day-icon"><i class="fas fa-draw-polygon" style="color: #38bdf8;"></i></div>
+                        <h3>CSS Outline &amp; Positioning</h3>
+                        <p class="day-desc">CSS outline property, outline vs border, outline offset, and basic positioning concepts.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Outline</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Border vs Outline</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Offset</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="css/week 2/day2/outline.html"><i class="fas fa-play"></i> Open Day 2</a>
+                        </div>
+                    </div>
+                    <!-- Day 3 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot css"></span> Week 3 · Day 3</div>
+                        <div class="day-icon"><i class="fas fa-layer-group" style="color: #f472b6;"></i></div>
+                        <h3>Z-Index &amp; Positioning</h3>
+                        <p class="day-desc">CSS positioning (relative, absolute, fixed), stacking context, z-index property, and interactive demos.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Position</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Z-Index</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Stacking</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="css/week 2/day3/index.html"><i class="fas fa-play"></i> Open Day 3</a>
+                            <a class="btn btn-secondary" href="css/week 2/day3/z_index.html"><i class="fas fa-file"></i> z-index</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== WEEK 4 ===================== -->
+        <div class="week-section">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-title">
+                    <h2><i class="fas fa-align-center"></i> Week 4: CSS Flexbox &amp; Layout</h2>
+                    <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
+                </div>
+                <i class="fas fa-chevron-down week-chevron"></i>
+            </div>
+            <div class="week-body">
+                <div class="days-grid">
+                    <!-- Day 1 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot css"></span> Week 4 · Day 1</div>
+                        <div class="day-icon"><i class="fas fa-arrows-alt-h" style="color: #34d399;"></i></div>
+                        <h3>Flexbox Introduction</h3>
+                        <p class="day-desc">Introduction to CSS Flexbox layout model: flex containers, flex items, main/cross axis, and alignment properties.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Flex Containers</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Flex Items</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Alignment</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="css/week 3/flex_intro.html"><i class="fas fa-play"></i> Flex Intro</a>
+                            <a class="btn btn-secondary" href="css/week 3/day1.html"><i class="fas fa-file"></i> CSS Gradients</a>
+                        </div>
+                    </div>
+                    <!-- Day 2 -->
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot css"></span> Week 4 · Day 2</div>
+                        <div class="day-icon"><i class="fas fa-grip" style="color: #fbbf24;"></i></div>
+                        <h3>Flexbox Properties</h3>
+                        <p class="day-desc">Deep dive into flex-grow, flex-shrink, flex-order, and align-self with individual demo pages.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Flex Grow</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Flex Shrink</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Flex Order</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Self-Align</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="css/week 3/class_work.html"><i class="fas fa-play"></i> Class Work</a>
+                            <a class="btn btn-secondary" href="css/week 3/flex_grow.html"><i class="fas fa-file"></i> grow</a>
+                            <a class="btn btn-secondary" href="css/week 3/flex_shrink.html"><i class="fas fa-file"></i> shrink</a>
+                            <a class="btn btn-secondary" href="css/week 3/flex_order.html"><i class="fas fa-file"></i> order</a>
