@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📦 Array Methods · Learn JavaScript</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f6f3ef; color: #1a1612; min-height: 100vh; padding: 1.5rem; display: flex; align-items: center; justify-content: center; }
+        .slide-deck { max-width: 1100px; width: 100%; background: #ffffff; border-radius: 2rem; padding: 2rem 2.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.03); }
+        .progress-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; }
+        .progress-track { flex: 1; height: 5px; background: #e8e1d9; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 10%; background: linear-gradient(90deg, #2563eb, #7c3aed); border-radius: 10px; transition: width 0.5s ease; }
+        .slide-counter { font-size: 0.8rem; font-weight: 600; color: #64748b; background: #f0ece7; padding: 0.2rem 1rem; border-radius: 30px; }
+        .slide-content { min-height: 350px; padding: 0.2rem 0; }
+        .slide-tag { display: inline-block; background: #e8e1d9; color: #4a3f35; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 1.2rem; border-radius: 40px; margin-bottom: 0.8rem; }
+        .slide-title { font-size: 2.3rem; font-weight: 800; margin-bottom: 0.6rem; color: #0a0f1a; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+        .slide-title i { background: linear-gradient(135deg, #2563eb, #7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .slide-desc { font-size: 1.05rem; color: #334155; line-height: 1.7; margin-bottom: 1.2rem; }
+        .feature-list { list-style: none; padding: 0; margin: 0.6rem 0 1rem; }
+        .feature-list li { padding: 0.3rem 0; color: #1e293b; display: flex; align-items: center; gap: 0.7rem; font-size: 0.95rem; border-bottom: 1px solid #f0ebe5; }
+        .feature-list li i { color: #2563eb; width: 20px; }
+        .code-block { background: #1a2332; border-radius: 1rem; padding: 1.2rem 1.5rem; font-family: 'Courier New', monospace; font-size: 0.82rem; color: #e2e8f0; overflow-x: auto; margin: 0.8rem 0 1rem; white-space: pre-wrap; word-break: break-word; line-height: 1.8; border: 1px solid #2d3748; }
+        .code-block .comment { color: #94a3b8; font-style: italic; }
+        .code-block .keyword { color: #c084fc; }
+        .code-block .string { color: #facc15; }
+        .code-block .function { color: #60a5fa; }
+        .code-block .number { color: #f472b6; }
+        .code-block .variable { color: #34d399; }
+        .code-block .boolean { color: #a78bfa; }
+        .code-block .operator { color: #fbbf24; }
+        .code-block .regex { color: #f472b6; }
+        .interactive-area { background: #f8f5f1; padding: 1.2rem 1.5rem; border-radius: 1.2rem; border: 1px solid #e8e1d9; margin: 0.8rem 0; }
+        .interactive-area h4 { font-weight: 700; color: #1e293b; margin-bottom: 0.8rem; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .interactive-area h4 i { color: #2563eb; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.8rem; }
+        .btn-group button { background: #ffffff; border: 1px solid #d4cdc4; color: #1e293b; padding: 0.35rem 1.2rem; border-radius: 40px; font-weight: 500; font-size: 0.8rem; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .btn-group button:hover { background: #2563eb; border-color: #2563eb; color: #fff; transform: translateY(-1px); }
+        .btn-group button.reset-btn { background: #e8e1d9; border-color: #d4cdc4; }
+        .btn-group button.reset-btn:hover { background: #d4cdc4; color: #1a1612; transform: none; }
+        .output-demo { background: #ffffff; padding: 0.8rem 1.2rem; border-radius: 0.8rem; border: 1px solid #e2d9d0; min-height: 50px; font-size: 0.9rem; line-height: 1.6; color: #1e293b; }
+        .quick-ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.8rem; margin: 0.8rem 0; }
+        .quick-ref-item { background: #f6f2ed; border-radius: 1rem; padding: 0.8rem 0.5rem; text-align: center; border: 1px solid #e5ddd5; }
+        .quick-ref-item:hover { background: #edf2ff; border-color: #2563eb; }
+        .quick-ref-item .method-name { font-weight: 700; color: #1e3a8a; font-size: 1rem; }
+        .quick-ref-item .method-name i { margin-right: 4px; color: #2563eb; }
+        .quick-ref-item .method-use { font-size: 0.75rem; color: #475569; margin-top: 4px; }
+        .quiz-question { background: #fcf8f3; padding: 0.8rem 1.2rem; margin: 0.5rem 0; border-radius: 1rem; border: 1px solid #ebdfd3; }
+        .quiz-question p { font-weight: 600; color: #1e293b; margin-bottom: 0.3rem; }
+        .quiz-question label { display: block; margin: 0.15rem 0 0.1rem 0.8rem; font-size: 0.9rem; color: #2d3a4f; cursor: pointer; }
+        .quiz-question label input { margin-right: 0.5rem; accent-color: #2563eb; }
+        .btn-toggle { background: #2563eb; color: white; border: none; padding: 0.5rem 2rem; border-radius: 60px; cursor: pointer; font-weight: 600; font-size: 0.9rem; margin: 0.6rem 0 0.2rem; transition: 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-toggle:hover { background: #1d4ed8; transform: scale(1.02); }
+        .answer-key { background: #eef4ff; padding: 1rem 1.5rem; border-radius: 1rem; display: none; margin-top: 0.6rem; border-left: 4px solid #2563eb; }
+        .nav-buttons { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 0.8rem; flex-wrap: wrap; }
+        .nav-btn { background: transparent; border: 2px solid #e2d9d0; color: #4a3f35; padding: 0.5rem 1.6rem; border-radius: 60px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .nav-btn:hover { border-color: #2563eb; color: #0a0f1a; background: #f8f5f1; }
+        .nav-btn.primary { background: #2563eb; border-color: #2563eb; color: #ffffff; }
+        .nav-btn.primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+        .nav-btn:disabled { opacity: 0.3; pointer-events: none; }
+        .dot-indicators { display: flex; gap: 0.5rem; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: #d9d0c7; cursor: pointer; transition: 0.25s ease; }
+        .dot.active { background: #2563eb; width: 28px; border-radius: 20px; }
+        .slide-footer { text-align: center; padding-top: 1.2rem; margin-top: 1.5rem; border-top: 1px solid #e6dfd7; color: #7a6b5a; font-size: 0.8rem; }
+        @media (max-width: 768px) { .slide-deck { padding: 1.2rem; } .slide-title { font-size: 1.7rem; } .quick-ref-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { .slide-deck { padding: 0.8rem; border-radius: 1.2rem; } .slide-title { font-size: 1.3rem; } .quick-ref-grid { grid-template-columns: 1fr; } .nav-btn { padding: 0.4rem 1rem; font-size: 0.75rem; } }
+    </style>
+</head>
+<body>
+<div class="slide-deck">
+    <div class="progress-row">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="slide-counter" id="slideCounter">1 / 12</span>
+    </div>
+    <div class="slide-content" id="slideContent"></div>
+    <div class="nav-buttons">
+        <button class="nav-btn" id="prevBtn"><i class="fas fa-arrow-left"></i> Back</button>
+        <div class="dot-indicators" id="dotContainer"></div>
+        <button class="nav-btn primary" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+    <div class="slide-footer"><i class="fas fa-code"></i> JavaScript Bootcamp — Array Methods</div>
+</div>
+<script>
+    // ================================================================
+    //  SLIDE DATA
+    // ================================================================
+    const slides = [{
+        tag: 'Array Methods',
+        title: 'JavaScript Array Methods',
+        desc: 'Arrays are like numbered lists. JavaScript gives us powerful tools (methods) to work with them. Learn the 5 most important methods: forEach, map, filter, reduce, and sort.',
+        icon: 'fa-list',
+        features: [
+            'forEach() — do something with each item',
+            'map() — transform every item into something new',
+            'filter() — keep only items that pass a test',
+            'reduce() — combine all items into one value',
+            'sort() — arrange items in order',
+            'real-world examples + interactive demos'
+        ]
+    }, {
+        tag: 'forEach',
+        title: 'forEach() — Loop Through Each Element',
+        desc: 'forEach() runs a function once for every element in the array. It\'s like saying "for each item, do this."',
+        icon: 'fa-arrow-right',
+        code: `// Simple forEach: print each fruit
+const fruits = ["apple", "orange", "cherry"];
+fruits.forEach((fruit, index) => {
+  console.log(index + ": " + fruit);
+});
+
+// Sum numbers using forEach
+const numbers = [10, 20, 30, 40, 50];
+let sum = 0;
+numbers.forEach(num => sum += num);
+console.log("Sum:", sum); // 150
+
+// Modify array in place (multiply each by 10)
+const values = [1, 2, 3, 4];
+values.forEach((item, idx, arr) => arr[idx] = item * 10);
+console.log(values); // [10, 20, 30, 40]`,
+        features: [
+            'Calls a function once for each element',
+            'Does not run for empty slots',
+            'Does NOT create a new array',
+            'Takes callback: (value, index, array)'
+        ],
+        demo_foreach: true
+    }, {
+        tag: 'map',
+        title: 'map() — Transform Every Element',
+        desc: 'map() creates a brand new array by applying a function to each element. It\'s like a factory line: input → process → new output.',
+        icon: 'fa-arrows-left-right',
+        code: `// Double each number
+const nums = [4, 9, 16, 25];
+const doubled = nums.map(num => num * 2);
+console.log(doubled); // [8, 18, 32, 50]
+
+// Extract names from user objects
+const users = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 }
+];
+const names = users.map(user => user.name);
+console.log(names); // ["Alice", "Bob", "Charlie"]`,
+        features: [
+            'Creates a NEW array (original unchanged)',
+            'New array has same length as original',
+            'Perfect for transforming data shape'
+        ],
+        demo_map: true
+    }, {
+        tag: 'filter',
+        title: 'filter() — Keep Only What Passes',
+        desc: 'filter() creates a new array with only the elements that pass a test. Think of it as a sieve: only items that meet the condition fall through.',
+        icon: 'fa-filter',
+        code: `// Keep adults (age >= 18)
+const ages = [32, 33, 16, 40, 12, 25, 18];
+const adults = ages.filter(age => age >= 18);
+console.log(adults); // [32, 33, 40, 25, 18]
+
+// Keep expensive products (> $100)
+const products = [
+  { name: "Laptop", price: 1200 },
+  { name: "Mouse", price: 25 },
+  { name: "Keyboard", price: 75 }
+];
+const expensive = products.filter(p => p.price > 100);
+console.log(expensive); // [{name:"Laptop", price:1200}]`,
+        features: [
+            'Creates a NEW array (original unchanged)',
+            'Only includes elements that return true',
+            'Returns empty array if no matches'
+        ],
+        demo_filter: true
+    }, {
+        tag: 'reduce',
+        title: 'reduce() — Accumulate to One Value',
+        desc: 'reduce() combines all elements into a single value. It\'s like adding up a shopping cart total or counting how many of each thing you have.',
+        icon: 'fa-calculator',
+        code: `// Sum all numbers
+const scores = [10, 20, 15, 30];
+const total = scores.reduce((acc, curr) => acc + curr, 0);
+console.log(total); // 75
+
+// Group items by category
+const items = [
+  { category: "fruit", name: "apple" },
+  { category: "fruit", name: "banana" },
+  { category: "veg", name: "carrot" }
+];
+const grouped = items.reduce((acc, item) => {
+  if (!acc[item.category]) acc[item.category] = [];
+  acc[item.category].push(item.name);
+  return acc;
+}, {});
+console.log(grouped); // { fruit: ["apple","banana"], veg: ["carrot"] }`,
+        features: [
+            'Reduces array to a single value (any type)',
+            'Takes callback and optional initial value',
+            'Ideal for sums, averages, grouping, counting'
+        ],
+        demo_reduce: true
+    }, {
+        tag: 'sort',
+        title: 'sort() — Order Your Array',
+        desc: 'sort() arranges the elements in order. By default it sorts alphabetically, but you can give it instructions for numbers.',
+        icon: 'fa-sort',
+        code: `// Numeric sort (ascending)
+const numbers = [40, 100, 1, 5, 25, 10];
+numbers.sort((a, b) => a - b);
+console.log(numbers); // [1, 5, 10, 25, 40, 100]
+
+// Sort objects by age (youngest first)
+const users = [
+  { name: "Charlie", age: 35 },
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 }
+];
+users.sort((a, b) => a.age - b.age);
+console.log(users); // Alice(25), Bob(30), Charlie(35)`,
+        features: [
+            'Sorts the array IN PLACE (modifies original)',
+            'Default is alphabetical (string order)',
+            'Use compare function for numeric sorting'
+        ],
+        demo_sort: true
+    }, {
+        tag: 'Quick Reference',
+        title: 'Quick Reference — When to Use Each',
+        desc: 'A handy cheat sheet to remember which method to use.',
+        icon: 'fa-book',
+        features: [
+            'forEach() — DO something with each (log, update DOM)',
+            'map() — TRANSFORM each → NEW array, same length',
+            'filter() — SELECT matching → NEW array',
+            'reduce() — COMBINE all → single value',
+            'sort() — ORDER elements → modifies original'
+        ],
+        quick_ref: true
+    }, {
+        tag: 'forEach Deep Dive',
+        title: 'forEach() — Real-World Examples',
+        desc: 'See how forEach() is used in everyday JavaScript tasks.',
+        icon: 'fa-arrow-right',
+        code: `// Compute sum with forEach
+const numbers = [65, 44, 12, 4];
+let sum = 0;
+numbers.forEach(item => sum += item);
+console.log(sum); // 125
+
+// Modify array in place
+const values = [1, 2, 3, 4];
+values.forEach((item, idx, arr) => arr[idx] = item * 10);
+console.log(values); // [10, 20, 30, 40]
+
+// Log each fruit with index
+const fruits = ["apple", "orange", "cherry"];
+fruits.forEach((fruit, index) => {
+  console.log("Fruit " + (index+1) + ": " + fruit);
+});`,
+        features: [
+            'Best for side effects (logging, DOM updates)',
+            'Cannot be stopped early (no break)',
+            'Does not return a new array'
+        ]
+    }, {
+        tag: 'map Deep Dive',
+        title: 'map() — Real-World Examples',
+        desc: 'Learn how map() transforms data in practical scenarios.',
+        icon: 'fa-arrows-left-right',
+        code: `// Extract property from objects (API data)
+const users = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 35 }
+];
+const names = users.map(user => user.name);
+// ["Alice", "Bob", "Charlie"]
+
+// Format prices as currency
+const prices = [19.99, 5.50, 100.00];
+const formatted = prices.map(price => "$" + price.toFixed(2));
+// ["$19.99", "$5.50", "$100.00"]
+
+// Convert string numbers to real numbers
+const stringNumbers = ["1", "2", "3", "4"];
+const numbers = stringNumbers.map(str => Number(str));
+// [1, 2, 3, 4]`,
+        features: [
+            'Perfect for transforming data shape',
+            'Often used with APIs to extract data',
+            'Creates a new array (original unchanged)'
+        ]
+    }, {
+        tag: 'filter Deep Dive',
+        title: 'filter() — Real-World Examples',
+        desc: 'Learn how filter() is used to select specific data.',
+        icon: 'fa-filter',
+        code: `// Filter products by price
+const products = [
+  { name: "Laptop", price: 1200 },
+  { name: "Mouse", price: 25 },
+  { name: "Keyboard", price: 75 }
+];
+const expensive = products.filter(p => p.price > 50);
+
+// Filter strings by length
+const words = ["apple", "banana", "cherry", "date"];
+const longWords = words.filter(word => word.length > 5);
+// ["banana", "cherry"]
+
+// Remove duplicates using filter (with index)
+const numbers = [1, 2, 3, 2, 4, 3, 5];
+const unique = numbers.filter((v, i, arr) => arr.indexOf(v) === i);
+// [1, 2, 3, 4, 5]`,
+        features: [
+            'Ideal for searching and selecting data',
+            'Used with search bars and filters',
+            'Returns new array with matching elements'
+        ]
+    }, {
+        tag: 'reduce Deep Dive',
+        title: 'reduce() — Real-World Examples',
+        desc: 'See how reduce() is used for powerful data aggregation.',
+        icon: 'fa-calculator',
+        code: `// Sum with initial value
+const scores = [10, 20, 15, 30];
+const total = scores.reduce((sum, score) => sum + score, 0);
+// 75
+
+// Group by category
+const items = [
+  { category: "fruit", name: "apple" },
+  { category: "fruit", name: "banana" },
+  { category: "veg", name: "carrot" }
+];
+const grouped = items.reduce((acc, item) => {
+  if (!acc[item.category]) acc[item.category] = [];
+  acc[item.category].push(item.name);
+  return acc;
+}, {});
+
+// Count occurrences
+const colors = ["red", "blue", "red", "green", "blue", "red"];
+const counts = colors.reduce((acc, color) => {
+  acc[color] = (acc[color] || 0) + 1;
+  return acc;
+}, {});
+// { red: 3, blue: 2, green: 1 }`,
+        features: [
+            'Most powerful for complex data processing',
+            'Can build objects, arrays, and aggregations',
+            'Often used for grouping and counting'
+        ]
+    }, {
+        tag: 'Labs & Assessment',
+        title: 'Hands-on Labs & Quiz',
+        desc: 'Practice what you\'ve learned with interactive exercises and test your knowledge.',
+        icon: 'fa-flask',
+        labs: true,
+        quiz: true,
+        features: [
+            'Lab 1: forEach — Sum all numbers',
+            'Lab 2: map — Double & extract names',
+            'Lab 3: filter — Filter by price & length',
+            'Lab 4: reduce — Sum & count occurrences',
+            'Lab 5: sort — Sort numbers & objects'
+        ]
+    }];
+
+    // ================================================================
+    //  DEMO FUNCTIONS
+    // ================================================================
+
+    window.forEachDemo = function() {
+        const out = document.getElementById('forEachOutput');
+        if (!out) return;
+        const fruits = ["apple", "orange", "cherry", "banana"];
+        let html = '<strong>List using forEach:</strong><br>';
+        fruits.forEach((item, index) => html += index + ': ' + item + '<br>');
+        out.innerHTML = html;
+    };
+    window.forEachSumDemo = function() {
+        const out = document.getElementById('forEachOutput');
+        if (!out) return;
+        const nums = [10, 20, 30, 40, 50];
+        let sum = 0;
+        nums.forEach(n => sum += n);
+        out.innerHTML = '<strong>Sum using forEach:</strong><br>Numbers: [' + nums.join(', ') + ']<br>Sum: ' + sum;
+    };
+    window.forEachReset = function() {
+        const out = document.getElementById('forEachOutput');
+        if (out) out.innerHTML = 'Click a button to run a forEach demo.';
+    };
+
+    window.mapDemo = function() {
+        const out = document.getElementById('mapOutput');
+        if (!out) return;
+        const nums = [4, 9, 16, 25];
+        const doubled = nums.map(n => n * 2);
+        const squared = nums.map(n => n * n);
+        out.innerHTML = '<strong>map() Demo:</strong><br>Original: [' + nums.join(', ') + ']<br>Doubled: [' + doubled.join(', ') + ']<br>Squared: [' + squared.join(', ') + ']';
+    };
+    window.mapExtractDemo = function() {
+        const out = document.getElementById('mapOutput');
+        if (!out) return;
+        const users = [{ name: "Alice", age: 25 }, { name: "Bob", age: 30 }, { name: "Charlie", age: 35 }];
+        const names = users.map(u => u.name);
+        out.innerHTML = '<strong>Extract names with map():</strong><br>Names: [' + names.join(', ') + ']';
+    };
+    window.mapReset = function() {
+        const out = document.getElementById('mapOutput');
+        if (out) out.innerHTML = 'Click a button to run a map demo.';
+    };
+
+    window.filterDemo = function() {
+        const out = document.getElementById('filterOutput');
+        if (!out) return;
+        const ages = [32, 33, 16, 40, 12, 25, 18];
+        const adults = ages.filter(a => a >= 18);
+        const minors = ages.filter(a => a < 18);
+        out.innerHTML = '<strong>filter() Demo:</strong><br>All: [' + ages.join(', ') + ']<br>Adults (18+): [' + adults.join(', ') + ']<br>Minors: [' + minors.join(', ') + ']';
+    };
+    window.filterProductsDemo = function() {
+        const out = document.getElementById('filterOutput');
+        if (!out) return;
+        const products = [{ name: "Laptop", price: 1200 }, { name: "Mouse", price: 25 }, { name: "Keyboard", price: 75 }, { name: "Monitor", price: 300 }];
+        const expensive = products.filter(p => p.price > 100);
+        out.innerHTML = '<strong>Filter products by price:</strong><br>Expensive (>$100): ' + JSON.stringify(expensive);
+    };
+    window.filterReset = function() {
+        const out = document.getElementById('filterOutput');
+        if (out) out.innerHTML = 'Click a button to run a filter demo.';
+    };
+
+    window.reduceSumDemo = function() {
+        const out = document.getElementById('reduceOutput');
+        if (!out) return;
+        const nums = [10, 20, 30, 40, 50];
+        const sum = nums.reduce((acc, n) => acc + n, 0);
+        out.innerHTML = '<strong>reduce() Sum:</strong><br>Numbers: [' + nums.join(', ') + ']<br>Sum: ' + sum;
+    };
+    window.reduceGroupDemo = function() {
+        const out = document.getElementById('reduceOutput');
+        if (!out) return;
+        const items = [{ category: "fruit", name: "apple" }, { category: "fruit", name: "banana" }, { category: "veg", name: "carrot" }];
+        const grouped = items.reduce((acc, item) => {
+            if (!acc[item.category]) acc[item.category] = [];
+            acc[item.category].push(item.name);
+            return acc;
+        }, {});
+        out.innerHTML = '<strong>Group by category:</strong><br>' + JSON.stringify(grouped);
+    };
+    window.reduceReset = function() {
+        const out = document.getElementById('reduceOutput');
+        if (out) out.innerHTML = 'Click a button to run a reduce demo.';
+    };
+
+    window.sortDemo = function() {
+        const out = document.getElementById('sortOutput');
+        if (!out) return;
+        const nums = [40, 100, 1, 5, 25, 10];
+        const sorted = [...nums].sort((a, b) => a - b);
+        out.innerHTML = '<strong>sort() Demo:</strong><br>Original: [' + nums.join(', ') + ']<br>Ascending: [' + sorted.join(', ') + ']';
+    };
+    window.sortObjectsDemo = function() {
+        const out = document.getElementById('sortOutput');
+        if (!out) return;
+        const users = [{ name: "Charlie", age: 35 }, { name: "Alice", age: 25 }, { name: "Bob", age: 30 }];
+        const byAge = [...users].sort((a, b) => a.age - b.age);
+        out.innerHTML = '<strong>Sort objects by age:</strong><br>' + JSON.stringify(byAge);
+    };
+    window.sortReset = function() {
+        const out = document.getElementById('sortOutput');
+        if (out) out.innerHTML = 'Click a button to run a sort demo.';
+    };
+
+    // ================================================================
+    //  LAB FUNCTIONS
+    // ================================================================
+    window.labForEach = function() {
+        const out = document.getElementById('labOutput');
+        if (!out) return;
+        const nums = [10, 20, 30, 40, 50];
+        let sum = 0;
+        nums.forEach(n => sum += n);
+        out.innerHTML = '✅ forEach: Sum of [' + nums.join(', ') + '] = ' + sum;
+    };
+    window.labMap = function() {
+        const out = document.getElementById('labOutput');
+        if (!out) return;
+        const nums = [1, 2, 3, 4, 5];
+        const doubled = nums.map(n => n * 2);
+        out.innerHTML = '✅ map: Original [' + nums.join(', ') + '] → Double [' + doubled.join(', ') + ']';
+    };
+    window.labFilter = function() {
+        const out = document.getElementById('labOutput');
+        if (!out) return;
+        const ages = [15, 18, 22, 16, 30, 12, 25];
+        const adults = ages.filter(a => a >= 18);
+        out.innerHTML = '✅ filter: Ages [' + ages.join(', ') + '] → Adults [' + adults.join(', ') + ']';
+    };
+    window.labReduce = function() {
+        const out = document.getElementById('labOutput');
+        if (!out) return;
+        const nums = [5, 10, 15, 20, 25];
+        const sum = nums.reduce((acc, n) => acc + n, 0);
+        out.innerHTML = '✅ reduce: Sum of [' + nums.join(', ') + '] = ' + sum;
+    };
+    window.labSort = function() {
+        const out = document.getElementById('labOutput');
+        if (!out) return;
+        const nums = [40, 100, 1, 5, 25, 10];
+        const sorted = [...nums].sort((a, b) => a - b);
+        out.innerHTML = '✅ sort: [' + nums.join(', ') + '] → [' + sorted.join(', ') + ']';
+    };
+    window.labReset = function() {
+        const out = document.getElementById('labOutput');
+        if (out) out.innerHTML = 'Click a lab button above to run an exercise.';
+    };
+
+    // ================================================================
+    //  RENDER ENGINE
+    // ================================================================
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    // ================================================================
+    //  SYNTAX HIGHLIGHTING ENGINE (FIXED - no double escaping)
+    // ================================================================
+
+    /**
+     * Highlights JavaScript code with semantic HTML spans
+     * 
+     * CRITICAL FIX: We DO NOT escape > characters because they're part of
+     * the arrow function syntax (=>) and should display as >, not &gt;
+     * 
+     * We only escape < and & to prevent HTML injection.
+     * Quotes are not escaped - they render correctly via innerHTML.
+     */
+
+    function highlightJavaScript(code) {
+        // Only escape < and & - NOT > and NOT quotes
+        // This preserves arrow functions (=>) and string quotes
+        const escaped = code
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;');
+
+        const lines = escaped.split('\n');
+        const highlightedLines = lines.map(line => highlightLine(line));
+        return highlightedLines.join('\n');
+    }
+
+    function highlightLine(line) {
+        if (line.trim().length === 0) return line;
+
+        let result = '';
+        let i = 0;
+        const len = line.length;
+
+        while (i < len) {
+            // Single-line comment (//)
+            if (line[i] === '/' && line[i + 1] === '/') {
+                result += `<span class="comment">${line.substring(i)}</span>`;
+                break;
+            }
+
+            // Double-quoted string
+            if (line[i] === '"') {
+                const start = i;
+                i++;
+                while (i < len && line[i] !== '"') {
+                    if (line[i] === '\\' && line[i + 1] === '"') i += 2;
+                    else i++;
+                }
+                if (i < len) i++;
+                result += `<span class="string">${line.substring(start, i)}</span>`;
+                continue;
+            }
+
+            // Single-quoted string
+            if (line[i] === "'") {
+                const start = i;
+                i++;
+                while (i < len && line[i] !== "'") {
+                    if (line[i] === '\\' && line[i + 1] === "'") i += 2;
+                    else i++;
+                }
+                if (i < len) i++;
+                result += `<span class="string">${line.substring(start, i)}</span>`;
+                continue;
+            }
+
+            // Template literal (backtick string)
+            if (line[i] === '`') {
+                const start = i;
+                i++;
+                let inExpression = false;
+                let braceCount = 0;
+                while (i < len) {
+                    if (line[i] === '\\' && line[i + 1] === '`') { i += 2; continue; }
+                    if (line[i] === '`' && !inExpression) { i++; break; }
+                    if (line[i] === '$' && line[i + 1] === '{') {
+                        inExpression = true;
+                        braceCount = 1;
+                        i += 2;
+                        continue;
+                    }
+                    if (inExpression) {
+                        if (line[i] === '{') braceCount++;
+                        if (line[i] === '}') {
+                            braceCount--;
+                            if (braceCount === 0) { inExpression = false; i++; continue; }
+                        }
+                    }
+                    i++;
+                }
+                result += `<span class="string">${line.substring(start, i)}</span>`;
+                continue;
+            }
+
+            // Regular expression /.../
+            if (line[i] === '/' && (i === 0 || !/[\w$]/.test(line[i - 1]))) {
+                const start = i;
+                i++;
+                let inClass = false;
+                while (i < len) {
+                    if (line[i] === '\\' && i + 1 < len) { i += 2; continue; }
+                    if (line[i] === '[') inClass = true;
+                    if (line[i] === ']') inClass = false;
+                    if (line[i] === '/' && !inClass) { i++; break; }
+                    i++;
+                }
+                while (i < len && /[gimsuy]/.test(line[i])) i++;
+                result += `<span class="regex">${line.substring(start, i)}</span>`;
+                continue;
+            }
+
+            // Numbers (hex, octal, binary, float, integer)
+            const numMatch = line.substring(i).match(/^(0x[0-9a-fA-F]+|0o[0-7]+|0b[01]+|\d+\.?\d*)/);
+            if (numMatch && i + numMatch[0].length <= len) {
+                const before = i > 0 ? line[i - 1] : '';
+                const after = i + numMatch[0].length < len ? line[i + numMatch[0].length] : '';
+                if (!/[\w$]/.test(before) && !/[\w$]/.test(after)) {
+                    result += `<span class="number">${numMatch[0]}</span>`;
+                    i += numMatch[0].length;
+                    continue;
+                }
+            }
+
+            // Booleans, null, undefined
+            const boolMatch = line.substring(i).match(/^(true|false|null|undefined)\b/);
+            if (boolMatch && i + boolMatch[0].length <= len) {
+                result += `<span class="boolean">${boolMatch[0]}</span>`;
+                i += boolMatch[0].length;
+                continue;
+            }
+
+            // Keywords and built-ins
+            const keywordMatch = line.substring(i).match(new RegExp(
+                '^(?:' + [
+                    // Statements & declarations
+                    'break', 'case', 'catch', 'class', 'const', 'continue',
+                    'debugger', 'default', 'delete', 'do', 'else', 'export',
+                    'extends', 'finally', 'for', 'function', 'if', 'import',
+                    'in', 'instanceof', 'new', 'return', 'super', 'switch',
+                    'this', 'throw', 'try', 'typeof', 'var', 'void', 'while',
+                    'with', 'yield', 'await', 'async',
+                    // Common built-ins & methods
+                    'console', 'log', 'forEach', 'map', 'filter', 'reduce',
+                    'sort', 'Promise', 'then', 'catch', 'resolve', 'reject',
+                    'Array', 'Object', 'String', 'Number', 'Boolean', 'Symbol',
+                    'parseInt', 'parseFloat', 'isNaN', 'isFinite'
+                ].join('|') + ')\\b'
+            ));
+            if (keywordMatch && i + keywordMatch[0].length <= len) {
+                result += `<span class="keyword">${keywordMatch[0]}</span>`;
+                i += keywordMatch[0].length;
+                continue;
+            }
+
+            // Operators
+            const opMatch = line.substring(i).match(/^(===|!==|==|!=|<=|>=|=>|\+\+|--|\+=|-=|\*=|\/=|%=|\|\||&&|\?|:|\+\-|\*\*|\.\.\.|[+\-*/%<>=!&|^~])/);
+            if (opMatch && i + opMatch[0].length <= len) {
+                result += `<span class="operator">${opMatch[0]}</span>`;
+                i += opMatch[0].length;
+                continue;
+            }
+
+            // Any other character: copy as-is
+            result += line[i];
+            i++;
+        }
+
+        return result;
+    }
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        const content = document.getElementById('slideContent');
+        const progress = document.getElementById('progressFill');
+        const counter = document.getElementById('slideCounter');
+
+        let html = '';
+        html += '<div class="slide-tag">' + slide.tag + '</div>';
+        const icon = slide.icon ? '<i class="fas ' + slide.icon + '"></i> ' : '';
+        html += '<div class="slide-title">' + icon + slide.title + '</div>';
+        html += '<div class="slide-desc">' + slide.desc + '</div>';
+
+        if (slide.features) {
+            html += '<ul class="feature-list">';
+            slide.features.forEach(f => { html += '<li><i class="fas fa-check-circle"></i> ' + f + '</li>'; });
+            html += '</ul>';
+        }
+
+        if (slide.quick_ref) {
+            const methods = [
+                { name: 'forEach()', use: 'DO something with each', icon: 'fa-arrow-right' },
+                { name: 'map()', use: 'TRANSFORM each element', icon: 'fa-arrows-left-right' },
+                { name: 'filter()', use: 'SELECT matching elements', icon: 'fa-filter' },
+                { name: 'reduce()', use: 'COMBINE into one value', icon: 'fa-calculator' },
+                { name: 'sort()', use: 'ORDER the elements', icon: 'fa-sort' }
+            ];
+            html += '<div class="quick-ref-grid">';
+            methods.forEach(m => {
+                html += '<div class="quick-ref-item"><div class="method-name"><i class="fas ' + m.icon + '"></i> ' + m.name + '</div><div class="method-use">' + m.use + '</div></div>';
+            });
+            html += '</div>';
+        }
+
+        if (slide.code) {
+            const highlighted = highlightJavaScript(slide.code);
+            html += '<div class="code-block">' + highlighted + '</div>';
+        }
+
+        // Demos
+        if (slide.demo_foreach) {
+            html += '<div class="interactive-area"><h4><i class="fas fa-play-circle"></i> forEach() Demo</h4><div class="btn-group">';
+            html += '<button onclick="forEachDemo()"><i class="fas fa-list"></i> List Fruits</button>';
+            html += '<button onclick="forEachSumDemo()"><i class="fas fa-calculator"></i> Sum Numbers</button>';
+            html += '<button class="reset-btn" onclick="forEachReset()"><i class="fas fa-undo"></i> Reset</button>';
+            html += '</div><div id="forEachOutput" class="output-demo">Click a button to run a forEach demo.</div></div>';
+        }
+        if (slide.demo_map) {
+            html += '<div class="interactive-area"><h4><i class="fas fa-play-circle"></i> map() Demo</h4><div class="btn-group">';
+            html += '<button onclick="mapDemo()"><i class="fas fa-arrows-left-right"></i> Transform Numbers</button>';
+            html += '<button onclick="mapExtractDemo()"><i class="fas fa-user"></i> Extract Names</button>';
+            html += '<button class="reset-btn" onclick="mapReset()"><i class="fas fa-undo"></i> Reset</button>';
+            html += '</div><div id="mapOutput" class="output-demo">Click a button to run a map demo.</div></div>';
+        }
+        if (slide.demo_filter) {
+            html += '<div class="interactive-area"><h4><i class="fas fa-play-circle"></i> filter() Demo</h4><div class="btn-group">';
+            html += '<button onclick="filterDemo()"><i class="fas fa-user"></i> Filter Ages</button>';
+            html += '<button onclick="filterProductsDemo()"><i class="fas fa-box"></i> Filter Products</button>';
+            html += '<button class="reset-btn" onclick="filterReset()"><i class="fas fa-undo"></i> Reset</button>';
+            html += '</div><div id="filterOutput" class="output-demo">Click a button to run a filter demo.</div></div>';
+        }
+        if (slide.demo_reduce) {
+            html += '<div class="interactive-area"><h4><i class="fas fa-play-circle"></i> reduce() Demo</h4><div class="btn-group">';
+            html += '<button onclick="reduceSumDemo()"><i class="fas fa-calculator"></i> Sum</button>';
+            html += '<button onclick="reduceGroupDemo()"><i class="fas fa-layer-group"></i> Group</button>';
+            html += '<button class="reset-btn" onclick="reduceReset()"><i class="fas fa-undo"></i> Reset</button>';
+            html += '</div><div id="reduceOutput" class="output-demo">Click a button to run a reduce demo.</div></div>';
+        }
+        if (slide.demo_sort) {
+            html += '<div class="interactive-area"><h4><i class="fas fa-play-circle"></i> sort() Demo</h4><div class="btn-group">';
+            html += '<button onclick="sortDemo()"><i class="fas fa-sort"></i> Sort Numbers</button>';
+            html += '<button onclick="sortObjectsDemo()"><i class="fas fa-user"></i> Sort Objects</button>';
+            html += '<button class="reset-btn" onclick="sortReset()"><i class="fas fa-undo"></i> Reset</button>';
+            html += '</div><div id="sortOutput" class="output-demo">Click a button to run a sort demo.</div></div>';
+        }
+
+        // Labs
+        if (slide.labs) {
+            html += '<div class="interactive-area"><h4><i class="fas fa-flask"></i> Array Methods Labs</h4><div class="btn-group">';
+            html += '<button onclick="labForEach()"><i class="fas fa-arrow-right"></i> forEach</button>';
+            html += '<button onclick="labMap()" style="background:#10b981;color:white;border-color:#10b981;"><i class="fas fa-arrows-left-right"></i> map</button>';
+            html += '<button onclick="labFilter()" style="background:#f59e0b;color:white;border-color:#f59e0b;"><i class="fas fa-filter"></i> filter</button>';
+            html += '<button onclick="labReduce()" style="background:#8b5cf6;color:white;border-color:#8b5cf6;"><i class="fas fa-calculator"></i> reduce</button>';
+            html += '<button onclick="labSort()" style="background:#ef4444;color:white;border-color:#ef4444;"><i class="fas fa-sort"></i> sort</button>';
+            html += '<button class="reset-btn" onclick="labReset()"><i class="fas fa-undo"></i> Reset</button>';
+            html += '</div><div id="labOutput" class="output-demo">Click a lab button above to run an exercise.</div></div>';
+        }
+
+        // Quiz
+        if (slide.quiz) {
+            html += `
+                <div class="quiz-question"><p><i class="fas fa-question-circle"></i> <strong>Q1:</strong> Which method creates a new array by applying a function to every element?</p>
+                <label><input type="radio" name="q1" value="A"> A) forEach()</label><label><input type="radio" name="q1" value="B"> B) map()</label>
+                <label><input type="radio" name="q1" value="C"> C) filter()</label><label><input type="radio" name="q1" value="D"> D) reduce()</label></div>
+                <div class="quiz-question"><p><i class="fas fa-question-circle"></i> <strong>Q2:</strong> Which method returns a single accumulated value?</p>
+                <label><input type="radio" name="q2" value="A"> A) forEach()</label><label><input type="radio" name="q2" value="B"> B) map()</label>
+                <label><input type="radio" name="q2" value="C"> C) filter()</label><label><input type="radio" name="q2" value="D"> D) reduce()</label></div>
+                <div class="quiz-question"><p><i class="fas fa-question-circle"></i> <strong>Q3:</strong> Which method creates a new array with only elements that pass a test?</p>
+                <label><input type="radio" name="q3" value="A"> A) forEach()</label><label><input type="radio" name="q3" value="B"> B) map()</label>
+                <label><input type="radio" name="q3" value="C"> C) filter()</label><label><input type="radio" name="q3" value="D"> D) sort()</label></div>
+                <div class="quiz-question"><p><i class="fas fa-question-circle"></i> <strong>Q4:</strong> Which method modifies the original array?</p>
+                <label><input type="radio" name="q4" value="A"> A) map()</label><label><input type="radio" name="q4" value="B"> B) filter()</label>
+                <label><input type="radio" name="q4" value="C"> C) reduce()</label><label><input type="radio" name="q4" value="D"> D) sort()</label></div>
+                <div class="quiz-question"><p><i class="fas fa-question-circle"></i> <strong>Q5:</strong> Which method does NOT create a new array?</p>
+                <label><input type="radio" name="q5" value="A"> A) map()</label><label><input type="radio" name="q5" value="B"> B) filter()</label>
+                <label><input type="radio" name="q5" value="C"> C) forEach()</label><label><input type="radio" name="q5" value="D"> D) reduce()</label></div>
+                <button class="btn-toggle" id="revealAnswersBtn"><i class="fas fa-key"></i> Reveal Answer Key</button>
+                <div id="answerKey" class="answer-key">
+                    <i class="fas fa-check-double"></i> <strong>ANSWER KEY</strong><br>
+                    <strong>Q1:</strong> B) map()<br>
+                    <strong>Q2:</strong> D) reduce()<br>
+                    <strong>Q3:</strong> C) filter()<br>
+                    <strong>Q4:</strong> D) sort()<br>
+                    <strong>Q5:</strong> C) forEach()
+                </div>
+            `;
+        }
+
+        content.innerHTML = html;
+        const pct = ((index + 1) / totalSlides) * 100;
+        progress.style.width = pct + '%';
+        counter.textContent = (index + 1) + ' / ' + totalSlides;
+
+        document.querySelectorAll('.dot').forEach((d, i) => { d.className = 'dot' + (i === index ? ' active' : ''); });
+        document.getElementById('prevBtn').disabled = (index === 0);
+        document.getElementById('nextBtn').disabled = (index === totalSlides - 1);
+        const nextBtn = document.getElementById('nextBtn');
+        nextBtn.innerHTML = (index === totalSlides - 1) ? 'Done <i class="fas fa-check"></i>' : 'Next <i class="fas fa-arrow-right"></i>';
+        currentIndex = index;
+    }
+
+    function goTo(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        renderSlide(index);
+    }
+
+    document.getElementById('prevBtn').onclick = () => goTo(currentIndex - 1);
+    document.getElementById('nextBtn').onclick = () => goTo(currentIndex + 1);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(currentIndex + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentIndex - 1); }
+    });
+
+    const dotContainer = document.getElementById('dotContainer');
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goTo(i);
+        dotContainer.appendChild(dot);
+    }
+
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'revealAnswersBtn') {
+            const key = document.getElementById('answerKey');
+            const btn = document.getElementById('revealAnswersBtn');
+            if (key) {
+                if (key.style.display === 'none' || key.style.display === '') {
+                    key.style.display = 'block';
+                    btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Answer Key';
+                } else {
+                    key.style.display = 'none';
+                    btn.innerHTML = '<i class="fas fa-key"></i> Reveal Answer Key';
+                }
+            }
+        }
+    });
+
+    renderSlide(0);
+    console.log('Array Methods interactive deck loaded with fixed syntax highlighting!');
+</script>
+</body>
+</html>
