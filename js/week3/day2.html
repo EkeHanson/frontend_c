@@ -132,27 +132,34 @@
             transition: 0.3s;
         }
         .dot.active { background: #2563eb; width: 28px; border-radius: 20px; }
+        
+        /* ============================================================
+           IMPROVED CODE BLOCK STYLING - Matching Array Methods page
+           ============================================================ */
         .code-block {
-            background: #1e293b;
-            border-radius: 0.8rem;
-            padding: 1rem 1.2rem;
+            background: #1a2332;
+            border-radius: 1rem;
+            padding: 1.2rem 1.5rem;
             font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: #e2e8f0;
             overflow-x: auto;
-            margin: 0.75rem 0;
+            margin: 0.8rem 0 1rem;
             white-space: pre-wrap;
             word-break: break-word;
-            line-height: 1.6;
+            line-height: 1.8;
+            border: 1px solid #2d3748;
         }
-        .code-block .c { color: #94a3b8; }
-        .code-block .k { color: #c084fc; }
-        .code-block .s { color: #facc15; }
-        .code-block .f { color: #60a5fa; }
-        .code-block .n { color: #f472b6; }
-        .code-block .b { color: #a78bfa; }
-        .code-block .o { color: #fbbf24; }
-        .code-block .t { color: #f87171; }
+        .code-block .comment { color: #94a3b8; font-style: italic; }
+        .code-block .keyword { color: #c084fc; }
+        .code-block .string { color: #facc15; }
+        .code-block .function { color: #60a5fa; }
+        .code-block .number { color: #f472b6; }
+        .code-block .variable { color: #34d399; }
+        .code-block .boolean { color: #a78bfa; }
+        .code-block .operator { color: #fbbf24; }
+        .code-block .regex { color: #f472b6; }
+
         .info-box {
             background: #f4f7fd;
             border-left: 4px solid #2563eb;
@@ -186,6 +193,9 @@
             font-weight: 500;
             margin: 0.2rem;
             transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
         }
         .interactive-area button:hover { background: #1d4ed8; }
         .interactive-area button.reset-btn { background: #64748b; }
@@ -230,6 +240,9 @@
             cursor: pointer;
             font-weight: 600;
             margin: 0.5rem 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .btn-toggle:hover { background: #1d4ed8; }
         .slide-footer {
@@ -309,6 +322,181 @@
     </div>
 
     <script>
+        // ============================================================
+        //  SYNTAX HIGHLIGHTING ENGINE (from Array Methods page)
+        // ============================================================
+
+        /**
+         * Highlights JavaScript code with semantic HTML spans
+         * 
+         * CRITICAL: We DO NOT escape > characters because they're part of
+         * arrow function syntax (=>) and should display as >, not &gt;
+         * 
+         * We only escape < and & to prevent HTML injection.
+         * Quotes are not escaped - they render correctly via innerHTML.
+         */
+
+        function highlightJavaScript(code) {
+            // Only escape < and & - NOT > and NOT quotes
+            // This preserves arrow functions (=>) and string quotes
+            var escaped = code
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;');
+
+            var lines = escaped.split('\n');
+            var highlightedLines = lines.map(function(line) {
+                return highlightLine(line);
+            });
+            return highlightedLines.join('\n');
+        }
+
+        function highlightLine(line) {
+            if (line.trim().length === 0) return line;
+
+            var result = '';
+            var i = 0;
+            var len = line.length;
+
+            while (i < len) {
+                // Single-line comment (//)
+                if (line[i] === '/' && line[i + 1] === '/') {
+                    result += '<span class="comment">' + line.substring(i) + '</span>';
+                    break;
+                }
+
+                // Double-quoted string
+                if (line[i] === '"') {
+                    var start = i;
+                    i++;
+                    while (i < len && line[i] !== '"') {
+                        if (line[i] === '\\' && line[i + 1] === '"') i += 2;
+                        else i++;
+                    }
+                    if (i < len) i++;
+                    result += '<span class="string">' + line.substring(start, i) + '</span>';
+                    continue;
+                }
+
+                // Single-quoted string
+                if (line[i] === "'") {
+                    var start = i;
+                    i++;
+                    while (i < len && line[i] !== "'") {
+                        if (line[i] === '\\' && line[i + 1] === "'") i += 2;
+                        else i++;
+                    }
+                    if (i < len) i++;
+                    result += '<span class="string">' + line.substring(start, i) + '</span>';
+                    continue;
+                }
+
+                // Template literal (backtick string)
+                if (line[i] === '`') {
+                    var start = i;
+                    i++;
+                    var inExpression = false;
+                    var braceCount = 0;
+                    while (i < len) {
+                        if (line[i] === '\\' && line[i + 1] === '`') { i += 2; continue; }
+                        if (line[i] === '`' && !inExpression) { i++; break; }
+                        if (line[i] === '$' && line[i + 1] === '{') {
+                            inExpression = true;
+                            braceCount = 1;
+                            i += 2;
+                            continue;
+                        }
+                        if (inExpression) {
+                            if (line[i] === '{') braceCount++;
+                            if (line[i] === '}') {
+                                braceCount--;
+                                if (braceCount === 0) { inExpression = false; i++; continue; }
+                            }
+                        }
+                        i++;
+                    }
+                    result += '<span class="string">' + line.substring(start, i) + '</span>';
+                    continue;
+                }
+
+                // Regular expression /.../
+                if (line[i] === '/' && (i === 0 || !/[\w$]/.test(line[i - 1]))) {
+                    var start = i;
+                    i++;
+                    var inClass = false;
+                    while (i < len) {
+                        if (line[i] === '\\' && i + 1 < len) { i += 2; continue; }
+                        if (line[i] === '[') inClass = true;
+                        if (line[i] === ']') inClass = false;
+                        if (line[i] === '/' && !inClass) { i++; break; }
+                        i++;
+                    }
+                    while (i < len && /[gimsuy]/.test(line[i])) i++;
+                    result += '<span class="regex">' + line.substring(start, i) + '</span>';
+                    continue;
+                }
+
+                // Numbers (hex, octal, binary, float, integer)
+                var numMatch = line.substring(i).match(/^(0x[0-9a-fA-F]+|0o[0-7]+|0b[01]+|\d+\.?\d*)/);
+                if (numMatch && i + numMatch[0].length <= len) {
+                    var before = i > 0 ? line[i - 1] : '';
+                    var after = i + numMatch[0].length < len ? line[i + numMatch[0].length] : '';
+                    if (!/[\w$]/.test(before) && !/[\w$]/.test(after)) {
+                        result += '<span class="number">' + numMatch[0] + '</span>';
+                        i += numMatch[0].length;
+                        continue;
+                    }
+                }
+
+                // Booleans, null, undefined
+                var boolMatch = line.substring(i).match(/^(true|false|null|undefined)\b/);
+                if (boolMatch && i + boolMatch[0].length <= len) {
+                    result += '<span class="boolean">' + boolMatch[0] + '</span>';
+                    i += boolMatch[0].length;
+                    continue;
+                }
+
+                // Keywords and built-ins
+                var keywordMatch = line.substring(i).match(new RegExp(
+                    '^(?:' + [
+                        // Statements & declarations
+                        'break', 'case', 'catch', 'class', 'const', 'continue',
+                        'debugger', 'default', 'delete', 'do', 'else', 'export',
+                        'extends', 'finally', 'for', 'function', 'if', 'import',
+                        'in', 'instanceof', 'new', 'return', 'super', 'switch',
+                        'this', 'throw', 'try', 'typeof', 'var', 'void', 'while',
+                        'with', 'yield', 'await', 'async',
+                        // Common built-ins & methods
+                        'console', 'log', 'Promise', 'then', 'catch', 'finally',
+                        'resolve', 'reject', 'all', 'allSettled', 'any', 'race',
+                        'Array', 'Object', 'String', 'Number', 'Boolean', 'Symbol',
+                        'parseInt', 'parseFloat', 'isNaN', 'isFinite',
+                        'setTimeout', 'setInterval', 'clearTimeout', 'clearInterval',
+                        'fetch', 'AbortController', 'AbortSignal', 'Worker',
+                        'JSON', 'parse', 'stringify'
+                    ].join('|') + ')\\b'
+                ));
+                if (keywordMatch && i + keywordMatch[0].length <= len) {
+                    result += '<span class="keyword">' + keywordMatch[0] + '</span>';
+                    i += keywordMatch[0].length;
+                    continue;
+                }
+
+                // Operators
+                var opMatch = line.substring(i).match(/^(===|!==|==|!=|<=|>=|=>|\+\+|--|\+=|-=|\*=|\/=|%=|\|\||&&|\?|:|\+\-|\*\*|\.\.\.|[+\-*/%<>=!&|^~])/);
+                if (opMatch && i + opMatch[0].length <= len) {
+                    result += '<span class="operator">' + opMatch[0] + '</span>';
+                    i += opMatch[0].length;
+                    continue;
+                }
+
+                // Any other character: copy as-is
+                result += line[i];
+                i++;
+            }
+
+            return result;
+        }
+
         // ============================================================
         // ALL SLIDE DATA — Complete async tutorial
         // ============================================================
@@ -899,26 +1087,12 @@
                 html += '<div class="info-box"><i class="fas fa-info-circle"></i> ' + slide.extra + '</div>';
             }
 
+            // ============================================================
+            //  USE THE IMPROVED HIGHLIGHTING ENGINE
+            // ============================================================
             if (slide.code) {
-                var lines = slide.code.split('\n');
-                var result = [];
-                for (var i = 0; i < lines.length; i++) {
-                    var line = lines[i];
-                    var processed = line;
-                    processed = processed.replace(/^( +)?(#.*)$/, function(match, spaces, comment) {
-                        return (spaces || '') + '<span class="c">' + comment + '</span>';
-                    });
-                    processed = processed.replace(/\b(let|const|var|function|return|if|else|for|while|typeof|new|class|try|catch|finally|throw|switch|case|break|continue|import|export|default|from|as|extends|super|static|get|set|async|await|Promise|then|catch|resolve|reject)\b/g,
-                        '<span class="k">$1</span>');
-                    processed = processed.replace(/"(.*?)"/g, '<span class="s">"$1"</span>');
-                    processed = processed.replace(/'(.*?)'/g, '<span class="s">\'$1\'</span>');
-                    processed = processed.replace(/\b(\d+\.?\d*)\b/g, '<span class="n">$1</span>');
-                    processed = processed.replace(/\b(document|console|window|alert|prompt|getElementById|innerHTML|innerText|style|addEventListener|fetch|setTimeout|setInterval|Promise|JSON|AbortController|Worker)\b/g,
-                        '<span class="f">$1</span>');
-                    processed = processed.replace(/\b(true|false|null|undefined)\b/g, '<span class="b">$1</span>');
-                    result.push(processed);
-                }
-                html += '<div class="code-block">' + result.join('\n') + '</div>';
+                var highlighted = highlightJavaScript(slide.code);
+                html += '<div class="code-block">' + highlighted + '</div>';
             }
 
             // Sync vs Async Demo

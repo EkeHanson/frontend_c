@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Demo · Simple</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #1e3a5f;
+            border-bottom: 3px solid #2c6b9b;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            margin: 0.2rem;
+        }
+        .btn-primary {
+            background: #2c6b9b;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #1a3f5f;
+        }
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #059669;
+        }
+        .user-card {
+            background: #f8faff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .user-card .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2c6b9b;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .user-card .info .name { font-weight: 600; color: #1e3a5f; }
+        .user-card .info .email { font-size: 0.85rem; color: #64748b; }
+        .loading {
+            color: #2c6b9b;
+            font-weight: 500;
+            padding: 1rem;
+            text-align: center;
+        }
+        .loading i { animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .error {
+            color: #dc2626;
+            background: #fef2f2;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border-left: 3px solid #dc2626;
+            margin: 0.5rem 0;
+        }
+        .placeholder {
+            text-align: center;
+            color: #94a3b8;
+            padding: 1.5rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 0.8rem 0;
+        }
+        .footer {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 500px) {
+            .container { padding: 1rem; }
+            .user-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h1>📡 API Data Demo</h1>
+
+        <div class="btn-group">
+            <button class="btn btn-success" id="loadBtn"><i class="fas fa-download"></i> Load Users</button>
+            <button class="btn btn-danger" id="clearBtn"><i class="fas fa-trash"></i> Clear</button>
+        </div>
+
+        <div id="output">
+            <div class="placeholder">
+                <i class="fas fa-users"></i> Click "Load Users" to fetch data from API
+            </div>
+        </div>
+
+        <div class="footer">
+            <i class="fas fa-database"></i> Data from JSONPlaceholder API
+        </div>
+
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script>
+        // Get the output container
+        const output = document.getElementById('output');
+
+        // Function to create a user card
+        function createUserCard(user) {
+            const div = document.createElement('div');
+            div.className = 'user-card';
+
+            // Get initials from name
+            const parts = user.name.split(' ');
+            const initials = parts.map(p => p[0]).join('').toUpperCase().slice(0, 2);
+
+            div.innerHTML = `
+                <div class="avatar">${initials}</div>
+                <div class="info">
+                    <div class="name">${user.name}</div>
+                    <div class="email">${user.email}</div>
+                </div>
+            `;
+            return div;
+        }
+
+        // Function to load users from API
+        async function loadUsers() {
+            // Show loading state
+            output.innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner"></i> Loading users from API...
+                </div>
+            `;
+
+            try {
+                // Fetch data from API
+                const response = await fetch('https://jsonplaceholder.typicode.com/users');
+
+                // Check if response is OK
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+
+                // Parse JSON
+                const users = await response.json();
+
+                // Clear output
+                output.innerHTML = '';
+
+                // Display each user
+                users.forEach(user => {
+                    output.appendChild(createUserCard(user));
+                });
+
+                // Add count summary
+                const summary = document.createElement('div');
+                summary.style.cssText = 'text-align:center; padding:0.5rem; color:#64748b; font-size:0.85rem; margin-top:0.5rem;';
+                summary.innerHTML = `<i class="fas fa-check-circle" style="color:#10b981;"></i> Loaded ${users.length} users from API`;
+                output.appendChild(summary);
+
+            } catch (error) {
+                // Show error
+                output.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-circle"></i> Error: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Function to clear output
+        function clearOutput() {
+            output.innerHTML = `
+                <div class="placeholder">
+                    <i class="fas fa-users"></i> Click "Load Users" to fetch data from API
+                </div>
+            `;
+        }
+
+        // Set up button listeners
+        document.getElementById('loadBtn').addEventListener('click', loadUsers);
+        document.getElementById('clearBtn').addEventListener('click', clearOutput);
+
+        console.log('✅ API Demo ready!');
+        console.log('📡 API URL: https://jsonplaceholder.typicode.com/users');
+    </script>
+</body>
+</html>
