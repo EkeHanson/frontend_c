@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>React · Day 2 · Lifecycle, Forms & Thinking in React</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #0b0f1c 0%, #111827 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .curriculum-header {
+            max-width: 1300px;
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 1.5rem;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
+        }
+        .badge {
+            background: #8b5cf6;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .duration {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .class-nav-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-left: auto;
+        }
+        .class-nav-btn {
+            background: #1e293b;
+            border: 1px solid #8b5cf6;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+        }
+        .class-nav-btn:hover {
+            background: #8b5cf6;
+            transform: scale(0.98);
+        }
+        .class-nav-btn i {
+            font-size: 0.8rem;
+        }
+
+        .presentation-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.02);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+            overflow: hidden;
+        }
+
+        .slide-area {
+            min-height: 600px;
+            background: #0f1119;
+            padding: 2rem;
+        }
+
+        .slide-card {
+            background: rgba(22, 26, 38, 0.96);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa, #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 5px solid #a78bfa;
+            padding-left: 1.2rem;
+        }
+
+        .slide-title i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #a78bfa;
+            font-size: 1.8rem;
+        }
+
+        .slide-sub {
+            color: #a0afc9;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 5px solid #a78bfa;
+            padding-left: 1.2rem;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .concept-box {
+            flex: 1;
+            min-width: 240px;
+            background: #1a1f2e;
+            border-radius: 1.5rem;
+            padding: 1.3rem;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        .concept-box:hover {
+            border-color: #a78bfa;
+            transform: translateY(-2px);
+        }
+
+        .concept-box h3 {
+            color: #a78bfa;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .concept-box h3 i {
+            color: #c4b5fd;
+        }
+
+        .concept-box p, .concept-list, .concept-box li {
+            color: #e2e8f0;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            color: #fcd34d;
+            font-weight: 600;
+        }
+        .react-highlight {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
+        .tag {
+            background: #1e293b;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: #c4b5fd;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .insight-card {
+            margin-top: 1.2rem;
+            background: #0f172a;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            color: #e2e8f0;
+            border-left: 3px solid #a78bfa;
+        }
+
+        .two-column-split {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .col {
+            flex: 1;
+            background: #131a2a;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #2d3a5e;
+        }
+        .col h4 {
+            color: #fcd34d;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        .col h4 i {
+            margin-right: 0.5rem;
+            color: #a78bfa;
+        }
+        .col p, .col li {
+            color: #e2e8f0;
+        }
+
+        .extensions-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.8rem 0;
+        }
+        .ext-card {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            border-left: 3px solid #a78bfa;
+            flex: 1;
+            min-width: 200px;
+            color: #e2e8f0;
+        }
+        .ext-card strong {
+            color: #fcd34d;
+        }
+        .ext-card i {
+            margin-right: 0.5rem;
+            color: #a78bfa;
+        }
+
+        pre {
+            background: #0a0e18;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            margin: 0.8rem 0;
+            border: 1px solid #334155;
+            font-family: 'Fira Code', monospace;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            color: #cbd5e6;
+        }
+
+        .qa-section {
+            margin-top: 1.5rem;
+            background: #0f172a;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid #334155;
+        }
+        .qa-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fcd34d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .qa-item {
+            background: #131b2e;
+            border-radius: 1rem;
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+            border: 1px solid #2d3a5e;
+        }
+        .qa-question {
+            padding: 1rem 1.2rem;
+            background: #1a2338;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #e2e8f0;
+            transition: background 0.2s;
+        }
+        .qa-question:hover {
+            background: #25334d;
+        }
+        .qa-question i {
+            color: #a78bfa;
+            transition: transform 0.3s;
+        }
+        .qa-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #0f172a;
+            color: #cbd5e6;
+            line-height: 1.5;
+        }
+        .qa-answer.show {
+            padding: 1rem 1.2rem;
+            max-height: 300px;
+        }
+        .qa-answer p {
+            margin: 0;
+            color: #cbd5e6;
+        }
+
+        .nav-bar {
+            background: #0b0e16;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #2a2f3f;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            background: #1e2a3a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            border: 1px solid #334155;
+        }
+
+        button i {
+            font-size: 0.9rem;
+        }
+
+        button:hover:not(:disabled) {
+            background: #2d3a4e;
+            transform: scale(0.97);
+            border-color: #a78bfa;
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            background: #1a1f2c;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            color: #c4b5fd;
+        }
+
+        .indicator-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #334155;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .dot.active {
+            background: #a78bfa;
+            width: 22px;
+        }
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.7rem;
+            background: #07090f;
+            color: #8ca3c7;
+        }
+        footer i {
+            color: #a78bfa;
+        }
+        footer a {
+            color: #a78bfa;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 700px) {
+            .slide-area { padding: 1rem; }
+            .slide-title { font-size: 1.4rem; }
+            .concept-box { min-width: 100%; }
+            .two-column-split { flex-direction: column; }
+            .class-nav-buttons { margin-left: 0; margin-top: 0.5rem; }
+            .curriculum-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="curriculum-header">
+    <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 2 · WEEK 1 · DAY 2</span></div>
+    <div class="class-title"><i class="fab fa-react"></i> React: Lifecycle, Forms & Thinking</div>
+    <div class="duration"><i class="far fa-clock"></i> 3 Hours · Advanced Patterns</div>
+    <div class="class-nav-buttons">
+        <a href="#" class="class-nav-btn"><i class="fas fa-arrow-left"></i> Day 1</a>
+        <a href="#" class="class-nav-btn"><i class="fas fa-arrow-right"></i> Day 3 →</a>
+    </div>
+</div>
+
+<div class="presentation-container">
+    <div class="slide-area" id="slideArea"></div>
+    <div class="nav-bar">
+        <div class="indicator-dots" id="dotsContainer"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+            <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 12</span>
+            <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <footer>
+        <i class="fab fa-react"></i> React · Lifecycle · Forms · Thinking in React · Advanced Hooks
+        <span style="margin-left: 1rem;">| <a href="#"><i class="fas fa-arrow-left"></i> Day 1</a> | <a href="#">Day 3 <i class="fas fa-arrow-right"></i></a></span>
+    </footer>
+</div>
+
+<script>
+    const slides = [
+        {
+            title: "<i class='fas fa-sync-alt'></i> Component Lifecycle (Functional)",
+            subtitle: "useEffect as the lifecycle manager",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-play"></i> Mounting</h4>
+                        <pre><code>useEffect(() => {
+  console.log('Component mounted');
+  // fetch data, subscriptions
+}, []);</code></pre>
+                        <p>Runs <span class="highlight">once</span> after the component is inserted into the DOM.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-edit"></i> Updating</h4>
+                        <pre><code>useEffect(() => {
+  console.log('Count changed:', count);
+}, [count]);</code></pre>
+                        <p>Runs when <span class="highlight">dependencies</span> change (re-render).</p>
+                    </div>
+                </div>
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-times"></i> Unmounting</h4>
+                        <pre><code>useEffect(() => {
+  const timer = setInterval(...);
+  return () => {
+    clearInterval(timer);
+    console.log('Cleanup');
+  };
+}, []);</code></pre>
+                        <p>Return function runs <span class="highlight">before</span> component is removed.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-sync"></i> All together</h4>
+                        <p>useEffect combines <span class="highlight">componentDidMount, componentDidUpdate, componentWillUnmount</span> in one API.</p>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <span class="tag">key insight</span> The dependency array controls when useEffect runs. An empty array = run once (mount).</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-check-double'></i> Conditional Rendering",
+            subtitle: "Show different UI based on state/props",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-code-branch"></i> if / else</h3>
+                        <pre><code>function Greeting({ isLoggedIn }) {
+  if (isLoggedIn) {
+    return &lt;h1&gt;Welcome back!&lt;/h1&gt;;
+  }
+  return &lt;h1&gt;Please sign in.&lt;/h1&gt;;
+}</code></pre>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-question-circle"></i> Ternary operator</h3>
+                        <pre><code>&lt;div&gt;
+  {isLoggedIn ? &lt;Logout /&gt; : &lt;Login /&gt;}
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-and"></i> Logical &&</h4>
+                        <pre><code>&lt;div&gt;
+  {unreadMessages.length > 0 && &lt;Alert /&gt;}
+&lt;/div&gt;</code></pre>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-ban"></i> Prevent rendering</h4>
+                        <pre><code>function Warning({ show }) {
+  if (!show) return null; // component hides
+  return &lt;div&gt;Warning!&lt;/div&gt;;
+}</code></pre>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-list'></i> Rendering Lists",
+            subtitle: "map, filter, keys and best practices",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-map"></i> .map()</h4>
+                        <pre><code>const todos = ['Learn React', 'Build App'];
+return (
+  &lt;ul&gt;
+    {todos.map((todo, index) => (
+      &lt;li key={index}&gt;{todo}&lt;/li&gt;
+    ))}
+  &lt;/ul&gt;
+);</code></pre>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-key"></i> Keys</h4>
+                        <ul style="margin-left:1.2rem;">
+                            <li>Keys help React identify <span class="highlight">which items changed</span></li>
+                            <li>Use <span class="highlight">unique, stable</span> IDs (not index if possible)</li>
+                            <li>Keys only need to be unique among <span class="highlight">siblings</span></li>
+                        </ul>
+                        <pre><code>// good
+{todos.map(todo => &lt;Todo key={todo.id} {...todo} /&gt;)}</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-exclamation-triangle"></i> <strong>Avoid</strong> using index as key if items can reorder — it causes bugs with state.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-edit'></i> Forms in React",
+            subtitle: "Controlled vs uncontrolled components",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-sliders-h"></i> Controlled</h4>
+                        <pre><code>function Form() {
+  const [name, setName] = useState('');
+  return (
+    &lt;input
+      value={name}
+      onChange={e => setName(e.target.value)}
+    /&gt;
+  );
+}</code></pre>
+                        <p>React state is the <span class="highlight">single source of truth</span>.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-unlink"></i> Uncontrolled</h4>
+                        <pre><code>function Form() {
+  const inputRef = useRef(null);
+  const handleSubmit = () => {
+    alert(inputRef.current.value);
+  };
+  return &lt;input ref={inputRef} /&gt;;
+}</code></pre>
+                        <p>DOM handles value, use ref to read it.</p>
+                    </div>
+                </div>
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-check"></i> Best Practice</h3>
+                        <p>Most React apps use <span class="highlight">controlled</span> components for better control, validation, and consistency.</p>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-shield-alt"></i> Validation</h3>
+                        <p>Validate on <span class="highlight">onChange</span> or <span class="highlight">onSubmit</span> — show errors conditionally.</p>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrow-up'></i> Lifting State Up",
+            subtitle: "Share state between components",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-arrow-up"></i> The Pattern</h4>
+                        <p>When multiple components need to share state, <span class="highlight">lift the state</span> to their closest common ancestor.</p>
+                        <pre><code>function Parent() {
+  const [value, setValue] = useState('');
+  return (
+    &lt;&gt;
+      &lt;ChildA value={value} /&gt;
+      &lt;ChildB onChange={setValue} /&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-handshake"></i> Example: Temperature</h4>
+                        <p>Two inputs (Celsius, Fahrenheit) share a single temperature state in parent.</p>
+                        <pre><code>function TemperatureConverter() {
+  const [temp, setTemp] = useState(0);
+  // ... render two inputs that call setTemp
+}</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Think:</strong> If two components depend on the same data, that data should live in their closest common parent.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-concierge-bell'></i> Context API",
+            subtitle: "Avoid prop drilling with React Context",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-share-alt"></i> Create Context</h3>
+                        <pre><code>const ThemeContext = React.createContext('light');</code></pre>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-provider"></i> Provider</h3>
+                        <pre><code>&lt;ThemeContext.Provider value="dark"&gt;
+  &lt;App /&gt;
+&lt;/ThemeContext.Provider&gt;</code></pre>
+                    </div>
+                </div>
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-user"></i> useContext Hook</h4>
+                        <pre><code>function Button() {
+  const theme = useContext(ThemeContext);
+  return &lt;button className={theme}&gt;Click&lt;/button&gt;;
+}</code></pre>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-warning"></i> When to use</h4>
+                        <p>Context is great for <span class="highlight">global</span> data: theme, user, locale. Not for every prop — keep it focused.</p>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-fetch'></i> Data Fetching & Side Effects",
+            subtitle: "useEffect + async/await",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-cloud-download-alt"></i> Fetch example</h4>
+                        <pre><code>useEffect(() => {
+  async function fetchData() {
+    const res = await fetch('https://api.example.com/data');
+    const data = await res.json();
+    setData(data);
+  }
+  fetchData();
+}, []);</code></pre>
+                        <p>Use <span class="highlight">async</span> inside, not directly in useEffect.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-spinner"></i> Loading / Error</h4>
+                        <pre><code>if (loading) return &lt;Loading /&gt;;
+if (error) return &lt;Error message={error} /&gt;;
+return &lt;DataDisplay data={data} /&gt;;</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-stopwatch"></i> <strong>Cleanup:</strong> AbortController or cancel flag to avoid memory leaks on unmount.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-hammer'></i> Custom Hooks",
+            subtitle: "Extract and reuse logic",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-tools"></i> What is a custom hook?</h3>
+                        <p>A function that starts with <span class="highlight">use</span> and can call other hooks. Allows you to share stateful logic between components.</p>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-code"></i> Example: useFetch</h3>
+                        <pre><code>function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch(url).then(res => res.json()).then(setData);
+  }, [url]);
+  return { data, loading };
+}</code></pre>
+                    </div>
+                </div>
+                <div class="extensions-grid">
+                    <div class="ext-card"><i class="fas fa-arrow-right"></i> <strong>useLocalStorage</strong> — sync state with localStorage</div>
+                    <div class="ext-card"><i class="fas fa-arrow-right"></i> <strong>useWindowSize</strong> — react to window resize</div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-puzzle-piece'></i> Thinking in React",
+            subtitle: "Step-by-step guide to building UIs",
+            content: `
+                <div class="extensions-grid">
+                    <div class="ext-card"><i class="fas fa-1"></i> <strong>Step 1:</strong> Break the UI into a component hierarchy</div>
+                    <div class="ext-card"><i class="fas fa-2"></i> <strong>Step 2:</strong> Build a static version in React (no state)</div>
+                    <div class="ext-card"><i class="fas fa-3"></i> <strong>Step 3:</strong> Identify the minimal (but complete) representation of UI state</div>
+                    <div class="ext-card"><i class="fas fa-4"></i> <strong>Step 4:</strong> Identify where state should live (lift state up)</div>
+                    <div class="ext-card"><i class="fas fa-5"></i> <strong>Step 5:</strong> Add inverse data flow (callbacks)</div>
+                </div>
+                <div class="insight-card"><i class="fas fa-brain"></i> <strong>React philosophy:</strong> State is minimal, derived data is computed during render.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-tasks'></i> Assignment: Build a Feedback Form",
+            subtitle: "Apply forms, lifting state, and custom hooks",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-star"></i> Core Tasks</h3>
+                        <ul style="margin-left:1.2rem;">
+                            <li>✓ Create a <span class="highlight">FeedbackForm</span> component</li>
+                            <li>✓ Controlled inputs: name, email, rating (1-5), comment</li>
+                            <li>✓ Validate: name required, email valid, rating 1-5</li>
+                            <li>✓ Display submitted data in a <span class="highlight">FeedbackList</span></li>
+                            <li>✓ Lift state to App component</li>
+                        </ul>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-gem"></i> Bonus</h3>
+                        <ul style="margin-left:1.2rem;">
+                            <li>⭐ Use <span class="highlight">useReducer</span> for form state</li>
+                            <li>⭐ Save submissions to localStorage</li>
+                            <li>⭐ Create a custom hook <span class="highlight">useForm</span> for generic form handling</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-camera"></i> <strong>Submit:</strong> CodeSandbox / GitHub with your feedback form app.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-challenge'></i> Extended Challenge: Shopping Cart",
+            subtitle: "Complex state, context, and composition",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-shopping-cart"></i> Cart Features</h4>
+                        <ul style="margin-left:1.2rem;">
+                            <li>Product list with "Add to Cart" button</li>
+                            <li>Cart view with quantity and total price</li>
+                            <li>Remove item, update quantity</li>
+                            <li>Use <span class="highlight">Context</span> for cart state</li>
+                        </ul>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-arrow-right"></i> Implementation</h4>
+                        <ul style="margin-left:1.2rem;">
+                            <li>Products: array of objects (id, name, price)</li>
+                            <li>Cart: Map of productId -> quantity</li>
+                            <li>Display total price in header</li>
+                            <li>Persist cart in localStorage</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-star"></i> <strong>Pro tip:</strong> Use <span class="highlight">useReducer</span> for cart actions (ADD, REMOVE, UPDATE_QUANTITY).</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-question-circle'></i> Knowledge Check: Day 2",
+            subtitle: "React lifecycle, forms, context — click to reveal answers",
+            content: `
+                <div class="qa-section">
+                    <div class="qa-title"><i class="fas fa-question-circle"></i> Toggle Questions (click to show/hide answer)</div>
+                    <div id="qa-container"></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Try answering before clicking to test your React knowledge!</div>
+            `
+        }
+    ];
+
+    const qaData = [
+        { q: "What is the difference between controlled and uncontrolled components in React forms?", a: "Controlled: React state controls the input value (value + onChange). Uncontrolled: DOM handles value, ref is used to read it. Controlled is recommended for most cases." },
+        { q: "What is lifting state up and why is it useful?", a: "Lifting state up means moving shared state to the closest common ancestor. It allows multiple components to share and sync data, avoiding duplication." },
+        { q: "How does the useEffect hook replace lifecycle methods in class components?", a: "useEffect with empty array = componentDidMount. With dependencies = componentDidUpdate. Return function = componentWillUnmount." },
+        { q: "What is React Context and when should you use it?", a: "Context provides a way to pass data through the component tree without prop drilling. Use for global data like theme, user, locale. Avoid for frequent updates." },
+        { q: "How do you handle data fetching in functional components?", a: "Use useEffect with async/await inside (or .then). Manage loading/error states. Use cleanup (AbortController) to avoid memory leaks." },
+        { q: "What are custom hooks and why are they useful?", a: "Custom hooks are functions that start with 'use' and encapsulate reusable stateful logic. They let you share logic across components without code duplication." },
+        { q: "What is the role of keys in React lists?", a: "Keys help React identify which items have changed, added, or removed. They should be unique, stable, and used on the topmost element in the list." },
+        { q: "Explain the 'Thinking in React' process.", a: "1. Component hierarchy. 2. Static version. 3. Identify minimal state. 4. Identify where state lives. 5. Add inverse data flow (callbacks)." },
+        { q: "What is the difference between props and state? Give an example.", a: "Props are read-only data passed from parent. State is mutable data owned by the component. Example: props.userName vs state.isLoggedIn." },
+        { q: "What is the purpose of the dependency array in useEffect?", a: "The dependency array tells React when to re-run the effect. Empty = run once. With values = re-run when values change. No array = run after every render." }
+    ];
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    const slideArea = document.getElementById('slideArea');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counterText = document.getElementById('counterText');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    function renderQA() {
+        const container = document.getElementById('qa-container');
+        if (!container) return;
+        container.innerHTML = '';
+        qaData.forEach((item, idx) => {
+            const qaDiv = document.createElement('div');
+            qaDiv.className = 'qa-item';
+            qaDiv.innerHTML = `
+                <div class="qa-question" data-idx="${idx}">
+                    <span><strong>${idx+1}.</strong> ${item.q}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="qa-answer" id="answer-${idx}">
+                    <p>${item.a}</p>
+                </div>
+            `;
+            container.appendChild(qaDiv);
+        });
+        document.querySelectorAll('.qa-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const idx = this.getAttribute('data-idx');
+                const answerDiv = document.getElementById(`answer-${idx}`);
+                const icon = this.querySelector('i');
+                answerDiv.classList.toggle('show');
+                icon.style.transform = answerDiv.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+    }
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        const html = `
+            <div class="slide-card">
+                <div class="slide-title">
+                    ${slide.title}
+                </div>
+                <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+                <div class="slide-content">
+                    ${slide.content}
+                </div>
+            </div>
+        `;
+        slideArea.innerHTML = html;
+        if (index === 11) renderQA();
+        counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === totalSlides-1);
+        updateDots(index);
+    }
+
+    function updateDots(activeIndex) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === activeIndex) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+    function handleKeyDown(e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    window.addEventListener('keydown', handleKeyDown);
+    renderSlide(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Class 4 · Student Worksheet · HTML & DOM Selectors</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #05070f;
+            color: #eef2ff;
+            padding: 1.5rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .class-header {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 2rem;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid #2d3a5e;
+        }
+        .badge {
+            background: #2563eb;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #cbd5ff, #7aa9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .worksheet-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .task-card {
+            background: #0f1422;
+            border-radius: 1.8rem;
+            padding: 1.8rem;
+            border: 1px solid #2a3958;
+            transition: all 0.2s;
+        }
+        .task-card:hover {
+            border-color: #3b82f6;
+        }
+        .task-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #253450;
+            padding-bottom: 0.8rem;
+        }
+        .task-number {
+            background: #2563eb;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .task-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #7aa9ff;
+        }
+        .task-body {
+            color: #c8d6e8;
+            line-height: 1.7;
+        }
+        .task-body p {
+            margin: 0.5rem 0;
+        }
+        .task-body ul, .task-body ol {
+            padding-left: 1.8rem;
+            margin: 0.5rem 0;
+        }
+        .task-body li {
+            margin: 0.4rem 0;
+        }
+        .code-block {
+            background: #01050e;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #cddcff;
+            margin: 0.8rem 0;
+            border: 1px solid #2d3a5e;
+        }
+        .hint-box {
+            background: #0a1120;
+            border-left: 4px solid #fbbf24;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 0.8rem 0;
+        }
+        .hint-box i {
+            color: #fbbf24;
+            margin-right: 0.5rem;
+        }
+        .submission-box {
+            background: #0a1a0a;
+            border-left: 4px solid #22c55e;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+        .submission-box i {
+            color: #22c55e;
+            margin-right: 0.5rem;
+        }
+        .checklist {
+            list-style: none;
+        }
+        .checklist li::before {
+            content: "☐ ";
+            color: #7aa9ff;
+            font-size: 1.2rem;
+        }
+        .checklist li.checked::before {
+            content: "☑ ";
+            color: #22c55e;
+        }
+        .inline-code {
+            background: #01050e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.4rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #cddcff;
+            border: 1px solid #2d3a5e;
+        }
+        .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        .tag {
+            background: #1e293b;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-family: monospace;
+            color: #b9d0ff;
+            display: inline-block;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            padding: 1.5rem 0;
+            color: #5f7f9e;
+            border-top: 1px solid #1e2a3a;
+            margin-top: 2rem;
+        }
+        .btn-primary {
+            background: #2563eb;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: scale(0.98);
+        }
+        @media (max-width: 700px) {
+            body { padding: 1rem; }
+            .task-card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="class-header">
+        <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 1 · WEEK 2 · CLASS 4</span></div>
+        <div class="class-title"><i class="fas fa-pencil-alt"></i> Student Worksheet: HTML & DOM Selectors</div>
+        <div style="display: flex; gap: 0.8rem;">
+            <span class="badge" style="background: #22c55e;"><i class="fas fa-check-circle"></i> 8 Tasks</span>
+            <span class="badge" style="background: #f59e0b;"><i class="fas fa-star"></i> Bonus Available</span>
+        </div>
+    </div>
+
+    <div class="worksheet-grid">
+        <!-- TASK 1: Heading Hierarchy -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-number">1</div>
+                <div class="task-title">Heading Hierarchy Practice</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Task:</strong> Create a simple HTML page about your favorite movie/book/game. Use proper heading hierarchy.</p>
+                <ul>
+                    <li>Use <span class="inline-code">&lt;h1&gt;</span> for the main title</li>
+                    <li>Use <span class="inline-code">&lt;h2&gt;</span> for sections (e.g., "Characters", "Plot", "Why I Love It")</li>
+                    <li>Use <span class="inline-code">&lt;h3&gt;</span> for subsections (e.g., "Main Character", "Supporting Characters")</li>
+                    <li>Include at least <strong>one</strong> paragraph with <span class="inline-code">&lt;strong&gt;</span> and <span class="inline-code">&lt;em&gt;</span></li>
+                </ul>
+                <div class="hint-box">
+                    <i class="fas fa-lightbulb"></i> <strong>Hint:</strong> Remember — one h1 per page, and don't skip heading levels!
+                </div>
+                <div class="submission-box">
+                    <i class="fas fa-check-circle"></i> <strong>Submit:</strong> Save as <span class="inline-code">task1-headings.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 2: Lists -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-number">2</div>
+                <div class="task-title">Lists — Unordered, Ordered, Description</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Task:</strong> Create a "My Favorite Things" page that uses all three list types.</p>
+                <ul>
+                    <li><span class="highlight">Unordered List</span> — your top 5 favorite foods (use <span class="inline-code">&lt;ul&gt;</span>)</li>
+                    <li><span class="highlight">Ordered List</span> — your top 3 favorite movies ranked (use <span class="inline-code">&lt;ol&gt;</span>)</li>
+                    <li><span class="highlight">Description List</span> — define 3 tech terms (use <span class="inline-code">&lt;dl&gt;</span>, <span class="inline-code">&lt;dt&gt;</span>, <span class="inline-code">&lt;dd&gt;</span>)</li>
+                </ul>
+                <div class="code-block">
+                    &lt;dl&gt;
+                      &lt;dt&gt;HTML&lt;/dt&gt;
+                      &lt;dd&gt;HyperText Markup Language — structure of web pages&lt;/dd&gt;
+                      &lt;dt&gt;CSS&lt;/dt&gt;
+                      &lt;dd&gt;Cascading Style Sheets — styling &amp; layout&lt;/dd&gt;
+                    &lt;/dl&gt;
+                </div>
+                <div class="submission-box">
+                    <i class="fas fa-check-circle"></i> <strong>Submit:</strong> Save as <span class="inline-code">task2-lists.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 3: Links -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-number">3</div>
+                <div class="task-title">Links — External, Relative, and Anchor</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Task:</strong> Build a "Resources" page with different types of links.</p>
+                <ul>
+                    <li><span class="highlight">External link</span> — link to Google or Wikipedia with <span class="inline-code">target="_blank"</span> and <span class="inline-code">rel="noopener noreferrer"</span></li>
+                    <li><span class="highlight">Relative link</span> — create a second page (<span class="inline-code">about.html</span>) and link to it</li>
+                    <li><span class="highlight">Anchor link</span> — create a long page with a "Back to top" link that jumps to the top</li>
+                    <li><span class="highlight">Email link</span> — <span class="inline-code">&lt;a href="mailto:yourname@example.com"&gt;Email Me&lt;/a&gt;</span></li>
+                </ul>
+                <div class="hint-box">
+                    <i class="fas fa-lightbulb"></i> <strong>Hint:</strong> Use <span class="inline-code">#top</span> as the href for "Back to top", and add <span class="inline-code">id="top"</span> at the top of your page.
+                </div>
+                <div class="submission-box">
+                    <i class="fas fa-check-circle"></i> <strong>Submit:</strong> Save as <span class="inline-code">task3-links.html</span> and <span class="inline-code">about.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 4: Images & Favicon -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-number">4</div>
+                <div class="task-title">Images &amp; Favicon</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Task:</strong> Add images to your page and set up a favicon.</p>
+                <ul>
+                    <li>Add at least <strong>2 images</strong> (use placeholder images from <span class="inline-code">https://picsum.photos</span>)</li>
+                    <li>Every <span class="inline-code">&lt;img&gt;</span> must have a <span class="highlight">descriptive alt attribute</span></li>
+                    <li>Add <span class="inline-code">loading="lazy"</span> to at least one image</li>
+                    <li><span class="highlight">Bonus:</span> Add a favicon to your page (use any small image or create one)</li>
+                </ul>
+                <div class="code-block">
+                    &lt;!-- Example image with all attributes --&gt;
+                    &lt;img src="https://picsum.photos/400/300" alt="Random landscape photo" width="400" height="300" loading="lazy"&gt;
+                </div>
+                <div class="submission-box">
+                    <i class="fas fa-check-circle"></i> <strong>Submit:</strong> Save as <span class="inline-code">task4-images.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 5: Personal Profile (Combined) -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-number">5</div>
+                <div class="task-title">Personal Profile Page (All Skills Combined)</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Task:</strong> Build a complete personal profile page that uses everything learned.</p>
+                <ul>
+                    <li>✅ Proper heading hierarchy (<span class="inline-code">h1</span>, <span class="inline-code">h2</span>, <span class="inline-code">h3</span>)</li>
+                    <li>✅ Profile image with correct <span class="inline-code">alt</span> text</li>
+                    <li>✅ Unordered list (skills or hobbies)</li>
+                    <li>✅ Ordered list (top 3 achievements or goals)</li>
+                    <li>✅ External link (GitHub, LinkedIn, or portfolio) with <span class="inline-code">target="_blank"</span></li>
+                    <li>✅ Relative link to a second page (<span class="inline-code">contact.html</span>)</li>
+                    <li>✅ Anchor link (jump to a section)</li>
+                </ul>
+                <div class="hint-box">
+                    <i class="fas fa-lightbulb"></i> <strong>Hint:</strong> Create a "Contact" section at the bottom, and link to it from the top with <span class="inline-code">#contact</span>.
+                </div>
+                <div class="submission-box">
+                    <i class="fas fa-check-circle"></i> <strong>Submit:</strong> Save as <span class="inline-code">profile.html</span> and <span class="inline-code">contact.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 6: DOM Selectors — getElementById & getElementsByTagName -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-number">6</div>
+                <div class="task-title">DOM Selectors: ID &amp; Tag Name</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Task:</strong> Write JavaScript to select and modify elements using <span class="inline-code">getElementById</span> and <span class="inline-code">getElementsByTagName</span>.</p>
+                <ul>
+                    <li>Create an HTML page with:
+                        <ul>
+                            <li>An element with <span class="inline-code">id="main-title"</span></li>
+                            <li>At least 3 paragraphs (<span class="inline-code">&lt;p&gt;</span>)</li>
+                        </ul>
+                    </li>
+                    <li>Use JavaScript to:
+                        <ul>
+                            <li>Change the text of the element with <span class="inline-code">id="main-title"</span> using <span class="inline-code">innerHTML</span></li>
+                            <li>Change the <span class="inline-code">color</span> of all paragraphs using <span class="inline-code">getElementsByTagName</span></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="code-block">
+                    &lt;script&gt;
+                      // Change title
+                      document.getElementById("main-title").innerHTML = "New Dynamic Title!";
+                      
+                      // Change all paragraph colors
+                      const paragraphs = document.getElementsByTagName("p");
+                      for (let i = 0; i &lt; paragraphs.length; i++) {
+                        paragraphs[i].style.color = "#34d399";
+                      }
+                    &lt;/script&gt;
+                </div>
+                <div class="submission-box">
+                    <i class="fas fa-check-circle"></i> <strong>Submit:</strong> Save as <span class="inline-code">task6-selectors.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 7: DOM Selectors — Class & Query Selectors -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-number">7</div>
+                <div class="task-title">DOM Selectors: Class, querySelector &amp; querySelectorAll</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Task:</strong> Practice modern DOM selection methods.</p>
+                <ul>
+                    <li>Create elements with:
+                        <ul>
+                            <li>Class name <span class="inline-code">"highlight"</span> (at least 3 elements)</li>
+                            <li>Class name <span class="inline-code">"special"</span> (at least 2 elements)</li>
+                        </ul>
+                    </li>
+                    <li>Use JavaScript to:
+                        <ul>
+                            <li>Change the background of ALL elements with class <span class="inline-code">"highlight"</span> using <span class="inline-code">getElementsByClassName</span></li>
+                            <li>Change the text color of the FIRST element with class <span class="inline-code">"special"</span> using <span class="inline-code">querySelector</span></li>
+                            <li>Add a border to ALL elements with class <span class="inline-code">"special"</span> using <span class="inline-code">querySelectorAll</span></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="code-block">
+                    &lt;script&gt;
+                      // getElementsByClassName
+                      const highlights = document.getElementsByClassName("highlight");
+                      for (let el of highlights) {
+                        el.style.background = "#fefcbf";
+                      }
+                      
+                      // querySelector (first match)
+                      const firstSpecial = document.querySelector(".special");
+                      firstSpecial.style.color = "#805ad5";
+                      
+                      // querySelectorAll (all matches)
+                      const allSpecial = document.querySelectorAll(".special");
+                      allSpecial.forEach(el => {
+                        el.style.border = "3px solid #e53e3e";
+                      });
+                    &lt;/script&gt;
+                </div>
+                <div class="submission-box">
+                    <i class="fas fa-check-circle"></i> <strong>Submit:</strong> Save as <span class="inline-code">task7-query-selectors.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 8: Interactive DOM Challenge -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-number">8</div>
+                <div class="task-title">Interactive DOM Challenge</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Task:</strong> Build a page with buttons that trigger DOM changes.</p>
+                <ul>
+                    <li>Create a page with:
+                        <ul>
+                            <li>A <span class="inline-code">&lt;div&gt;</span> with <span class="inline-code">id="content"</span> containing some text</li>
+                            <li>An <span class="inline-code">&lt;input&gt;</span> field and a <span class="inline-code">&lt;button&gt;</span></li>
+                            <li>A <span class="inline-code">&lt;ul&gt;</span> with <span class="inline-code">id="item-list"</span> (empty initially)</li>
+                        </ul>
+                    </li>
+                    <li>Add JavaScript to:
+                        <ul>
+                            <li>Change the content of <span class="inline-code">#content</span> when a button is clicked</li>
+                            <li>Add items to the list when the user types in the input and clicks "Add"</li>
+                            <li>Toggle the background color of the page when a "Toggle Theme" button is clicked</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="code-block">
+                    &lt;script&gt;
+                      // Change content
+                      document.getElementById("changeBtn").onclick = function() {
+                        document.getElementById("content").innerHTML = "You changed this content!";
+                      };
+                      
+                      // Add list item
+                      document.getElementById("addBtn").onclick = function() {
+                        const input = document.getElementById("itemInput");
+                        const li = document.createElement("li");
+                        li.textContent = input.value;
+                        document.getElementById("item-list").appendChild(li);
+                        input.value = "";
+                      };
+                      
+                      // Toggle theme
+                      let dark = true;
+                      document.getElementById("themeBtn").onclick = function() {
+                        document.body.style.background = dark ? "#1a2338" : "#05070f";
+                        dark = !dark;
+                      };
+                    &lt;/script&gt;
+                </div>
+                <div class="submission-box">
+                    <i class="fas fa-check-circle"></i> <strong>Submit:</strong> Save as <span class="inline-code">task8-interactive.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- BONUS SECTION -->
+        <div class="task-card" style="border-color: #f59e0b;">
+            <div class="task-header">
+                <div class="task-number" style="background: #f59e0b;"><i class="fas fa-star"></i></div>
+                <div class="task-title" style="color: #f59e0b;">Bonus Challenge</div>
+            </div>
+            <div class="task-body">
+                <p><strong>Challenge:</strong> Build a "Mini Todo List" using everything you've learned.</p>
+                <ul>
+                    <li>✅ Use <span class="inline-code">getElementById</span> and <span class="inline-code">querySelector</span></li>
+                    <li>✅ Add items to a list (like Task 8)</li>
+                    <li>✅ Add a "Delete" button next to each item (use <span class="inline-code">element.remove()</span>)</li>
+                    <li>✅ Save the list to <span class="highlight">localStorage</span> so items persist when the page reloads</li>
+                    <li>✅ Use <span class="inline-code">JSON.stringify</span> and <span class="inline-code">JSON.parse</span> to save/load the list</li>
+                </ul>
+                <div class="hint-box">
+                    <i class="fas fa-lightbulb"></i> <strong>Hint:</strong> Store the list as an array of strings. When the page loads, check localStorage and render the saved items.
+                </div>
+                <div class="submission-box" style="border-left-color: #f59e0b;">
+                    <i class="fas fa-star" style="color: #f59e0b;"></i> <strong>Submit:</strong> Save as <span class="inline-code">bonus-todo.html</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submission Summary -->
+        <div style="background: #0a1120; border-radius: 1.8rem; padding: 1.8rem; border: 1px solid #2a3958; text-align: center;">
+            <h3 style="color: #7aa9ff; margin-bottom: 0.5rem;"><i class="fas fa-upload"></i> Submission Checklist</h3>
+            <p style="color: #9bb1d0; margin-bottom: 1rem;">Complete all tasks and submit your files.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+                <span class="tag">task1-headings.html</span>
+                <span class="tag">task2-lists.html</span>
+                <span class="tag">task3-links.html</span>
+                <span class="tag">about.html</span>
+                <span class="tag">task4-images.html</span>
+                <span class="tag">profile.html</span>
+                <span class="tag">contact.html</span>
+                <span class="tag">task6-selectors.html</span>
+                <span class="tag">task7-query-selectors.html</span>
+                <span class="tag">task8-interactive.html</span>
+                <span class="tag" style="background: #f59e0b;">bonus-todo.html</span>
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn-primary" onclick="window.print()"><i class="fas fa-print"></i> Print Worksheet</button>
+                <button class="btn-primary" style="background: #22c55e;" onclick="document.querySelectorAll('.task-card').forEach(c => c.style.borderColor='#22c55e'); setTimeout(()=>document.querySelectorAll('.task-card').forEach(c=>c.style.borderColor=''), 3000);"><i class="fas fa-check-double"></i> Mark All Complete</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-pencil-alt"></i> Class 4 Worksheet — HTML Text, Links, Images & DOM Selectors
+        <span style="margin-left: 1rem;">| Due: Next Class</span>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,485 +1,82 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Web Development Curriculum - Complete Navigation Hub</title>
-    
-
-
-  <!-- 32x32 (most common) -->
-  <link rel="icon" type="image/png" sizes="32x32" href="tracking.png">
-  
-  <!-- 16x16 (for older browsers) -->
-  <link rel="icon" type="image/png" sizes="16x16" href="tracking.png">
-  
-  <!-- Fallback for very old browsers -->
-  <link rel="shortcut icon" href="tracking.png">
-
-
-    <!-- Font Awesome 6 -->
+    <link rel="icon" type="image/png" sizes="32x32" href="tracking.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="tracking.png">
+    <link rel="shortcut icon" href="tracking.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #0a0c15 0%, #111827 100%);
-            min-height: 100vh;
-            padding: 2rem;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* Header Section */
-        .hero {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            padding: 2.5rem;
-            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
-            border-radius: 2rem;
-            border: 1px solid #334155;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #E0F2FE, #7AA9FF, #a78bfa);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero p {
-            color: #a0afc9;
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-        }
-
-        .badge-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.2rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background: #1e293b;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            color: #94a3b8;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .badge i {
-            color: #60a5fa;
-        }
-
-        /* Week Section */
-        .week-section {
-            background: rgba(15, 23, 42, 0.8);
-            border-radius: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #1e293b;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .week-section:hover {
-            border-color: #334155;
-        }
-
-        .week-header {
-            background: linear-gradient(95deg, #0f172a 0%, #1a2338 100%);
-            padding: 1.2rem 1.8rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-            border-bottom: 1px solid transparent;
-        }
-
-        .week-header:hover {
-            background: #1a2338;
-        }
-
-        .week-header.active {
-            border-bottom-color: #334155;
-        }
-
-        .week-title {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .week-title h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fbbf24;
-        }
-
-        .week-title h2 i {
-            color: #60a5fa;
-            margin-right: 0.5rem;
-        }
-
-        .week-badge {
-            background: #1e293b;
-            padding: 0.25rem 0.9rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            color: #94a3b8;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .week-badge i {
-            color: #60a5fa;
-        }
-
-        .week-chevron {
-            color: #64748b;
-            transition: transform 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .week-chevron.rotated {
-            transform: rotate(180deg);
-        }
-
-        .week-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .week-body.open {
-            max-height: 2000px;
-        }
-
-        .days-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            padding: 1.2rem 1.8rem 1.8rem;
-        }
-
-        .day-card {
-            background: rgba(22, 26, 38, 0.95);
-            backdrop-filter: blur(4px);
-            border-radius: 1.2rem;
-            padding: 1.1rem;
-            border: 1px solid #2d3748;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .day-card:hover {
-            transform: translateY(-4px);
-            border-color: #3b82f6;
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        .day-card .day-number {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #60a5fa;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-
-        .day-card .day-icon {
-            font-size: 1.6rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .day-card h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #e2e8f0;
-            margin-bottom: 0.3rem;
-        }
-
-        .day-card .day-desc {
-            color: #94a3b8;
-            font-size: 0.78rem;
-            line-height: 1.4;
-            margin-bottom: 0.6rem;
-            flex: 1;
-        }
-
-        .day-card .day-topics {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .day-card .topic-tag {
-            background: #1e293b;
-            padding: 0.1rem 0.5rem;
-            border-radius: 20px;
-            font-size: 0.62rem;
-            color: #94a3b8;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.2rem;
-        }
-
-        .day-card .topic-tag i {
-            color: #60a5fa;
-            font-size: 0.55rem;
-        }
-
-        .day-card .btn-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
-
-        .day-card .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: linear-gradient(135deg, #1e2a3a, #1a2338);
-            padding: 0.4rem 0.9rem;
-            border-radius: 2rem;
-            color: #e2e8f0;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.72rem;
-            transition: all 0.2s;
-            border: 1px solid #334155;
-            flex: 1;
-            justify-content: center;
-        }
-
-        .day-card .btn:hover {
-            background: linear-gradient(135deg, #2d3a4e, #25334d);
-            border-color: #3b82f6;
-            transform: scale(0.98);
-        }
-
-        .day-card .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            border-color: #3b82f6;
-        }
-
-        .day-card .btn-primary:hover {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        }
-
-        .day-card .btn-secondary {
-            flex: 0 1 auto;
-            font-size: 0.65rem;
-            padding: 0.35rem 0.6rem;
-        }
-
-        /* Bonus Section */
-        .bonus-section {
-            margin-top: 0.5rem;
-        }
-
-        .bonus-section .bonus-header {
-            background: linear-gradient(95deg, #0f172a 0%, #1a2338 100%);
-            border-radius: 1.5rem;
-            padding: 1rem 1.8rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #1e293b;
-        }
-
-        .bonus-section .bonus-header:hover {
-            border-color: #334155;
-        }
-
-        .bonus-section .bonus-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .bonus-section .bonus-body.open {
-            max-height: 2000px;
-        }
-
-        .bonus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 0.8rem;
-            padding: 1.2rem 0 0.5rem;
-        }
-
-        .bonus-card {
-            background: rgba(22, 26, 38, 0.9);
-            border-radius: 1rem;
-            padding: 0.9rem;
-            border: 1px solid #2d3748;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .bonus-card:hover {
-            border-color: #8b5cf6;
-            transform: translateY(-3px);
-        }
-
-        .bonus-card h4 {
-            font-size: 0.85rem;
-            color: #e2e8f0;
-            margin-bottom: 0.3rem;
-        }
-
-        .bonus-card p {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            margin-bottom: 0.6rem;
-            flex: 1;
-        }
-
-        .bonus-card .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            background: #1e293b;
-            padding: 0.3rem 0.8rem;
-            border-radius: 2rem;
-            color: #e2e8f0;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.68rem;
-            transition: all 0.2s;
-            border: 1px solid #334155;
-            align-self: flex-start;
-        }
-
-        .bonus-card .btn:hover {
-            border-color: #8b5cf6;
-            background: #2d3a4e;
-        }
-
-        /* Instructions */
-        .instructions {
-            background: #0f172a;
-            border-radius: 1.2rem;
-            padding: 1.2rem 1.5rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid #3b82f6;
-        }
-
-        .instructions h3 {
-            color: #fbbf24;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 1.1rem;
-        }
-
-        .instructions p {
-            color: #cbd5e6;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .instructions .legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid #1e293b;
-        }
-
-        .instructions .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
-
-        .instructions .legend-item i {
-            color: #60a5fa;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 4px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; background: linear-gradient(135deg, #0a0c15 0%, #111827 100%); min-height: 100vh; padding: 2rem; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .hero { text-align: center; margin-bottom: 2.5rem; padding: 2.5rem; background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%); border-radius: 2rem; border: 1px solid #334155; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4); }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, #E0F2FE, #7AA9FF, #a78bfa); background-clip: text; -webkit-background-clip: text; color: transparent; margin-bottom: 0.5rem; }
+        .hero p { color: #a0afc9; font-size: 1.1rem; margin-top: 0.5rem; }
+        .badge-container { display: flex; justify-content: center; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap; }
+        .badge { background: #1e293b; padding: 0.3rem 1.2rem; border-radius: 40px; font-size: 0.8rem; color: #94a3b8; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .badge i { color: #60a5fa; }
+        .week-section { background: rgba(15, 23, 42, 0.8); border-radius: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #1e293b; overflow: hidden; transition: all 0.3s ease; }
+        .week-section:hover { border-color: #334155; }
+        .week-header { background: linear-gradient(95deg, #0f172a 0%, #1a2338 100%); padding: 1.2rem 1.8rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; border-bottom: 1px solid transparent; }
+        .week-header:hover { background: #1a2338; }
+        .week-header.active { border-bottom-color: #334155; }
+        .week-title { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .week-title h2 { font-size: 1.3rem; font-weight: 700; color: #fbbf24; }
+        .week-title h2 i { color: #60a5fa; margin-right: 0.5rem; }
+        .week-badge { background: #1e293b; padding: 0.25rem 0.9rem; border-radius: 30px; font-size: 0.7rem; color: #94a3b8; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .week-badge i { color: #60a5fa; }
+        .week-chevron { color: #64748b; transition: transform 0.3s ease; font-size: 1.1rem; }
+        .week-chevron.rotated { transform: rotate(180deg); }
+        .week-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .week-body.open { max-height: 3000px; }
+        .days-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; padding: 1.2rem 1.8rem 1.8rem; }
+        .day-card { background: rgba(22, 26, 38, 0.95); backdrop-filter: blur(4px); border-radius: 1.2rem; padding: 1.1rem; border: 1px solid #2d3748; transition: all 0.3s ease; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .day-card:hover { transform: translateY(-4px); border-color: #3b82f6; box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5); }
+        .day-card .day-number { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: #60a5fa; font-weight: 600; margin-bottom: 0.4rem; }
+        .day-card .day-icon { font-size: 1.6rem; margin-bottom: 0.4rem; }
+        .day-card h3 { font-size: 1rem; font-weight: 700; color: #e2e8f0; margin-bottom: 0.3rem; }
+        .day-card .day-desc { color: #94a3b8; font-size: 0.78rem; line-height: 1.4; margin-bottom: 0.6rem; flex: 1; }
+        .day-card .day-topics { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.8rem; }
+        .day-card .topic-tag { background: #1e293b; padding: 0.1rem 0.5rem; border-radius: 20px; font-size: 0.62rem; color: #94a3b8; display: inline-flex; align-items: center; gap: 0.2rem; }
+        .day-card .topic-tag i { color: #60a5fa; font-size: 0.55rem; }
+        .day-card .btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+        .day-card .btn { display: inline-flex; align-items: center; gap: 0.4rem; background: linear-gradient(135deg, #1e2a3a, #1a2338); padding: 0.4rem 0.9rem; border-radius: 2rem; color: #e2e8f0; text-decoration: none; font-weight: 600; font-size: 0.72rem; transition: all 0.2s; border: 1px solid #334155; flex: 1; justify-content: center; }
+        .day-card .btn:hover { background: linear-gradient(135deg, #2d3a4e, #25334d); border-color: #3b82f6; transform: scale(0.98); }
+        .day-card .btn-primary { background: linear-gradient(135deg, #3b82f6, #2563eb); border-color: #3b82f6; }
+        .day-card .btn-primary:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+        .day-card .btn-secondary { flex: 0 1 auto; font-size: 0.65rem; padding: 0.35rem 0.6rem; }
+        .day-nav { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid #1e293b; }
+        .day-nav a { font-size: 0.65rem; color: #94a3b8; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; transition: color 0.2s; }
+        .day-nav a:hover { color: #60a5fa; }
+        .instructions { background: #0f172a; border-radius: 1.2rem; padding: 1.2rem 1.5rem; margin-bottom: 2rem; border-left: 4px solid #3b82f6; }
+        .instructions h3 { color: #fbbf24; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; font-size: 1.1rem; }
+        .instructions p { color: #cbd5e6; font-size: 0.9rem; line-height: 1.5; }
+        .instructions .legend { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid #1e293b; }
+        .instructions .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: #94a3b8; }
+        .instructions .legend-item i { color: #60a5fa; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
         .status-dot.html { background: #f97316; }
         .status-dot.css { background: #3b82f6; }
         .status-dot.js { background: #eab308; }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #6b7280;
-            font-size: 0.85rem;
-            border-top: 1px solid #1e293b;
-            margin-top: 1.5rem;
-        }
-
-        footer i {
-            color: #60a5fa;
-        }
-
+        footer { text-align: center; padding: 2rem; color: #6b7280; font-size: 0.85rem; border-top: 1px solid #1e293b; margin-top: 1.5rem; }
+        footer i { color: #60a5fa; }
         @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            .days-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-            .week-header {
-                padding: 1rem;
-            }
-            .week-title h2 {
-                font-size: 1.1rem;
-            }
+            body { padding: 1rem; }
+            .hero h1 { font-size: 1.8rem; }
+            .days-grid { grid-template-columns: 1fr; padding: 1rem; }
+            .week-header { padding: 1rem; }
+            .week-title h2 { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Hero Section -->
         <div class="hero">
             <h1><i class="fas fa-code"></i> Web Development Curriculum</h1>
-            <p>Complete Frontend Course · 6 Weeks · 3 Classes per Week · Interactive Slides &amp; Projects</p>
+            <p>Complete Frontend Course · 6 Weeks · 3 Classes per Week · Interactive Slides & Projects</p>
             <div class="badge-container">
                 <span class="badge"><i class="fas fa-layer-group"></i> 50+ Pages</span>
                 <span class="badge"><i class="fab fa-html5"></i> HTML</span>
@@ -488,11 +85,9 @@
                 <span class="badge"><i class="fas fa-rocket"></i> Click to Launch</span>
             </div>
         </div>
-
-        <!-- Instructions -->
         <div class="instructions">
             <h3><i class="fas fa-info-circle"></i> How to Navigate</h3>
-            <p>Click on any day card below to open the class slides or project. Each week has 3 days of content. Use the arrow keys or navigation buttons within each slide deck to move through lessons.</p>
+            <p>Click on any day card below to open the class slides or project. Each week has 3 days of content. Click week headers to expand/collapse. Use prev/next buttons inside each slide deck.</p>
             <div class="legend">
                 <span class="legend-item"><span class="status-dot html"></span> HTML Content</span>
                 <span class="legend-item"><span class="status-dot css"></span> CSS Content</span>
@@ -500,8 +95,7 @@
                 <span class="legend-item"><i class="fas fa-chevron-down"></i> Click week headers to expand/collapse</span>
             </div>
         </div>
-
-        <!-- ===================== WEEK 1 ===================== -->
+        <!-- WEEK 1 -->
         <div class="week-section">
             <div class="week-header" onclick="toggleWeek(this)">
                 <div class="week-title">
@@ -512,22 +106,24 @@
             </div>
             <div class="week-body open">
                 <div class="days-grid">
-                    <!-- Day 1 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot html"></span> Week 1 · Day 1</div>
                         <div class="day-icon"><i class="fas fa-network-wired" style="color: #60a5fa;"></i></div>
                         <h3>How the Web Works</h3>
                         <p class="day-desc">Internet fundamentals, browsers, DNS, HTTP/HTTPS, frontend vs backend, and developer tools.</p>
                         <div class="day-topics">
-                            <span class="topic-tag"><i class="fas fa-check"></i> IP &amp; DNS</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> IP & DNS</span>
                             <span class="topic-tag"><i class="fas fa-check"></i> HTTP Protocol</span>
                             <span class="topic-tag"><i class="fas fa-check"></i> Hosting</span>
                         </div>
                         <div class="btn-row">
-                            <a class="btn btn-primary" href="class-1-how-web-works.htm"><i class="fas fa-play"></i> Open Class 1</a>
+                            <a class="btn btn-primary" href="HTML/class-1-how-web-works.htm"><i class="fas fa-play"></i> Open Class 1</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="#"><i class="fas fa-arrow-left"></i> Previous</a>
+                            <a href="HTML/class-2-how-web-works.htm"><i class="fas fa-arrow-right"></i> Next: Dev Environment</a>
                         </div>
                     </div>
-                    <!-- Day 2 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot html"></span> Week 1 · Day 2</div>
                         <div class="day-icon"><i class="fas fa-laptop-code" style="color: #34d399;"></i></div>
@@ -539,10 +135,13 @@
                             <span class="topic-tag"><i class="fas fa-check"></i> Emmet</span>
                         </div>
                         <div class="btn-row">
-                            <a class="btn btn-primary" href="class-2-how-web-works.htm"><i class="fas fa-play"></i> Open Class 2</a>
+                            <a class="btn btn-primary" href="HTML/class-2-how-web-works.htm"><i class="fas fa-play"></i> Open Class 2</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="HTML/class-1-how-web-works.htm"><i class="fas fa-arrow-left"></i> Previous: Web Works</a>
+                            <a href="HTML/class-3-html-tags-img.htm"><i class="fas fa-arrow-right"></i> Next: Intro to HTML</a>
                         </div>
                     </div>
-                    <!-- Day 3 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot html"></span> Week 1 · Day 3</div>
                         <div class="day-icon"><i class="fab fa-html5" style="color: #f97316;"></i></div>
@@ -554,14 +153,17 @@
                             <span class="topic-tag"><i class="fas fa-check"></i> Boilerplate</span>
                         </div>
                         <div class="btn-row">
-                            <a class="btn btn-primary" href="class-3-html-tags-img.htm"><i class="fas fa-play"></i> Open Class 3</a>
+                            <a class="btn btn-primary" href="HTML/class-3-html-tags-img.htm"><i class="fas fa-play"></i> Open Class 3</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="HTML/class-2-how-web-works.htm"><i class="fas fa-arrow-left"></i> Previous: Dev Environment</a>
+                            <a href="HTML/class-4-html-elements.htm"><i class="fas fa-arrow-right"></i> Next: Text, Links & Images</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- ===================== WEEK 2 ===================== -->
+        <!-- WEEK 2 -->
         <div class="week-section">
             <div class="week-header" onclick="toggleWeek(this)">
                 <div class="week-title">
@@ -572,11 +174,10 @@
             </div>
             <div class="week-body">
                 <div class="days-grid">
-                    <!-- Day 1 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot html"></span> Week 2 · Day 1</div>
                         <div class="day-icon"><i class="fas fa-paragraph" style="color: #60a5fa;"></i></div>
-                        <h3>Text, Links &amp; Images</h3>
+                        <h3>Text, Links & Images</h3>
                         <p class="day-desc">Heading hierarchy, lists, anchor tags (absolute/relative), img tag, alt text, and semantic formatting.</p>
                         <div class="day-topics">
                             <span class="topic-tag"><i class="fas fa-check"></i> Headings</span>
@@ -584,10 +185,13 @@
                             <span class="topic-tag"><i class="fas fa-check"></i> Images</span>
                         </div>
                         <div class="btn-row">
-                            <a class="btn btn-primary" href="class-4-html-elements.htm"><i class="fas fa-play"></i> Open Class 4</a>
+                            <a class="btn btn-primary" href="HTML/class-4-html-elements.htm"><i class="fas fa-play"></i> Open Class 4</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="HTML/class-3-html-tags-img.htm"><i class="fas fa-arrow-left"></i> Previous: Intro to HTML</a>
+                            <a href="HTML/class5.html"><i class="fas fa-arrow-right"></i> Next: HTML Forms</a>
                         </div>
                     </div>
-                    <!-- Day 2 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot html"></span> Week 2 · Day 2</div>
                         <div class="day-icon"><i class="fas fa-file-alt" style="color: #fbbf24;"></i></div>
@@ -599,14 +203,18 @@
                             <span class="topic-tag"><i class="fas fa-check"></i> Validation</span>
                         </div>
                         <div class="btn-row">
-                            <a class="btn btn-primary" href="class5.html"><i class="fas fa-play"></i> Open Class 5</a>
+                            <a class="btn btn-primary" href="HTML/class5.html"><i class="fas fa-play"></i> Open Class 5</a>
+                            <a class="btn btn-secondary" href="HTML/class5work.html"><i class="fas fa-file"></i> Class Work</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="HTML/class-4-html-elements.htm"><i class="fas fa-arrow-left"></i> Previous: Text, Links & Images</a>
+                            <a href="HTML/class6.html"><i class="fas fa-arrow-right"></i> Next: Semantic HTML5</a>
                         </div>
                     </div>
-                    <!-- Day 3 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot html"></span> Week 2 · Day 3</div>
                         <div class="day-icon"><i class="fas fa-globe" style="color: #a78bfa;"></i></div>
-                        <h3>Semantic HTML5 &amp; SEO</h3>
+                        <h3>Semantic HTML5 & SEO</h3>
                         <p class="day-desc">Semantic elements (header, nav, main, article, aside), accessibility, ARIA, Open Graph tags, and SEO basics.</p>
                         <div class="day-topics">
                             <span class="topic-tag"><i class="fas fa-check"></i> Semantic HTML</span>
@@ -614,30 +222,32 @@
                             <span class="topic-tag"><i class="fas fa-check"></i> SEO Basics</span>
                         </div>
                         <div class="btn-row">
-                            <a class="btn btn-primary" href="class6.html"><i class="fas fa-play"></i> Open Class 6</a>
+                            <a class="btn btn-primary" href="HTML/class6.html"><i class="fas fa-play"></i> Open Class 6</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="HTML/class5.html"><i class="fas fa-arrow-left"></i> Previous: HTML Forms</a>
+                            <a href="css/week 2/day1/day1.html"><i class="fas fa-arrow-right"></i> Next: CSS Foundations</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- ===================== WEEK 3 ===================== -->
+        <!-- WEEK 3 -->
         <div class="week-section">
             <div class="week-header" onclick="toggleWeek(this)">
                 <div class="week-title">
-                    <h2><i class="fab fa-css3-alt"></i> Week 3: CSS Styling</h2>
+                    <h2><i class="fab fa-css3-alt"></i> Week 3: CSS Foundations</h2>
                     <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
                 </div>
                 <i class="fas fa-chevron-down week-chevron"></i>
             </div>
             <div class="week-body">
                 <div class="days-grid">
-                    <!-- Day 1 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot css"></span> Week 3 · Day 1</div>
                         <div class="day-icon"><i class="fas fa-palette" style="color: #3b82f6;"></i></div>
-                        <h3>CSS Complete Course</h3>
-                        <p class="day-desc">CSS syntax, selectors, 3 methods (inline/internal/external), cascade, colors (RGB/HEX/HSL), backgrounds, borders, box model, margins, padding, and quiz.</p>
+                        <h3>CSS Basics & Colors</h3>
+                        <p class="day-desc">CSS syntax, selectors, 3 methods (inline/internal/external), colors (RGB/HEX/HSL), backgrounds, borders, and box model.</p>
                         <div class="day-topics">
                             <span class="topic-tag"><i class="fas fa-check"></i> Selectors</span>
                             <span class="topic-tag"><i class="fas fa-check"></i> Colors</span>
@@ -649,12 +259,15 @@
                             <a class="btn btn-secondary" href="css/week 2/day1/inline.html"><i class="fas fa-file"></i> inline</a>
                             <a class="btn btn-secondary" href="css/week 2/day1/taskflow.html"><i class="fas fa-file"></i> taskflow</a>
                         </div>
+                        <div class="day-nav">
+                            <a href="HTML/class6.html"><i class="fas fa-arrow-left"></i> Previous: Semantic HTML5</a>
+                            <a href="css/week 2/day2/outline.html"><i class="fas fa-arrow-right"></i> Next: Outline & Positioning</a>
+                        </div>
                     </div>
-                    <!-- Day 2 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot css"></span> Week 3 · Day 2</div>
                         <div class="day-icon"><i class="fas fa-draw-polygon" style="color: #38bdf8;"></i></div>
-                        <h3>CSS Outline &amp; Positioning</h3>
+                        <h3>Outline & Positioning</h3>
                         <p class="day-desc">CSS outline property, outline vs border, outline offset, and basic positioning concepts.</p>
                         <div class="day-topics">
                             <span class="topic-tag"><i class="fas fa-check"></i> Outline</span>
@@ -664,12 +277,15 @@
                         <div class="btn-row">
                             <a class="btn btn-primary" href="css/week 2/day2/outline.html"><i class="fas fa-play"></i> Open Day 2</a>
                         </div>
+                        <div class="day-nav">
+                            <a href="css/week 2/day1/day1.html"><i class="fas fa-arrow-left"></i> Previous: CSS Basics</a>
+                            <a href="css/week 2/day3/index.html"><i class="fas fa-arrow-right"></i> Next: Z-Index & Positioning</a>
+                        </div>
                     </div>
-                    <!-- Day 3 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot css"></span> Week 3 · Day 3</div>
                         <div class="day-icon"><i class="fas fa-layer-group" style="color: #f472b6;"></i></div>
-                        <h3>Z-Index &amp; Positioning</h3>
+                        <h3>Z-Index & Positioning</h3>
                         <p class="day-desc">CSS positioning (relative, absolute, fixed), stacking context, z-index property, and interactive demos.</p>
                         <div class="day-topics">
                             <span class="topic-tag"><i class="fas fa-check"></i> Position</span>
@@ -680,23 +296,25 @@
                             <a class="btn btn-primary" href="css/week 2/day3/index.html"><i class="fas fa-play"></i> Open Day 3</a>
                             <a class="btn btn-secondary" href="css/week 2/day3/z_index.html"><i class="fas fa-file"></i> z-index</a>
                         </div>
+                        <div class="day-nav">
+                            <a href="css/week 2/day2/outline.html"><i class="fas fa-arrow-left"></i> Previous: Outline & Positioning</a>
+                            <a href="css/week 3/flex_intro.html"><i class="fas fa-arrow-right"></i> Next: Flexbox Intro</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- ===================== WEEK 4 ===================== -->
+        <!-- WEEK 4 -->
         <div class="week-section">
             <div class="week-header" onclick="toggleWeek(this)">
                 <div class="week-title">
-                    <h2><i class="fas fa-align-center"></i> Week 4: CSS Flexbox &amp; Layout</h2>
+                    <h2><i class="fas fa-align-center"></i> Week 4: CSS Flexbox & Layout</h2>
                     <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
                 </div>
                 <i class="fas fa-chevron-down week-chevron"></i>
             </div>
             <div class="week-body">
                 <div class="days-grid">
-                    <!-- Day 1 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot css"></span> Week 4 · Day 1</div>
                         <div class="day-icon"><i class="fas fa-arrows-alt-h" style="color: #34d399;"></i></div>
@@ -711,8 +329,11 @@
                             <a class="btn btn-primary" href="css/week 3/flex_intro.html"><i class="fas fa-play"></i> Flex Intro</a>
                             <a class="btn btn-secondary" href="css/week 3/day1.html"><i class="fas fa-file"></i> CSS Gradients</a>
                         </div>
+                        <div class="day-nav">
+                            <a href="css/week 2/day3/z_index.html"><i class="fas fa-arrow-left"></i> Previous: Z-Index</a>
+                            <a href="css/week 3/flex_grow.html"><i class="fas fa-arrow-right"></i> Next: Flexbox Properties</a>
+                        </div>
                     </div>
-                    <!-- Day 2 -->
                     <div class="day-card">
                         <div class="day-number"><span class="status-dot css"></span> Week 4 · Day 2</div>
                         <div class="day-icon"><i class="fas fa-grip" style="color: #fbbf24;"></i></div>
@@ -729,3 +350,257 @@
                             <a class="btn btn-secondary" href="css/week 3/flex_grow.html"><i class="fas fa-file"></i> grow</a>
                             <a class="btn btn-secondary" href="css/week 3/flex_shrink.html"><i class="fas fa-file"></i> shrink</a>
                             <a class="btn btn-secondary" href="css/week 3/flex_order.html"><i class="fas fa-file"></i> order</a>
+                            <a class="btn btn-secondary" href="css/week 3/self_align.html"><i class="fas fa-file"></i> self-align</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="css/week 3/flex_intro.html"><i class="fas fa-arrow-left"></i> Previous: Flex Intro</a>
+                            <a href="css/week 3/day3.html"><i class="fas fa-arrow-right"></i> Next: Flexbox Practice</a>
+                        </div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot css"></span> Week 4 · Day 3</div>
+                        <div class="day-icon"><i class="fas fa-chalkboard-user" style="color: #a78bfa;"></i></div>
+                        <h3>Flexbox Practice & Projects</h3>
+                        <p class="day-desc">Classwork examples, practice exercises, and real-world flexbox layout projects consolidating all flex properties.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Class Work</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Practice</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Layouts</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="css/week 3/day3.html"><i class="fas fa-play"></i> Open Day 3</a>
+                            <a class="btn btn-secondary" href="css/week 3/class_work.html"><i class="fas fa-file"></i> class_work</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="css/week 3/flex_grow.html"><i class="fas fa-arrow-left"></i> Previous: Flex Properties</a>
+                            <a href="css/google_chrome_broswer_home_page.html"><i class="fas fa-arrow-right"></i> Next: Chrome Replica</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- WEEK 5 -->
+        <div class="week-section">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-title">
+                    <h2><i class="fab fa-js"></i> Week 5: JavaScript Basics</h2>
+                    <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
+                </div>
+                <i class="fas fa-chevron-down week-chevron"></i>
+            </div>
+            <div class="week-body">
+                <div class="days-grid">
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot js"></span> Week 5 · Day 1</div>
+                        <div class="day-icon"><i class="fas fa-code" style="color: #eab308;"></i></div>
+                        <h3>JavaScript Fundamentals</h3>
+                        <p class="day-desc">Introduction to JavaScript, variables, data types, operators, and basic syntax in the browser.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Variables</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Data Types</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Operators</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="js/week1/day1.html"><i class="fas fa-play"></i> Open Day 1</a>
+                            <a class="btn btn-secondary" href="js/week1/js.html"><i class="fas fa-file"></i> JS Intro</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="css/google_chrome_broswer_home_page.html"><i class="fas fa-arrow-left"></i> Previous: CSS Projects</a>
+                            <a href="js/week1/day2.html"><i class="fas fa-arrow-right"></i> Next: JS Basics Day 2</a>
+                        </div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot js"></span> Week 5 · Day 2</div>
+                        <div class="day-icon"><i class="fas fa-calculator" style="color: #34d399;"></i></div>
+                        <h3>JS Basics & Calculator</h3>
+                        <p class="day-desc">Functions, control flow, interactive examples, and building a functional calculator web app.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Functions</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Control Flow</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Calculator App</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="js/week1/day2.html"><i class="fas fa-play"></i> Open Day 2</a>
+                            <a class="btn btn-secondary" href="js/week1/day2/index.html"><i class="fas fa-file"></i> Project Index</a>
+                            <a class="btn btn-secondary" href="js/week1/day2/calc_project/index.html"><i class="fas fa-calculator"></i> Calculator</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="js/week1/day1.html"><i class="fas fa-arrow-left"></i> Previous: JS Fundamentals</a>
+                            <a href="js/week1/day4/todo/todo.html"><i class="fas fa-arrow-right"></i> Next: To-Do App</a>
+                        </div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot js"></span> Week 5 · Day 3</div>
+                        <div class="day-icon"><i class="fas fa-list-check" style="color: #f472b6;"></i></div>
+                        <h3>DOM Manipulation & To-Do App</h3>
+                        <p class="day-desc">DOM manipulation, event handling, and building a to-do list application with add, complete, and delete functionality.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> DOM</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Events</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> To-Do App</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="js/week1/day4/todo/todo.html"><i class="fas fa-play"></i> Open To-Do App</a>
+                            <a class="btn btn-secondary" href="js/week1/day4/objects.html"><i class="fas fa-file"></i> Objects</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="js/week1/day2.html"><i class="fas fa-arrow-left"></i> Previous: JS Basics</a>
+                            <a href="js/week2/day1.html"><i class="fas fa-arrow-right"></i> Next: JS Intermediate</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- WEEK 6 -->
+        <div class="week-section">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-title">
+                    <h2><i class="fab fa-js"></i> Week 6: JavaScript Intermediate</h2>
+                    <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
+                </div>
+                <i class="fas fa-chevron-down week-chevron"></i>
+            </div>
+            <div class="week-body">
+                <div class="days-grid">
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot js"></span> Week 6 · Day 1</div>
+                        <div class="day-icon"><i class="fas fa-code" style="color: #eab308;"></i></div>
+                        <h3>JS Functions & Scope</h3>
+                        <p class="day-desc">Deep dive into functions, scope, closures, arrow functions, and practical coding exercises.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Functions</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Scope</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Closures</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="js/week2/day1.html"><i class="fas fa-play"></i> Open Day 1</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="js/week1/day4/todo/todo.html"><i class="fas fa-arrow-left"></i> Previous: To-Do App</a>
+                            <a href="js/week3/day1.html"><i class="fas fa-arrow-right"></i> Next: JS Advanced</a>
+                        </div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot js"></span> Week 6 · Day 2</div>
+                        <div class="day-icon"><i class="fas fa-cogs" style="color: #38bdf8;"></i></div>
+                        <h3>JS Arrays & Objects</h3>
+                        <p class="day-desc">Advanced array methods (map, filter, reduce), object manipulation, destructuring, and spread operator.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Arrays</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Objects</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Destructuring</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="js/week3/day1.html"><i class="fas fa-play"></i> Open Day 2</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="js/week2/day1.html"><i class="fas fa-arrow-left"></i> Previous: Functions & Scope</a>
+                            <a href="js/week3/day2.html"><i class="fas fa-arrow-right"></i> Next: JS Advanced</a>
+                        </div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot js"></span> Week 6 · Day 3</div>
+                        <div class="day-icon"><i class="fas fa-rocket" style="color: #f472b6;"></i></div>
+                        <h3>Async JavaScript & APIs</h3>
+                        <p class="day-desc">Promises, async/await, fetch API, working with JSON data, and building API-powered web applications.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Promises</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Async/Await</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Fetch API</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="js/week4/index.html"><i class="fas fa-play"></i> Open Day 3</a>
+                            <a class="btn btn-secondary" href="js/week4/api.html"><i class="fas fa-file"></i> API Demo</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="js/week3/day2.html"><i class="fas fa-arrow-left"></i> Previous: Arrays & Objects</a>
+                            <a href="React/day1.html"><i class="fas fa-arrow-right"></i> Next: React Basics</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- WEEK 7 -->
+        <div class="week-section">
+            <div class="week-header" onclick="toggleWeek(this)">
+                <div class="week-title">
+                    <h2><i class="fab fa-react"></i> Week 7: React Fundamentals</h2>
+                    <span class="week-badge"><i class="far fa-calendar-alt"></i> 3 Classes</span>
+                </div>
+                <i class="fas fa-chevron-down week-chevron"></i>
+            </div>
+            <div class="week-body">
+                <div class="days-grid">
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot react"></span> Week 7 · Day 1</div>
+                        <div class="day-icon"><i class="fab fa-react" style="color: #61dafb;"></i></div>
+                        <h3>React Introduction</h3>
+                        <p class="day-desc">Introduction to React, components, JSX, props, state, and the component-based architecture.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> Components</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> JSX</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Props & State</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="React/day1.html"><i class="fas fa-play"></i> Open Day 1</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="js/week4/index.html"><i class="fas fa-arrow-left"></i> Previous: Async JS</a>
+                            <a href="React/day2.html"><i class="fas fa-arrow-right"></i> Next: React Hooks</a>
+                        </div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot react"></span> Week 7 · Day 2</div>
+                        <div class="day-icon"><i class="fas fa-code-branch" style="color: #34d399;"></i></div>
+                        <h3>React Hooks & State</h3>
+                        <p class="day-desc">useState, useEffect, useRef, custom hooks, and managing state in functional components.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> useState</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> useEffect</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Custom Hooks</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="React/day2.html"><i class="fas fa-play"></i> Open Day 2</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="React/day1.html"><i class="fas fa-arrow-left"></i> Previous: React Intro</a>
+                            <a href="#"><i class="fas fa-arrow-right"></i> Next: React Router</a>
+                        </div>
+                    </div>
+                    <div class="day-card">
+                        <div class="day-number"><span class="status-dot react"></span> Week 7 · Day 3</div>
+                        <div class="day-icon"><i class="fas fa-route" style="color: #fbbf24;"></i></div>
+                        <h3>React Router & API Integration</h3>
+                        <p class="day-desc">Client-side routing with React Router, fetching data from APIs, and integrating external services.</p>
+                        <div class="day-topics">
+                            <span class="topic-tag"><i class="fas fa-check"></i> React Router</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> API Calls</span>
+                            <span class="topic-tag"><i class="fas fa-check"></i> Loading States</span>
+                        </div>
+                        <div class="btn-row">
+                            <a class="btn btn-primary" href="js/week4/api.html"><i class="fas fa-play"></i> API Demo</a>
+                            <a class="btn btn-secondary" href="js/week4/api1.html"><i class="fas fa-file"></i> API 1</a>
+                        </div>
+                        <div class="day-nav">
+                            <a href="React/day2.html"><i class="fas fa-arrow-left"></i> Previous: React Hooks</a>
+                            <a href="#"><i class="fas fa-arrow-right"></i> Course Complete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <i class="fas fa-graduation-cap"></i> Web Development Curriculum · 7 Weeks · 21 Classes · Built for interactive learning
+    </footer>
+    <script>
+        function toggleWeek(header) {
+            const body = header.nextElementSibling;
+            const chevron = header.querySelector('.week-chevron');
+            body.classList.toggle('open');
+            chevron.classList.toggle('rotated');
+            header.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

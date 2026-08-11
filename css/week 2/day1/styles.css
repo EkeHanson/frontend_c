@@ -41,3 +41,35 @@ p.our_choice{
 /* h1 {
   border: dotted solid red;
 } */
+
+
+
+
+
+
+
+.parent1{
+    background-color: red;
+    width: 500px;
+    height: 500px;
+    margin: auto;
+}
+#parent2{
+    background-color: Green;
+    width: 300px;
+    height: 300px;
+    margin-left: 100px;
+    margin-top: auto;
+}
+#parent3{
+    background-color: Blue;
+    width: 100px;
+    height: 100px;
+    margin: 100px;
+}
+#parent4{
+    background-color: yellow;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}

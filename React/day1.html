@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>React · Class 2 · JSX & Components</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #0b0f1c 0%, #111827 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .curriculum-header {
+            max-width: 1300px;
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 1.5rem;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
+        }
+        .badge {
+            background: #3b82f6;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .duration {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .class-nav-buttons {
+            display: flex;
+            gap: 0.8rem;
+            margin-left: auto;
+        }
+        .class-nav-btn {
+            background: #1e293b;
+            border: 1px solid #3b82f6;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+        }
+        .class-nav-btn:hover {
+            background: #3b82f6;
+            transform: scale(0.98);
+        }
+        .class-nav-btn i {
+            font-size: 0.8rem;
+        }
+
+        .presentation-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.02);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+            overflow: hidden;
+        }
+
+        .slide-area {
+            min-height: 600px;
+            background: #0f1119;
+            padding: 2rem;
+        }
+
+        .slide-card {
+            background: rgba(22, 26, 38, 0.96);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
+            border: 1px solid rgba(97, 218, 251, 0.25);
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #b3e5fc, #7aa9ff, #a78bfa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 5px solid #61dafb;
+            padding-left: 1.2rem;
+        }
+
+        .slide-title i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #61dafb;
+            font-size: 1.8rem;
+        }
+
+        .slide-sub {
+            color: #a0afc9;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 5px solid #61dafb;
+            padding-left: 1.2rem;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .concept-box {
+            flex: 1;
+            min-width: 240px;
+            background: #1a1f2e;
+            border-radius: 1.5rem;
+            padding: 1.3rem;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        .concept-box:hover {
+            border-color: #61dafb;
+            transform: translateY(-2px);
+        }
+
+        .concept-box h3 {
+            color: #7aa9ff;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .concept-box h3 i {
+            color: #61dafb;
+        }
+
+        .concept-box p, .concept-list, .concept-box li {
+            color: #e2e8f0;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        .react-highlight {
+            color: #61dafb;
+            font-weight: 600;
+        }
+
+        .tag {
+            background: #1e293b;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: #b9d0ff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .insight-card {
+            margin-top: 1.2rem;
+            background: #0f172a;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            color: #e2e8f0;
+            border-left: 3px solid #61dafb;
+        }
+
+        .two-column-split {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .col {
+            flex: 1;
+            background: #131a2a;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #2d3a5e;
+        }
+        .col h4 {
+            color: #fbbf24;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        .col h4 i {
+            margin-right: 0.5rem;
+            color: #61dafb;
+        }
+        .col p, .col li {
+            color: #e2e8f0;
+        }
+
+        .extensions-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.8rem 0;
+        }
+        .ext-card {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            border-left: 3px solid #61dafb;
+            flex: 1;
+            min-width: 200px;
+            color: #e2e8f0;
+        }
+        .ext-card strong {
+            color: #fbbf24;
+        }
+        .ext-card i {
+            margin-right: 0.5rem;
+            color: #61dafb;
+        }
+
+        pre {
+            background: #0a0e18;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            margin: 0.8rem 0;
+            border: 1px solid #334155;
+            font-family: 'Fira Code', monospace;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            color: #cbd5e6;
+        }
+
+        .qa-section {
+            margin-top: 1.5rem;
+            background: #0f172a;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid #334155;
+        }
+        .qa-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .qa-item {
+            background: #131b2e;
+            border-radius: 1rem;
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+            border: 1px solid #2d3a5e;
+        }
+        .qa-question {
+            padding: 1rem 1.2rem;
+            background: #1a2338;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #e2e8f0;
+            transition: background 0.2s;
+        }
+        .qa-question:hover {
+            background: #25334d;
+        }
+        .qa-question i {
+            color: #61dafb;
+            transition: transform 0.3s;
+        }
+        .qa-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #0f172a;
+            color: #cbd5e6;
+            line-height: 1.5;
+        }
+        .qa-answer.show {
+            padding: 1rem 1.2rem;
+            max-height: 300px;
+        }
+        .qa-answer p {
+            margin: 0;
+            color: #cbd5e6;
+        }
+
+        .nav-bar {
+            background: #0b0e16;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #2a2f3f;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            background: #1e2a3a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            border: 1px solid #334155;
+        }
+
+        button i {
+            font-size: 0.9rem;
+        }
+
+        button:hover:not(:disabled) {
+            background: #2d3a4e;
+            transform: scale(0.97);
+            border-color: #61dafb;
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-size: 0.9rem;
+            background: #1a1f2c;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            color: #a5b4fc;
+        }
+
+        .indicator-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #334155;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .dot.active {
+            background: #61dafb;
+            width: 22px;
+        }
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.7rem;
+            background: #07090f;
+            color: #8ca3c7;
+        }
+        footer i {
+            color: #61dafb;
+        }
+        footer a {
+            color: #61dafb;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 700px) {
+            .slide-area { padding: 1rem; }
+            .slide-title { font-size: 1.4rem; }
+            .concept-box { min-width: 100%; }
+            .two-column-split { flex-direction: column; }
+            .class-nav-buttons { margin-left: 0; margin-top: 0.5rem; }
+            .curriculum-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="curriculum-header">
+    <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 2 · WEEK 1 · CLASS 2</span></div>
+    <div class="class-title"><i class="fab fa-react"></i> React: JSX & Components</div>
+    <div class="duration"><i class="far fa-clock"></i> 3 Hours · Component Thinking</div>
+    <div class="class-nav-buttons">
+        <a href="#" class="class-nav-btn"><i class="fas fa-arrow-left"></i> Class 1</a>
+        <a href="#" class="class-nav-btn"><i class="fas fa-arrow-right"></i> Class 3 →</a>
+    </div>
+</div>
+
+<div class="presentation-container">
+    <div class="slide-area" id="slideArea"></div>
+    <div class="nav-bar">
+        <div class="indicator-dots" id="dotsContainer"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+            <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 11</span>
+            <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <footer>
+        <i class="fab fa-react"></i> React · JSX · Components · Props · State
+        <span style="margin-left: 1rem;">| <a href="#"><i class="fas fa-arrow-left"></i> Class 1</a> | <a href="#">Class 3 <i class="fas fa-arrow-right"></i></a></span>
+    </footer>
+</div>
+
+<script>
+    const slides = [
+        {
+            title: "<i class='fab fa-react'></i> React: Declarative UI",
+            subtitle: "Components, JSX, and the React philosophy",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-cubes"></i> What is React?</h3><p>React is a <span class="highlight">component-based</span> library for building user interfaces. It's declarative: you describe the UI state, React updates the DOM efficiently.</p><p>Created by Facebook (Meta) in 2013, powers Instagram, Airbnb, Netflix, and thousands of apps.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-brain"></i> Why React?</h3><p><span class="highlight">Reusability</span> — build once, use everywhere.<br><span class="highlight">Virtual DOM</span> — fast updates.<br><span class="highlight">Ecosystem</span> — hooks, router, state management.<br><span class="highlight">Job market</span> — most demanded frontend skill.</p></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <span class="tag">core idea</span> <span>React is not a framework — it's a library for building component trees that render efficiently.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-code'></i> JSX: JavaScript + XML",
+            subtitle: "HTML-like syntax inside JavaScript",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-magic"></i> What is JSX?</h4>
+                        <p>JSX is a syntax extension that lets you write HTML-like markup inside JavaScript.</p>
+                        <pre><code>const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;</code></pre>
+                        <p>JSX is <span class="highlight">not HTML</span> — it's JavaScript with syntactic sugar. Babel compiles it to React.createElement calls.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-rules"></i> JSX Rules</h4>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li>Use <span class="highlight">className</span> instead of class</li>
+                            <li>Wrap multiple elements in a parent (Fragment <>&lt;&gt;...&lt;/&gt;)</li>
+                            <li>JavaScript expressions go in <span class="highlight">{ }</span></li>
+                            <li>Self-closing tags: &lt;img /&gt;, &lt;input /&gt;</li>
+                            <li>All attributes are camelCase: onClick, onChange</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-star"></i> <strong>JSX is optional</strong> — but it makes React code much more readable and expressive.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-balance-scale'></i> Library vs Framework",
+            subtitle: "Why React is a library — and what that means for you",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-book-open"></i> Library</h4>
+                        <p>A library is a collection of functions you <span class="highlight">call</span> when you need them. You are in control — you decide when and where to use it.</p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0; margin-top:0.5rem;">
+                            <li>✅ Lightweight, focused</li>
+                            <li>✅ You control the flow</li>
+                            <li>✅ Easy to swap out</li>
+                            <li>✅ React, jQuery, Lodash</li>
+                        </ul>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-building"></i> Framework</h4>
+                        <p>A framework is a <span class="highlight">complete structure</span> that calls your code. The framework is in control — you fill in the blanks according to its rules.</p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0; margin-top:0.5rem;">
+                            <li>🔒 Opinionated, full-featured</li>
+                            <li>🔒 Framework controls the flow</li>
+                            <li>🔒 Harder to replace parts</li>
+                            <li>🔒 Angular, Vue (sometimes), Django</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fab fa-react"></i> <strong>React is a library</strong> because it focuses solely on the View layer. You can use it with any routing, state management, or build system — giving you freedom to choose. <span class="highlight">You call React, React doesn't call you.</span></div>
+            `
+        },
+        {
+            title: "<i class='fas fa-cube'></i> Components: The Building Blocks",
+            subtitle: "Functional and Class components",
+            content: `
+                <div class="extensions-grid">
+                    <div class="ext-card"><i class="fas fa-arrow-right"></i> <strong>Functional Component</strong><br>function Greeting() { return &lt;h1&gt;Hi&lt;/h1&gt;; }<br>Modern, with Hooks</div>
+                    <div class="ext-card"><i class="fas fa-arrow-right"></i> <strong>Class Component</strong><br>class Greeting extends React.Component { render() { return &lt;h1&gt;Hi&lt;/h1&gt;; } }<br>Legacy, but still used</div>
+                    <div class="ext-card"><i class="fas fa-arrow-right"></i> <strong>Pure Component</strong><br>Optimized re-rendering, shallow props compare</div>
+                </div>
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-folder-tree"></i> Component Naming</h3><p>Components must start with <span class="highlight">capital letter</span> (PascalCase): MyButton, UserProfile, TodoList.<br>Lowercase elements are treated as HTML tags.</p></div>
+                    <div class="concept-box"><h3><i class="fas fa-export"></i> Export/Import</h3><p>export default MyComponent; <br>import MyComponent from './MyComponent';</p></div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrow-right'></i> Props: Passing Data",
+            subtitle: "Read-only data from parent to child",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-inbox"></i> Props are read-only</h4>
+                        <pre><code>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}
+// usage: &lt;Welcome name="Alice" /&gt;</code></pre>
+                        <p>Props are like HTML attributes — they flow <span class="highlight">down</span> the component tree.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-puzzle-piece"></i> Destructuring</h4>
+                        <pre><code>function Welcome({ name, age }) {
+  return &lt;h1&gt;{name} is {age}&lt;/h1&gt;;
+}</code></pre>
+                        <p>Default props: <span class="highlight">Welcome.defaultProps = { name: 'Guest' }</span></p>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-arrow-down"></i> <strong>One-way data flow:</strong> props are immutable — children cannot modify their props.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-database'></i> State: Component Memory",
+            subtitle: "State makes components interactive",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-sync-alt"></i> useState Hook</h3>
+                        <pre><code>import { useState } from 'react';
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    &lt;button onClick={() => setCount(count + 1)}&gt;
+      Clicks: {count}
+    &lt;/button&gt;
+  );
+}</code></pre>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-info-circle"></i> State Rules</h3>
+                        <ul style="margin-left:1.2rem;">
+                            <li><span class="highlight">State</span> is private to the component</li>
+                            <li>Use <span class="highlight">setState</span> (or setCount) to update — never mutate directly</li>
+                            <li>State updates <span class="highlight">trigger re-render</span></li>
+                            <li>Multiple states: use multiple useState calls</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-exclamation-triangle"></i> <strong>Never</strong> do: this.state.count = 1; — always use the updater function.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-tree'></i> Component Composition",
+            subtitle: "Build complex UIs from simple pieces",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-layers"></i> Composition pattern</h4>
+                        <pre><code>function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;Main /&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                        <p>Components can contain other components — this is the <span class="highlight">composition model</span>.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-children"></i> Children prop</h4>
+                        <pre><code>function Card({ children }) {
+  return &lt;div className="card"&gt;{children}&lt;/div&gt;;
+}
+// usage:
+&lt;Card&gt;&lt;h1&gt;Hello&lt;/h1&gt;&lt;/Card&gt;</code></pre>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrows-rotate'></i> React Hooks Intro",
+            subtitle: "State and side-effects in functional components",
+            content: `
+                <div class="extensions-grid">
+                    <div class="ext-card"><i class="fas fa-database"></i> <strong>useState</strong> — local state</div>
+                    <div class="ext-card"><i class="fas fa-sync-alt"></i> <strong>useEffect</strong> — side effects (API calls, DOM updates)</div>
+                    <div class="ext-card"><i class="fas fa-share-alt"></i> <strong>useContext</strong> — global state without prop drilling</div>
+                    <div class="ext-card"><i class="fas fa-code-branch"></i> <strong>useReducer</strong> — complex state logic</div>
+                </div>
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-clock"></i> useEffect example</h3>
+                        <pre><code>useEffect(() => {
+  document.title = \`You clicked \${count} times\`;
+}, [count]); // re-run when count changes</code></pre>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-clean"></i> Cleanup</h3>
+                        <pre><code>useEffect(() => {
+  const timer = setInterval(() => { ... }, 1000);
+  return () => clearInterval(timer);
+}, []);</code></pre>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-tasks'></i> Assignment: Build a Todo App",
+            subtitle: "Apply component, props, state, and hooks",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-check-square"></i> Basic Tasks</h3>
+                        <ul style="margin-left:1.2rem;">
+                            <li>✓ Create a Todo component with state (items array)</li>
+                            <li>✓ Render list of todos using map()</li>
+                            <li>✓ Add input + button to add new todos</li>
+                            <li>✓ Each todo has a delete button (filter)</li>
+                            <li>✓ Use useState for input and todo list</li>
+                        </ul>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-star"></i> Bonus</h3>
+                        <ul style="margin-left:1.2rem;">
+                            <li>⭐ Toggle complete status (strikethrough style)</li>
+                            <li>⭐ Save todos to localStorage</li>
+                            <li>⭐ Use useEffect to load from storage</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-camera"></i> <strong>Submit:</strong> Code sandbox link or GitHub repo with your todo app.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-challenge'></i> Extended Challenge",
+            subtitle: "Professional React patterns",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-puzzle-piece"></i> Task 1: Component Tree</h4>
+                        <p>Build a <span class="highlight">comment section</span> with nested components: CommentList, CommentItem, ReplyForm.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-arrow-up"></i> Task 2: Lifting State</h4>
+                        <p>Two sibling components share state via parent — implement a <span class="highlight">temperature converter</span>.</p>
+                    </div>
+                </div>
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-shield-alt"></i> Task 3: Prop Types</h4>
+                        <p>Install <code>prop-types</code> and add type checking to your components.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-mobile-alt"></i> Task 4: Conditional Rendering</h4>
+                        <p>Show a loading spinner while data is being fetched (use useEffect + fetch).</p>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-question-circle'></i> Knowledge Check",
+            subtitle: "React fundamentals — click to reveal answers",
+            content: `
+                <div class="qa-section">
+                    <div class="qa-title"><i class="fas fa-question-circle"></i> Toggle Questions (click to show/hide answer)</div>
+                    <div id="qa-container"></div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Try answering before clicking to test your React knowledge!</div>
+            `
+        }
+    ];
+
+    const qaData = [
+        { q: "What is the difference between a library and a framework? Give examples.", a: "A library is a collection of functions you call (e.g., React, jQuery). A framework is a structure that calls your code (e.g., Angular, Django). You control the flow with a library; the framework controls the flow." },
+        { q: "Why is React considered a library and not a framework?", a: "React focuses only on the View layer. It doesn't prescribe routing, state management, or build tools. You can integrate it with other libraries freely — you are in control." },
+        { q: "What is the difference between props and state in React?", a: "Props are read-only data passed from parent to child. State is mutable data managed inside a component. Changing state triggers re-render; props cannot be changed by the child." },
+        { q: "What is JSX and why is it used?", a: "JSX is a syntax extension that lets you write HTML-like code inside JavaScript. It makes component definitions more readable and expressive. It's compiled to React.createElement calls." },
+        { q: "What is the useState hook and how do you use it?", a: "useState is a React Hook that lets you add state to functional components. It returns an array: [state, setState]. Example: const [count, setCount] = useState(0);" },
+        { q: "What is the significance of the React virtual DOM?", a: "The virtual DOM is a lightweight copy of the actual DOM. React updates the virtual DOM, compares it to the previous version (diffing), and then efficiently updates only the changed parts in the real DOM — improving performance." },
+        { q: "How do you pass data from a parent component to a child component?", a: "Via props. Example: <Child name=\"Alice\" /> inside parent; child receives props.name or destructures { name }." },
+        { q: "What are keys in React and why are they important?", a: "Keys are special attributes used when rendering lists of elements. They help React identify which items have changed, are added, or removed. Keys should be unique among siblings and stable (prefer using IDs)." },
+        { q: "What is the useEffect hook used for?", a: "useEffect handles side effects in functional components: data fetching, DOM updates, timers, subscriptions. It runs after the component renders. Dependencies array controls when it re-runs." },
+        { q: "What is prop drilling and how can you avoid it?", a: "Prop drilling is passing props through multiple layers of components. Avoid it by using Context API or state management libraries like Redux." }
+    ];
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    const slideArea = document.getElementById('slideArea');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counterText = document.getElementById('counterText');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    function renderQA() {
+        const container = document.getElementById('qa-container');
+        if (!container) return;
+        container.innerHTML = '';
+        qaData.forEach((item, idx) => {
+            const qaDiv = document.createElement('div');
+            qaDiv.className = 'qa-item';
+            qaDiv.innerHTML = `
+                <div class="qa-question" data-idx="${idx}">
+                    <span><strong>${idx+1}.</strong> ${item.q}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="qa-answer" id="answer-${idx}">
+                    <p>${item.a}</p>
+                </div>
+            `;
+            container.appendChild(qaDiv);
+        });
+        document.querySelectorAll('.qa-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const idx = this.getAttribute('data-idx');
+                const answerDiv = document.getElementById(`answer-${idx}`);
+                const icon = this.querySelector('i');
+                answerDiv.classList.toggle('show');
+                icon.style.transform = answerDiv.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+    }
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        const html = `
+            <div class="slide-card">
+                <div class="slide-title">
+                    ${slide.title}
+                </div>
+                <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+                <div class="slide-content">
+                    ${slide.content}
+                </div>
+            </div>
+        `;
+        slideArea.innerHTML = html;
+        if (index === 10) renderQA();
+        counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === totalSlides-1);
+        updateDots(index);
+    }
+
+    function updateDots(activeIndex) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === activeIndex) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+    function handleKeyDown(e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    window.addEventListener('keydown', handleKeyDown);
+    renderSlide(0);
+</script>
+</body>
+</html>

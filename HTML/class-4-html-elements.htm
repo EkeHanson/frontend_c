@@ -5,15 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Class 4 · Text, Links & Images | Web Development Curriculum</title>
     <!-- Font Awesome 6 -->
-      <!-- 32x32 (most common) -->
     <link rel="icon" type="image/png" sizes="32x32" href="tracking.png">
-    
-    <!-- 16x16 (for older browsers) -->
     <link rel="icon" type="image/png" sizes="16x16" href="tracking.png">
-    
-    <!-- Fallback for very old browsers -->
     <link rel="shortcut icon" href="tracking.png">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -289,6 +283,184 @@
             .slide-area { padding: 1rem; }
             .slide-title { font-size: 1.4rem; }
         }
+
+        /* Demo Styles */
+        .demo-container {
+            background: #0f1625;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid #2d3a5e;
+        }
+        .demo-box {
+            background: #1a2744;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            border-left: 3px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .demo-box h4 {
+            color: #7aa9ff;
+            margin-bottom: 0.5rem;
+        }
+        .demo-box code {
+            background: #01050e;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.3rem;
+            color: #cddcff;
+            font-size: 0.85rem;
+        }
+        .highlight-blue {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+        .highlight-green {
+            color: #34d399;
+            font-weight: bold;
+        }
+        .highlight-yellow {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+        }
+        .btn-group button {
+            background: #1e293b;
+            border: 1px solid #3b82f6;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .btn-group button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        .demo-output {
+            background: #01050e;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #2d3a5e;
+            min-height: 40px;
+            color: #cddcff;
+            white-space: pre-wrap;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .demo-output .highlight {
+            color: #f6ad55;
+        }
+        .demo-output .success {
+            color: #68d391;
+        }
+        .demo-output .info {
+            color: #63b3ed;
+        }
+        .tag-demo {
+            display: inline-block;
+            margin: 0.2rem;
+            padding: 0.2rem 0.8rem;
+            background: #1e293b;
+            border-radius: 0.3rem;
+            transition: all 0.3s ease;
+        }
+        .class-demo {
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.3rem;
+            margin: 0.2rem 0;
+            transition: all 0.3s ease;
+        }
+        .query-demo {
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.3rem;
+            margin: 0.2rem 0;
+            transition: all 0.3s ease;
+        }
+        .query-all-demo {
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.3rem;
+            margin: 0.2rem 0;
+            transition: all 0.3s ease;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin: 0.2rem;
+        }
+        .badge-success {
+            background: #48bb78;
+            color: white;
+        }
+        .badge-info {
+            background: #4299e1;
+            color: white;
+        }
+        .badge-warning {
+            background: #ed8936;
+            color: white;
+        }
+        .badge-purple {
+            background: #9f7aea;
+            color: white;
+        }
+        .badge-danger {
+            background: #e53e3e;
+            color: white;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            background: #0f1625;
+            border-radius: 0.8rem;
+            margin: 0.5rem 0 1rem 0;
+            border: 1px solid #253450;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: #9bb1d0;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid #2d3a5e;
+        }
+        .selected-id {
+            background: #fefcbf !important;
+            border: 3px solid #d69e2e !important;
+        }
+        .selected-tag {
+            background: #bee3f8 !important;
+            border: 3px solid #3182ce !important;
+        }
+        .selected-class {
+            background: #c6f6d5 !important;
+            border: 3px solid #38a169 !important;
+        }
+        .selected-query {
+            background: #e9d8fd !important;
+            border: 3px solid #805ad5 !important;
+        }
+        .selected-all {
+            background: #fed7d7 !important;
+            border: 3px solid #e53e3e !important;
+        }
     </style>
 </head>
 <body>
@@ -308,7 +480,7 @@
             <div class="dot-group" id="dotsPanel"></div>
             <div style="display: flex; gap: 1rem;">
                 <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
-                <span id="counter" style="background:#111827; padding:0.3rem 1rem; border-radius:30px;"><i class="far fa-file"></i> 1 / 18</span>
+                <span id="counter" style="background:#111827; padding:0.3rem 1rem; border-radius:30px;"><i class="far fa-file"></i> 1 / 19</span>
                 <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
@@ -336,6 +508,231 @@
 </div>
 
 <script>
+    // ============================================
+    // DEMONSTRATION FUNCTIONS (Global Scope)
+    // ============================================
+    
+    // DEMONSTRATION 1: getElementById()
+    function demoGetElementById() {
+        const element = document.getElementById('uniqueElement');
+        if (!element) return;
+        
+        // Reset all elements first
+        resetAllDemos();
+        
+        const resultSpan = document.getElementById('idResult');
+        resultSpan.textContent = '✅ Found by ID!';
+        resultSpan.style.color = '#34d399';
+        element.classList.add('selected-id');
+        
+        const output = document.getElementById('outputArea');
+        if (output) {
+            output.innerHTML = 
+                '<span class="success">✅ document.getElementById("uniqueElement")</span>\n' +
+                '<span class="highlight">✓ Element found!</span>\n' +
+                'Element selected: <strong>"' + element.textContent.trim() + '"</strong>\n\n' +
+                '<span class="info">📌 How it works:</span> Searches the entire document for an element with id="uniqueElement" and returns that single element. IDs must be unique!\n\n' +
+                '<span class="info">🔍 Use when:</span> You need to select a specific, unique element on the page.';
+        }
+    }
+
+    // DEMONSTRATION 2: getElementsByTagName()
+    function demoGetElementsByTagName() {
+        const tagResult = document.getElementById('tagResult');
+        if (!tagResult) return;
+        
+        // Reset all elements first
+        resetAllDemos();
+        
+        const paragraphs = tagResult.getElementsByTagName('p');
+        
+        for(let i = 0; i < paragraphs.length; i++) {
+            paragraphs[i].classList.add('selected-tag');
+        }
+        
+        const tagCount = document.getElementById('tagCount');
+        if (tagCount) {
+            tagCount.textContent = paragraphs.length + ' found';
+            tagCount.style.background = '#48bb78';
+        }
+        
+        const output = document.getElementById('outputArea');
+        if (output) {
+            output.innerHTML = 
+                '<span class="success">✅ document.getElementsByTagName("p")</span>\n' +
+                '<span class="highlight">✓ Found ' + paragraphs.length + ' elements!</span>\n' +
+                'Elements selected:\n' + 
+                Array.from(paragraphs).map((p, i) => '  ' + (i+1) + '. "' + p.textContent.trim() + '"').join('\n') + '\n\n' +
+                '<span class="info">📌 How it works:</span> Returns a live HTMLCollection of all elements with the tag name "p".\n\n' +
+                '<span class="info">🔍 Use when:</span> You need to select all elements of a specific type (like all paragraphs, all divs, etc.).';
+        }
+    }
+
+    // DEMONSTRATION 3: getElementsByClassName()
+    function demoGetElementsByClassName() {
+        // Reset all elements first
+        resetAllDemos();
+        
+        const elements = document.getElementsByClassName('class-demo');
+        
+        for(let i = 0; i < elements.length; i++) {
+            elements[i].classList.add('selected-class');
+        }
+        
+        const classCount = document.getElementById('classCount');
+        if (classCount) {
+            classCount.textContent = elements.length + ' found';
+            classCount.style.background = '#48bb78';
+        }
+        
+        const output = document.getElementById('outputArea');
+        if (output) {
+            output.innerHTML = 
+                '<span class="success">✅ document.getElementsByClassName("class-demo")</span>\n' +
+                '<span class="highlight">✓ Found ' + elements.length + ' elements!</span>\n' +
+                'Elements selected:\n' + 
+                Array.from(elements).map((el, i) => '  ' + (i+1) + '. "' + el.textContent.trim() + '"').join('\n') + '\n\n' +
+                '<span class="info">📌 How it works:</span> Returns a live HTMLCollection of all elements with the class "class-demo".\n\n' +
+                '<span class="info">🔍 Use when:</span> You need to select multiple elements that share the same class name.';
+        }
+    }
+
+    // DEMONSTRATION 4: querySelector()
+    function demoQuerySelector() {
+        // Reset all elements first
+        resetAllDemos();
+        
+        const element = document.querySelector('.query-demo');
+        if (!element) return;
+        
+        element.classList.add('selected-query');
+        
+        const queryFirst = document.getElementById('queryFirst');
+        if (queryFirst) {
+            queryFirst.textContent = 'First: ' + element.textContent.trim();
+            queryFirst.style.background = '#9f7aea';
+        }
+        
+        const output = document.getElementById('outputArea');
+        if (output) {
+            output.innerHTML = 
+                '<span class="success">✅ document.querySelector(".query-demo")</span>\n' +
+                '<span class="highlight">✓ First match found!</span>\n' +
+                'Element selected: <strong>"' + element.textContent.trim() + '"</strong>\n\n' +
+                '<span class="info">📌 How it works:</span> Returns the FIRST element that matches the CSS selector ".query-demo".\n\n' +
+                '<span class="info">🔍 Use when:</span> You only need the first matching element and want to use flexible CSS selector syntax.';
+        }
+    }
+
+    // DEMONSTRATION 5: querySelectorAll()
+    function demoQuerySelectorAll() {
+        // Reset all elements first
+        resetAllDemos();
+        
+        const elements = document.querySelectorAll('.query-all-demo');
+        
+        elements.forEach((el, index) => {
+            el.classList.add('selected-all');
+            el.textContent = '🎯 Item ' + (index + 1);
+        });
+        
+        const allCount = document.getElementById('allCount');
+        if (allCount) {
+            allCount.textContent = elements.length + ' found';
+            allCount.style.background = '#48bb78';
+        }
+        
+        const output = document.getElementById('outputArea');
+        if (output) {
+            output.innerHTML = 
+                '<span class="success">✅ document.querySelectorAll(".query-all-demo")</span>\n' +
+                '<span class="highlight">✓ Found ' + elements.length + ' elements!</span>\n' +
+                'Elements selected:\n' + 
+                Array.from(elements).map((el, i) => '  ' + (i+1) + '. "' + el.textContent.trim() + '"').join('\n') + '\n\n' +
+                '<span class="info">📌 How it works:</span> Returns a static NodeList of ALL elements that match the CSS selector ".query-all-demo".\n\n' +
+                '<span class="info">🔍 Use when:</span> You need ALL matching elements and want to use flexible CSS selector syntax.';
+        }
+    }
+
+    // ============================================
+    // RESET FUNCTION
+    // ============================================
+    function resetAllDemos() {
+        // Reset getElementById
+        const idElement = document.getElementById('uniqueElement');
+        if (idElement) {
+            idElement.classList.remove('selected-id', 'selected-tag', 'selected-class', 'selected-query', 'selected-all');
+        }
+        const idResult = document.getElementById('idResult');
+        if (idResult) {
+            idResult.textContent = '🔵 I have a unique ID!';
+            idResult.style.color = '#60a5fa';
+        }
+        
+        // Reset getElementsByTagName
+        const paragraphs = document.querySelectorAll('#tagResult p');
+        paragraphs.forEach(p => {
+            p.classList.remove('selected-id', 'selected-tag', 'selected-class', 'selected-query', 'selected-all');
+        });
+        const tagCount = document.getElementById('tagCount');
+        if (tagCount) {
+            tagCount.textContent = '3 found';
+            tagCount.style.background = '#4299e1';
+        }
+        
+        // Reset getElementsByClassName
+        const classElements = document.getElementsByClassName('class-demo');
+        for(let i = 0; i < classElements.length; i++) {
+            classElements[i].classList.remove('selected-id', 'selected-tag', 'selected-class', 'selected-query', 'selected-all');
+        }
+        const classCount = document.getElementById('classCount');
+        if (classCount) {
+            classCount.textContent = '3 found';
+            classCount.style.background = '#4299e1';
+        }
+        
+        // Reset querySelector
+        const queryElements = document.querySelectorAll('.query-demo');
+        queryElements.forEach((el, index) => {
+            el.classList.remove('selected-id', 'selected-tag', 'selected-class', 'selected-query', 'selected-all');
+            const items = ['🎯 First match - Item A', '🎯 Second match - Item B', '🎯 Third match - Item C'];
+            el.textContent = items[index] || '🎯 Item ' + (index + 1);
+        });
+        const queryFirst = document.getElementById('queryFirst');
+        if (queryFirst) {
+            queryFirst.textContent = 'First: Item A';
+            queryFirst.style.background = '#4299e1';
+        }
+        
+        // Reset querySelectorAll
+        const allElements = document.querySelectorAll('.query-all-demo');
+        const originalTexts = ['🎯 All item 1', '🎯 All item 2', '🎯 All item 3', '🎯 All item 4'];
+        allElements.forEach((el, index) => {
+            el.classList.remove('selected-id', 'selected-tag', 'selected-class', 'selected-query', 'selected-all');
+            el.textContent = originalTexts[index] || '🎯 All item ' + (index + 1);
+        });
+        const allCount = document.getElementById('allCount');
+        if (allCount) {
+            allCount.textContent = '4 found';
+            allCount.style.background = '#4299e1';
+        }
+        
+        const output = document.getElementById('outputArea');
+        if (output) {
+            output.innerHTML = 
+                '💡 All demos reset. Click any button above to see a selector in action.\n\n' +
+                '<span class="info">📌 Quick Reference:</span>\n' +
+                '• <span class="highlight">getElementById</span> - Select by unique ID (yellow)\n' +
+                '• <span class="highlight">getElementsByTagName</span> - Select by tag name (blue)\n' +
+                '• <span class="highlight">getElementsByClassName</span> - Select by class name (green)\n' +
+                '• <span class="highlight">querySelector</span> - Select first match (purple)\n' +
+                '• <span class="highlight">querySelectorAll</span> - Select all matches (red)';
+        }
+    }
+
+    // ============================================
+    // SLIDE DATA
+    // ============================================
     const slides = [
         // Original slides
         {
@@ -400,7 +797,119 @@
             </ul></div><div class="insight"><i class="fas fa-cloud-upload-alt"></i> Submit: Both HTML files + screenshot showing working links in browser.</div>`
         },
 
-        // DOM Content Slides (chronologically integrated)
+        // ============================================
+        // DOM SELECTORS DEMONSTRATION SLIDE
+        // ============================================
+        {
+            title: "<i class='fas fa-code'></i> DOM Selection Methods in Action",
+            subtitle: "Live demo of all 5 selection methods with examples",
+            content: `
+                <div class="demo-container" id="demoContainer">
+                    <h4 style="color: #7aa9ff; margin-bottom: 0.8rem;">🎯 Interactive Demo</h4>
+                    
+                    <!-- Legend -->
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #fefcbf; border-color: #d69e2e;"></div>
+                            <span><strong>getElementById</strong> - by ID</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #bee3f8; border-color: #3182ce;"></div>
+                            <span><strong>getElementsByTagName</strong> - by tag</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #c6f6d5; border-color: #38a169;"></div>
+                            <span><strong>getElementsByClassName</strong> - by class</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #e9d8fd; border-color: #805ad5;"></div>
+                            <span><strong>querySelector</strong> - first match</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #fed7d7; border-color: #e53e3e;"></div>
+                            <span><strong>querySelectorAll</strong> - all matches</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Elements with different identifiers -->
+                    <div id="uniqueElement" class="demo-box">
+                        <h4>📌 <code>id="uniqueElement"</code></h4>
+                        <p>Selected using <code>document.getElementById()</code></p>
+                        <p class="highlight-blue">Text: <span id="idResult">🔵 I have a unique ID!</span></p>
+                        <span class="status-badge badge-info">ID: uniqueElement</span>
+                    </div>
+
+                    <div class="demo-box">
+                        <h4>📌 <code>&lt;p&gt;</code> Tag Name</h4>
+                        <p>Selected using <code>document.getElementsByTagName()</code></p>
+                        <div id="tagResult">
+                            <p class="tag-demo">📝 Paragraph 1</p>
+                            <p class="tag-demo">📝 Paragraph 2</p>
+                            <p class="tag-demo">📝 Paragraph 3</p>
+                        </div>
+                        <span class="status-badge badge-success">Tag: p</span>
+                        <span class="status-badge badge-info" id="tagCount">3 found</span>
+                    </div>
+
+                    <div class="demo-box">
+                        <h4>📌 <code>class="class-demo"</code></h4>
+                        <p>Selected using <code>document.getElementsByClassName()</code></p>
+                        <div id="classResult">
+                            <div class="class-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">📦 Class item 1</div>
+                            <div class="class-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">📦 Class item 2</div>
+                            <div class="class-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">📦 Class item 3</div>
+                        </div>
+                        <span class="status-badge badge-warning">Class: class-demo</span>
+                        <span class="status-badge badge-info" id="classCount">3 found</span>
+                    </div>
+
+                    <div class="demo-box">
+                        <h4>📌 <code>.query-demo</code> (First Match)</h4>
+                        <p>Selected using <code>document.querySelector()</code></p>
+                        <div id="queryResult">
+                            <div class="query-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">🎯 First match - Item A</div>
+                            <div class="query-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">🎯 Second match - Item B</div>
+                            <div class="query-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">🎯 Third match - Item C</div>
+                        </div>
+                        <span class="status-badge badge-purple">Selector: .query-demo</span>
+                        <span class="status-badge badge-info" id="queryFirst">First: Item A</span>
+                    </div>
+
+                    <div class="demo-box">
+                        <h4>📌 <code>.query-all-demo</code> (All Matches)</h4>
+                        <p>Selected using <code>document.querySelectorAll()</code></p>
+                        <div id="allResult">
+                            <div class="query-all-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">🎯 All item 1</div>
+                            <div class="query-all-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">🎯 All item 2</div>
+                            <div class="query-all-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">🎯 All item 3</div>
+                            <div class="query-all-demo" style="background: #1e293b; padding: 0.3rem 0.8rem; border-radius: 0.3rem; margin: 0.2rem 0;">🎯 All item 4</div>
+                        </div>
+                        <span class="status-badge badge-danger">Selector: .query-all-demo</span>
+                        <span class="status-badge badge-info" id="allCount">4 found</span>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <div style="margin: 1rem 0;">
+                        <h4 style="color: #7aa9ff; margin-bottom: 0.5rem;">🔄 Click to Test Each Selector</h4>
+                        <div class="btn-group">
+                            <button onclick="demoGetElementById()" style="border-color: #d69e2e;">🎯 getElementById</button>
+                            <button onclick="demoGetElementsByTagName()" style="border-color: #3182ce;">🏷️ getElementsByTagName</button>
+                            <button onclick="demoGetElementsByClassName()" style="border-color: #38a169;">📋 getElementsByClassName</button>
+                            <button onclick="demoQuerySelector()" style="border-color: #805ad5;">🔍 querySelector</button>
+                            <button onclick="demoQuerySelectorAll()" style="border-color: #e53e3e;">📚 querySelectorAll</button>
+                            <button onclick="resetAllDemos()" style="border-color: #ef4444;">🔄 Reset All</button>
+                        </div>
+                    </div>
+
+                    <!-- Output Area -->
+                    <div class="demo-output" id="outputArea">
+                        💡 Click any button above to see each selector in action.\nThe selected elements will be highlighted and explained here.\n\n<span class="info">📌 Quick Reference:</span>\n• <span class="highlight">getElementById</span> - Select by unique ID (yellow)\n• <span class="highlight">getElementsByTagName</span> - Select by tag name (blue)\n• <span class="highlight">getElementsByClassName</span> - Select by class name (green)\n• <span class="highlight">querySelector</span> - Select first match (purple)\n• <span class="highlight">querySelectorAll</span> - Select all matches (red)
+                    </div>
+                </div>
+            `
+        },
+
+        // DOM Content Slides
         {
             title: "<i class='fas fa-code'></i> Introduction to the HTML DOM",
             subtitle: "What is the Document Object Model?",
@@ -562,6 +1071,9 @@
         }
     ];
 
+    // ============================================
+    // SLIDE NAVIGATION
+    // ============================================
     let current = 0;
     const container = document.getElementById('slideContainer');
     const prevBtn = document.getElementById('prevBtn');
@@ -595,6 +1107,17 @@
         if (e.key === 'ArrowLeft') prevBtn.click();
     });
     renderSlide(0);
+
+    // Log instructions to console
+    console.log('🎯 DOM Selectors Demo Loaded!');
+    console.log('📌 Navigate to the "DOM Selection Methods in Action" slide to test the selectors.');
+    console.log('📌 Keyboard Shortcuts on the demo slide:');
+    console.log('  1 - getElementById');
+    console.log('  2 - getElementsByTagName');
+    console.log('  3 - getElementsByClassName');
+    console.log('  4 - querySelector');
+    console.log('  5 - querySelectorAll');
+    console.log('  0 - Reset All');
 </script>
 </body>
 </html>
