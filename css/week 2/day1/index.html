@@ -2,23 +2,1197 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>CSS · Complete Lesson · All Topics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #0b0f1c 0%, #111827 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+        .curriculum-header {
+            max-width: 1300px; margin: 0 auto 1rem auto;
+            background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 1.5rem; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 1rem;
+            border: 1px solid #334155; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
+        }
+        .badge { background: #8b5cf6; padding: 0.3rem 1rem; border-radius: 40px; font-size: 0.8rem; font-weight: bold; color: white; }
+        .class-title { font-size: 1.3rem; font-weight: 600; color: #e2e8f0; }
+        .duration { color: #94a3b8; font-size: 0.85rem; }
+        .class-nav-buttons { display: flex; gap: 0.8rem; margin-left: auto; }
+        .class-nav-btn {
+            background: #1e293b; border: 1px solid #8b5cf6; padding: 0.4rem 1rem;
+            border-radius: 2rem; font-size: 0.8rem; font-weight: 600; color: #e2e8f0;
+            cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.4rem;
+            text-decoration: none;
+        }
+        .class-nav-btn:hover { background: #8b5cf6; transform: scale(0.98); }
+        .class-nav-btn i { font-size: 0.8rem; }
+
+        .presentation-container {
+            max-width: 1300px; margin: 0 auto;
+            background: rgba(255,255,255,0.02); border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+            overflow: hidden;
+        }
+        .slide-area { min-height: 600px; background: #0f1119; padding: 2rem; }
+        .slide-card {
+            background: rgba(22, 26, 38, 0.96); backdrop-filter: blur(4px);
+            border-radius: 2rem; padding: 2rem 2.2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+        }
+        .slide-title {
+            font-size: 2rem; font-weight: 700;
+            background: linear-gradient(135deg, #c4b5fd, #a78bfa, #8b5cf6);
+            background-clip: text; -webkit-background-clip: text; color: transparent;
+            margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.8rem;
+            border-left: 5px solid #a78bfa; padding-left: 1.2rem;
+        }
+        .slide-title i { background: none; -webkit-background-clip: unset; color: #a78bfa; font-size: 1.8rem; }
+        .slide-sub { color: #a0afc9; margin-bottom: 1.5rem; font-size: 0.95rem; border-left: 5px solid #a78bfa; padding-left: 1.2rem; }
+        .content-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; }
+        .concept-box {
+            flex: 1; min-width: 240px; background: #1a1f2e; border-radius: 1.5rem;
+            padding: 1.3rem; border: 1px solid #334155; transition: all 0.2s;
+        }
+        .concept-box:hover { border-color: #a78bfa; transform: translateY(-2px); }
+        .concept-box h3 { color: #a78bfa; font-size: 1.3rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+        .concept-box h3 i { color: #c4b5fd; }
+        .concept-box p, .concept-box li { color: #e2e8f0; line-height: 1.55; font-size: 0.95rem; }
+        .highlight { color: #fcd34d; font-weight: 600; }
+        .tag { background: #1e293b; padding: 0.25rem 0.9rem; border-radius: 30px; font-size: 0.75rem; font-family: monospace; color: #c4b5fd; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .insight-card {
+            margin-top: 1.2rem; background: #0f172a; padding: 0.9rem 1.2rem;
+            border-radius: 1rem; display: flex; align-items: center; flex-wrap: wrap;
+            gap: 0.6rem; color: #e2e8f0; border-left: 3px solid #a78bfa;
+        }
+        .two-column-split { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0; }
+        .col { flex: 1; background: #131a2a; border-radius: 1.2rem; padding: 1.2rem; border: 1px solid #2d3a5e; }
+        .col h4 { color: #fcd34d; margin-bottom: 0.8rem; font-size: 1.2rem; }
+        .col h4 i { margin-right: 0.5rem; color: #a78bfa; }
+        .col p, .col li { color: #e2e8f0; line-height: 1.6; }
+        pre {
+            background: #0a0e18; padding: 1rem; border-radius: 1rem; overflow-x: auto;
+            font-size: 0.8rem; color: #e2e8f0; margin: 0.8rem 0;
+            border: 1px solid #334155; font-family: 'Fira Code', monospace;
+            white-space: pre-wrap; word-break: break-word;
+        }
+        code { font-family: 'Fira Code', monospace; color: #cbd5e6; }
+        .color-swatch {
+            width: 80px; height: 80px; border-radius: 1rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 600; color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            border: 1px solid #334155;
+        }
+        .color-demo { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0.8rem 0; }
+        .bg-demo { padding: 1.5rem; border-radius: 1rem; margin: 0.5rem 0; color: #e2e8f0; }
+        .nav-bar {
+            background: #0b0e16; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid #2a2f3f; flex-wrap: wrap; gap: 0.8rem;
+        }
+        .nav-buttons { display: flex; gap: 1rem; }
+        button {
+            background: #1e2a3a; border: none; font-size: 1rem; font-weight: 600;
+            padding: 0.5rem 1.5rem; border-radius: 2rem; color: #e2e8f0;
+            cursor: pointer; transition: 0.2s; display: flex; align-items: center;
+            gap: 0.5rem; font-family: inherit; border: 1px solid #334155;
+        }
+        button i { font-size: 0.9rem; }
+        button:hover:not(:disabled) { background: #2d3a4e; transform: scale(0.97); border-color: #a78bfa; }
+        button:disabled { opacity: 0.4; cursor: not-allowed; }
+        .slide-counter { font-size: 0.9rem; background: #1a1f2c; padding: 0.4rem 1rem; border-radius: 2rem; color: #c4b5fd; }
+        .indicator-dots { display: flex; gap: 0.5rem; }
+        .dot { width: 8px; height: 8px; background: #334155; border-radius: 10px; transition: 0.2s; }
+        .dot.active { background: #a78bfa; width: 22px; }
+        footer {
+            font-size: 0.7rem; text-align: center; padding: 0.7rem;
+            background: #07090f; color: #8ca3c7;
+        }
+        footer i { color: #a78bfa; }
+        footer a { color: #a78bfa; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .error-example {
+            border-left: 4px solid #ef4444;
+            padding: 0.8rem 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .good-example {
+            border-left: 4px solid #22c55e;
+            padding: 0.8rem 1rem;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .border-demo {
+            padding: 1rem; margin: 0.5rem 0; border-radius: 0.3rem;
+            background: #1a1f2e; color: #e2e8f0;
+        }
+        .qa-section {
+            margin-top: 1.5rem; background: #0f172a; border-radius: 1.5rem; padding: 1.5rem; border: 1px solid #334155;
+        }
+        .qa-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.8rem;
+        }
+        .qa-title { font-size: 1.5rem; font-weight: 700; color: #fcd34d; display: flex; align-items: center; gap: 0.8rem; }
+        .qa-title i { color: #a78bfa; }
+        .qa-stats { display: flex; gap: 1.5rem; font-size: 0.9rem; color: #94a3b8; }
+        .qa-stats span { display: flex; align-items: center; gap: 0.4rem; }
+        .qa-stats i { color: #a78bfa; }
+        .qa-item {
+            background: #131b2e; border-radius: 1rem; margin-bottom: 0.8rem; overflow: hidden; border: 1px solid #2d3a5e;
+            transition: all 0.3s ease;
+        }
+        .qa-item:hover { border-color: #a78bfa; }
+        .qa-question {
+            padding: 1rem 1.2rem; background: #1a2338; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; color: #e2e8f0; transition: background 0.2s; gap: 1rem;
+        }
+        .qa-question:hover { background: #25334d; }
+        .qa-question .q-number {
+            display: inline-block; background: #8b5cf6; color: white; border-radius: 50%;
+            width: 28px; height: 28px; text-align: center; line-height: 28px; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
+        }
+        .qa-question .q-text { flex: 1; }
+        .qa-question i { color: #a78bfa; transition: transform 0.3s; flex-shrink: 0; }
+        .qa-answer {
+            padding: 0 1.2rem; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+            background: #0f172a; color: #cbd5e6; line-height: 1.6; opacity: 0;
+        }
+        .qa-answer.show { padding: 1.2rem 1.2rem; max-height: 400px; opacity: 1; }
+        .qa-answer p { margin: 0; color: #cbd5e6; border-left: 3px solid #22c55e; padding-left: 1rem; }
+        .qa-answer .answer-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #22c55e; font-weight: 700; margin-bottom: 0.3rem; }
+        .qa-item.completed .qa-question { background: #1a2a3a; }
+        .qa-item.completed .qa-question .q-number { background: #22c55e; }
+        .qa-footer { margin-top: 1.2rem; text-align: center; font-size: 0.85rem; color: #94a3b8; }
+        .qa-footer i { color: #fcd34d; }
+
+        @media (max-width: 700px) {
+            .slide-area { padding: 1rem; }
+            .slide-title { font-size: 1.4rem; }
+            .concept-box { min-width: 100%; }
+            .two-column-split { flex-direction: column; }
+            .class-nav-buttons { margin-left: 0; margin-top: 0.5rem; }
+            .curriculum-header { flex-direction: column; text-align: center; }
+            .color-swatch { width: 60px; height: 60px; }
+            .qa-header { flex-direction: column; align-items: flex-start; }
+            .qa-stats { flex-wrap: wrap; }
+        }
+    </style>
 </head>
-<body >
-
-    <h1 >The CSS background properties are used to add background effects for elements.</h1>
-
-    <div class="parent1"> 
-        <div id="parent2">
-            <div id="parent3"> 
-                <div id="parent4">
-                    
-                </div>
-            </div>
+<body>
+<div class="curriculum-header">
+    <div><span class="badge"><i class="fas fa-calendar-alt"></i> CSS · COMPLETE LESSON</span></div>
+    <div class="class-title"><i class="fab fa-css3-alt"></i> CSS: Syntax · Selectors · Colors · Backgrounds · Box Model</div>
+    <div class="duration"><i class="far fa-clock"></i> 3 Hours · Master CSS Fundamentals</div>
+    <div class="class-nav-buttons">
+        <a href="#" class="class-nav-btn"><i class="fas fa-arrow-left"></i> Prev</a>
+        <a href="#" class="class-nav-btn"><i class="fas fa-arrow-right"></i> Next →</a>
+    </div>
+</div>
+<div class="presentation-container">
+    <div class="slide-area" id="slideArea"></div>
+    <div class="nav-bar">
+        <div class="indicator-dots" id="dotsContainer"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+            <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 16</span>
+            <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
         </div>
-     </div>
-    
+    </div>
+    <footer>
+        <i class="fab fa-css3-alt"></i> CSS · Syntax · Selectors · Colors · Backgrounds · Borders · Margins · Padding · Box Model
+        <span style="margin-left:1rem;">| <a href="#"><i class="fas fa-arrow-left"></i> Prev</a> | <a href="#">Next <i class="fas fa-arrow-right"></i></a></span>
+    </footer>
+</div>
+
+<script>
+    const slides = [
+        {
+            title: "<i class='fas fa-code'></i> CSS Syntax",
+            subtitle: "CSS rule structure and declarations",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-cog"></i> CSS Rule Structure</h4>
+                        <p>A CSS rule consists of a <span class="highlight">selector</span> and a <span class="highlight">declaration block</span>.</p>
+                        <pre><code>selector {
+  property: value;
+  property: value;
+}</code></pre>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>p {
+  color: red;
+  text-align: center;
+}</code></pre>
+                        <p><strong>Example Explained:</strong></p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><span class="highlight">p</span> is a selector (it points to the HTML element: &lt;p&gt;)</li>
+                            <li><span class="highlight">color</span> is a property, <span class="highlight">red</span> is the property value</li>
+                            <li><span class="highlight">text-align</span> is a property, <span class="highlight">center</span> is the property value</li>
+                        </ul>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-notes-medical"></i> CSS Comments</h4>
+                        <p>Comments are used to explain the CSS code, and may help when you edit the source code at a later date.</p>
+                        <p>Comments are also used to temporarily disable sections of CSS code within a stylesheet.</p>
+                        <p>Comments are <span class="highlight">ignored by browsers</span>!</p>
+                        <pre><code>/* This is a single-line comment */
+p {
+  color: red;
+}
+
+p {
+  color: red;  /* Set text color to red */
+}
+
+/* This is
+a multi-line
+comment */
+
+p {
+  color: /*red*/blue; 
+}</code></pre>
+                        <p><span class="highlight">💡</span> You can also use HTML comments: <code>&lt;!-- This is an HTML comment --&gt;</code></p>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Key takeaway:</strong> CSS rules are made of selectors and declarations. Comments help keep code maintainable and explain your logic.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-mouse-pointer'></i> CSS Simple Selectors",
+            subtitle: "Element, ID, Class, Universal, and Grouping",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-tag"></i> The CSS element Selector</h3>
+                        <p>The element selector selects HTML elements based on the element name.</p>
+                        <p><strong>Example:</strong> Here, all &lt;p&gt; elements on the page will be center-aligned, with a red text color:</p>
+                        <pre><code>p {
+  text-align: center;
+  color: red;
+}</code></pre>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-hashtag"></i> The CSS id Selector</h3>
+                        <p>The id selector uses the <span class="highlight">id</span> attribute of an HTML element to select a specific element.</p>
+                        <p>The id of an element is <span class="highlight">unique within a page</span>, so the id selector is used to select one unique element!</p>
+                        <p>To select an element with a specific id, write a hash <span class="highlight">(#)</span> character, followed by the id of the element.</p>
+                        <pre><code>#para1 {
+  text-align: center;
+  color: red;
+}</code></pre>
+                        <p><span class="highlight">⚠️</span> An id name cannot start with a number!</p>
+                    </div>
+                </div>
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-circle"></i> The CSS class Selector</h3>
+                        <p>The class selector selects HTML elements with a specific <span class="highlight">class</span> attribute.</p>
+                        <p>To select elements with a specific class, write a period <span class="highlight">(.)</span> character, followed by the class name.</p>
+                        <pre><code>.center {
+  text-align: center;
+  color: red;
+}</code></pre>
+                        <p>You can also specify that only specific HTML elements should be affected by a class.</p>
+                        <pre><code>p.center {
+  text-align: center;
+  color: red;
+}</code></pre>
+                        <p>HTML elements can also refer to <span class="highlight">more than one class</span>.</p>
+                        <pre><code>&lt;p class="center large"&gt;This paragraph refers to two classes.&lt;/p&gt;</code></pre>
+                        <p><span class="highlight">⚠️</span> A class name cannot start with a number!</p>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-asterisk"></i> Universal & Grouping</h3>
+                        <p><strong>The CSS Universal Selector:</strong> The universal selector <span class="highlight">(*)</span> selects all HTML elements on the page.</p>
+                        <pre><code>* {
+  text-align: center;
+  color: blue;
+}</code></pre>
+                        <p><strong>The CSS Grouping Selector:</strong> The grouping selector selects all the HTML elements with the same style definitions.</p>
+                        <pre><code>h1, h2, p {
+  text-align: center;
+  color: red;
+}</code></pre>
+                        <p>To group selectors, <span class="highlight">separate each selector with a comma</span>.</p>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-table"></i> <strong>Selector reference:</strong> #id, .class, element, *, element,element</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-palette'></i> CSS Colors",
+            subtitle: "Color names, RGB, HEX, HSL, RGBA, HSLA",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-swatchbook"></i> Color Formats</h4>
+                        <p>In CSS, colors can be specified by using a <span class="highlight">predefined color name</span>, or with a RGB, HEX, HSL, RGBA, HSLA value.</p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>Color names:</strong> <span style="color:tomato;">Tomato</span>, <span style="color:orange;">Orange</span>, <span style="color:dodgerblue;">DodgerBlue</span>, <span style="color:mediumseagreen;">MediumSeaGreen</span></li>
+                            <li><strong>HEX:</strong> <span style="color:#ff6347;">#ff6347</span>, <span style="color:#3cb371;">#3cb371</span>, <span style="color:#6a5acd;">#6a5acd</span></li>
+                            <li><strong>RGB:</strong> <span style="color:rgb(255,99,71);">rgb(255,99,71)</span>, <span style="color:rgb(60,179,113);">rgb(60,179,113)</span></li>
+                            <li><strong>RGBA:</strong> <span style="color:rgba(255,99,71,0.6);">rgba(255,99,71,0.6)</span></li>
+                            <li><strong>HSL:</strong> <span style="color:hsl(9,100%,64%);">hsl(9,100%,64%)</span></li>
+                            <li><strong>HSLA:</strong> <span style="color:hsla(9,100%,64%,0.5);">hsla(9,100%,64%,0.5)</span></li>
+                        </ul>
+                        <p><span class="highlight">CSS/HTML support 140 standard color names.</span></p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-swatchbook"></i> Color Demos</h4>
+                        <div class="color-demo">
+                            <div class="color-swatch" style="background:tomato;">Tomato</div>
+                            <div class="color-swatch" style="background:#ff6347;">#ff6347</div>
+                            <div class="color-swatch" style="background:rgb(255,99,71);">RGB</div>
+                            <div class="color-swatch" style="background:rgba(106,90,205,0.7);">RGBA</div>
+                            <div class="color-swatch" style="background:hsl(240,100%,50%);">HSL</div>
+                            <div class="color-swatch" style="background:hsla(300,76%,72%,0.8);">HSLA</div>
+                        </div>
+                        <pre><code>/* Examples */\nbody { color: #333; }\nh1 { color: rgb(255, 99, 71); }\np { color: rgba(0, 128, 0, 0.7); }</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-gem"></i> <strong>Pro tip:</strong> Use HEX for simplicity, RGBA for transparency, HSL for intuitive color adjustments.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-swatchbook'></i> HSL Colors Explained",
+            subtitle: "Hue, Saturation, Lightness",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-sliders-h"></i> HSL Value</h4>
+                        <p>HSL stands for <span class="highlight">hue, saturation, and lightness</span>.</p>
+                        <pre><code>hsl(hue, saturation, lightness)</code></pre>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>Hue</strong> is a degree on the color wheel (0-360): 0 = red, 120 = green, 240 = blue</li>
+                            <li><strong>Saturation</strong> is a percentage: 0% = gray, 100% = full color</li>
+                            <li><strong>Lightness</strong> is a percentage: 0% = black, 50% = normal, 100% = white</li>
+                        </ul>
+                        <pre><code>hsl(0, 100%, 50%)  /* red */
+hsl(240, 100%, 50%) /* blue */
+hsl(147, 50%, 47%)  /* green */
+hsl(300, 76%, 72%)  /* pink */
+hsl(39, 100%, 50%)  /* orange */
+hsl(248, 53%, 58%)  /* purple */</code></pre>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-eye"></i> Saturation & Lightness</h4>
+                        <p><strong>Saturation examples (hue=0, lightness=50%):</strong></p>
+                        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin:0.5rem 0;">
+                            <div style="width:50px; height:40px; background:hsl(0,100%,50%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,80%,50%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,60%,50%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,40%,50%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,20%,50%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,0%,50%); border-radius:0.3rem;"></div>
+                        </div>
+                        <p><strong>Lightness examples (hue=0, saturation=100%):</strong></p>
+                        <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin:0.5rem 0;">
+                            <div style="width:50px; height:40px; background:hsl(0,100%,0%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,100%,25%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,100%,50%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,100%,75%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,100%,90%); border-radius:0.3rem;"></div>
+                            <div style="width:50px; height:40px; background:hsl(0,100%,100%); border-radius:0.3rem;"></div>
+                        </div>
+                        <p><strong>Shades of gray:</strong> Set hue and saturation to 0, adjust lightness.</p>
+                        <pre><code>hsl(0, 0%, 0%)   /* black */
+hsl(0, 0%, 24%)  /* dark gray */
+hsl(0, 0%, 47%)  /* gray */
+hsl(0, 0%, 71%)  /* light gray */
+hsl(0, 0%, 94%)  /* very light gray */
+hsl(0, 0%, 100%) /* white */</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>HSLA</strong> adds an alpha channel: <span class="highlight">hsla(hue, saturation, lightness, alpha)</span> where alpha is 0.0 to 1.0.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-hexagon'></i> HEX & RGB Colors",
+            subtitle: "HEX, RGB, and RGBA values",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-hashtag"></i> HEX Value</h4>
+                        <p>A hexadecimal color is specified with: <span class="highlight">#RRGGBB</span></p>
+                        <p>Where rr (red), gg (green) and bb (blue) are hexadecimal values between 00 and ff (same as decimal 0-255).</p>
+                        <pre><code>#ff0000  /* red */
+#0000ff  /* blue */
+#3cb371  /* green */
+#ee82ee  /* pink */
+#ffa500  /* orange */
+#6a5acd  /* purple */</code></pre>
+                        <p><strong>Shades of gray:</strong> Equal values for all three.</p>
+                        <pre><code>#3c3c3c  /* dark gray */
+#616161  /* gray */
+#787878  /* gray */
+#b4b4b4  /* light gray */
+#f0f0f0  /* very light gray */
+#f9f9f9  /* almost white */</code></pre>
+                        <p><strong>3 Digit HEX Value:</strong> Shorthand for some 6-digit hex codes.</p>
+                        <pre><code>#fc9 /* same as #ffcc99 */
+#f0f /* same as #ff00ff */
+#b58 /* same as #bb5588 */</code></pre>
+                        <p><span class="highlight">💡</span> The 3-digit hex code can only be used when both values (RR, GG, and BB) are the same.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-sliders-h"></i> RGB & RGBA</h4>
+                        <p><strong>RGB Value:</strong> rgb(red, green, blue) where each is 0-255.</p>
+                        <pre><code>rgb(255, 0, 0)    /* red */
+rgb(0, 0, 255)    /* blue */
+rgb(60, 179, 113) /* green */
+rgb(238, 130, 238) /* pink */
+rgb(255, 165, 0)  /* orange */
+rgb(106, 90, 205) /* purple */</code></pre>
+                        <p><strong>Shades of gray:</strong> Equal values for all three.</p>
+                        <pre><code>rgb(60, 60, 60)   /* dark gray */
+rgb(90, 90, 90)   /* gray */
+rgb(120, 120, 120) /* gray */
+rgb(180, 180, 180) /* light gray */
+rgb(210, 210, 210) /* light gray */
+rgb(240, 240, 240) /* very light gray */</code></pre>
+                        <p><strong>RGBA Value:</strong> Adds alpha channel for opacity.</p>
+                        <pre><code>rgba(255, 99, 71, 0)   /* fully transparent */
+rgba(255, 99, 71, 0.2) /* 20% opacity */
+rgba(255, 99, 71, 0.4) /* 40% opacity */
+rgba(255, 99, 71, 0.6) /* 60% opacity */
+rgba(255, 99, 71, 0.8) /* 80% opacity */
+rgba(255, 99, 71, 1)   /* fully opaque */</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-gem"></i> <strong>Quick reference:</strong> #ff0000 = rgb(255,0,0) = red. #000000 = rgb(0,0,0) = black. #ffffff = rgb(255,255,255) = white.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-image'></i> CSS Backgrounds",
+            subtitle: "Background color, image, repeat, and position",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-fill-drip"></i> Background Color</h4>
+                        <p>The <span class="highlight">background-color</span> property specifies the background color of an element.</p>
+                        <pre><code>body {
+  background-color: lightblue;
+}</code></pre>
+                        <p>You can set the background color for any HTML elements:</p>
+                        <pre><code>h1 {
+  background-color: green;
+}
+
+div {
+  background-color: lightblue;
+}
+
+p {
+  background-color: yellow;
+}</code></pre>
+                        <p><strong>Opacity / Transparency:</strong> The <span class="highlight">opacity</span> property specifies the opacity/transparency of an element. It can take a value from 0.0 - 1.0.</p>
+                        <pre><code>div {
+  background-color: green;
+  opacity: 0.3;
+}</code></pre>
+                        <p><span class="highlight">⚠️</span> When using the opacity property to add transparency to the background of an element, all of its child elements inherit the same transparency.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-eye"></i> Transparency using RGBA</h4>
+                        <p>If you do not want to apply opacity to child elements, use <span class="highlight">RGBA</span> color values.</p>
+                        <pre><code>div {
+  background: rgba(0, 128, 0, 0.3); /* Green background with 30% opacity */
+}</code></pre>
+                        <p><span class="highlight">✅</span> RGBA only affects the background, not the text.</p>
+                        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin:0.5rem 0;">
+                            <div style="background:rgba(0,128,0,1); padding:0.5rem 1rem; border-radius:0.3rem; color:white;">100% opacity</div>
+                            <div style="background:rgba(0,128,0,0.6); padding:0.5rem 1rem; border-radius:0.3rem; color:white;">60% opacity</div>
+                            <div style="background:rgba(0,128,0,0.3); padding:0.5rem 1rem; border-radius:0.3rem; color:white;">30% opacity</div>
+                            <div style="background:rgba(0,128,0,0.1); padding:0.5rem 1rem; border-radius:0.3rem; color:white;">10% opacity</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Pro tip:</strong> Use RGBA for transparency when you want the text to remain fully readable.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-image'></i> CSS Background Image",
+            subtitle: "background-image, background-repeat, background-position",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-image"></i> Background Image</h4>
+                        <p>The <span class="highlight">background-image</span> property specifies an image to use as the background of an element.</p>
+                        <p>By default, the image is repeated so it covers the entire element.</p>
+                        <pre><code>body {
+  background-image: url("paper.gif");
+}</code></pre>
+                        <p><span class="highlight">⚠️</span> When using a background image, use an image that does not disturb the text.</p>
+                        <p>The background image can also be set for specific elements, like the &lt;p&gt; element:</p>
+                        <pre><code>p {
+  background-image: url("paper.gif");
+}</code></pre>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-arrows-repeat"></i> Background Repeat</h4>
+                        <p>The <span class="highlight">background-repeat</span> property sets if/how a background image will be repeated.</p>
+                        <p>By default, a background-image is repeated both vertically and horizontally.</p>
+                        <p><strong>Repeat Horizontally:</strong></p>
+                        <pre><code>body {
+  background-image: url("gradient_bg.png");
+  background-repeat: repeat-x;
+}</code></pre>
+                        <p><strong>No Repeat:</strong></p>
+                        <pre><code>body {
+  background-image: url("img_tree.png");
+  background-repeat: no-repeat;
+}</code></pre>
+                        <p><span class="highlight">💡</span> Use <strong>repeat-x</strong> for horizontal gradients, <strong>repeat-y</strong> for vertical, <strong>no-repeat</strong> for logos.</p>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Pro tip:</strong> Use <span class="highlight">background-position</span> with no-repeat to place the image where you want it.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-thumbtack'></i> Background Position & Attachment",
+            subtitle: "position, attachment, and shorthand",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-arrows-alt"></i> Background Position</h4>
+                        <p>The <span class="highlight">background-position</span> property is used to set the starting position of the background image.</p>
+                        <p>By default, a background-image is placed at the top-left corner of an element.</p>
+                        <pre><code>body {
+  background-image: url("img_tree.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+}</code></pre>
+                        <p>Values can be: <span class="highlight">left, right, top, bottom, center</span>, or percentages.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-link"></i> Background Attachment</h4>
+                        <p>The <span class="highlight">background-attachment</span> property specifies whether the background image should scroll or be fixed.</p>
+                        <p><strong>Fixed:</strong> The background image will not scroll with the rest of the page.</p>
+                        <pre><code>body {
+  background-image: url("img_tree.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+}</code></pre>
+                        <p><strong>Scroll:</strong> The background image will scroll with the rest of the page (default).</p>
+                        <pre><code>body {
+  background-image: url("img_tree.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: scroll;
+}</code></pre>
+                    </div>
+                </div>
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-shortcode"></i> Background Shorthand</h4>
+                        <p>To shorten the code, it is possible to specify all the background properties in one single property. This is called a <span class="highlight">shorthand property</span>.</p>
+                        <p><strong>Instead of writing:</strong></p>
+                        <pre><code>body {
+  background-color: #ffffff;
+  background-image: url("img_tree.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+}</code></pre>
+                        <p><strong>You can use the shorthand property:</strong></p>
+                        <pre><code>body {
+  background: #ffffff url("img_tree.png") no-repeat right top;
+}</code></pre>
+                        <p><span class="highlight">📋</span> Order: color image repeat position attachment</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-list"></i> All Background Properties</h4>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>background</strong> — Sets all in one declaration</li>
+                            <li><strong>background-attachment</strong> — Fixed or scroll</li>
+                            <li><strong>background-clip</strong> — Painting area</li>
+                            <li><strong>background-color</strong> — Background color</li>
+                            <li><strong>background-image</strong> — Background image</li>
+                            <li><strong>background-origin</strong> — Position area</li>
+                            <li><strong>background-position</strong> — Starting position</li>
+                            <li><strong>background-repeat</strong> — Repeat behavior</li>
+                            <li><strong>background-size</strong> — Size of the image</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-rocket"></i> <strong>Efficiency tip:</strong> Use the <span class="highlight">background</span> shorthand to reduce code and improve readability.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-border-all'></i> CSS Borders",
+            subtitle: "Border style, width, color, and rounded borders",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-border-style"></i> Border Style</h4>
+                        <p>The <span class="highlight">border-style</span> property specifies what kind of border to display.</p>
+                        <p>Allowed values: <span class="highlight">dotted, dashed, solid, double, groove, ridge, inset, outset, none, hidden</span></p>
+                        <pre><code>p.dotted { border-style: dotted; }
+p.dashed { border-style: dashed; }
+p.solid { border-style: solid; }
+p.double { border-style: double; }
+p.groove { border-style: groove; }
+p.ridge { border-style: ridge; }
+p.inset { border-style: inset; }
+p.outset { border-style: outset; }
+p.none { border-style: none; }
+p.hidden { border-style: hidden; }
+p.mix { border-style: dotted dashed solid double; }</code></pre>
+                        <p><span class="highlight">⚠️</span> None of the other CSS border properties will have ANY effect unless the <strong>border-style</strong> property is set!</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-palette"></i> Border Color & Width</h4>
+                        <p><strong>Border Color:</strong> The <span class="highlight">border-color</span> property sets the color of the four borders.</p>
+                        <p>Color can be set by: <span class="highlight">name, HEX, RGB, HSL, transparent</span></p>
+                        <pre><code>p.one {
+  border-style: solid;
+  border-color: red;
+}</code></pre>
+                        <p><strong>Border Width:</strong> The <span class="highlight">border-width</span> property specifies the width of the four borders.</p>
+                        <p>Values: <span class="highlight">thin, medium, thick, or specific size (px, pt, cm)</span></p>
+                        <pre><code>p.one {
+  border-style: solid;
+  border-width: 5px;
+}</code></pre>
+                        <p><strong>Rounded Borders:</strong> The <span class="highlight">border-radius</span> property adds rounded borders.</p>
+                        <pre><code>p {
+  border: 2px solid red;
+  border-radius: 5px;
+}</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-gem"></i> <strong>Pro tip:</strong> Use <span class="highlight">border-radius</span> for modern, rounded designs. Always set border-style first!</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-border-all'></i> CSS Border Sides & Shorthand",
+            subtitle: "Individual sides and shorthand properties",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-arrows-alt-h'></i> Individual Sides</h4>
+                        <p>CSS has properties for specifying each of the borders (top, right, bottom, and left):</p>
+                        <pre><code>border-top-style
+border-right-style
+border-bottom-style
+border-left-style</code></pre>
+                        <p><strong>Example:</strong></p>
+                        <pre><code>p {
+  border-top-style: dotted;
+  border-right-style: solid;
+  border-bottom-style: dotted;
+  border-left-style: solid;
+}</code></pre>
+                        <p><strong>Shorthand for border-style:</strong></p>
+                        <pre><code>/* Four values: top, right, bottom, left */
+p { border-style: dotted solid double dashed; }
+
+/* Two values: top/bottom, right/left */
+p { border-style: dotted solid; }
+
+/* One value: all four sides */
+p { border-style: dotted; }</code></pre>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-shortcode"></i> Border Shorthand</h4>
+                        <p>The <span class="highlight">border</span> property is a shorthand for:</p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li>border-width</li>
+                            <li>border-style <span class="highlight">(required)</span></li>
+                            <li>border-color</li>
+                        </ul>
+                        <pre><code>p {
+  border: 5px solid red;
+}</code></pre>
+                        <p><strong>Specific side shorthand:</strong></p>
+                        <pre><code>/* Left border */
+p { border-left: 6px solid red; }
+
+/* Bottom border */
+p { border-bottom: 6px solid red; }</code></pre>
+                        <p><strong>Border radius shorthand:</strong></p>
+                        <pre><code>p {
+  border: 2px solid red;
+  border-radius: 5px;  /* 10px, 50%, etc. */
+}</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Remember:</strong> The border shorthand requires <span class="highlight">border-style</span> to work. Order doesn't matter: width style color.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrows-alt-h'></i> CSS Margins",
+            subtitle: "Creating space around elements",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-arrows-alt'></i> Margin Properties</h4>
+                        <p>The CSS margin properties are used to create space around elements, <span class="highlight">outside of any defined borders</span>.</p>
+                        <p>CSS has properties for specifying the margin for each side of an element:</p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>margin-top</strong> — sets the top margin</li>
+                            <li><strong>margin-right</strong> — sets the right margin</li>
+                            <li><strong>margin-bottom</strong> — sets the bottom margin</li>
+                            <li><strong>margin-left</strong> — sets the left margin</li>
+                        </ul>
+                        <pre><code>p {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}</code></pre>
+                        <p>Values: <span class="highlight">auto, length (px, pt, cm), %, inherit</span></p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-shortcode"></i> Margin Shorthand</h4>
+                        <p>The <span class="highlight">margin</span> property is a shorthand for all four margins.</p>
+                        <pre><code>/* Four values: top, right, bottom, left */
+p { margin: 25px 50px 75px 100px; }
+
+/* Three values: top, right/left, bottom */
+p { margin: 25px 50px 75px; }
+
+/* Two values: top/bottom, right/left */
+p { margin: 25px 50px; }
+
+/* One value: all four sides */
+p { margin: 25px; }</code></pre>
+                        <p><strong>The auto Value:</strong> Horizontally center an element within its container.</p>
+                        <pre><code>div {
+  width: 300px;
+  margin: auto;
+  border: 1px solid red;
+}</code></pre>
+                        <p><strong>The inherit Value:</strong> Margin inherited from the parent element.</p>
+                        <pre><code>p.ex1 {
+  margin-left: inherit;
+}</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Margin Collapse:</strong> Top and bottom margins sometimes collapse into a single margin equal to the largest of the two!</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrows-alt-h'></i> CSS Padding",
+            subtitle: "Creating space inside elements",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-arrows-alt'></i> Padding Properties</h4>
+                        <p>The CSS padding properties are used to generate space around an element's content, <span class="highlight">inside of any defined borders</span>.</p>
+                        <p>CSS has properties for specifying the padding for each side of an element:</p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>padding-top</strong> — sets the top padding</li>
+                            <li><strong>padding-right</strong> — sets the right padding</li>
+                            <li><strong>padding-bottom</strong> — sets the bottom padding</li>
+                            <li><strong>padding-left</strong> — sets the left padding</li>
+                        </ul>
+                        <pre><code>div {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}</code></pre>
+                        <p>Values: <span class="highlight">length (px, pt, cm), %, inherit</span></p>
+                        <p><span class="highlight">⚠️</span> Negative values are <strong>not allowed</strong> for padding.</p>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-shortcode"></i> Padding Shorthand</h4>
+                        <p>The <span class="highlight">padding</span> property is a shorthand for all four paddings.</p>
+                        <pre><code>/* Four values: top, right, bottom, left */
+div { padding: 25px 50px 75px 100px; }
+
+/* Three values: top, right/left, bottom */
+div { padding: 25px 50px 75px; }
+
+/* Two values: top/bottom, right/left */
+div { padding: 25px 50px; }
+
+/* One value: all four sides */
+div { padding: 25px; }</code></pre>
+                        <p><strong>Example with different padding:</strong></p>
+                        <div style="background:#1a1f2e; padding:10px; border-radius:0.5rem; border:1px solid #334155; margin-top:0.5rem;">
+                            <div style="background:#2d3a5e; padding:20px 40px; border-radius:0.3rem; color:#e2e8f0; text-align:center;">
+                                Padding: 20px 40px
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-gem"></i> <strong>Key difference:</strong> <span class="highlight">Margin</span> creates space outside the border, <span class="highlight">Padding</span> creates space inside the border.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrows-alt-v'></i> CSS Height & Width",
+            subtitle: "Setting dimensions of elements",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-ruler-vertical'></i> Height & Width</h4>
+                        <p>The <span class="highlight">height</span> and <span class="highlight">width</span> properties set the height and width of an element.</p>
+                        <p><span class="highlight">⚠️</span> They do <strong>NOT</strong> include padding, borders, or margins!</p>
+                        <p>Values: <span class="highlight">auto, length (px, cm, em), %, initial, inherit</span></p>
+                        <pre><code>div {
+  height: 200px;
+  width: 50%;
+  background-color: powderblue;
+}</code></pre>
+                        <div style="background:powderblue; height:100px; width:50%; border-radius:0.3rem; margin:0.5rem 0; display:flex; align-items:center; justify-content:center; color:#0b0f1c; font-weight:600;">
+                            height: 100px, width: 50%
+                        </div>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-ruler"></i> Min/Max Height & Width</h4>
+                        <p><strong>max-width:</strong> Prevents the element from being wider than the specified value.</p>
+                        <pre><code>.div1 {
+  max-width: 500px;
+  background-color: powderblue;
+}
+
+.div2 {
+  width: 500px;
+  background-color: powderblue;
+}</code></pre>
+                        <p><strong>Using both width and max-width:</strong></p>
+                        <pre><code>.div1 {
+  width: 100%;
+  max-width: 900px;
+  background-color: powderblue;
+}</code></pre>
+                        <p><span class="highlight">💡</span> If width is larger than max-width, <strong>max-width</strong> wins!</p>
+                        <p><strong>Other properties:</strong></p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>min-width</strong> — minimum width</li>
+                            <li><strong>min-height</strong> — minimum height</li>
+                            <li><strong>max-height</strong> — maximum height</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Best practice:</strong> Use <span class="highlight">max-width</span> for responsive design, <span class="highlight">width: 100%</span> with max-width for fluid layouts.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-box'></i> The CSS Box Model",
+            subtitle: "Understanding content, padding, border, and margin",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-cube'></i> The Box Model Explained</h4>
+                        <p>The CSS box model is essentially a box that wraps around every HTML element.</p>
+                        <p>Every box consists of four parts (from innermost to outermost):</p>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><span class="highlight">Content</span> — The content of the box, where text and images appear</li>
+                            <li><span class="highlight">Padding</span> — Clears an area around the content (transparent)</li>
+                            <li><span class="highlight">Border</span> — A border that goes around the padding and content</li>
+                            <li><span class="highlight">Margin</span> — Clears an area outside the border (transparent)</li>
+                        </ul>
+                        <pre><code>div {
+  width: 300px;
+  border: 15px solid green;
+  padding: 50px;
+  margin: 20px;
+}</code></pre>
+                        <div style="background:#1a1f2e; padding:1rem; border:2px solid #a78bfa; margin:0.5rem 0; border-radius:0.5rem;">
+                            <div style="background:rgba(167,139,250,0.2); padding:0.8rem; border:2px dashed #a78bfa; border-radius:0.3rem;">
+                                <div style="background:#a78bfa; padding:0.8rem; border-radius:0.3rem; text-align:center; color:white;">
+                                    <i class="fas fa-font"></i> Content
+                                </div>
+                                <div style="text-align:center; color:#94a3b8; font-size:0.7rem; margin-top:0.3rem;">Padding</div>
+                            </div>
+                            <div style="text-align:center; color:#94a3b8; font-size:0.7rem; margin-top:0.3rem;">Border</div>
+                            <div style="text-align:center; color:#94a3b8; font-size:0.7rem; margin-top:0.3rem;">Margin (outside)</div>
+                        </div>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-calculator'></i> Calculating Total Size</h4>
+                        <p><strong>Important:</strong> When you set width and height, you only set the <span class="highlight">content area</span>.</p>
+                        <p>To calculate total width and height, include padding and borders:</p>
+                        <pre><code>div {
+  width: 320px;
+  height: 50px;
+  padding: 10px;
+  border: 5px solid gray;
+  margin: 0;
+}</code></pre>
+                        <p><strong>Total Width Calculation:</strong></p>
+                        <pre><code>320px (width)
++ 20px (left padding + right padding)
++ 10px (left border + right border)
+= 350px (total width)</code></pre>
+                        <p><strong>Total Height Calculation:</strong></p>
+                        <pre><code>50px (height)
++ 20px (top padding + bottom padding)
++ 10px (top border + bottom border)
+= 80px (total height)</code></pre>
+                        <p><span class="highlight">💡</span> Margin is <strong>not</strong> included in the actual size of the box.</p>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-gem"></i> <strong>Pro tip:</strong> Use <span class="highlight">box-sizing: border-box;</span> to make width and height include padding and border!</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-exclamation-triangle'></i> Common CSS Errors",
+            subtitle: "Missing semicolons, invalid properties, unclosed braces, and more",
+            content: `
+                <div class="two-column-split">
+                    <div class="col"><h4><i class="fas fa-semicolon"></i> Missing Semicolons</h4>
+                        <p>Forgetting a semicolon at the end of a property declaration can break the style rule.</p>
+                        <div class="error-example">
+                            <strong>❌ Bad:</strong>
+                            <pre><code>.bad {
+  color: red
+  background-color: yellow;
+}</code></pre>
+                        </div>
+                        <div class="good-example">
+                            <strong>✅ Good:</strong>
+                            <pre><code>.good {
+  color: red;
+  background-color: yellow;
+}</code></pre>
+                        </div>
+                        <p><strong>Invalid Property Names:</strong> Using a property name that does not exist will simply be ignored by the browser.</p>
+                        <div class="error-example">
+                            <strong>❌ Bad:</strong>
+                            <pre><code>.bad {
+  colr: blue;  /* typo: should be 'color' */
+  font-size: 16px;
+}</code></pre>
+                        </div>
+                    </div>
+                    <div class="col"><h4><i class="fas fa-bug"></i> Invalid Values & Unclosed Braces</h4>
+                        <p><strong>Invalid Values:</strong> Correct properties but invalid values will also be ignored.</p>
+                        <div class="error-example">
+                            <strong>❌ Bad:</strong>
+                            <pre><code>.bad {
+  width: -100px;  /* invalid value */
+  color: green;
+}</code></pre>
+                        </div>
+                        <p><strong>Unclosed Braces:</strong> If you forget to close a brace <span class="highlight">}</span>, the entire rule may be ignored.</p>
+                        <div class="error-example">
+                            <strong>❌ Bad:</strong>
+                            <pre><code>.bad {
+  padding: 20px;
+  margin: 10px;
+/* missing closing brace */</code></pre>
+                        </div>
+                        <p><strong>Extra Colons or Braces:</strong> Typos like extra colons or misplaced braces can cause rules to break.</p>
+                        <div class="error-example">
+                            <strong>❌ Bad:</strong>
+                            <pre><code>.bad {
+  color:: blue;  /* extra colon */
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-shield-alt"></i> <strong>Tips to Avoid CSS Errors:</strong></div>
+                <ul style="margin-left:2.5rem; color:#e2e8f0; margin-top:0.5rem;">
+                    <li>✅ Use a code editor with syntax highlighting</li>
+                    <li>✅ Validate your CSS with a CSS linter or validator</li>
+                    <li>✅ Write CSS in small sections and test frequently</li>
+                </ul>
+            `
+        },
+        {
+            title: "<i class='fas fa-bolt'></i> Quick Reference & Summary",
+            subtitle: "All key concepts in one place",
+            content: `
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-code"></i> CSS Syntax</h3>
+                        <pre><code>selector {
+  property: value;
+}</code></pre>
+                        <p>Comments: <span class="highlight">/* comment */</span></p>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-mouse-pointer"></i> Selectors</h3>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>#id</strong> — unique element</li>
+                            <li><strong>.class</strong> — group of elements</li>
+                            <li><strong>element</strong> — all elements of a type</li>
+                            <li><strong>*</strong> — universal</li>
+                            <li><strong>h1, h2</strong> — grouping</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-palette"></i> Colors</h3>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>Names:</strong> red, blue, tomato</li>
+                            <li><strong>HEX:</strong> #ff6347</li>
+                            <li><strong>RGB:</strong> rgb(255,99,71)</li>
+                            <li><strong>RGBA:</strong> rgba(255,99,71,0.5)</li>
+                            <li><strong>HSL:</strong> hsl(9,100%,64%)</li>
+                            <li><strong>HSLA:</strong> hsla(9,100%,64%,0.5)</li>
+                        </ul>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-image"></i> Backgrounds</h3>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>background-color</strong></li>
+                            <li><strong>background-image</strong></li>
+                            <li><strong>background-repeat</strong></li>
+                            <li><strong>background-position</strong></li>
+                            <li><strong>background-attachment</strong></li>
+                            <li><strong>background</strong> (shorthand)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-grid">
+                    <div class="concept-box"><h3><i class="fas fa-border-all"></i> Borders</h3>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>border-style:</strong> dotted, solid, double, etc.</li>
+                            <li><strong>border-color:</strong> name, HEX, RGB</li>
+                            <li><strong>border-width:</strong> thin, medium, thick, px</li>
+                            <li><strong>border-radius:</strong> rounded corners</li>
+                            <li><strong>border:</strong> shorthand (width style color)</li>
+                        </ul>
+                    </div>
+                    <div class="concept-box"><h3><i class="fas fa-box"></i> Box Model</h3>
+                        <ul style="margin-left:1.2rem; color:#e2e8f0;">
+                            <li><strong>Content</strong> — the actual content</li>
+                            <li><strong>Padding</strong> — space inside border</li>
+                            <li><strong>Border</strong> — the edge of the box</li>
+                            <li><strong>Margin</strong> — space outside border</li>
+                            <li><strong>Margin collapse</strong> — vertical margins combine</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card"><i class="fas fa-star"></i> <strong>Remember:</strong> Practice is key! Write small CSS snippets and test them in the browser. Use DevTools to debug.</div>
+            `
+        },
+        {
+            title: "<i class='fas fa-question-circle'></i> Knowledge Check",
+            subtitle: "Test your CSS understanding with 20 questions",
+            content: `
+                <div class="qa-section">
+                    <div class="qa-header">
+                        <div class="qa-title">
+                            <i class="fas fa-graduation-cap"></i>
+                            CSS Fundamentals Quiz
+                        </div>
+                        <div class="qa-stats">
+                            <span><i class="fas fa-question-circle"></i> 20 Questions</span>
+                            <span><i class="fas fa-lightbulb"></i> Click to reveal answer</span>
+                        </div>
+                    </div>
+                    <div id="qa-container"></div>
+                    <div class="qa-footer">
+                        <i class="fas fa-info-circle"></i> Click on any question to check your answer
+                    </div>
+                </div>
+                <div class="insight-card" style="margin-top:0.8rem;">
+                    <i class="fas fa-trophy"></i>
+                    <strong>How to use:</strong> Try to answer each question on your own first, then click to reveal the correct answer and learn from it!
+                </div>
+            `
+        }
+    ];
+
+    const qaData = [
+        { q: "What is the correct CSS syntax to make all <p> elements red?", a: "p { color: red; }" },
+        { q: "How do you select an element with id='header'?", a: "#header { }" },
+        { q: "How do you select all elements with class='center'?", a: ".center { }" },
+        { q: "What is the difference between RGB and RGBA?", a: "RGBA has an alpha channel for opacity: rgba(red, green, blue, alpha)" },
+        { q: "What does the background shorthand property combine?", a: "background-color, background-image, background-repeat, background-position, background-attachment" },
+        { q: "Which CSS property controls transparency of an entire element?", a: "opacity (e.g., opacity: 0.5;)" },
+        { q: "What is the difference between opacity and RGBA?", a: "opacity affects the whole element and children; RGBA affects only the background color." },
+        { q: "What does background-repeat: no-repeat; do?", a: "It displays the background image only once, without repeating." },
+        { q: "What is the universal selector and how is it written?", a: "* { } — it selects all elements on the page." },
+        { q: "What is HSL in CSS?", a: "HSL stands for Hue, Saturation, and Lightness. Hue is a degree on the color wheel (0-360), saturation and lightness are percentages." },
+        { q: "What happens when you forget a semicolon in CSS?", a: "The style rule breaks. The property without the semicolon and everything after it may be ignored." },
+        { q: "What is an id selector and how is it written?", a: "The id selector uses the id attribute of an HTML element. It's written with a # character, followed by the id name. Example: #para1" },
+        { q: "What is a class selector and how is it written?", a: "The class selector selects elements with a specific class attribute. It's written with a period (.) character, followed by the class name. Example: .center" },
+        { q: "What is the grouping selector and why use it?", a: "The grouping selector selects all HTML elements with the same style definitions. It's written by separating selectors with commas. Example: h1, h2, p { color: red; }" },
+        { q: "What are the 5 categories of CSS selectors?", a: "Simple selectors, Combinator selectors, Pseudo-class selectors, Pseudo-elements selectors, Attribute selectors" },
+        { q: "What does background-attachment: fixed; do?", a: "It makes the background image stay in place (fixed) and not scroll with the rest of the page." },
+        { q: "What is the border-style property and why is it important?", a: "The border-style property specifies what kind of border to display. None of the other border properties will work unless border-style is set!" },
+        { q: "What is the difference between margin and padding?", a: "Margin creates space outside the border (between elements), padding creates space inside the border (between content and border)." },
+        { q: "What is margin collapse?", a: "Margin collapse is when two vertical margins collapse into a single margin that is equal to the largest of the two margins." },
+        { q: "How do you calculate the total width of an element?", a: "Total width = width + left padding + right padding + left border + right border. Margin is not included in the actual size." }
+    ];
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    const slideArea = document.getElementById('slideArea');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counterText = document.getElementById('counterText');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    function renderQA() {
+        const container = document.getElementById('qa-container');
+        if (!container) return;
+        container.innerHTML = '';
+        qaData.forEach((item, idx) => {
+            const qaDiv = document.createElement('div');
+            qaDiv.className = 'qa-item';
+            qaDiv.innerHTML = `
+                <div class="qa-question" data-idx="${idx}">
+                    <span class="q-number">${idx+1}</span>
+                    <span class="q-text">${item.q}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="qa-answer" id="answer-${idx}">
+                    <div class="answer-label"><i class="fas fa-check-circle"></i> Answer:</div>
+                    <p>${item.a}</p>
+                </div>
+            `;
+            container.appendChild(qaDiv);
+        });
+
+        document.querySelectorAll('.qa-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const idx = this.getAttribute('data-idx');
+                const answerDiv = document.getElementById(`answer-${idx}`);
+                const icon = this.querySelector('i');
+                const item = this.closest('.qa-item');
+
+                const isShowing = answerDiv.classList.contains('show');
+                
+                document.querySelectorAll('.qa-answer').forEach(ans => {
+                    ans.classList.remove('show');
+                    ans.style.maxHeight = '0';
+                    ans.style.padding = '0 1.2rem';
+                    ans.style.opacity = '0';
+                });
+                document.querySelectorAll('.qa-question i').forEach(ic => {
+                    ic.style.transform = 'rotate(0deg)';
+                });
+                document.querySelectorAll('.qa-item').forEach(it => {
+                    it.classList.remove('completed');
+                });
+
+                if (!isShowing) {
+                    answerDiv.classList.add('show');
+                    answerDiv.style.maxHeight = '400px';
+                    answerDiv.style.padding = '1.2rem 1.2rem';
+                    answerDiv.style.opacity = '1';
+                    icon.style.transform = 'rotate(180deg)';
+                    item.classList.add('completed');
+                }
+            });
+        });
+    }
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        const html = `
+            <div class="slide-card">
+                <div class="slide-title">${slide.title}</div>
+                <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+                <div class="slide-content">${slide.content}</div>
+            </div>
+        `;
+        slideArea.innerHTML = html;
+        if (index === totalSlides - 1) {
+            renderQA();
+        }
+        counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === totalSlides-1);
+        updateDots(index);
+    }
+
+    function updateDots(activeIndex) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === activeIndex) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+    function handleKeyDown(e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    window.addEventListener('keydown', handleKeyDown);
+    renderSlide(0);
+</script>
 </body>
 </html>

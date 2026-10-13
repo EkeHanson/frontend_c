@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>React · Intermediate Track · State, Hooks, Performance</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #0b0f1c 0%, #111827 100%);
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    .curriculum-header {
+      max-width: 1300px; margin:0 auto 1rem auto;
+      background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+      border-radius: 1.5rem; padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap:1rem;
+      border:1px solid #334155; box-shadow:0 10px 20px -5px rgba(0,0,0,0.4);
+    }
+    .badge { background: #8b5cf6; padding:0.3rem 1rem; border-radius:40px; font-size:0.8rem; font-weight:bold; color:white; }
+    .class-title { font-size:1.3rem; font-weight:600; color:#e2e8f0; }
+    .duration { color:#94a3b8; font-size:0.85rem; }
+    .class-nav-buttons { display:flex; gap:0.8rem; margin-left:auto; }
+    .class-nav-btn {
+      background:#1e293b; border:1px solid #8b5cf6; padding:0.4rem 1rem;
+      border-radius:2rem; font-size:0.8rem; font-weight:600; color:#e2e8f0;
+      cursor:pointer; transition:all 0.2s; display:flex; align-items:center; gap:0.4rem;
+      text-decoration:none;
+    }
+    .class-nav-btn:hover { background:#8b5cf6; transform:scale(0.98); }
+    .class-nav-btn i { font-size:0.8rem; }
+
+    .presentation-container {
+      max-width:1300px; margin:0 auto;
+      background:rgba(255,255,255,0.02); border-radius:2rem;
+      backdrop-filter:blur(2px);
+      box-shadow:0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+      overflow:hidden;
+    }
+    .slide-area { min-height:600px; background:#0f1119; padding:2rem; }
+    .slide-card {
+      background:rgba(22,26,38,0.96); backdrop-filter:blur(4px);
+      border-radius:2rem; padding:2rem 2.2rem;
+      box-shadow:0 20px 35px -12px rgba(0,0,0,0.6);
+      border:1px solid rgba(139,92,246,0.25);
+    }
+    .slide-title {
+      font-size:2rem; font-weight:700;
+      background:linear-gradient(135deg, #c4b5fd, #a78bfa, #8b5cf6);
+      background-clip:text; -webkit-background-clip:text; color:transparent;
+      margin-bottom:0.5rem; display:flex; align-items:center; gap:0.8rem;
+      border-left:5px solid #a78bfa; padding-left:1.2rem;
+    }
+    .slide-title i { background:none; -webkit-background-clip:unset; color:#a78bfa; font-size:1.8rem; }
+    .slide-sub { color:#a0afc9; margin-bottom:1.5rem; font-size:0.95rem; border-left:5px solid #a78bfa; padding-left:1.2rem; }
+    .content-grid { display:flex; flex-wrap:wrap; gap:1.5rem; margin-top:1rem; }
+    .concept-box {
+      flex:1; min-width:240px; background:#1a1f2e; border-radius:1.5rem;
+      padding:1.3rem; border:1px solid #334155; transition:all 0.2s;
+    }
+    .concept-box:hover { border-color:#a78bfa; transform:translateY(-2px); }
+    .concept-box h3 { color:#a78bfa; font-size:1.3rem; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.6rem; }
+    .concept-box h3 i { color:#c4b5fd; }
+    .concept-box p, .concept-list, .concept-box li { color:#e2e8f0; line-height:1.55; font-size:0.95rem; }
+    .highlight { color:#fcd34d; font-weight:600; }
+    .react-highlight { color:#a78bfa; font-weight:600; }
+    .tag { background:#1e293b; padding:0.25rem 0.9rem; border-radius:30px; font-size:0.75rem; font-family:monospace; color:#c4b5fd; display:inline-flex; align-items:center; gap:0.4rem; }
+    .insight-card {
+      margin-top:1.2rem; background:#0f172a; padding:0.9rem 1.2rem;
+      border-radius:1rem; display:flex; align-items:center; flex-wrap:wrap;
+      gap:0.6rem; color:#e2e8f0; border-left:3px solid #a78bfa;
+    }
+    .two-column-split { display:flex; flex-wrap:wrap; gap:1.5rem; margin:1rem 0; }
+    .col { flex:1; background:#131a2a; border-radius:1.2rem; padding:1.2rem; border:1px solid #2d3a5e; }
+    .col h4 { color:#fcd34d; margin-bottom:0.8rem; font-size:1.2rem; }
+    .col h4 i { margin-right:0.5rem; color:#a78bfa; }
+    .col p, .col li { color:#e2e8f0; }
+    .extensions-grid { display:flex; flex-wrap:wrap; gap:1rem; margin:0.8rem 0; }
+    .ext-card { background:#0f172a; border-radius:1rem; padding:0.8rem 1rem; border-left:3px solid #a78bfa; flex:1; min-width:200px; color:#e2e8f0; }
+    .ext-card strong { color:#fcd34d; }
+    .ext-card i { margin-right:0.5rem; color:#a78bfa; }
+    pre { background:#0a0e18; padding:1rem; border-radius:1rem; overflow-x:auto; font-size:0.8rem; color:#e2e8f0; margin:0.8rem 0; border:1px solid #334155; font-family:'Fira Code', monospace; }
+    code { font-family:'Fira Code', monospace; color:#cbd5e6; }
+
+    .qa-section { margin-top:1.5rem; background:#0f172a; border-radius:1.5rem; padding:1.2rem; border:1px solid #334155; }
+    .qa-title { font-size:1.3rem; font-weight:bold; color:#fcd34d; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+    .qa-item { background:#131b2e; border-radius:1rem; margin-bottom:0.8rem; overflow:hidden; border:1px solid #2d3a5e; }
+    .qa-question { padding:1rem 1.2rem; background:#1a2338; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#e2e8f0; transition:background 0.2s; }
+    .qa-question:hover { background:#25334d; }
+    .qa-question i { color:#a78bfa; transition:transform 0.3s; }
+    .qa-answer { padding:0 1.2rem; max-height:0; overflow:hidden; transition:max-height 0.3s ease, padding 0.3s ease; background:#0f172a; color:#cbd5e6; line-height:1.5; }
+    .qa-answer.show { padding:1rem 1.2rem; max-height:300px; }
+    .qa-answer p { margin:0; color:#cbd5e6; }
+
+    .nav-bar { background:#0b0e16; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #2a2f3f; flex-wrap:wrap; gap:0.8rem; }
+    .nav-buttons { display:flex; gap:1rem; }
+    button { background:#1e2a3a; border:none; font-size:1rem; font-weight:600; padding:0.5rem 1.5rem; border-radius:2rem; color:#e2e8f0; cursor:pointer; transition:0.2s; display:flex; align-items:center; gap:0.5rem; font-family:inherit; border:1px solid #334155; }
+    button i { font-size:0.9rem; }
+    button:hover:not(:disabled) { background:#2d3a4e; transform:scale(0.97); border-color:#a78bfa; }
+    button:disabled { opacity:0.4; cursor:not-allowed; }
+    .slide-counter { font-size:0.9rem; background:#1a1f2c; padding:0.4rem 1rem; border-radius:2rem; color:#c4b5fd; }
+    .indicator-dots { display:flex; gap:0.5rem; }
+    .dot { width:8px; height:8px; background:#334155; border-radius:10px; transition:0.2s; }
+    .dot.active { background:#a78bfa; width:22px; }
+    footer { font-size:0.7rem; text-align:center; padding:0.7rem; background:#07090f; color:#8ca3c7; }
+    footer i { color:#a78bfa; }
+    footer a { color:#a78bfa; text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
+    @media (max-width:700px) { .slide-area { padding:1rem; } .slide-title { font-size:1.4rem; } .concept-box { min-width:100%; } .two-column-split { flex-direction:column; } .class-nav-buttons { margin-left:0; margin-top:0.5rem; } .curriculum-header { flex-direction:column; text-align:center; } }
+  </style>
+</head>
+<body>
+<div class="curriculum-header">
+  <div><span class="badge"><i class="fas fa-calendar-alt"></i> TRACK 2 · INTERMEDIATE</span></div>
+  <div class="class-title"><i class="fab fa-react"></i> React: State · Hooks · Performance · Routing</div>
+  <div class="duration"><i class="far fa-clock"></i> 1 week · build an e-commerce catalog</div>
+  <div class="class-nav-buttons">
+    <a href="#" class="class-nav-btn"><i class="fas fa-arrow-left"></i> Prev</a>
+    <a href="#" class="class-nav-btn"><i class="fas fa-arrow-right"></i> Next →</a>
+  </div>
+</div>
+<div class="presentation-container">
+  <div class="slide-area" id="slideArea"></div>
+  <div class="nav-bar">
+    <div class="indicator-dots" id="dotsContainer"></div>
+    <div class="nav-buttons">
+      <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+      <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 12</span>
+      <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+  <footer>
+    <i class="fab fa-react"></i> Intermediate React · Lifting State · useReducer · Context · Memo · Router
+    <span style="margin-left:1rem;">| <a href="#"><i class="fas fa-arrow-left"></i> Prev</a> | <a href="#">Next <i class="fas fa-arrow-right"></i></a></span>
+  </footer>
+</div>
+
+<script>
+  const slides = [
+    { title: "<i class='fas fa-arrow-up'></i> Lifting State Up", subtitle: "Share state between components",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-arrow-up"></i> The Pattern</h4>
+            <p>When multiple components need to share state, <span class="highlight">lift the state</span> to their closest common ancestor.</p>
+            <pre><code>function Parent() {\n  const [value, setValue] = useState('');\n  return (\n    &lt;&gt;\n      &lt;ChildA value={value} /&gt;\n      &lt;ChildB onChange={setValue} /&gt;\n    &lt;/&gt;\n  );\n}</code></pre>
+            <p><strong>Example:</strong> Two inputs sharing a temperature value.</p>
+          </div>
+          <div class="col"><h4><i class="fas fa-handshake"></i> Real Example</h4>
+            <pre><code>function TemperatureConverter() {\n  const [celsius, setCelsius] = useState(0);\n  const fahrenheit = (celsius * 9/5) + 32;\n  \n  return (\n    &lt;&gt;\n      &lt;Input \n        label="Celsius"\n        value={celsius}\n        onChange={setCelsius}\n      /&gt;\n      &lt;Input \n        label="Fahrenheit"\n        value={fahrenheit}\n        onChange={(f) => setCelsius((f-32)*5/9)}\n      /&gt;\n    &lt;/&gt;\n  );\n}</code></pre>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Think:</strong> If two components depend on the same data, that data should live in their closest common parent.</div>
+      `
+    },
+    { title: "<i class='fas fa-reduce'></i> useReducer for Complex State", subtitle: "Managing state with actions and reducers",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-cog"></i> Reducer Pattern</h4>
+            <pre><code>const initialState = { count: 0 };\n\nfunction reducer(state, action) {\n  switch (action.type) {\n    case 'INCREMENT':\n      return { count: state.count + 1 };\n    case 'DECREMENT':\n      return { count: state.count - 1 };\n    default:\n      return state;\n  }\n}\n\nfunction Counter() {\n  const [state, dispatch] = useReducer(reducer, initialState);\n  return (\n    &lt;&gt;\n      Count: {state.count}\n      &lt;button onClick={() => dispatch({ type: 'INCREMENT' })}&gt;+&lt;/button&gt;\n    &lt;/&gt;\n  );\n}</code></pre>
+          </div>
+          <div class="col"><h4><i class="fas fa-list"></i> When to Use</h4>
+            <ul style="margin-left:1.2rem;">
+              <li>✅ Complex state logic with multiple sub-values</li>
+              <li>✅ Next state depends on previous state</li>
+              <li>✅ Deep updates (nested objects/arrays)</li>
+              <li>✅ State transitions are predictable</li>
+            </ul>
+            <p><strong>Example:</strong> Shopping cart with add, remove, update quantity.</p>
+            <pre><code>// Cart reducer\ncase 'ADD_ITEM':\n  return { ...state, items: [...state.items, action.payload] };\ncase 'REMOVE_ITEM':\n  return { ...state, items: state.items.filter(i => i.id !== action.id) };</code></pre>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-code-branch"></i> <strong>useReducer vs useState:</strong> useReducer is better when state updates are complex and involve multiple actions.</div>
+      `
+    },
+    { title: "<i class='fas fa-share-alt'></i> useContext for Global State", subtitle: "Avoid prop drilling with React Context",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-share-alt"></i> Create & Provide Context</h4>
+            <pre><code>// 1. Create context\nconst ThemeContext = React.createContext('light');\n\n// 2. Provide value\nfunction App() {\n  return (\n    &lt;ThemeContext.Provider value="dark"&gt;\n      &lt;Main /&gt;\n    &lt;/ThemeContext.Provider&gt;\n  );\n}\n\n// 3. Consume context\nfunction Button() {\n  const theme = useContext(ThemeContext);\n  return &lt;button className={theme}&gt;Click&lt;/button&gt;;\n}</code></pre>
+          </div>
+          <div class="col"><h4><i class="fas fa-user"></i> Real Examples</h4>
+            <ul style="margin-left:1.2rem;">
+              <li>🌓 <strong>Theme:</strong> dark/light mode</li>
+              <li>👤 <strong>User:</strong> authentication status</li>
+              <li>🌍 <strong>Locale:</strong> language preference</li>
+              <li>🛒 <strong>Cart:</strong> shopping cart state</li>
+            </ul>
+            <pre><code>// User context\nconst UserContext = createContext();\n\nfunction Profile() {\n  const { user, setUser } = useContext(UserContext);\n  return &lt;div&gt;Welcome, {user.name}&lt;/div&gt;;\n}</code></pre>
+            <p><span class="highlight">⚠️</span> Use Context for global data, not for every prop.</p>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-gem"></i> <strong>Combine with useReducer:</strong> Create a global state with Context + useReducer for powerful state management.</div>
+      `
+    },
+    { title: "<i class='fas fa-memory'></i> useMemo & useCallback", subtitle: "Memoization for performance",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-calculator"></i> useMemo</h4>
+            <p>Memoizes <span class="highlight">values</span> to avoid expensive calculations on every render.</p>
+            <pre><code>function ExpensiveComponent({ data }) {\n  // Only recalculates when data changes\n  const processedData = useMemo(() => {\n    return data.map(item => heavyComputation(item));\n  }, [data]);\n  \n  return &lt;div&gt;{processedData}&lt;/div&gt;;\n}</code></pre>
+            <p><strong>Example:</strong> Filtering a large list, sorting, complex calculations.</p>
+          </div>
+          <div class="col"><h4><i class="fas fa-arrow-right"></i> useCallback</h4>
+            <p>Memoizes <span class="highlight">functions</span> to prevent unnecessary re-renders of child components.</p>
+            <pre><code>function Parent() {\n  const [count, setCount] = useState(0);\n  \n  // Only creates new function when count changes\n  const handleClick = useCallback(() => {\n    console.log('Clicked!', count);\n  }, [count]);\n  \n  return &lt;Child onClick={handleClick} /&gt;;\n}</code></pre>
+            <p><strong>Example:</strong> Passing callbacks to memoized child components.</p>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-ruler"></i> <strong>When to use:</strong> Only for expensive computations or when passing callbacks to memoized children. Don't over-optimize!</div>
+      `
+    },
+    { title: "<i class='fas fa-link'></i> useRef: DOM & Mutable Variables", subtitle: "Access DOM elements and store mutable values",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-dom"></i> DOM Access</h4>
+            <pre><code>function InputFocus() {\n  const inputRef = useRef(null);\n  \n  const focusInput = () => {\n    inputRef.current.focus(); // Direct DOM access\n  };\n  \n  return (\n    &lt;&gt;\n      &lt;input ref={inputRef} /&gt;\n      &lt;button onClick={focusInput}&gt;Focus&lt;/button&gt;\n    &lt;/&gt;\n  );\n}</code></pre>
+            <p><strong>Use cases:</strong> Focusing inputs, measuring DOM elements, integrating with 3rd-party libraries.</p>
+          </div>
+          <div class="col"><h4><i class="fas fa-box"></i> Mutable Values</h4>
+            <p>Store values that <span class="highlight">don't trigger re-renders</span> when changed.</p>
+            <pre><code>function Timer() {\n  const intervalRef = useRef(null);\n  const [count, setCount] = useState(0);\n  \n  const startTimer = () => {\n    intervalRef.current = setInterval(() => {\n      setCount(c => c + 1);\n    }, 1000);\n  };\n  \n  const stopTimer = () => {\n    clearInterval(intervalRef.current);\n  };\n  \n  return &lt;&gt;Count: {count}&lt;/&gt;;\n}</code></pre>
+            <p><strong>Use cases:</strong> Timer IDs, previous values, instance variables.</p>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-exclamation-circle"></i> <strong>Important:</strong> Changing useRef.current doesn't trigger re-renders. Use useState when you need to update the UI.</div>
+      `
+    },
+    { title: "<i class='fas fa-tools'></i> Custom Hooks", subtitle: "Extract and reuse stateful logic",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-code"></i> Creating Custom Hooks</h4>
+            <p>Functions that start with <span class="highlight">use</span> and can call other hooks.</p>
+            <pre><code>function useFetch(url) {\n  const [data, setData] = useState(null);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState(null);\n  \n  useEffect(() => {\n    async function fetchData() {\n      try {\n        const res = await fetch(url);\n        const json = await res.json();\n        setData(json);\n      } catch (err) {\n        setError(err);\n      } finally {\n        setLoading(false);\n      }\n    }\n    fetchData();\n  }, [url]);\n  \n  return { data, loading, error };\n}</code></pre>
+          </div>
+          <div class="col"><h4><i class="fas fa-arrow-right"></i> Using Custom Hooks</h4>
+            <pre><code>function UserList() {\n  const { data, loading, error } = useFetch('https://api.github.com/users');\n  \n  if (loading) return &lt;p&gt;Loading...&lt;/p&gt;;\n  if (error) return &lt;p&gt;Error: {error.message}&lt;/p&gt;;\n  return (\n    &lt;ul&gt;\n      {data.map(user => (\n        &lt;li key={user.id}&gt;{user.login}&lt;/li&gt;\n      ))}\n    &lt;/ul&gt;\n  );\n}</code></pre>
+            <p><strong>Popular custom hooks:</strong></p>
+            <ul style="margin-left:1.2rem;">
+              <li>📦 <strong>useLocalStorage</strong> — sync with localStorage</li>
+              <li>📱 <strong>useWindowSize</strong> — responsive design</li>
+              <li>🔄 <strong>useToggle</strong> — boolean state</li>
+            </ul>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-gem"></i> <strong>Benefits:</strong> Reusable logic, cleaner components, easier testing, and better separation of concerns.</div>
+      `
+    },
+    { title: "<i class='fas fa-rocket'></i> React.memo & Performance", subtitle: "Optimize component re-renders",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-memory"></i> React.memo</h4>
+            <p>Prevents re-rendering when props haven't changed.</p>
+            <pre><code>// Without memo - re-renders on every parent change\nconst Child = ({ name }) => &lt;div&gt;{name}&lt;/div&gt;;\n\n// With memo - only re-renders when props change\nconst Child = React.memo(({ name }) => {\n  console.log('Rendering:', name);\n  return &lt;div&gt;{name}&lt;/div&gt;;\n});\n\n// Parent component\nfunction Parent() {\n  const [count, setCount] = useState(0);\n  return (\n    &lt;&gt;\n      &lt;button onClick={() => setCount(c => c+1)}&gt;\n        Count: {count}\n      &lt;/button&gt;\n      &lt;Child name="John" /&gt; {/* Won't re-render */}\n    &lt;/&gt;\n  );\n}</code></pre>
+          </div>
+          <div class="col"><h4><i class="fas fa-lightbulb"></i> Virtual DOM & Keys</h4>
+            <p><strong>Virtual DOM:</strong> A lightweight copy of the real DOM. React compares it with the previous version (diffing) to find changes.</p>
+            <pre><code>// Why keys matter\n{todos.map(todo => (\n  // ❌ Bad: using index as key\n  &lt;Todo key={index} {...todo} /&gt;\n  \n  // ✅ Good: using stable unique ID\n  &lt;Todo key={todo.id} {...todo} /&gt;\n))}</code></pre>
+            <p><strong>Keys help React:</strong></p>
+            <ul style="margin-left:1.2rem;">
+              <li>✅ Identify which items changed</li>
+              <li>✅ Minimize DOM updates</li>
+              <li>✅ Maintain component state</li>
+            </ul>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-stopwatch"></i> <strong>Performance tips:</strong> Use React.memo for expensive components, keys for lists, and avoid inline functions in render.</div>
+      `
+    },
+    { title: "<i class='fas fa-route'></i> React Router v6", subtitle: "Navigation, nested routes, and URL params",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-route"></i> Setup & Routes</h4>
+            <pre><code>// App.js\nimport { BrowserRouter, Routes, Route, Link } from 'react-router-dom';\n\nfunction App() {\n  return (\n    &lt;BrowserRouter&gt;\n      &lt;nav&gt;\n        &lt;Link to="/"&gt;Home&lt;/Link&gt;\n        &lt;Link to="/about"&gt;About&lt;/Link&gt;\n        &lt;Link to="/products"&gt;Products&lt;/Link&gt;\n      &lt;/nav&gt;\n      \n      &lt;Routes&gt;\n        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;\n        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;\n        &lt;Route path="/products" element={&lt;Products /&gt;} /&gt;\n        &lt;Route path="/products/:id" element={&lt;ProductDetail /&gt;} /&gt;\n      &lt;/Routes&gt;\n    &lt;/BrowserRouter&gt;\n  );\n}</code></pre>
+          </div>
+          <div class="col"><h4><i class="fas fa-id-card"></i> Nested Routes & Params</h4>
+            <pre><code>// ProductDetail.js\nimport { useParams, useNavigate } from 'react-router-dom';\n\nfunction ProductDetail() {\n  const { id } = useParams(); // Get URL parameter\n  const navigate = useNavigate(); // Programmatic navigation\n  \n  return (\n    &lt;&gt;\n      &lt;h1&gt;Product {id}&lt;/h1&gt;\n      &lt;button onClick={() => navigate(-1)}&gt;Go Back&lt;/button&gt;\n      &lt;button onClick={() => navigate('/products')}&gt;All Products&lt;/button&gt;\n    &lt;/&gt;\n  );\n}\n\n// Nested routes\nfunction Products() {\n  return (\n    &lt;&gt;\n      &lt;ProductList /&gt;\n      &lt;Outlet /&gt; {/* Renders nested routes */}\n    &lt;/&gt;\n  );\n}</code></pre>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-compass"></i> <strong>Key features:</strong> useNavigate, useParams, Outlet for nested routes, and useLocation for state management.</div>
+      `
+    },
+    { title: "<i class='fas fa-paint-brush'></i> Styling Options", subtitle: "CSS Modules vs Styled Components vs Tailwind",
+      content: `
+        <div class="extensions-grid">
+          <div class="ext-card"><i class="fas fa-file-code"></i> <strong>CSS Modules</strong><br>• Scoped styles automatically<br>• Build-time optimization<br>• No runtime overhead<br><code>import styles from './Button.module.css';<br>&lt;button className={styles.button}&gt;</code></div>
+          <div class="ext-card"><i class="fas fa-code-branch"></i> <strong>Styled Components</strong><br>• CSS-in-JS<br>• Dynamic styling with props<br>• Theming support<br><code>const Button = styled.button\`<br>  background: \${props => props.primary ? 'blue' : 'gray'};<br>\`;</code></div>
+          <div class="ext-card"><i class="fas fa-wind"></i> <strong>Tailwind CSS</strong><br>• Utility-first CSS<br>• Highly customizable<br>• No context switching<br><code>&lt;button className="bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded"&gt;</code></div>
+        </div>
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-check-circle"></i> Pros & Cons</h4>
+            <ul style="margin-left:1.2rem;">
+              <li><strong>CSS Modules:</strong> ✅ Scoped, ✅ Fast, ❌ No dynamic styles</li>
+              <li><strong>Styled Components:</strong> ✅ Dynamic, ✅ Theming, ❌ Runtime cost</li>
+              <li><strong>Tailwind:</strong> ✅ Fast development, ✅ Consistent, ❌ Learning curve</li>
+            </ul>
+          </div>
+          <div class="col"><h4><i class="fas fa-rocket"></i> Recommendation</h4>
+            <ul style="margin-left:1.2rem;">
+              <li><strong>Small projects:</strong> CSS Modules or Tailwind</li>
+              <li><strong>Enterprise apps:</strong> Styled Components or Tailwind</li>
+              <li><strong>Team preference:</strong> Choose what your team knows best</li>
+            </ul>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-cog"></i> <strong>Popular choice:</strong> Many modern React apps use Tailwind CSS for its speed and consistency.</div>
+      `
+    },
+    { title: "<i class='fas fa-shopping-cart'></i> Final Project: E-Commerce Catalog", subtitle: "Apply all concepts: Context, Router, Hooks",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-tasks"></i> Core Features</h4>
+            <ul style="margin-left:1.2rem;">
+              <li>✅ Product listing with categories</li>
+              <li>✅ Product detail page (useParams)</li>
+              <li>✅ Shopping cart (useReducer + Context)</li>
+              <li>✅ Add/remove items from cart</li>
+              <li>✅ Cart total & quantity</li>
+              <li>✅ Checkout flow (nested routes)</li>
+              <li>✅ Responsive design</li>
+            </ul>
+          </div>
+          <div class="col"><h4><i class="fas fa-code"></i> Implementation Structure</h4>
+            <pre><code>src/\n├── components/\n│   ├── ProductList.jsx\n│   ├── ProductDetail.jsx\n│   ├── Cart.jsx\n│   └── Checkout.jsx\n├── context/\n│   └── CartContext.jsx // useReducer + Context\n├── hooks/\n│   ├── useCart.js // custom hook\n│   └── useFetch.js // data fetching\n├── styles/\n│   └── *.module.css\n└── App.jsx // Routing</code></pre>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-gem"></i> <strong>Bonus:</strong> Add search, filters, and persist cart in localStorage with useEffect.</div>
+      `
+    },
+    { title: "<i class='fas fa-question-circle'></i> Knowledge Check", subtitle: "Intermediate React concepts",
+      content: `
+        <div class="qa-section">
+          <div class="qa-title"><i class="fas fa-question-circle"></i> Toggle Questions (click to reveal answers)</div>
+          <div id="qa-container"></div>
+        </div>
+        <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Try answering before clicking to test your React knowledge!</div>
+      `
+    }
+  ];
+
+  const qaData = [
+    { q: "What is lifting state up and why is it useful?", a: "Lifting state up means moving shared state to the closest common ancestor. It allows multiple components to share and sync data, avoiding duplication." },
+    { q: "When should you use useReducer instead of useState?", a: "useReducer is better when state has complex logic, multiple sub-values, or updates depend on previous state. Example: shopping cart, forms with validation." },
+    { q: "What is the difference between useMemo and useCallback?", a: "useMemo memoizes values (expensive calculations), useCallback memoizes functions. Both prevent unnecessary re-computations but for different types of data." },
+    { q: "What is React Context and when should you use it?", a: "Context provides a way to pass data through the component tree without prop drilling. Use for global data like theme, user, locale. Avoid for frequent updates." },
+    { q: "What is the purpose of useRef?", a: "useRef provides a mutable reference that persists across renders. It can access DOM elements directly and store mutable values without causing re-renders." },
+    { q: "What are custom hooks and why are they useful?", a: "Custom hooks are functions that start with 'use' and encapsulate reusable stateful logic. They let you share logic across components without code duplication." },
+    { q: "How does React.memo help with performance?", a: "React.memo prevents a component from re-rendering if its props haven't changed. It's useful for expensive components that render frequently." },
+    { q: "What is the role of keys in React lists?", a: "Keys help React identify which items have changed, added, or removed. They should be unique, stable, and used on the topmost element in the list." },
+    { q: "What are the main features of React Router v6?", a: "React Router v6 provides declarative routing with useNavigate, useParams, Outlet for nested routes, and useLocation for state management." },
+    { q: "What are the differences between CSS Modules, Styled Components, and Tailwind?", a: "CSS Modules: scoped styles, no runtime. Styled Components: CSS-in-JS, dynamic styling. Tailwind: utility-first, fast development, no context switching." }
+  ];
+
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+  const slideArea = document.getElementById('slideArea');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const counterText = document.getElementById('counterText');
+  const dotsContainer = document.getElementById('dotsContainer');
+
+  function renderQA() {
+    const container = document.getElementById('qa-container');
+    if (!container) return;
+    container.innerHTML = '';
+    qaData.forEach((item, idx) => {
+      const qaDiv = document.createElement('div');
+      qaDiv.className = 'qa-item';
+      qaDiv.innerHTML = `
+        <div class="qa-question" data-idx="${idx}">
+          <span><strong>${idx+1}.</strong> ${item.q}</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="qa-answer" id="answer-${idx}">
+          <p>${item.a}</p>
+        </div>
+      `;
+      container.appendChild(qaDiv);
+    });
+    document.querySelectorAll('.qa-question').forEach(question => {
+      question.addEventListener('click', function() {
+        const idx = this.getAttribute('data-idx');
+        const answerDiv = document.getElementById(`answer-${idx}`);
+        const icon = this.querySelector('i');
+        answerDiv.classList.toggle('show');
+        icon.style.transform = answerDiv.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+      });
+    });
+  }
+
+  function renderSlide(index) {
+    const slide = slides[index];
+    const html = `
+      <div class="slide-card">
+        <div class="slide-title">${slide.title}</div>
+        <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+        <div class="slide-content">${slide.content}</div>
+      </div>
+    `;
+    slideArea.innerHTML = html;
+    if (index === totalSlides - 1) {
+      const content = slideArea.querySelector('.slide-content');
+      const qaDiv = document.createElement('div');
+      qaDiv.className = 'qa-section';
+      qaDiv.innerHTML = `<div class="qa-title"><i class="fas fa-question-circle"></i> Knowledge Check · Intermediate React</div><div id="qa-container"></div>`;
+      content.appendChild(qaDiv);
+      renderQA();
+    }
+    counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+    prevBtn.disabled = (index === 0);
+    nextBtn.disabled = (index === totalSlides-1);
+    updateDots(index);
+  }
+
+  function updateDots(activeIndex) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === activeIndex) dot.classList.add('active');
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+  function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+  function handleKeyDown(e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  }
+
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+  window.addEventListener('keydown', handleKeyDown);
+  renderSlide(0);
+</script>
+</body>
+</html>

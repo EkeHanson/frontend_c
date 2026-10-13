@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Output Methods — Demo for Students</title>
+  <!-- Google Font & Font Awesome for clean look (optional but used in original style) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fcf9f5;
+      color: #1e1b13;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      max-width: 1100px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 2rem;
+      padding: 2rem 2rem 2.2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid #f0e9e0;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    h1 i {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 2rem;
+    }
+
+    .subhead {
+      font-size: 1rem;
+      color: #475569;
+      margin-bottom: 2rem;
+      border-left: 5px solid #2563eb;
+      padding-left: 1rem;
+      background: #f8fafc;
+      border-radius: 0 12px 12px 0;
+      line-height: 1.5;
+    }
+
+    .subhead strong {
+      color: #1e293b;
+    }
+
+    /* Grid of demos */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 1.8rem 0 1rem;
+    }
+
+    .demo-card {
+      background: #ffffff;
+      border: 1px solid #e9e2d9;
+      border-radius: 1.5rem;
+      padding: 1.5rem 1.4rem 1.4rem;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .demo-card:hover {
+      box-shadow: 0 12px 28px -8px rgba(37, 99, 235, 0.12);
+      border-color: #cbd5e1;
+    }
+
+    .demo-card .method-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .method-name i {
+      color: #2563eb;
+      font-size: 1.2rem;
+      width: 1.8rem;
+      text-align: center;
+    }
+
+    .method-desc {
+      font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 1.1rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .code-badge {
+      background: #1e293b;
+      color: #e2e8f0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: 12px;
+      margin: 0.5rem 0 1rem;
+      word-break: break-word;
+      border-left: 4px solid #2563eb;
+    }
+
+    .demo-area {
+      background: #f8fafc;
+      border-radius: 1rem;
+      padding: 0.9rem 1rem;
+      margin: 0.5rem 0 0.8rem;
+      min-height: 70px;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .demo-area .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #64748b;
+      margin-bottom: 0.35rem;
+    }
+
+    .demo-area .content {
+      font-size: 0.95rem;
+      color: #0f172a;
+      min-height: 2rem;
+      word-break: break-word;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+    }
+
+    button {
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 0.55rem 1.3rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: 0.15s ease;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 5px rgba(37, 99, 235, 0.15);
+    }
+
+    button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.2);
+    }
+
+    button.secondary {
+      background: transparent;
+      border: 1.5px solid #cbd5e1;
+      color: #334155;
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+      color: #0f172a;
+      transform: translateY(-1px);
+    }
+
+    button.warning {
+      background: #f59e0b;
+      box-shadow: 0 2px 5px rgba(245, 158, 11, 0.2);
+    }
+
+    button.warning:hover {
+      background: #d97706;
+    }
+
+    button.danger {
+      background: #ef4444;
+      box-shadow: 0 2px 5px rgba(239, 68, 68, 0.2);
+    }
+
+    button.danger:hover {
+      background: #dc2626;
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .output-log {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      margin-top: 0.8rem;
+      border-left: 4px solid #38bdf8;
+      max-height: 80px;
+      overflow-y: auto;
+    }
+
+    .output-log span {
+      color: #86efac;
+    }
+
+    .note-warning {
+      background: #fef9e7;
+      border-left: 4px solid #f59e0b;
+      padding: 0.9rem 1.2rem;
+      border-radius: 0 1rem 1rem 0;
+      margin-top: 1.8rem;
+      font-size: 0.9rem;
+      color: #78350f;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .note-warning i {
+      color: #f59e0b;
+      font-size: 1.3rem;
+    }
+
+    .note-warning code {
+      background: #f1f5f9;
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .flex-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 0.3rem;
+    }
+
+    .inline-code {
+      background: #eef2ff;
+      padding: 0.1rem 0.5rem;
+      border-radius: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: #1e3a8a;
+      font-weight: 600;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ece3d7;
+      margin: 1.5rem 0 0.8rem;
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: #7a6b5a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 650px) {
+      .card {
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>
+      <i class="fas fa-terminal"></i>
+      JavaScript Output Methods
+    </h1>
+    <div class="subhead">
+      <strong>Live demo for students</strong> — click buttons to see each method in action.
+      Compare <code>innerHTML</code> vs <code>innerText</code>, try <code>document.write()</code>, alert, and console.log.
+    </div>
+
+    <!-- DEMO GRID -->
+    <div class="demo-grid">
+
+      <!-- 1️⃣ innerHTML -->
+      <div class="demo-card">
+        <div class="method-name">
+          <i class="fas fa-code"></i> innerHTML
+        </div>
+        <div class="method-desc">
+          Changes HTML content of an element — <strong>parses and renders HTML tags</strong>.
+        </div>
+        <div class="code-badge">
+          element.innerHTML = "Hello &lt;b&gt;World&lt;/b&gt;";
+        </div>
+        <div class="demo-area">
+          <div class="label"><i class="fas fa-eye"></i> Live preview</div>
+          <div class="content" id="innerHTMLTarget">
+            Hello <b>World</b>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button onclick="updateInnerHTML()">
+            <i class="fas fa-play"></i> Apply innerHTML
+          </button>
+          <button class="secondary" onclick="resetInnerHTML()">
+            <i class="fas fa-undo-alt"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- 2️⃣ innerText -->
+      <div class="demo-card">
+        <div class="method-name">
+          <i class="fas fa-font"></i> innerText
+        </div>
+        <div class="method-desc">
+          Changes only plain text — <strong>shows HTML tags as literal text</strong>.
+        </div>
+        <div class="code-badge">
+          element.innerText = "Hello &lt;b&gt;World&lt;/b&gt;";
+        </div>
+        <div class="demo-area">
+          <div class="label"><i class="fas fa-eye"></i> Live preview</div>
+          <div class="content" id="innerTextTarget">
+            Hello &lt;b&gt;World&lt;/b&gt;
+          </div>
+        </div>
+        <div class="btn-row">
+          <button onclick="updateInnerText()" style="background:#64748b;">
+            <i class="fas fa-play"></i> Apply innerText
+          </button>
+          <button class="secondary" onclick="resetInnerText()">
+            <i class="fas fa-undo-alt"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- 3️⃣ document.write() -->
+      <div class="demo-card">
+        <div class="method-name">
+          <i class="fas fa-file-alt"></i> document.write()
+        </div>
+        <div class="method-desc">
+          Writes directly to the HTML document. <span style="color:#b45309; font-weight:500;">After page load it overwrites everything!</span>
+        </div>
+        <div class="code-badge">
+          document.write("Hello from write()");
+        </div>
+        <div class="demo-area" style="min-height: 60px;">
+          <div class="label"><i class="fas fa-exclamation-triangle" style="color:#f59e0b;"></i> Try with caution</div>
+          <div class="content" style="font-size:0.85rem; color:#b45309;">
+            Clicking the button will replace the entire page content (then you'll need to refresh).
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="warning" onclick="useDocumentWrite()">
+            <i class="fas fa-pen"></i> document.write()
+          </button>
+        </div>
+        <div class="output-log" id="writeLog">
+          <span>ℹ️ document.write() demo ready.</span>
+        </div>
+      </div>
+
+      <!-- 4️⃣ window.alert() -->
+      <div class="demo-card">
+        <div class="method-name">
+          <i class="fas fa-bell"></i> window.alert()
+        </div>
+        <div class="method-desc">
+          Shows a pop-up alert box — blocks the page until dismissed.
+        </div>
+        <div class="code-badge">
+          window.alert("Hello from JavaScript!");
+        </div>
+        <div class="demo-area" style="min-height: 60px;">
+          <div class="label"><i class="fas fa-comment"></i> Alert preview</div>
+          <div class="content" style="font-size:0.9rem; color:#475569;">
+            Click the button to see a native browser alert.
+          </div>
+        </div>
+        <div class="btn-row">
+          <button onclick="showAlert()">
+            <i class="fas fa-exclamation-circle"></i> Show Alert
+          </button>
+          <button class="secondary" onclick="showCustomAlert()">
+            <i class="fas fa-star"></i> Custom Alert
+          </button>
+        </div>
+      </div>
+
+      <!-- 5️⃣ console.log() -->
+      <div class="demo-card">
+        <div class="method-name">
+          <i class="fas fa-terminal"></i> console.log()
+        </div>
+        <div class="method-desc">
+          Outputs to browser console — great for debugging. Open DevTools (F12) to see.
+        </div>
+        <div class="code-badge">
+          console.log("Hello from console!");
+        </div>
+        <div class="demo-area" style="min-height: 60px;">
+          <div class="label"><i class="fas fa-chart-simple"></i> Console output</div>
+          <div class="content" style="font-size:0.9rem;">
+            <span id="consolePreview" style="font-family: monospace; color: #2563eb;">👀 open console to see logs</span>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button onclick="logToConsole()">
+            <i class="fas fa-arrow-right"></i> console.log()
+          </button>
+          <button class="secondary" onclick="logObject()">
+            <i class="fas fa-cube"></i> Log Object
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WARNING about document.write after page load -->
+    <div class="note-warning">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span><strong>⚠️ Important warning:</strong> Using <code>document.write()</code> after the page has loaded will <strong>overwrite the entire document</strong>. (Try the button above to see it in action — then refresh the page.)</span>
+    </div>
+
+    <hr />
+
+    <div class="footer-note">
+      <span><i class="fas fa-chalkboard-teacher"></i> Interactive demo — JavaScript Output Methods</span>
+      <span><i class="fas fa-rotate-right"></i> Refresh page after document.write() test</span>
+    </div>
+  </div>
+
+  <script>
+    // ----- 1. innerHTML demo -----
+    function updateInnerHTML() {
+      const target = document.getElementById('innerHTMLTarget');
+      if (target) {
+        target.innerHTML = 'Hello <b>World</b> (bold text!)';
+        console.log('🔵 innerHTML updated — HTML tags are rendered.');
+      }
+    }
+
+    function resetInnerHTML() {
+      const target = document.getElementById('innerHTMLTarget');
+      if (target) {
+        target.innerHTML = 'Hello <b>World</b>';
+        console.log('🔵 innerHTML reset to default.');
+      }
+    }
+
+    // ----- 2. innerText demo -----
+    function updateInnerText() {
+      const target = document.getElementById('innerTextTarget');
+      if (target) {
+        target.innerText = 'Hello <b>World</b> (tags shown as text)';
+        console.log('🟠 innerText updated — HTML tags are displayed as plain text.');
+      }
+    }
+
+    function resetInnerText() {
+      const target = document.getElementById('innerTextTarget');
+      if (target) {
+        target.innerText = 'Hello <b>World</b>';
+        console.log('🟠 innerText reset to default.');
+      }
+    }
+
+    // ----- 3. document.write() demo -----
+    function useDocumentWrite() {
+      // This will overwrite the entire page — that's the point!
+      document.write('<h2 style="font-family: Inter, sans-serif; padding:2rem; color:#0f172a;">🚨 document.write() was called after page load — it overwrote everything!</h2><p style="font-family: Inter, sans-serif; padding:0 2rem; color:#475569;">Refresh the page to bring back the demo.</p>');
+      // Note: after document.write() the page is replaced, so this log might not appear in some browsers.
+      console.log('⚠️ document.write() executed — the page has been overwritten.');
+    }
+
+    // ----- 4. alert demo -----
+    function showAlert() {
+      window.alert('Hello from JavaScript! 👋');
+      console.log('🔔 Alert shown: "Hello from JavaScript!"');
+    }
+
+    function showCustomAlert() {
+      const name = prompt('What is your name?', 'Student');
+      if (name) {
+        window.alert(`Hello, ${name}! Welcome to the JS demo.`);
+        console.log(`🔔 Custom alert shown for: ${name}`);
+      } else {
+        window.alert('You didn\'t enter a name — that\'s fine too!');
+        console.log('🔔 Custom alert cancelled or empty.');
+      }
+    }
+
+    // ----- 5. console.log demo -----
+    function logToConsole() {
+      console.log('✅ Hello from console.log()! — This message is in the browser DevTools console.');
+      // also update a small preview on the card
+      const preview = document.getElementById('consolePreview');
+      if (preview) {
+        preview.textContent = '✅ Log sent! (open console)';
+        preview.style.color = '#10b981';
+        setTimeout(() => {
+          preview.textContent = '👀 open console to see logs';
+          preview.style.color = '#2563eb';
+        }, 2000);
+      }
+    }
+
+    function logObject() {
+      const student = {
+        name: 'Alex',
+        age: 22,
+        isEnrolled: true,
+        courses: ['JavaScript', 'HTML', 'CSS'],
+        greet: function() { return 'Hello!'; }
+      };
+      console.log('📦 Logging an object:', student);
+      console.log('📦 Also as table (if supported):');
+      console.table(student);
+      
+      const preview = document.getElementById('consolePreview');
+      if (preview) {
+        preview.textContent = '📦 Object logged! (check console)';
+        preview.style.color = '#8b5cf6';
+        setTimeout(() => {
+          preview.textContent = '👀 open console to see logs';
+          preview.style.color = '#2563eb';
+        }, 2000);
+      }
+    }
+
+    // ----- Bonus: update write log on page load? Not needed.
+
+    // Also log a friendly welcome to the console for students
+    console.log('👋 Welcome to the JavaScript Output Methods demo!');
+    console.log('💡 Try each button and watch the console (F12) for messages.');
+  </script>
+</body>
+</html>

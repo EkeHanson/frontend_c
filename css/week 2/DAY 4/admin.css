@@ -1,0 +1,456 @@
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e7d9cd;  /* warmer, less rigid */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    /* main card – soft, not perfectly square */
+    #parent_div {
+      width: 96%;
+      max-width: 1320px;
+      background: #f5ede7;
+      border-radius: 32px 32px 28px 28px;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+      min-height: 520px;
+      transition: all 0.1s;
+      border: 1px solid #d6c9bd;
+    }
+
+    /* ---------- SIDEBAR (left) – handcrafted feel ---------- */
+    #first_child {
+      background: #a67c6b;  /* terracotta, not flat */
+      padding: 24px 12px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 0 0 190px;
+      border-right: 2px solid #8b6b5b;
+      box-shadow: inset -2px 0 0 #b5917e;
+    }
+
+    #sidebar_brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      padding-left: 2px;
+      color: #fcf6ed;
+      letter-spacing: -0.2px;
+    }
+    #brand_symbol {
+      font-weight: 600;
+      font-size: 24px;
+      background: #b28b78;
+      padding: 0 10px 2px 10px;
+      border-radius: 40px;
+      color: #f7efe6;
+      box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.2);
+      line-height: 1.4;
+    }
+    #brand_text {
+      font-weight: 500;
+      font-size: 21px;
+      color: #fcf3ea;
+      letter-spacing: 0.3px;
+      border-bottom: 2px dotted #cbad98;
+      padding-bottom: 2px;
+    }
+
+    /* sidebar buttons – uneven, varied */
+    #first_child button {
+      background: transparent;
+      border: none;
+      color: #e4d4c6;
+      font-size: 14px;
+      font-weight: 450;
+      padding: 8px 12px 8px 12px;
+      margin: 0 0 2px 0;
+      border-radius: 40px 8px 40px 8px;  /* quirky */
+      transition: all 0.12s;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      border-left: 2px solid transparent;
+    }
+    #first_child button:hover {
+      background: #8f6e5d;
+      color: #fffbf5;
+      border-left-color: #f0d5c0;
+      padding-left: 16px;
+    }
+    /* "active" button – not perfectly highlighted */
+    #first_child button:first-of-type {
+      background: #7c5f4f;
+      color: #fcf3e6;
+      border-left: 4px solid #efd7c4;
+      font-weight: 500;
+      box-shadow: inset 0 1px 0 #b28a77;
+    }
+
+    #sidebar_footer {
+      margin-top: auto;
+      border-top: 1px solid #9b7a68;
+      padding-top: 18px;
+      margin-bottom: 4px;
+    }
+    #sidebar_footer button {
+      font-size: 13px;
+      opacity: 0.75;
+      border-radius: 30px 4px 30px 4px;
+      background: #7d604f;
+      color: #efe3d7;
+      padding: 8px 16px;
+      text-align: center;
+      border-left: none;
+    }
+    #sidebar_footer button:hover {
+      background: #6a5041;
+      color: white;
+      opacity: 1;
+    }
+
+    /* ---------- MAIN CONTENT (middle) ---------- */
+    #second_child_div {
+      background: #faf3ec;
+      padding: 22px 26px 26px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      flex: 1;
+      min-width: 0;
+      border-right: 1px solid #ddcec0;
+    }
+
+    #top_actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px 14px;
+      flex-wrap: wrap;
+      border-bottom: 2px dashed #d6c3b4;
+      padding-bottom: 12px;
+    }
+    #top_actions button {
+      background: transparent;
+      border: none;
+      padding: 5px 14px;
+      font-weight: 450;
+      font-size: 14px;
+      color: #3b2c22;
+      border-radius: 30px;
+      transition: all 0.1s;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    #top_actions button:hover {
+      background: #e6d5c6;
+      border-color: #bfaa99;
+    }
+    #top_actions button:last-child {
+      background: #493b30;
+      color: #f2e7dd;
+      padding: 6px 24px;
+      border-radius: 40px;
+      font-weight: 500;
+      border: 1px solid #6b5544;
+    }
+    #top_actions button:last-child:hover {
+      background: #2f231b;
+      border-color: #8b6f5b;
+    }
+
+    #welcome_section h2 {
+      font-weight: 500;
+      font-size: 26px;
+      color: #2a1f17;
+      letter-spacing: -0.2px;
+      border-left: 6px solid #b28a78;
+      padding-left: 14px;
+    }
+    #welcome_section p {
+      color: #5f4b3b;
+      font-size: 15px;
+      margin-top: 6px;
+      padding-left: 20px;
+      font-style: italic;
+    }
+
+    /* stats – uneven widths, human */
+    #stats_grid {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      margin-top: 2px;
+      flex-wrap: wrap;
+    }
+    .stat_card {
+      background: #fcf7f0;
+      padding: 18px 12px 12px 18px;
+      border-radius: 24px 8px 24px 8px;
+      border: 1px solid #dac9bb;
+      flex: 1 1 110px;
+      min-width: 100px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: 0.1s;
+    }
+    .stat_card:nth-child(2) {
+      background: #f8efe8;
+      border-color: #cfb9a8;
+    }
+    .stat_card:nth-child(3) {
+      background: #f5e9df;
+      border-color: #cbb39f;
+    }
+    .stat_card .stat_number {
+      font-size: 28px;
+      font-weight: 550;
+      color: #2d1f17;
+      letter-spacing: -0.5px;
+    }
+    .stat_card .stat_label {
+      color: #6f5848;
+      font-size: 12px;
+      font-weight: 450;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+    .stat_card .stat_prefix {
+      display: inline-block;
+      background: #e1cebe;
+      padding: 0 12px 2px 12px;
+      border-radius: 40px;
+      margin-right: 6px;
+      font-size: 16px;
+      color: #3d2b1f;
+      line-height: 1.5;
+    }
+
+    #meta_line {
+      color: #907a69;
+      font-size: 13px;
+      border-top: 2px dotted #dac7b8;
+      padding-top: 16px;
+      font-style: italic;
+      letter-spacing: 0.2px;
+    }
+
+    /* ---------- RIGHT PANEL (activity) ---------- */
+    #third_child_div {
+      background: #ede3da;
+      padding: 22px 18px 26px 18px;
+      border-left: 2px solid #d4bfaf;
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 250px;
+    }
+
+    #activity_header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    #activity_header h4 {
+      font-size: 18px;
+      font-weight: 500;
+      color: #2b1e15;
+      border-bottom: 3px solid #b59480;
+      padding-bottom: 4px;
+    }
+    #activity_header span {
+      color: #5f4b3b;
+      font-size: 12px;
+      background: #dac7b8;
+      padding: 4px 12px;
+      border-radius: 40px;
+      border: 1px solid #b5947e;
+      font-weight: 450;
+    }
+
+    #log_list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .log_item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #faf1e8;
+      padding: 10px 12px;
+      border-radius: 20px 8px 20px 8px;
+      border: 1px solid #d6bfae;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+    .log_item .log_label {
+      background: #e2cebd;
+      border-radius: 30px;
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #2b1d13;
+      flex-shrink: 0;
+      min-width: 30px;
+      text-align: center;
+      border: 1px solid #c5ab97;
+    }
+    .log_item .log_content {
+      flex: 1;
+    }
+    .log_item .log_title {
+      font-weight: 460;
+      font-size: 14px;
+      color: #2b1f15;
+    }
+    .log_item .log_time {
+      font-size: 11px;
+      color: #7d6654;
+      margin-top: 1px;
+    }
+    .log_item .log_badge {
+      background: #d8c6b7;
+      border-radius: 40px;
+      padding: 2px 10px;
+      font-size: 10px;
+      font-weight: 500;
+      color: #3b2b1e;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border: 1px solid #b89d89;
+    }
+    .log_item .log_badge.success {
+      background: #c9d9c2;
+      color: #2a4b34;
+      border-color: #8eae7a;
+    }
+    .log_item .log_badge.warning {
+      background: #eed9b0;
+      color: #7a5d2b;
+      border-color: #cbaa6d;
+    }
+    .log_item .log_badge.info {
+      background: #c7d6e6;
+      color: #1f3f5c;
+      border-color: #8daec9;
+    }
+
+    #activity_footer {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 2px dashed #ccb8a7;
+      font-size: 13px;
+      color: #6f5948;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 450;
+    }
+    #activity_footer span:last-child {
+      background: #dac5b4;
+      padding: 2px 14px;
+      border-radius: 40px;
+      color: #2f1f14;
+      border: 1px solid #b4957e;
+    }
+
+    /* ----- RESPONSIVE – human adjustments ----- */
+    @media (max-width: 1024px) {
+      #first_child { flex: 0 0 170px; }
+      #third_child_div { flex: 0 0 200px; }
+    }
+
+    @media (max-width: 820px) {
+      #parent_div {
+        flex-direction: column;
+        border-radius: 28px;
+      }
+      #first_child {
+        flex: 0 0 auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 12px 16px;
+        gap: 4px;
+        border-right: none;
+        border-bottom: 2px solid #8f6f5d;
+      }
+      #sidebar_brand {
+        width: 100%;
+        margin-bottom: 4px;
+      }
+      #first_child button {
+        width: auto;
+        padding: 5px 14px;
+        font-size: 13px;
+        border-radius: 40px;
+        border-left: none;
+      }
+      #first_child button:first-of-type {
+        border-left: none;
+        background: #7c5f4f;
+        border-radius: 30px 8px 30px 8px;
+      }
+      #sidebar_footer {
+        display: none;
+      }
+      #second_child_div {
+        padding: 16px 18px;
+      }
+      #third_child_div {
+        flex: 0 0 auto;
+        border-left: none;
+        border-top: 2px solid #ccb6a4;
+        padding: 18px;
+      }
+      #stats_grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .stat_card {
+        min-width: 90px;
+        flex: 1 1 28%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      #stats_grid {
+        flex-direction: column;
+      }
+      .stat_card {
+        flex: 1 1 auto;
+      }
+      #top_actions {
+        justify-content: center;
+      }
+      #first_child button {
+        font-size: 12px;
+        padding: 4px 12px;
+      }
+      #brand_text {
+        font-size: 18px;
+      }
+      #welcome_section h2 {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 500px) {
+  body {
+    background-color: red;
+  }
+}
+

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abraham of appBrew · Developer Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #222;
+            background: #fafafa;
+        }
+
+        /* ========== LAYOUT ========== */
+        section {
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: #333;
+            letter-spacing: -0.3px;
+        }
+
+        /* ========== HEADER / NAV ========== */
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4a6fa5;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-size: 0.95rem;
+            padding: 0.2rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #4a6fa5;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1 1 280px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: #222;
+        }
+
+        .hero-text .title {
+            font-size: 1.2rem;
+            color: #4a6fa5;
+            font-weight: 450;
+            margin: 0.1rem 0 0.6rem;
+        }
+
+        .hero-text .intro {
+            font-size: 1.05rem;
+            color: #555;
+            max-width: 400px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-image {
+            flex: 0 0 180px;
+        }
+
+        .image-placeholder {
+            background: #e8e8e8;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.9rem;
+            aspect-ratio: 1/1;
+            width: 180px;
+            border: 1px solid #d0d0d0;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-block;
+            padding: 0.55rem 1.6rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 450;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        .btn-primary {
+            background: #4a6fa5;
+            color: #fff;
+            border-color: #4a6fa5;
+        }
+
+        .btn-primary:hover {
+            background: #3d5f8f;
+            border-color: #3d5f8f;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #4a6fa5;
+            border-color: #4a6fa5;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f4fa;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ========== ABOUT ========== */
+        .about-content p {
+            font-size: 1.05rem;
+            color: #444;
+            max-width: 700px;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ========== SKILLS ========== */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1.2rem;
+        }
+
+        .skill {
+            background: #f0f2f5;
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* ========== PROJECTS ========== */
+        .projects-list {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .project-card {
+            flex: 1 1 240px;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            padding: 1.2rem 1.2rem 1.5rem;
+            transition: border-color 0.15s;
+        }
+
+        .project-card:hover {
+            border-color: #c8d0d8;
+        }
+
+        .project-image {
+            margin-bottom: 0.8rem;
+        }
+
+        .project-image .image-placeholder.small {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #e8e8e8;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.8rem;
+            border: 1px solid #d0d0d0;
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #222;
+            margin-bottom: 0.2rem;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.7rem;
+            margin: 0.4rem 0 0.6rem;
+        }
+
+        .project-tech span {
+            background: #f0f2f5;
+            padding: 0.05rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #555;
+            border: 1px solid #e0e0e0;
+        }
+
+        .project-link {
+            color: #4a6fa5;
+            text-decoration: none;
+            font-weight: 450;
+            font-size: 0.95rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== CONTACT ========== */
+        .contact-wrapper {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1 1 200px;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.4rem;
+            color: #444;
+        }
+
+        .contact-form {
+            flex: 2 1 300px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 450;
+            font-size: 0.9rem;
+            color: #444;
+            margin-bottom: 0.2rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem 0.7rem;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #fff;
+            transition: border-color 0.15s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4a6fa5;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            border-top: 1px solid #e8e8e8;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .social-links a {
+            color: #555;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #4a6fa5;
+            text-decoration: underline;
+        }
+
+        /* ========== RESPONSIVE ========== */
+
+        /* Tablet */
+        @media (max-width: 768px) {
+            section {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .hero-image {
+                flex: 0 0 auto;
+            }
+
+            .image-placeholder {
+                width: 140px;
+            }
+
+            .contact-wrapper {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 1.8rem 1rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-text .title {
+                font-size: 1rem;
+            }
+
+            .projects-list {
+                flex-direction: column;
+            }
+
+            .project-card {
+                flex: 1 1 auto;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+                padding: 1.2rem 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-buttons .btn {
+                text-align: center;
+            }
+        }
+</style>
+</head>
+<body>
+
+    <!-- ========== HEADER / NAVIGATION ========== -->
+    <header>
+        <nav>
+            <div class="logo">Abraham of appBrew</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ========== HERO SECTION ========== -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Hi, I'm Abraham</h1>
+                    <p class="title">Senior Web Developer</p>
+                    <p class="intro">
+                        I build simple, functional websites and web applications. 
+                        Currently learning JavaScript and Django.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-placeholder">
+                        <span>Photo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ABOUT SECTION ========== -->
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>
+                    I'm a self-taught developer who started coding about a year ago. 
+                    I enjoy the process of figuring things out and building things 
+                    that actually work. My background is in graphic design, which 
+                    helps me think about how users interact with websites.
+                </p>
+                <p>
+                    Right now I'm focused on learning JavaScript more deeply and 
+                    exploring backend development with Django. I like working on 
+                    small projects that solve real problems or just look interesting.
+                </p>
+            </div>
+        </section>
+
+        <!-- ========== SKILLS SECTION ========== -->
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-list">
+                <span class="skill">HTML</span>
+                <span class="skill">CSS</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">Python</span>
+                <span class="skill">Django</span>
+                <span class="skill">Git</span>
+                <span class="skill">Responsive Design</span>
+                <span class="skill">Figma</span>
+            </div>
+        </section>
+
+        <!-- ========== PROJECTS SECTION ========== -->
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-list">
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="image-placeholder small">Screenshot</div>
+                    </div>
+                    <h3>Weather App</h3>
+                    <p>A simple weather dashboard that shows current conditions using a public API.</p>
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                    <a href="#" class="project-link">View Project →</a>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="image-placeholder small">Screenshot</div>
+                    </div>
+                    <h3>Task Manager</h3>
+                    <p>A basic to-do list app with add, complete, and delete functionality.</p>
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                    <a href="#" class="project-link">View Project →</a>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="image-placeholder small">Screenshot</div>
+                    </div>
+                    <h3>Portfolio Site</h3>
+                    <p>This very website — built from scratch with HTML and CSS.</p>
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                    </div>
+                    <a href="#" class="project-link">View Project →</a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ========== CONTACT SECTION ========== -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <p><strong>Email:</strong> info@appBrew.com</p>
+                    <p><strong>Phone:</strong> (555) 123-4567</p>
+                    <p><strong>Location:</strong> Port Harcourt, Nigeria</p>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <p>&copy; 2026 Abraham of appBrew. Built with HTML &amp; CSS.</p>
+        <div class="social-links">
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+</body>
+</html>

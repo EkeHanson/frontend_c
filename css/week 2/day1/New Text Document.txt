@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Simple Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           UNIVERSAL SELECTOR - Reset
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ============================================
+           ELEMENT SELECTORS
+           ============================================ */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 5px solid #3498db;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .header h1 i {
+            color: #3498db;
+            margin-right: 0.5rem;
+        }
+
+        .nav a {
+            color: #cbd5e0;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .nav a:hover {
+            color: white;
+            border-bottom-color: #3498db;
+        }
+
+        /* ============================================
+           CONTAINER
+           ============================================ */
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 2px solid #5a4fcf;
+        }
+
+        .hero h2 {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.3);
+            font-size: 2rem;
+        }
+
+        .hero p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: #667eea;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* ============================================
+           CARDS SECTION
+           ============================================ */
+        .cards {
+            display: flex;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 6px solid #3498db;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card i {
+            font-size: 2rem;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .card h3 {
+            color: #2c3e50;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #4a5568;
+        }
+
+        .card-purple {
+            border-left-color: #9b59b6;
+        }
+
+        .card-purple i {
+            color: #9b59b6;
+        }
+
+        .card-green {
+            border-left-color: #2ecc71;
+        }
+
+        .card-green i {
+            color: #2ecc71;
+        }
+
+        .card-orange {
+            border-left-color: #f39c12;
+        }
+
+        .card-orange i {
+            color: #f39c12;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 2px solid #e2e8f0;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 200px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            border: 3px solid #2980b9;
+        }
+
+        .about-image i {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 250px;
+        }
+
+        .about-text p {
+            color: #4a5568;
+        }
+
+        /* ============================================
+           SERVICES GRID
+           ============================================ */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .service-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .service-item:hover {
+            border-color: #3498db;
+            transform: translateY(-3px);
+        }
+
+        .service-item i {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-item h3 {
+            color: #2c3e50;
+        }
+
+        .service-item p {
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        /* ============================================
+           TESTIMONIAL SECTION
+           ============================================ */
+        .testimonial {
+            background: #2c3e50;
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+            border: 3px solid #34495e;
+        }
+
+        .testimonial i {
+            font-size: 2rem;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .testimonial .author {
+            color: #3498db;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            font-style: normal;
+        }
+
+        /* ============================================
+           BLOG POSTS
+           ============================================ */
+        .blog-post {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid #3498db;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .blog-post h3 {
+            color: #2c3e50;
+        }
+
+        .blog-post .meta {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-post .meta i {
+            color: #3498db;
+            margin-right: 0.3rem;
+        }
+
+        .blog-post .read-more {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .blog-post .read-more:hover {
+            border-bottom-color: #3498db;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background-color: #2c3e50;
+            color: #cbd5e0;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 5px solid #3498db;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #cbd5e0;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer .social {
+            margin-top: 1rem;
+        }
+
+        .footer .social a {
+            color: #cbd5e0;
+            margin: 0 0.8rem;
+            font-size: 1.3rem;
+            transition: color 0.3s;
+        }
+
+        .footer .social a:hover {
+            color: #3498db;
+        }
+
+        /* ============================================
+           RESPONSIVE - Media Query
+           ============================================ */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .nav a {
+                margin: 0 0.8rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .cards {
+                flex-direction: column;
+            }
+
+            .card {
+                min-width: auto;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.3rem;
+            }
+
+            .nav a {
+                display: block;
+                margin: 0.3rem 0;
+            }
+
+            .btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <header class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-code"></i> MySite</h1>
+            <nav class="nav">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         MAIN CONTENT
+         ============================================ -->
+    <main class="container">
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <h2>Welcome to MySite</h2>
+            <p>This is a simple website that uses all the CSS concepts from our lesson. Clean, modern, and responsive.</p>
+            <a href="#" class="btn">Get Started</a>
+        </section>
+
+        <!-- CARDS SECTION -->
+        <section>
+            <h2>Our Services</h2>
+            <div class="cards">
+                <div class="card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Custom websites built with modern technologies and best practices.</p>
+                </div>
+                <div class="card card-purple">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Design</h3>
+                    <p>Beautiful, user-friendly designs that engage and convert visitors.</p>
+                </div>
+                <div class="card card-green">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Responsive</h3>
+                    <p>Websites that look great on all devices, from phones to desktops.</p>
+                </div>
+                <div class="card card-orange">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Performance</h3>
+                    <p>Fast loading websites optimized for speed and user experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="about">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <i class="fas fa-users"></i>
+                    <h3 style="color: white;">Our Team</h3>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Dedicated professionals</p>
+                </div>
+                <div class="about-text">
+                    <p>We are a team of passionate developers and designers who love creating amazing web experiences. Our mission is to build websites that are not only beautiful but also functional and user-friendly.</p>
+                    <p>With years of experience in the industry, we bring expertise in everything from frontend development to backend systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES GRID -->
+        <section>
+            <h2>What We Offer</h2>
+            <div class="services">
+                <div class="service-item">
+                    <i class="fas fa-code"></i>
+                    <h3>Frontend</h3>
+                    <p>HTML, CSS, JavaScript, React, and responsive design.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-server"></i>
+                    <h3>Backend</h3>
+                    <p>Node.js, Python, databases, and API development.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud</h3>
+                    <p>AWS, Azure, deployment, and DevOps solutions.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Security</h3>
+                    <p>Web security best practices and secure coding.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIAL -->
+        <section class="testimonial">
+            <i class="fas fa-quote-left"></i>
+            <p>"This team transformed our online presence completely. The new website is fast, beautiful, and our customers love it!"</p>
+            <div class="author">— Sarah Johnson, CEO</div>
+        </section>
+
+        <!-- BLOG POSTS -->
+        <section>
+            <h2>Latest Posts</h2>
+            <article class="blog-post">
+                <h3>Getting Started with CSS</h3>
+                <div class="meta">
+                    <i class="fas fa-calendar-alt"></i> August 15, 2026
+                    <i class="fas fa-tag" style="margin-left: 1rem;"></i> CSS, Web Development
+                </div>
+                <p>Learn the fundamentals of CSS including selectors, colors, backgrounds, borders, and the box model...</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+
+            <article class="blog-post">
+                <h3>Building Responsive Websites</h3>
+                <div class="meta">
+                    <i class="fas fa-calendar-alt"></i> August 10, 2026
+                    <i class="fas fa-tag" style="margin-left: 1rem;"></i> Responsive, Design
+                </div>
+                <p>Learn how to create websites that work perfectly on all devices using media queries and flexible layouts...</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+
+            <article class="blog-post">
+                <h3>CSS Box Model Explained</h3>
+                <div class="meta">
+                    <i class="fas fa-calendar-alt"></i> August 5, 2026
+                    <i class="fas fa-tag" style="margin-left: 1rem;"></i> CSS, Box Model
+                </div>
+                <p>Understanding the CSS box model is essential for layout design. Learn about content, padding, border, and margin...</p>
+                <a href="#" class="read-more">Read More →</a>
+            </article>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <p>&copy; 2026 MySite. All rights reserved.</p>
+        <p>Built with ❤️ using CSS</p>
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>

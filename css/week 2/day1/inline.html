@@ -3,24 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>CSS CLass 1</title>
-  
-</head>
-<body >
-    <div style="background-color: red; width: 600px; height: 600px; margin-left:200px;">
-        <p>There is a P tag qwerty</p>
-        <a href="www.ggogle.com">Visit my web site</a>
+    <title>CSS Proper</title>
+    <style>
 
-        <h1>This is used to denote H1</h1>
-    </div>
-    <h1>
-        This is my first line of plenty lines
-    </h1>
-    <p class="our_choice">Lorem ipsum, dolor sit amet consectetur 
-        adipisicing elit. Blanditiis expedita
-    </p>
+        body{
+            background-image:
+             url("1.avif");
+             background-repeat: no-repeat;
+             background-size: cover; /* cover the entire page */
+             background-position: center; /* center the image */
+             background-attachment: fixed; /* keep it fixed during scroll (optional) */
+             width: 100%; 
+             height: auto;
 
+            }
+
+            p{
+                align-items: center;
+                margin: 100px 20px 50px 50px;
+            }
+
+
+        h1{
+           
+           align-items: center;
+           
+        }
+         h1:hover{
+            background-color: red;
+        }
+        p{
+            font-size: bold;
+        }
+        #para{
+            color: #ffffff;
+        } 
+        /* The block style is to make the
+         element take the whole width */
+        .visit{
+            color: hsl(0, 20%, 62%);
+            display: block;
+            text-decoration: double;
+            color: dodgerblue
+        }
+        div{
+            width: 250px;
+            height: 250px;
+            background-color: rgb(179, 199, 219);
+            margin-left: 10%;
+            /* border-style: dotted; */
+            border-style: dotted dashed solid double;
+             border-color: #a1eead81;
+             border-radius: 15px;
+        }
+
+        div:hover{
+            background-color: red;
+        }
+    </style>
+</head> 
+<body>
+    <!-- <img src="download.jfif"> -->
+    <h1>appBrew</h1>
+        <!-- <p>This is a paragraph tag</p> -->
+        <p>This is a paragraph tag</p>
+        <p id="para">This is also a paragraph tag</p>
+        <a class="visit">Visit my Home Page</a>
+        
+        <div> 
+        <p> Box Model</p>
+        </div>
+    
 </body>
 </html>
-

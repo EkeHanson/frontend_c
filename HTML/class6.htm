@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HTML Mastery Course | Days 6-7 Interactive Lessons</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0a0c15 0%, #1a0a2e 100%);
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .curriculum-header {
+            max-width: 1300px;
+            margin: 0 auto 1rem auto;
+            background: linear-gradient(95deg, #0f172a 0%, #2d1b4e 100%);
+            border-radius: 1.5rem;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid #4a2b7a;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+        }
+        .badge {
+            background: #8b5cf6;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .class-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .duration {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .presentation-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.03);
+            border-radius: 2rem;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .slide-area {
+            min-height: 600px;
+            background: #0f1119;
+            padding: 2rem;
+        }
+
+        .slide-card {
+            background: rgba(22, 26, 38, 0.98);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            animation: fadeSlide 0.4s ease;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E0F2FE, #a78bfa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-left: 5px solid #8b5cf6;
+            padding-left: 1.2rem;
+        }
+
+        .slide-title i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #a78bfa;
+            font-size: 1.8rem;
+        }
+
+        .slide-sub {
+            color: #a0afc9;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 5px solid #8b5cf6;
+            padding-left: 1.2rem;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .concept-box {
+            flex: 1;
+            min-width: 240px;
+            background: #1a1f2e;
+            border-radius: 1.5rem;
+            padding: 1.3rem;
+            border: 1px solid #334155;
+            transition: all 0.2s;
+        }
+        .concept-box:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+        }
+        .concept-box h3 {
+            color: #a78bfa;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .concept-box p, .concept-list, .concept-box li {
+            color: #e2e8f0;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+        .highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+        .tag {
+            background: #1e293b;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: #c4b5fd;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .insight-card {
+            margin-top: 1.2rem;
+            background: #0f172a;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            color: #e2e8f0;
+            border-left: 3px solid #8b5cf6;
+        }
+        .two-column-split {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .col {
+            flex: 1;
+            background: #131a2a;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border: 1px solid #2d3a5e;
+        }
+        .col h4 {
+            color: #fbbf24;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        pre {
+            background: #0a0e18;
+            padding: 1rem;
+            border-radius: 1rem;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            margin: 0.8rem 0;
+            border: 1px solid #334155;
+            font-family: 'Fira Code', monospace;
+            position: relative;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            color: #cbd5e6;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 4px 8px;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: 0.2s;
+        }
+        .copy-btn:hover {
+            background: #2d3a4e;
+            color: #e2e8f0;
+        }
+
+        .iframe-demo {
+            background: #0a0e18;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border: 1px solid #334155;
+        }
+        .iframe-demo iframe {
+            width: 100%;
+            border-radius: 0.5rem;
+            background: white;
+        }
+
+        .live-iframe-container {
+            background: #0a0e18;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px solid #334155;
+            margin: 0.8rem 0;
+        }
+        .live-iframe-container iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            border-radius: 0.5rem;
+            background: white;
+        }
+
+        .iframe-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+        .iframe-controls input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid #334155;
+            background: #1a1f2e;
+            color: #e2e8f0;
+            font-family: inherit;
+        }
+        .iframe-controls input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        /* Block & Inline Styles */
+        .block-demo {
+            background: #1a2a3a;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            border-left: 3px solid #22c55e;
+        }
+        .inline-demo {
+            background: #1a2a3a;
+            padding: 0.3rem 0.8rem;
+            margin: 0.2rem;
+            border-radius: 0.3rem;
+            border: 1px solid #4ade80;
+            display: inline-block;
+        }
+        .element-tag {
+            display: inline-block;
+            background: #1e293b;
+            padding: 0.15rem 0.6rem;
+            border-radius: 0.3rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: #86efac;
+            margin: 0.1rem;
+        }
+        .element-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.5rem 0;
+        }
+        .badge-block {
+            background: #22c55e;
+            color: white;
+            padding: 0.15rem 0.6rem;
+            border-radius: 0.3rem;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge-inline {
+            background: #3b82f6;
+            color: white;
+            padding: 0.15rem 0.6rem;
+            border-radius: 0.3rem;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge-table {
+            background: #8b5cf6;
+            color: white;
+            padding: 0.15rem 0.6rem;
+            border-radius: 0.3rem;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Table Styles */
+        .table-preview {
+            background: #0a0e18;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            overflow-x: auto;
+        }
+        .table-preview table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .table-preview th, .table-preview td {
+            border: 1px solid #334155;
+            padding: 0.4rem 0.8rem;
+            text-align: left;
+            color: #e2e8f0;
+        }
+        .table-preview th {
+            background: #1e293b;
+            color: #4ade80;
+        }
+        .table-preview tr:nth-child(even) {
+            background: #1a2a3a;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #334155;
+            padding: 0.7rem;
+            text-align: left;
+            color: #e2e8f0;
+        }
+        .comparison-table th {
+            background: #1e293b;
+            color: #fbbf24;
+        }
+        .comparison-table .block-row {
+            background: rgba(34, 197, 94, 0.1);
+        }
+        .comparison-table .inline-row {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .interactive-toggle {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 0.8rem 0;
+        }
+        .interactive-toggle button {
+            flex: 1;
+            min-width: 120px;
+            justify-content: center;
+        }
+        .interactive-toggle button.active-toggle {
+            border-color: #22c55e;
+            background: #22c55e20;
+        }
+
+        button {
+            background: #1e2a3a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            border: 1px solid #334155;
+        }
+        button:hover:not(:disabled) {
+            background: #2d3a4e;
+            transform: scale(0.97);
+            border-color: #8b5cf6;
+        }
+        .nav-bar {
+            background: #0b0e16;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #2a2f3f;
+            flex-wrap: wrap;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .slide-counter {
+            font-size: 0.9rem;
+            background: #1a1f2c;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            color: #c4b5fd;
+        }
+        .indicator-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #334155;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .dot.active {
+            background: #8b5cf6;
+            width: 22px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #1a1f2c;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .qa-item {
+            margin-bottom: 0.8rem;
+            background: #131b2e;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .qa-question {
+            background: #1a2338;
+            cursor: pointer;
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s;
+        }
+        .qa-question:hover {
+            background: #232f4a;
+        }
+        .qa-question i {
+            transition: transform 0.3s;
+        }
+        .qa-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1rem;
+            background: #0f172a;
+        }
+        .qa-answer.show {
+            max-height: 500px;
+            padding: 0.5rem 1rem;
+        }
+
+        .visual-demo {
+            background: #0a0e18;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 2px dashed #334155;
+            margin: 0.8rem 0;
+        }
+        .visual-demo .block-element {
+            background: #22c55e33;
+            border: 2px solid #22c55e;
+            padding: 0.5rem;
+            margin: 0.3rem 0;
+            border-radius: 0.3rem;
+            color: #e2e8f0;
+        }
+        .visual-demo .inline-element {
+            background: #3b82f633;
+            border: 2px solid #3b82f6;
+            padding: 0.3rem 0.8rem;
+            margin: 0.2rem;
+            border-radius: 0.3rem;
+            color: #e2e8f0;
+            display: inline-block;
+        }
+
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.7rem;
+            background: #07090f;
+            color: #8ca3c7;
+        }
+        @media (max-width: 700px) {
+            .slide-area { padding: 1rem; }
+            .slide-title { font-size: 1.4rem; }
+            .slide-card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="curriculum-header">
+    <div><span class="badge"><i class="fas fa-code"></i> DAYS 6-7 • HTML MODULE</span></div>
+    <div class="class-title"><i class="fas fa-layer-group"></i> Iframes + Block/Inline + Tables</div>
+    <div class="duration"><i class="far fa-clock"></i> Complete Reference + Interactive Demos</div>
+</div>
+
+<div class="presentation-container">
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="slide-area" id="slideArea"></div>
+    <div class="nav-bar">
+        <div class="indicator-dots" id="dotsContainer"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+            <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 30</span>
+            <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <footer><i class="fas fa-graduation-cap"></i> HTML Iframes | Block & Inline Elements | HTML Tables | Complete Reference</footer>
+</div>
+
+<script>
+    // Complete combined slides array - Day 6 Iframes + Day 7 Block/Inline + Tables
+    const slides = [
+        // ==================== DAY 6: IFRAMES (Slides 0-11) ====================
+        {
+            title: "<i class='fas fa-window-restore'></i> What is an Iframe?",
+            subtitle: "Display a web page within a web page",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-question-circle"></i> Understanding Iframes</h3>
+                    <p>An HTML <span class="highlight">iframe</span> (inline frame) is used to embed another document within the current HTML document.</p>
+                    <div class="iframe-demo">
+                        <iframe src="https://example.com" height="200" style="width:100%;" title="Example Demo"></iframe>
+                        <p style="color:#94a3b8; font-size:0.8rem; margin-top:0.5rem;">⬆️ Live iframe displaying example.com</p>
+                    </div>
+                    <div class="insight-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Iframes are commonly used for embedding videos, maps, social media posts, and external content.</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-code'></i> Iframe Syntax",
+            subtitle: "The basic structure of an iframe element",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-terminal"></i> Basic Syntax</h4>
+                        <pre><code>&lt;iframe src="url" title="description"&gt;&lt;/iframe&gt;</code></pre>
+                        <div class="insight-card" style="margin-top:0.5rem;">
+                            <i class="fas fa-universal-access"></i>
+                            <span><strong>Important:</strong> Always include a <code>title</code> attribute for screen readers!</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-example"></i> Example</h4>
+                        <pre><code>&lt;iframe 
+    src="https://example.com" 
+    title="Example Website"
+    height="300"
+    width="100%"
+&gt;&lt;/iframe&gt;</code></pre>
+                        <div style="background:#0a0e18; border-radius:0.5rem; padding:0.5rem; margin-top:0.5rem;">
+                            <iframe src="https://example.com" title="Example Website" height="200" style="width:100%; border:none; border-radius:0.3rem;"></iframe>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrows-alt-v'></i> Setting Height & Width",
+            subtitle: "Controlling iframe dimensions",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-ruler-combined"></i> HTML Attributes</h4>
+                        <pre><code>&lt;iframe src="demo.htm" 
+    height="200" 
+    width="300" 
+    title="Iframe Example"&gt;
+&lt;/iframe&gt;</code></pre>
+                        <div style="background:#0a0e18; border-radius:0.5rem; padding:0.5rem;">
+                            <iframe src="https://example.com" height="200" width="300" title="200x300 iframe" style="border:none; border-radius:0.3rem;"></iframe>
+                            <p style="color:#94a3b8; font-size:0.7rem;">⬆️ 200px × 300px</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fab fa-css3-alt"></i> CSS Properties</h4>
+                        <pre><code>&lt;iframe src="demo.htm" 
+    style="height:200px; width:300px;" 
+    title="Iframe Example"&gt;
+&lt;/iframe&gt;</code></pre>
+                        <div class="insight-card" style="margin-top:0.5rem;">
+                            <i class="fas fa-info-circle"></i>
+                            <span>CSS is more flexible — you can use <code>%</code>, <code>vw</code>, <code>vh</code>, etc.</span>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-border-none'></i> Removing the Border",
+            subtitle: "Customizing iframe borders with CSS",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-ban"></i> No Border</h4>
+                        <pre><code>&lt;iframe src="demo.htm" 
+    style="border:none;" 
+    title="No Border"&gt;
+&lt;/iframe&gt;</code></pre>
+                        <div style="background:#0a0e18; border-radius:0.5rem; padding:0.5rem;">
+                            <iframe src="https://example.com" style="border:none; width:100%; height:150px; border-radius:0.3rem;" title="No border iframe"></iframe>
+                            <p style="color:#94a3b8; font-size:0.7rem;">⬆️ No border (clean)</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-paint-brush"></i> Custom Border</h4>
+                        <pre><code>&lt;iframe src="demo.htm" 
+    style="border:3px solid #8b5cf6; border-radius:12px;" 
+    title="Styled Border"&gt;
+&lt;/iframe&gt;</code></pre>
+                        <div style="background:#0a0e18; border-radius:0.5rem; padding:0.5rem;">
+                            <iframe src="https://example.com" style="border:3px solid #8b5cf6; border-radius:12px; width:100%; height:150px;" title="Styled border iframe"></iframe>
+                            <p style="color:#94a3b8; font-size:0.7rem;">⬆️ Purple border with rounded corners</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-magic"></i>
+                    <span>Use <code>border: none</code> or set custom borders to match your design!</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-crosshairs'></i> Iframe as Link Target",
+            subtitle: "Loading content into an iframe via links",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-link"></i> Target Attribute</h3>
+                    <p>Use the <code>target</code> attribute of a link to load content into a named iframe.</p>
+                    <div class="iframe-demo">
+                        <iframe name="demo-iframe" src="https://example.com" title="Link Target Demo" style="width:100%; height:250px; border:1px solid #334155; border-radius:0.5rem; background:white;"></iframe>
+                        <div style="display:flex; flex-wrap:wrap; gap:0.8rem; margin-top:0.8rem;">
+                            <a href="https://example.com" target="demo-iframe" style="color:#a78bfa; padding:0.4rem 1rem; background:#1a1f2e; border-radius:2rem; text-decoration:none; border:1px solid #334155; transition:0.2s;" onmouseover="this.style.borderColor='#8b5cf6'" onmouseout="this.style.borderColor='#334155'">Example.com</a>
+                            <a href="https://www.wikipedia.org" target="demo-iframe" style="color:#a78bfa; padding:0.4rem 1rem; background:#1a1f2e; border-radius:2rem; text-decoration:none; border:1px solid #334155; transition:0.2s;" onmouseover="this.style.borderColor='#8b5cf6'" onmouseout="this.style.borderColor='#334155'">Wikipedia</a>
+                            <a href="https://github.com" target="demo-iframe" style="color:#a78bfa; padding:0.4rem 1rem; background:#1a1f2e; border-radius:2rem; text-decoration:none; border:1px solid #334155; transition:0.2s;" onmouseover="this.style.borderColor='#8b5cf6'" onmouseout="this.style.borderColor='#334155'">GitHub</a>
+                            <a href="https://www.youtube.com/embed/dQw4w9WgXcQ" target="demo-iframe" style="color:#a78bfa; padding:0.4rem 1rem; background:#1a1f2e; border-radius:2rem; text-decoration:none; border:1px solid #334155; transition:0.2s;" onmouseover="this.style.borderColor='#8b5cf6'" onmouseout="this.style.borderColor='#334155'">YouTube</a>
+                        </div>
+                        <pre style="margin-top:0.8rem;"><code>&lt;iframe name="demo-iframe" src="https://example.com"&gt;&lt;/iframe&gt;
+&lt;a href="https://example.com" target="demo-iframe"&gt;Visit&lt;/a&gt;</code></pre>
+                    </div>
+                    <div class="insight-card">
+                        <i class="fas fa-star"></i>
+                        <span>This is perfect for navigation menus that keep a main content iframe!</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-play'></i> Live Iframe Playground",
+            subtitle: "Enter any URL to load in the iframe",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-rocket"></i> Interactive Demo</h3>
+                    <div class="live-iframe-container">
+                        <iframe id="liveIframe" src="https://example.com" title="Live iframe playground" style="width:100%; height:350px; border:none; border-radius:0.5rem; background:white;"></iframe>
+                    </div>
+                    <div class="iframe-controls">
+                        <input type="text" id="iframeUrlInput" placeholder="Enter URL (e.g., https://example.com)" value="https://example.com">
+                        <button onclick="loadIframe()"><i class="fas fa-arrow-right"></i> Load</button>
+                        <button onclick="resetIframe()"><i class="fas fa-redo"></i> Reset</button>
+                    </div>
+                    <div class="iframe-controls" style="margin-top:0.5rem;">
+                        <button onclick="loadIframePreset('https://example.com')">Example.com</button>
+                        <button onclick="loadIframePreset('https://www.wikipedia.org')">Wikipedia</button>
+                        <button onclick="loadIframePreset('https://github.com')">GitHub</button>
+                        <button onclick="loadIframePreset('https://www.youtube.com/embed/dQw4w9WgXcQ')">YouTube Video</button>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-shield-alt'></i> Iframe Security",
+            subtitle: "Important security considerations",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Sandbox Attribute</h4>
+                        <pre><code>&lt;iframe src="demo.htm" 
+    sandbox="allow-scripts allow-forms"
+    title="Sandboxed iframe"&gt;
+&lt;/iframe&gt;</code></pre>
+                        <p style="color:#e2e8f0;">The <code>sandbox</code> attribute applies restrictions to the iframe content:</p>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem; margin-top:0.5rem;">
+                            <li><code>allow-scripts</code> - allows JavaScript</li>
+                            <li><code>allow-forms</code> - allows form submission</li>
+                            <li><code>allow-same-origin</code> - allows same-origin access</li>
+                            <li><code>allow-popups</code> - allows popup windows</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-lock"></i> Best Practices</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li><span class="highlight">Always</span> use the <code>title</code> attribute</li>
+                            <li>Use HTTPS for <code>src</code> when possible</li>
+                            <li>Avoid loading untrusted content</li>
+                            <li>Use <code>sandbox</code> for third-party content</li>
+                            <li>Consider using <code>loading="lazy"</code> for performance</li>
+                        </ul>
+                        <div class="insight-card" style="margin-top:0.8rem;">
+                            <i class="fas fa-gavel"></i>
+                            <span>Many sites (Google, Facebook) block iframe embedding for security reasons.</span>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-video'></i> Embedding Videos with Iframe",
+            subtitle: "YouTube, Vimeo, and more",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fab fa-youtube"></i> YouTube Embed</h3>
+                    <div class="iframe-demo">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" style="width:100%; height:315px; border:none; border-radius:0.5rem;"></iframe>
+                    </div>
+                    <pre><code>&lt;iframe src="https://www.youtube.com/embed/VIDEO_ID" 
+    title="YouTube video player"
+    width="100%" height="315"
+    style="border:none; border-radius:8px;"&gt;
+&lt;/iframe&gt;</code></pre>
+                    <div class="insight-card">
+                        <i class="fas fa-film"></i>
+                        <span>Most video platforms provide embed codes that use iframes!</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-map-marked-alt'></i> Embedding Maps with Iframe",
+            subtitle: "Google Maps iframe integration",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-map-pin"></i> Google Maps Embed</h3>
+                    <div class="iframe-demo">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.935239787771!2d-0.1279873!3d51.5073509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604c3b9d6c6d1%3A0x5f98b2b7f4cf0b8!2sLondon%2C%20UK!5e0!3m2!1sen!2sus!4v1234567890" title="Google Maps - London" style="width:100%; height:300px; border:none; border-radius:0.5rem;" loading="lazy"></iframe>
+                    </div>
+                    <div class="insight-card">
+                        <i class="fas fa-globe"></i>
+                        <span>Use Google Maps' "Share" → "Embed a map" to get your own iframe code!</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-share-alt'></i> Embedding Social Media",
+            subtitle: "Twitter, Instagram, and Facebook embeds",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fab fa-twitter"></i> Twitter Embed</h4>
+                        <div style="background:#0a0e18; border-radius:0.5rem; padding:0.5rem;">
+                            <iframe src="https://platform.twitter.com/widgets/tweet.html?id=123456789" title="Twitter embed" style="width:100%; height:200px; border:none; border-radius:0.3rem;"></iframe>
+                        </div>
+                        <p style="color:#94a3b8; font-size:0.7rem; margin-top:0.3rem;">Note: Twitter requires specific tweet IDs for embedding</p>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-code"></i> Getting Embed Codes</h4>
+                        <div style="background:#0a0e18; border-radius:0.5rem; padding:1rem;">
+                            <p style="color:#e2e8f0; margin-bottom:0.8rem;"><i class="fas fa-check-circle" style="color:#4ade80;"></i> Most platforms provide embed codes:</p>
+                            <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                                <li>YouTube → Share → Embed</li>
+                                <li>Twitter → Share Tweet → Embed</li>
+                                <li>Instagram → ⋮ → Embed</li>
+                                <li>Google Maps → Share → Embed map</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-hashtag"></i>
+                    <span>Social platforms provide embed codes in their share/embed options!</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-list-check'></i> Knowledge Check - Iframes",
+            subtitle: "Test your iframe understanding",
+            content: `
+                <div class="qa-section" id="knowledge-qa-iframe">
+                    <div class="concept-box" style="margin-bottom:1rem;">
+                        <h3><i class="fas fa-puzzle-piece"></i> Click to reveal answers</h3>
+                        <p style="color:#94a3b8;">Test your knowledge about HTML iframes</p>
+                    </div>
+                    <div id="checkContainerIframe"></div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-graduation-cap'></i> Iframes Summary",
+            subtitle: "Everything you learned about iframes",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-check-circle"></i> Key Concepts</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li><span class="highlight">&lt;iframe&gt;</span> embeds external content</li>
+                            <li><code>src</code> defines the content URL</li>
+                            <li><code>title</code> is required for accessibility</li>
+                            <li><code>height</code> and <code>width</code> control size</li>
+                            <li><code>border: none</code> removes default border</li>
+                            <li><code>target="iframe-name"</code> loads links into iframe</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-tools"></i> Advanced Topics</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li><code>sandbox</code> for security restrictions</li>
+                            <li><code>loading="lazy"</code> for performance</li>
+                            <li><code>allow</code> for permission policies</li>
+                            <li><code>srcdoc</code> for inline HTML content</li>
+                            <li>Cross-origin iframe communication (postMessage)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Practice: Build a "link preview" tool with an iframe that loads different pages!</span>
+                </div>
+            `
+        },
+
+        // ==================== DAY 7: BLOCK & INLINE ELEMENTS (Slides 12-18) ====================
+        {
+            title: "<i class='fas fa-layer-group'></i> Understanding Display Values",
+            subtitle: "Every HTML element has a default display behavior",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-question-circle"></i> Block vs Inline</h3>
+                    <p>Every HTML element has a default <span class="highlight">display</span> value, depending on what type of element it is.</p>
+                    <p>The two most common display values are <span class="highlight">block</span> and <span class="highlight">inline</span>.</p>
+                    
+                    <div class="visual-demo">
+                        <div class="block-element">
+                            <i class="fas fa-chevron-right" style="color:#22c55e;"></i> Block element - takes full width
+                        </div>
+                        <div class="block-element">
+                            <i class="fas fa-chevron-right" style="color:#22c55e;"></i> Another block element - starts on new line
+                        </div>
+                        <div style="margin-top:0.5rem;">
+                            <span class="inline-element">
+                                <i class="fas fa-chevron-right" style="color:#3b82f6;"></i> Inline
+                            </span>
+                            <span class="inline-element">
+                                <i class="fas fa-chevron-right" style="color:#3b82f6;"></i> Inline
+                            </span>
+                            <span class="inline-element">
+                                <i class="fas fa-chevron-right" style="color:#3b82f6;"></i> Inline
+                            </span>
+                            <span style="color:#94a3b8; font-size:0.85rem;">← All on same line!</span>
+                        </div>
+                    </div>
+
+                    <div class="insight-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <span><strong>Key Difference:</strong> Block elements start on new lines and take full width. Inline elements stay in the same line and only take as much width as needed.</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-cube'></i> Block-Level Elements",
+            subtitle: "Elements that start on a new line and take full width",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-check-circle" style="color:#22c55e;"></i> Block Characteristics</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li>Always starts on a <span class="highlight">new line</span></li>
+                            <li>Takes up the <span class="highlight">full width</span> available</li>
+                            <li>Browsers add <span class="highlight">margin</span> before and after</li>
+                            <li>Can contain <span class="highlight">inline</span> and other <span class="highlight">block</span> elements</li>
+                        </ul>
+                        <div style="margin-top:1rem; background:#0a0e18; border-radius:0.5rem; padding:0.5rem;">
+                            <div style="background:#22c55e33; border:1px solid #22c55e; padding:0.3rem; margin:0.2rem 0; border-radius:0.2rem;">
+                                <span style="color:#e2e8f0;">Block 1</span>
+                            </div>
+                            <div style="background:#22c55e33; border:1px solid #22c55e; padding:0.3rem; margin:0.2rem 0; border-radius:0.2rem;">
+                                <span style="color:#e2e8f0;">Block 2</span>
+                            </div>
+                            <div style="background:#22c55e33; border:1px solid #22c55e; padding:0.3rem; margin:0.2rem 0; border-radius:0.2rem;">
+                                <span style="color:#e2e8f0;">Block 3</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-list"></i> Common Block Elements</h4>
+                        <div class="element-grid">
+                            <span class="element-tag">&lt;address&gt;</span>
+                            <span class="element-tag">&lt;article&gt;</span>
+                            <span class="element-tag">&lt;aside&gt;</span>
+                            <span class="element-tag">&lt;blockquote&gt;</span>
+                            <span class="element-tag">&lt;canvas&gt;</span>
+                            <span class="element-tag">&lt;dd&gt;</span>
+                            <span class="element-tag">&lt;div&gt;</span>
+                            <span class="element-tag">&lt;dl&gt;</span>
+                            <span class="element-tag">&lt;dt&gt;</span>
+                            <span class="element-tag">&lt;fieldset&gt;</span>
+                            <span class="element-tag">&lt;figcaption&gt;</span>
+                            <span class="element-tag">&lt;figure&gt;</span>
+                            <span class="element-tag">&lt;footer&gt;</span>
+                            <span class="element-tag">&lt;form&gt;</span>
+                            <span class="element-tag">&lt;h1&gt; - &lt;h6&gt;</span>
+                            <span class="element-tag">&lt;header&gt;</span>
+                            <span class="element-tag">&lt;hr&gt;</span>
+                            <span class="element-tag">&lt;li&gt;</span>
+                            <span class="element-tag">&lt;main&gt;</span>
+                            <span class="element-tag">&lt;nav&gt;</span>
+                            <span class="element-tag">&lt;noscript&gt;</span>
+                            <span class="element-tag">&lt;ol&gt;</span>
+                            <span class="element-tag">&lt;p&gt;</span>
+                            <span class="element-tag">&lt;pre&gt;</span>
+                            <span class="element-tag">&lt;section&gt;</span>
+                            <span class="element-tag">&lt;table&gt;</span>
+                            <span class="element-tag">&lt;tfoot&gt;</span>
+                            <span class="element-tag">&lt;ul&gt;</span>
+                            <span class="element-tag">&lt;video&gt;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-info-circle"></i>
+                    <span>The <span class="badge-block">BLOCK</span> elements <code>&lt;p&gt;</code> and <code>&lt;div&gt;</code> are the most commonly used block elements.</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrows-alt-h'></i> Inline Elements",
+            subtitle: "Elements that stay in the same line and take only needed width",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-check-circle" style="color:#3b82f6;"></i> Inline Characteristics</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li>Does <span class="highlight">not</span> start on a new line</li>
+                            <li>Only takes up as much width as <span class="highlight">necessary</span></li>
+                            <li>Does <span class="highlight">not</span> add margins before/after</li>
+                            <li>Cannot contain <span class="highlight">block</span> elements</li>
+                        </ul>
+                        <div style="margin-top:1rem; background:#0a0e18; border-radius:0.5rem; padding:0.5rem;">
+                            <span style="background:#3b82f633; border:1px solid #3b82f6; padding:0.2rem 0.6rem; border-radius:0.2rem; color:#e2e8f0;">Inline 1</span>
+                            <span style="background:#3b82f633; border:1px solid #3b82f6; padding:0.2rem 0.6rem; border-radius:0.2rem; color:#e2e8f0;">Inline 2</span>
+                            <span style="background:#3b82f633; border:1px solid #3b82f6; padding:0.2rem 0.6rem; border-radius:0.2rem; color:#e2e8f0;">Inline 3</span>
+                            <span style="color:#94a3b8; font-size:0.8rem;">← All on same line!</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-list"></i> Common Inline Elements</h4>
+                        <div class="element-grid">
+                            <span class="element-tag">&lt;a&gt;</span>
+                            <span class="element-tag">&lt;abbr&gt;</span>
+                            <span class="element-tag">&lt;acronym&gt;</span>
+                            <span class="element-tag">&lt;b&gt;</span>
+                            <span class="element-tag">&lt;bdo&gt;</span>
+                            <span class="element-tag">&lt;big&gt;</span>
+                            <span class="element-tag">&lt;br&gt;</span>
+                            <span class="element-tag">&lt;button&gt;</span>
+                            <span class="element-tag">&lt;cite&gt;</span>
+                            <span class="element-tag">&lt;code&gt;</span>
+                            <span class="element-tag">&lt;dfn&gt;</span>
+                            <span class="element-tag">&lt;em&gt;</span>
+                            <span class="element-tag">&lt;i&gt;</span>
+                            <span class="element-tag">&lt;img&gt;</span>
+                            <span class="element-tag">&lt;input&gt;</span>
+                            <span class="element-tag">&lt;kbd&gt;</span>
+                            <span class="element-tag">&lt;label&gt;</span>
+                            <span class="element-tag">&lt;map&gt;</span>
+                            <span class="element-tag">&lt;object&gt;</span>
+                            <span class="element-tag">&lt;output&gt;</span>
+                            <span class="element-tag">&lt;q&gt;</span>
+                            <span class="element-tag">&lt;samp&gt;</span>
+                            <span class="element-tag">&lt;script&gt;</span>
+                            <span class="element-tag">&lt;select&gt;</span>
+                            <span class="element-tag">&lt;small&gt;</span>
+                            <span class="element-tag">&lt;span&gt;</span>
+                            <span class="element-tag">&lt;strong&gt;</span>
+                            <span class="element-tag">&lt;sub&gt;</span>
+                            <span class="element-tag">&lt;sup&gt;</span>
+                            <span class="element-tag">&lt;textarea&gt;</span>
+                            <span class="element-tag">&lt;time&gt;</span>
+                            <span class="element-tag">&lt;tt&gt;</span>
+                            <span class="element-tag">&lt;var&gt;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-exclamation-triangle" style="color:#fbbf24;"></i>
+                    <span><strong>Important:</strong> An inline element <span class="highlight">cannot</span> contain a block-level element!</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-box'></i> The &lt;div&gt; Element",
+            subtitle: "The ultimate block-level container",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-divide"></i> &lt;div&gt; - Division Container</h3>
+                    <p>The <code>&lt;div&gt;</code> element is often used as a <span class="highlight">container</span> for other HTML elements.</p>
+                    
+                    <div class="demo-box" style="background:#0a0e18; border-radius:1rem; padding:1rem; margin:0.8rem 0; border:1px solid #334155;">
+                        <div style="background:#1a2a3a; padding:1.2rem; border-radius:0.5rem; border:2px solid #22c55e;">
+                            <h3 style="color:#4ade80;">London</h3>
+                            <p style="color:#e2e8f0;">London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+                            <p style="color:#94a3b8; font-size:0.8rem;">⬆️ This content is inside a &lt;div&gt; container</p>
+                        </div>
+                    </div>
+
+                    <pre><code>&lt;div style="background-color:black;color:white;padding:20px;"&gt;
+    &lt;h2&gt;London&lt;/h2&gt;
+    &lt;p&gt;London is the capital city of England...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+                    <div class="insight-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>The <code>&lt;div&gt;</code> element has no required attributes, but <code>style</code>, <code>class</code>, and <code>id</code> are commonly used with CSS.</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-pen'></i> The &lt;span&gt; Element",
+            subtitle: "The inline container for styling parts of text",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-pen-fancy"></i> &lt;span&gt; - Inline Container</h3>
+                    <p>The <code>&lt;span&gt;</code> element is an <span class="highlight">inline container</span> used to mark up a part of a text or document.</p>
+                    
+                    <div class="demo-box" style="background:#0a0e18; border-radius:1rem; padding:1rem; margin:0.8rem 0; border:1px solid #334155;">
+                        <div style="background:#1a2a3a; padding:1.2rem; border-radius:0.5rem; border:2px solid #3b82f6;">
+                            <p style="color:#e2e8f0; font-size:1.1rem;">
+                                My mother has 
+                                <span style="color:#3b82f6; font-weight:bold; background:#3b82f622; padding:0.2rem 0.5rem; border-radius:0.3rem;">blue</span> 
+                                eyes and my father has 
+                                <span style="color:#22c55e; font-weight:bold; background:#22c55e22; padding:0.2rem 0.5rem; border-radius:0.3rem;">dark green</span> 
+                                eyes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <pre><code>&lt;p&gt;My mother has 
+    &lt;span style="color:blue;font-weight:bold;"&gt;blue&lt;/span&gt; 
+    eyes and my father has 
+    &lt;span style="color:darkolivegreen;font-weight:bold;"&gt;dark green&lt;/span&gt; 
+    eyes.&lt;/p&gt;</code></pre>
+
+                    <div class="insight-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>The <code>&lt;span&gt;</code> element is perfect for styling <span style="color:#3b82f6;">specific parts</span> of text without affecting the rest of the content.</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-table'></i> Block vs Inline Comparison",
+            subtitle: "Side-by-side comparison of block and inline elements",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-balance-scale"></i> Comparison Table</h3>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th style="width:30%;">Feature</th>
+                                <th style="width:35%;"><span class="badge-block">BLOCK</span></th>
+                                <th style="width:35%;"><span class="badge-inline">INLINE</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="block-row">
+                                <td><strong>Starts on new line?</strong></td>
+                                <td>✅ Yes, always</td>
+                                <td>❌ No</td>
+                            </tr>
+                            <tr class="inline-row">
+                                <td><strong>Width behavior</strong></td>
+                                <td>Takes <span class="highlight">full width</span> available</td>
+                                <td>Takes only <span class="highlight">as much as needed</span></td>
+                            </tr>
+                            <tr class="block-row">
+                                <td><strong>Margins</strong></td>
+                                <td>Auto margins before/after</td>
+                                <td>No auto margins</td>
+                            </tr>
+                            <tr class="inline-row">
+                                <td><strong>Can contain</strong></td>
+                                <td>Block + Inline elements</td>
+                                <td><span class="highlight">Only</span> inline elements</td>
+                            </tr>
+                            <tr class="block-row">
+                                <td><strong>Common examples</strong></td>
+                                <td>&lt;div&gt;, &lt;p&gt;, &lt;h1&gt; - &lt;h6&gt;</td>
+                                <td>&lt;span&gt;, &lt;a&gt;, &lt;strong&gt;, &lt;em&gt;</td>
+                            </tr>
+                            <tr class="inline-row">
+                                <td><strong>Best used for</strong></td>
+                                <td>Structure, layout, sections</td>
+                                <td>Styling text parts, links, emphasis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="insight-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span><strong>Remember:</strong> Block = Structure, Inline = Style. Use them appropriately!</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-play'></i> Interactive Display Demo",
+            subtitle: "Toggle between block and inline display",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-sliders-h"></i> Display Property Toggle</h3>
+                    <p>Click the buttons below to change the display property of the element.</p>
+                    
+                    <div style="margin-top:1rem;">
+                        <div id="interactiveElement" style="background:#1a2a3a; padding:1rem; border-radius:0.5rem; border:2px solid #22c55e; transition:all 0.3s;">
+                            <p style="color:#e2e8f0; margin:0;">
+                                <i class="fas fa-cube" style="color:#4ade80;"></i>
+                                This element's display is currently: 
+                                <span id="displayStatus" style="color:#fbbf24; font-weight:bold;">block</span>
+                            </p>
+                            <p style="color:#94a3b8; font-size:0.85rem; margin-top:0.5rem;">
+                                Notice how the element behaves differently with each display value!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-toggle">
+                        <button onclick="setDisplay('block')" id="blockBtn" class="active-toggle" style="border-color:#22c55e;">
+                            <i class="fas fa-cube"></i> Block
+                        </button>
+                        <button onclick="setDisplay('inline')" id="inlineBtn" style="border-color:#3b82f6;">
+                            <i class="fas fa-arrows-alt-h"></i> Inline
+                        </button>
+                        <button onclick="setDisplay('inline-block')" id="inlineBlockBtn" style="border-color:#a78bfa;">
+                            <i class="fas fa-layer-group"></i> Inline-Block
+                        </button>
+                        <button onclick="setDisplay('none')" id="noneBtn" style="border-color:#ef4444;">
+                            <i class="fas fa-eye-slash"></i> None (hidden)
+                        </button>
+                    </div>
+
+                    <pre style="margin-top:0.5rem;"><code>display: <span id="codeDisplay">block</span>;</code></pre>
+
+                    <div class="insight-card">
+                        <i class="fas fa-magic"></i>
+                        <span>Try different display values to see how they affect layout! <code>inline-block</code> combines the best of both.</span>
+                    </div>
+                </div>
+                <script>
+                    function setDisplay(value) {
+                        const element = document.getElementById('interactiveElement');
+                        const status = document.getElementById('displayStatus');
+                        const codeDisplay = document.getElementById('codeDisplay');
+                        const allBtns = document.querySelectorAll('.interactive-toggle button');
+                        
+                        allBtns.forEach(btn => btn.classList.remove('active-toggle'));
+                        
+                        if (value === 'block') {
+                            element.style.display = 'block';
+                            element.style.borderColor = '#22c55e';
+                            document.getElementById('blockBtn').classList.add('active-toggle');
+                        } else if (value === 'inline') {
+                            element.style.display = 'inline';
+                            element.style.borderColor = '#3b82f6';
+                            document.getElementById('inlineBtn').classList.add('active-toggle');
+                        } else if (value === 'inline-block') {
+                            element.style.display = 'inline-block';
+                            element.style.borderColor = '#a78bfa';
+                            document.getElementById('inlineBlockBtn').classList.add('active-toggle');
+                        } else if (value === 'none') {
+                            element.style.display = 'none';
+                            document.getElementById('noneBtn').classList.add('active-toggle');
+                            status.textContent = 'none (hidden)';
+                            codeDisplay.textContent = 'none';
+                            return;
+                        }
+                        status.textContent = value;
+                        codeDisplay.textContent = value;
+                    }
+                <\/script>
+            `
+        },
+        {
+            title: "<i class='fas fa-list-check'></i> Knowledge Check - Block & Inline",
+            subtitle: "Test your understanding of block and inline elements",
+            content: `
+                <div class="qa-section" id="knowledge-qa-block">
+                    <div class="concept-box" style="margin-bottom:1rem;">
+                        <h3><i class="fas fa-puzzle-piece"></i> Block & Inline Quiz</h3>
+                        <p style="color:#94a3b8;">Click to reveal answers</p>
+                    </div>
+                    <div id="checkContainerBlock"></div>
+                </div>
+            `
+        },
+
+        // ==================== DAY 7: TABLES (Slides 19-29) ====================
+        {
+            title: "<i class='fas fa-table'></i> Introduction to HTML Tables",
+            subtitle: "Arranging data into rows and columns",
+            content: `
+                <div class="concept-box">
+                    <h3><i class="fas fa-database"></i> What are HTML Tables?</h3>
+                    <p>HTML tables allow web developers to arrange data into <span class="highlight">rows</span> and <span class="highlight">columns</span>.</p>
+                    
+                    <div class="table-preview" style="border:1px solid #334155; border-radius:0.5rem; overflow:hidden;">
+                        <table style="border-collapse:collapse; width:100%;">
+                            <thead>
+                                <tr>
+                                    <th style="border:1px solid #334155; padding:0.6rem 1rem; background:#1e293b; color:#4ade80;">Company</th>
+                                    <th style="border:1px solid #334155; padding:0.6rem 1rem; background:#1e293b; color:#4ade80;">Contact</th>
+                                    <th style="border:1px solid #334155; padding:0.6rem 1rem; background:#1e293b; color:#4ade80;">Country</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Alfreds Futterkiste</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Maria Anders</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Germany</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Centro comercial Moctezuma</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Francisco Chang</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Mexico</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Ernst Handel</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Roland Mendel</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Austria</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Island Trading</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Helen Bennett</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">UK</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Laughing Bacchus Winecellars</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Yoshi Tannamuri</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Canada</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Magazzini Alimentari Riuniti</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Giovanni Rovelli</td>
+                                    <td style="border:1px solid #334155; padding:0.6rem 1rem; color:#e2e8f0;">Italy</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="insight-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Tables are perfect for displaying structured data like financial reports, schedules, and comparison charts.</span>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-code'></i> Table Structure",
+            subtitle: "Understanding table, tr, th, and td elements",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-sitemap"></i> Table Elements</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li><code>&lt;table&gt;</code> - Defines the table</li>
+                            <li><code>&lt;tr&gt;</code> - Table row</li>
+                            <li><code>&lt;td&gt;</code> - Table data (cell)</li>
+                            <li><code>&lt;th&gt;</code> - Table header (bold & centered)</li>
+                            <li><code>&lt;thead&gt;</code> - Groups header content</li>
+                            <li><code>&lt;tbody&gt;</code> - Groups body content</li>
+                            <li><code>&lt;tfoot&gt;</code> - Groups footer content</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-example"></i> Basic Table</h4>
+                        <pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Name&lt;/th&gt;
+    &lt;th&gt;Age&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Emil&lt;/td&gt;
+    &lt;td&gt;16&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Tobias&lt;/td&gt;
+    &lt;td&gt;14&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+                        <div class="table-preview">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                </tr>
+                                <tr>
+                                    <td>Emil</td>
+                                    <td>16</td>
+                                </tr>
+                                <tr>
+                                    <td>Tobias</td>
+                                    <td>14</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-info-circle"></i>
+                    <span><code>th</code> elements are bold and centered by default. <code>td</code> elements are regular text.</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-border-all'></i> Table Borders",
+            subtitle: "Adding and styling table borders",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-border-style"></i> Basic Border</h4>
+                        <pre><code>table, th, td {
+  border: 1px solid black;
+}</code></pre>
+                        <div class="table-preview" style="border:1px solid #4ade80; border-radius:0.5rem; overflow:hidden;">
+                            <table style="border:1px solid #4ade80; border-collapse:collapse;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Name</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Age</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Emil</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">16</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-compress-arrows-alt"></i> Collapsed Border</h4>
+                        <pre><code>table {
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid black;
+}</code></pre>
+                        <div class="table-preview" style="border:1px solid #4ade80; border-radius:0.5rem; overflow:hidden;">
+                            <table style="border:1px solid #4ade80; border-collapse:collapse;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Name</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Age</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Emil</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">16</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="insight-card" style="margin-top:0.5rem;">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Use <code>border-collapse: collapse</code> to merge double borders into one.</span>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-arrows-alt'></i> Table Sizes",
+            subtitle: "Setting width, height, and column sizes",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-expand"></i> Table Width</h4>
+                        <pre><code>&lt;table style="width:100%"&gt;</code></pre>
+                        <div class="table-preview">
+                            <table style="width:100%; border-collapse:collapse; border:1px solid #4ade80;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.3rem 0.6rem; background:#1e293b; color:#4ade80;">Name</th>
+                                    <th style="border:1px solid #4ade80; padding:0.3rem 0.6rem; background:#1e293b; color:#4ade80;">Age</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.3rem 0.6rem;">Emil</td>
+                                    <td style="border:1px solid #4ade80; padding:0.3rem 0.6rem;">16</td>
+                                </tr>
+                            </table>
+                            <p style="color:#94a3b8; font-size:0.7rem; margin-top:0.3rem;">Table takes 100% of available width</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-columns"></i> Column Width</h4>
+                        <pre><code>&lt;th style="width:70%"&gt;</code></pre>
+                        <div class="table-preview">
+                            <table style="width:100%; border-collapse:collapse; border:1px solid #4ade80;">
+                                <tr>
+                                    <th style="width:70%; border:1px solid #4ade80; padding:0.3rem 0.6rem; background:#1e293b; color:#4ade80;">Name (70%)</th>
+                                    <th style="border:1px solid #4ade80; padding:0.3rem 0.6rem; background:#1e293b; color:#4ade80;">Age (30%)</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.3rem 0.6rem;">Emil</td>
+                                    <td style="border:1px solid #4ade80; padding:0.3rem 0.6rem;">16</td>
+                                </tr>
+                            </table>
+                            <p style="color:#94a3b8; font-size:0.7rem; margin-top:0.3rem;">First column takes 70% of the width</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Use percentage for responsive table sizing. Set row height with <code>style="height:200px"</code> on <code>&lt;tr&gt;</code>.</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-heading'></i> Table Headers",
+            subtitle: "Horizontal and vertical headers",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-arrow-right"></i> Horizontal Headers</h4>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; border:1px solid #4ade80;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Firstname</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Lastname</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Age</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Jill</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Smith</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">50</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-arrow-down"></i> Vertical Headers</h4>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; border:1px solid #4ade80;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Firstname</th>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Jill</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Eve</td>
+                                </tr>
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Lastname</th>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Smith</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Jackson</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Use <code>th</code> for headers. Add <code>text-align: left</code> to left-align header text.</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-merge'></i> Colspan & Rowspan",
+            subtitle: "Merging cells across columns and rows",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-arrows-left-right"></i> Colspan</h4>
+                        <p style="color:#e2e8f0; font-size:0.9rem;">Merges cells across multiple <span class="highlight">columns</span>.</p>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; border:1px solid #4ade80;">
+                                <tr>
+                                    <th colspan="2" style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80; text-align:center;">Name</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Age</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Jill</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Smith</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">43</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <pre><code>&lt;th colspan="2"&gt;Name&lt;/th&gt;</code></pre>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-arrows-up-down"></i> Rowspan</h4>
+                        <p style="color:#e2e8f0; font-size:0.9rem;">Merges cells across multiple <span class="highlight">rows</span>.</p>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; border:1px solid #4ade80;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Name</th>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Jill</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2" style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Phone</th>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">555-1234</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">555-8745</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <pre><code>&lt;th rowspan="2"&gt;Phone&lt;/th&gt;</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-magic"></i>
+                    <span><strong>Tip:</strong> <code>colspan</code> spans columns, <code>rowspan</code> spans rows. The value is the number of cells to merge!</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-palette'></i> Table Styling",
+            subtitle: "Zebra stripes, hover effects, and dividers",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-stripes"></i> Zebra Stripes</h4>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; border:1px solid #4ade80;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">#</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Name</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Age</th>
+                                </tr>
+                                <tr style="background:#1a2a3a;">
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">1</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Alice</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">25</td>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">2</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Bob</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">30</td>
+                                </tr>
+                                <tr style="background:#1a2a3a;">
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">3</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Charlie</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">35</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <pre><code>tr:nth-child(even) {
+  background-color: #1a2a3a;
+}</code></pre>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-mouse-pointer"></i> Hover & Dividers</h4>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; width:100%;">
+                                <tr>
+                                    <th style="border-bottom:2px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Name</th>
+                                    <th style="border-bottom:2px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Savings</th>
+                                </tr>
+                                <tr style="border-bottom:1px solid #334155; transition:0.2s;" onmouseover="this.style.background='#1a2a3a'" onmouseout="this.style.background='transparent'">
+                                    <td style="padding:0.4rem 0.8rem; color:#e2e8f0;">Peter</td>
+                                    <td style="padding:0.4rem 0.8rem; color:#e2e8f0;">$100</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #334155; transition:0.2s;" onmouseover="this.style.background='#1a2a3a'" onmouseout="this.style.background='transparent'">
+                                    <td style="padding:0.4rem 0.8rem; color:#e2e8f0;">Lois</td>
+                                    <td style="padding:0.4rem 0.8rem; color:#e2e8f0;">$150</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #334155; transition:0.2s;" onmouseover="this.style.background='#1a2a3a'" onmouseout="this.style.background='transparent'">
+                                    <td style="padding:0.4rem 0.8rem; color:#e2e8f0;">Joe</td>
+                                    <td style="padding:0.4rem 0.8rem; color:#e2e8f0;">$300</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <pre><code>tr:hover { background: #1a2a3a; }
+tr { border-bottom: 1px solid #ddd; }</code></pre>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-gem"></i>
+                    <span>Combine <code>:nth-child(even)</code> with <code>:hover</code> for professional-looking tables!</span>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-padding'></i> Table Padding & Spacing",
+            subtitle: "Controlling cell padding and spacing",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-arrows-alt"></i> Cell Padding</h4>
+                        <p style="color:#94a3b8; font-size:0.85rem;">Space between cell edges and content</p>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; border:1px solid #4ade80;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:20px; background:#1e293b; color:#4ade80;">Name</th>
+                                    <th style="border:1px solid #4ade80; padding:20px; background:#1e293b; color:#4ade80;">Age</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:20px;">Emil</td>
+                                    <td style="border:1px solid #4ade80; padding:20px;">16</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <pre><code>th, td { padding: 20px; }</code></pre>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-expand"></i> Cell Spacing</h4>
+                        <p style="color:#94a3b8; font-size:0.85rem;">Space between cells</p>
+                        <div class="table-preview">
+                            <table style="border-spacing:15px; border-collapse:separate; border:1px solid #4ade80;">
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Name</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Age</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">Emil</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">16</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <pre><code>table { border-spacing: 15px; }</code></pre>
+                        <div class="insight-card" style="margin-top:0.5rem;">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Use <code>padding</code> for inner space, <code>border-spacing</code> for outer space between cells.</span>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-caption'></i> Table Caption & Colgroup",
+            subtitle: "Adding titles and styling columns",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-heading"></i> Table Caption</h4>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; border:1px solid #4ade80;">
+                                <caption style="color:#4ade80; font-weight:bold; padding:0.5rem;">Monthly Savings</caption>
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Month</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; background:#1e293b; color:#4ade80;">Savings</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">January</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem;">$100</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <pre><code>&lt;caption&gt;Monthly Savings&lt;/caption&gt;</code></pre>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-columns"></i> Colgroup</h4>
+                        <div class="table-preview">
+                            <table style="border-collapse:collapse; border:1px solid #4ade80;">
+                                <colgroup>
+                                    <col style="background:#1a2a3a;">
+                                    <col style="background:#0a1a2a;">
+                                </colgroup>
+                                <tr>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; color:#4ade80;">MON</th>
+                                    <th style="border:1px solid #4ade80; padding:0.4rem 0.8rem; color:#4ade80;">TUE</th>
+                                </tr>
+                                <tr>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem; color:#e2e8f0;">1</td>
+                                    <td style="border:1px solid #4ade80; padding:0.4rem 0.8rem; color:#e2e8f0;">2</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <pre><code>&lt;colgroup&gt;
+  &lt;col span="2" style="background:#1a2a3a;"&gt;
+&lt;/colgroup&gt;</code></pre>
+                        <div class="insight-card" style="margin-top:0.5rem;">
+                            <i class="fas fa-info-circle"></i>
+                            <span><code>colgroup</code> allows styling specific columns. Place it after <code>&lt;caption&gt;</code> and before <code>&lt;thead&gt;</code>.</span>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-list-check'></i> Knowledge Check - Tables",
+            subtitle: "Test your understanding of HTML tables",
+            content: `
+                <div class="qa-section" id="knowledge-qa-tables">
+                    <div class="concept-box" style="margin-bottom:1rem;">
+                        <h3><i class="fas fa-puzzle-piece"></i> Tables Quiz</h3>
+                        <p style="color:#94a3b8;">Click to reveal answers</p>
+                    </div>
+                    <div id="checkContainerTables"></div>
+                </div>
+            `
+        },
+        {
+            title: "<i class='fas fa-graduation-cap'></i> Complete Summary",
+            subtitle: "Everything you learned in Days 6-7",
+            content: `
+                <div class="two-column-split">
+                    <div class="col">
+                        <h4><i class="fas fa-check-circle"></i> Iframes Summary</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li><span class="highlight">&lt;iframe&gt;</span> embeds external content</li>
+                            <li><code>src</code> defines the content URL</li>
+                            <li><code>title</code> is required for accessibility</li>
+                            <li><code>height</code> and <code>width</code> control size</li>
+                            <li><code>border: none</code> removes default border</li>
+                            <li><code>target="iframe-name"</code> loads links into iframe</li>
+                        </ul>
+                        <div style="margin-top:1rem;">
+                            <h4 style="color:#fbbf24; font-size:1rem;">Block & Inline</h4>
+                            <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                                <li><span class="badge-block">BLOCK</span> starts new line, takes full width</li>
+                                <li><span class="badge-inline">INLINE</span> flows with text, takes needed width</li>
+                                <li><code>&lt;div&gt;</code> = block container, <code>&lt;span&gt;</code> = inline container</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h4><i class="fas fa-table"></i> Tables Summary</h4>
+                        <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                            <li><code>&lt;table&gt;</code> - defines the table</li>
+                            <li><code>&lt;tr&gt;</code> - table row</li>
+                            <li><code>&lt;td&gt;</code> - table data cell</li>
+                            <li><code>&lt;th&gt;</code> - table header cell</li>
+                            <li><code>colspan</code> - merge columns</li>
+                            <li><code>rowspan</code> - merge rows</li>
+                        </ul>
+                        <div style="margin-top:1rem;">
+                            <h4 style="color:#fbbf24; font-size:1rem;">Table Styling</h4>
+                            <ul style="color:#e2e8f0; margin-left:1.2rem;">
+                                <li><code>border-collapse</code> for clean borders</li>
+                                <li><code>:nth-child(even)</code> for zebra stripes</li>
+                                <li><code>:hover</code> for interactive rows</li>
+                                <li><code>padding</code> and <code>border-spacing</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <span><strong>Practice Challenge:</strong> Create a student grade table with zebra stripes, hover effects, and a caption!</span>
+                </div>
+            `
+        }
+    ];
+
+    // Knowledge check questions - Iframes
+    const qaChecklistIframe = [
+        { q: "What does iframe stand for and what is its purpose?", a: "Inline Frame — it displays another HTML document within the current page." },
+        { q: "Which attribute is required for accessibility in an iframe?", a: "The <code>title</code> attribute, which describes the content for screen readers." },
+        { q: "How do you remove the default border from an iframe?", a: "Use <code>style='border:none;'</code> or <code>style='border:0;'</code>." },
+        { q: "What attribute makes an iframe load content from a link?", a: "The <code>target</code> attribute on the link, referring to the iframe's <code>name</code> attribute." },
+        { q: "Which attribute restricts what an iframe can do for security?", a: "The <code>sandbox</code> attribute applies restrictions to the embedded content." }
+    ];
+
+    // Knowledge check questions - Block & Inline
+    const qaChecklistBlock = [
+        { q: "What is the main difference between block and inline elements?", a: "Block elements start on new lines and take full width. Inline elements stay in the same line and only take needed width." },
+        { q: "Which HTML element is the standard block-level container?", a: "<code>&lt;div&gt;</code> - it's a block-level element used as a container." },
+        { q: "Which HTML element is the standard inline container?", a: "<code>&lt;span&gt;</code> - it's an inline element used to style parts of text." },
+        { q: "Can an inline element contain a block-level element?", a: "No! An inline element <span class='highlight'>cannot</span> contain a block-level element." },
+        { q: "What CSS property controls the display behavior of an element?", a: "The <code>display</code> property (e.g., <code>display: block</code>, <code>display: inline</code>)." }
+    ];
+
+    // Knowledge check questions - Tables
+    const qaChecklistTables = [
+        { q: "What does <code>&lt;tr&gt;</code> stand for in HTML tables?", a: "Table Row - it defines a row in an HTML table." },
+        { q: "What is the difference between <code>&lt;th&gt;</code> and <code>&lt;td&gt;</code>?", a: "<code>&lt;th&gt;</code> is a table header cell (bold, centered), <code>&lt;td&gt;</code> is a regular table data cell." },
+        { q: "Which attribute merges cells across multiple columns?", a: "<code>colspan</code> - e.g., <code>&lt;td colspan='2'&gt;</code> merges two columns." },
+        { q: "Which attribute merges cells across multiple rows?", a: "<code>rowspan</code> - e.g., <code>&lt;td rowspan='3'&gt;</code> merges three rows." },
+        { q: "How do you add zebra stripes to a table?", a: "Use CSS <code>:nth-child(even)</code> on <code>&lt;tr&gt;</code> elements." },
+        { q: "What CSS property collapses double borders into one?", a: "<code>border-collapse: collapse;</code> on the table element." }
+    ];
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    const slideArea = document.getElementById('slideArea');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const counterText = document.getElementById('counterText');
+    const dotsContainer = document.getElementById('dotsContainer');
+    const progressFill = document.getElementById('progressFill');
+
+    // Functions for the live iframe playground
+    window.loadIframe = function() {
+        const url = document.getElementById('iframeUrlInput').value;
+        if (url) {
+            document.getElementById('liveIframe').src = url;
+        }
+    };
+
+    window.resetIframe = function() {
+        const input = document.getElementById('iframeUrlInput');
+        input.value = 'https://example.com';
+        document.getElementById('liveIframe').src = 'https://example.com';
+    };
+
+    window.loadIframePreset = function(url) {
+        document.getElementById('iframeUrlInput').value = url;
+        document.getElementById('liveIframe').src = url;
+    };
+
+    function renderKnowledgeCheck(containerId, questions) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = '';
+        questions.forEach((item, idx) => {
+            const qaDiv = document.createElement('div');
+            qaDiv.className = 'qa-item';
+            qaDiv.innerHTML = `
+                <div class="qa-question" data-idx="${idx}">
+                    <span><strong>${idx+1}.</strong> ${item.q}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="qa-answer" id="${containerId}-ans-${idx}">
+                    <p style="padding:0.6rem 0;">✅ <span class="highlight">Answer:</span> ${item.a}</p>
+                </div>
+            `;
+            container.appendChild(qaDiv);
+        });
+        document.querySelectorAll(`#${containerId} .qa-question`).forEach(q => {
+            q.addEventListener('click', function() {
+                const idx = this.getAttribute('data-idx');
+                const ansDiv = document.getElementById(`${containerId}-ans-${idx}`);
+                const icon = this.querySelector('i');
+                if (ansDiv.classList.contains('show')) {
+                    ansDiv.classList.remove('show');
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    ansDiv.classList.add('show');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    }
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        const html = `
+            <div class="slide-card">
+                <div class="slide-title">${slide.title}</div>
+                <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+                <div class="slide-content">${slide.content}</div>
+            </div>
+        `;
+        slideArea.innerHTML = html;
+        
+        // Render knowledge checks
+        if (index === 10) {
+            renderKnowledgeCheck('checkContainerIframe', qaChecklistIframe);
+        }
+        if (index === 18) {
+            renderKnowledgeCheck('checkContainerBlock', qaChecklistBlock);
+        }
+        if (index === 28) {
+            renderKnowledgeCheck('checkContainerTables', qaChecklistTables);
+        }
+        
+        // Update navigation
+        counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === totalSlides-1);
+        
+        // Update dots
+        updateDots(index);
+        
+        // Update progress
+        progressFill.style.width = `${((index+1) / totalSlides) * 100}%`;
+        
+        // Scroll to top of slide
+        slideArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function updateDots(activeIndex) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === activeIndex) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextSlide() {
+        if (currentIndex < totalSlides - 1) {
+            currentIndex++;
+            renderSlide(currentIndex);
+        }
+    }
+
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            renderSlide(currentIndex);
+        }
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'Home') { 
+            currentIndex = 0; 
+            renderSlide(0); 
+        }
+        if (e.key === 'End') { 
+            currentIndex = totalSlides - 1; 
+            renderSlide(currentIndex); 
+        }
+    });
+
+    // Button event listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    // Load saved progress
+    const savedSlide = localStorage.getItem('combinedDays67Slide');
+    if (savedSlide !== null) {
+        const parsed = parseInt(savedSlide);
+        if (parsed >= 0 && parsed < totalSlides) {
+            currentIndex = parsed;
+        }
+    }
+
+    // Save progress on slide change
+    const originalRender = renderSlide;
+    renderSlide = function(index) {
+        originalRender(index);
+        localStorage.setItem('combinedDays67Slide', index);
+    };
+
+    // Initial render
+    renderSlide(currentIndex);
+</script>
+</body>
+</html>

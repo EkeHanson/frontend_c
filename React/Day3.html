@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>React · useEffect · Real‑world examples</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #0b0f1c 0%, #111827 100%);
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    .curriculum-header {
+      max-width: 1300px; margin: 0 auto 1rem auto;
+      background: linear-gradient(95deg, #0f172a 0%, #1e293b 100%);
+      border-radius: 1.5rem; padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      border: 1px solid #334155; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
+    }
+    .badge { background: #3b82f6; padding: 0.3rem 1rem; border-radius: 40px; font-size: 0.8rem; font-weight: bold; color: white; }
+    .class-title { font-size: 1.3rem; font-weight: 600; color: #e2e8f0; }
+    .duration { color: #94a3b8; font-size: 0.85rem; }
+    .class-nav-buttons { display: flex; gap: 0.8rem; margin-left: auto; }
+    .class-nav-btn {
+      background: #1e293b; border: 1px solid #3b82f6; padding: 0.4rem 1rem;
+      border-radius: 2rem; font-size: 0.8rem; font-weight: 600;
+      color: #e2e8f0; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.4rem; text-decoration: none;
+    }
+    .class-nav-btn:hover { background: #3b82f6; transform: scale(0.98); }
+    .class-nav-btn i { font-size: 0.8rem; }
+
+    .presentation-container {
+      max-width: 1300px; margin: 0 auto;
+      background: rgba(255,255,255,0.02); border-radius: 2rem;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+    .slide-area { min-height: 600px; background: #0f1119; padding: 2rem; }
+    .slide-card {
+      background: rgba(22, 26, 38, 0.96); backdrop-filter: blur(4px);
+      border-radius: 2rem; padding: 2rem 2.2rem;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
+      border: 1px solid rgba(97, 218, 251, 0.25);
+    }
+    .slide-title {
+      font-size: 2rem; font-weight: 700;
+      background: linear-gradient(135deg, #b3e5fc, #7aa9ff, #a78bfa);
+      background-clip: text; -webkit-background-clip: text; color: transparent;
+      margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.8rem;
+      border-left: 5px solid #61dafb; padding-left: 1.2rem;
+    }
+    .slide-title i { background: none; -webkit-background-clip: unset; color: #61dafb; font-size: 1.8rem; }
+    .slide-sub { color: #a0afc9; margin-bottom: 1.5rem; font-size: 0.95rem; border-left: 5px solid #61dafb; padding-left: 1.2rem; }
+    .content-grid { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem; }
+    .concept-box {
+      flex: 1; min-width: 240px; background: #1a1f2e; border-radius: 1.5rem;
+      padding: 1.3rem; border: 1px solid #334155; transition: all 0.2s;
+    }
+    .concept-box:hover { border-color: #61dafb; transform: translateY(-2px); }
+    .concept-box h3 { color: #7aa9ff; font-size: 1.3rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+    .concept-box h3 i { color: #61dafb; }
+    .concept-box p, .concept-list, .concept-box li { color: #e2e8f0; line-height: 1.55; font-size: 0.95rem; }
+    .highlight { color: #fbbf24; font-weight: 600; }
+    .react-highlight { color: #61dafb; font-weight: 600; }
+    .tag {
+      background: #1e293b; padding: 0.25rem 0.9rem; border-radius: 30px;
+      font-size: 0.75rem; font-family: monospace; color: #b9d0ff;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .insight-card {
+      margin-top: 1.2rem; background: #0f172a; padding: 0.9rem 1.2rem;
+      border-radius: 1rem; display: flex; align-items: center;
+      flex-wrap: wrap; gap: 0.6rem; color: #e2e8f0; border-left: 3px solid #61dafb;
+    }
+    .two-column-split { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0; }
+    .col { flex: 1; background: #131a2a; border-radius: 1.2rem; padding: 1.2rem; border: 1px solid #2d3a5e; }
+    .col h4 { color: #fbbf24; margin-bottom: 0.8rem; font-size: 1.2rem; }
+    .col h4 i { margin-right: 0.5rem; color: #61dafb; }
+    .col p, .col li { color: #e2e8f0; }
+    .extensions-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0.8rem 0; }
+    .ext-card {
+      background: #0f172a; border-radius: 1rem; padding: 0.8rem 1rem;
+      border-left: 3px solid #61dafb; flex: 1; min-width: 200px; color: #e2e8f0;
+    }
+    .ext-card strong { color: #fbbf24; }
+    .ext-card i { margin-right: 0.5rem; color: #61dafb; }
+    pre {
+      background: #0a0e18; padding: 1rem; border-radius: 1rem;
+      overflow-x: auto; font-size: 0.8rem; color: #e2e8f0;
+      margin: 0.8rem 0; border: 1px solid #334155;
+      font-family: 'Fira Code', monospace;
+    }
+    code { font-family: 'Fira Code', monospace; color: #cbd5e6; }
+
+    .qa-section { margin-top: 1.5rem; background: #0f172a; border-radius: 1.5rem; padding: 1.2rem; border: 1px solid #334155; }
+    .qa-title { font-size: 1.3rem; font-weight: bold; color: #fbbf24; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .qa-item { background: #131b2e; border-radius: 1rem; margin-bottom: 0.8rem; overflow: hidden; border: 1px solid #2d3a5e; }
+    .qa-question { padding: 1rem 1.2rem; background: #1a2338; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #e2e8f0; transition: background 0.2s; }
+    .qa-question:hover { background: #25334d; }
+    .qa-question i { color: #61dafb; transition: transform 0.3s; }
+    .qa-answer { padding: 0 1.2rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; background: #0f172a; color: #cbd5e6; line-height: 1.5; }
+    .qa-answer.show { padding: 1rem 1.2rem; max-height: 300px; }
+    .qa-answer p { margin: 0; color: #cbd5e6; }
+
+    .nav-bar { background: #0b0e16; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #2a2f3f; flex-wrap: wrap; gap: 0.8rem; }
+    .nav-buttons { display: flex; gap: 1rem; }
+    button {
+      background: #1e2a3a; border: none; font-size: 1rem; font-weight: 600;
+      padding: 0.5rem 1.5rem; border-radius: 2rem; color: #e2e8f0;
+      cursor: pointer; transition: 0.2s; display: flex; align-items: center;
+      gap: 0.5rem; font-family: inherit; border: 1px solid #334155;
+    }
+    button i { font-size: 0.9rem; }
+    button:hover:not(:disabled) { background: #2d3a4e; transform: scale(0.97); border-color: #61dafb; }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .slide-counter { font-size: 0.9rem; background: #1a1f2c; padding: 0.4rem 1rem; border-radius: 2rem; color: #a5b4fc; }
+    .indicator-dots { display: flex; gap: 0.5rem; }
+    .dot { width: 8px; height: 8px; background: #334155; border-radius: 10px; transition: 0.2s; }
+    .dot.active { background: #61dafb; width: 22px; }
+    footer { font-size: 0.7rem; text-align: center; padding: 0.7rem; background: #07090f; color: #8ca3c7; }
+    footer i { color: #61dafb; }
+    footer a { color: #61dafb; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* GitHub card styles for the useEffect slide */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .user-card {
+      background: #1a1f2e;
+      border-radius: 1.2rem;
+      padding: 1rem;
+      border: 1px solid #2d3a5e;
+      transition: 0.2s;
+      text-align: center;
+    }
+    .user-card:hover { border-color: #61dafb; transform: translateY(-3px); }
+    .user-card img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid #3b82f6;
+      margin-bottom: 0.4rem;
+      background: #0f172a;
+    }
+    .user-card .login { font-size: 1rem; font-weight: 600; color: #b9d0ff; }
+    .user-card .id { font-size: 0.7rem; color: #94a3b8; }
+    .user-card .type { font-size: 0.65rem; background: #0f172a; padding: 0.1rem 0.6rem; border-radius: 30px; display: inline-block; border: 1px solid #334155; }
+    .user-card a { color: #61dafb; text-decoration: none; font-size: 0.75rem; display: inline-block; margin-top: 0.2rem; }
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      color: #94a3b8;
+    }
+    .loading-spinner i { font-size: 2rem; color: #61dafb; }
+    .error-box {
+      background: #2d1a1a;
+      border: 1px solid #f87171;
+      border-radius: 1.2rem;
+      padding: 1rem;
+      color: #fca5a5;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .error-box i { font-size: 1.5rem; color: #f87171; }
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .status-badge {
+      background: #1e293b;
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      border: 1px solid #334155;
+    }
+    .status-badge i { color: #61dafb; margin-right: 0.4rem; }
+    .btn {
+      background: #1e293b;
+      border: 1px solid #3b82f6;
+      padding: 0.3rem 1.2rem;
+      border-radius: 2rem;
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.8rem;
+      font-family: inherit;
+    }
+    .btn:hover:not(:disabled) { background: #2d3a4e; border-color: #61dafb; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .code-block {
+      background: #0a0e18;
+      padding: 0.8rem 1rem;
+      border-radius: 0.8rem;
+      overflow-x: auto;
+      font-size: 0.75rem;
+      border: 1px solid #2d3a5e;
+      color: #cbd5e6;
+      font-family: 'Fira Code', monospace;
+      margin: 0.6rem 0;
+    }
+
+    @media (max-width: 700px) {
+      .slide-area { padding: 1rem; }
+      .slide-title { font-size: 1.4rem; }
+      .concept-box { min-width: 100%; }
+      .two-column-split { flex-direction: column; }
+      .class-nav-buttons { margin-left: 0; margin-top: 0.5rem; }
+      .curriculum-header { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="curriculum-header">
+  <div><span class="badge"><i class="fas fa-calendar-alt"></i> MONTH 2 · WEEK 2 · HOOKS</span></div>
+  <div class="class-title"><i class="fas fa-sync-alt"></i> useEffect · Real‑world</div>
+  <div class="duration"><i class="far fa-clock"></i> 2.5h · side effects + data</div>
+  <div class="class-nav-buttons">
+    <a href="#" class="class-nav-btn"><i class="fas fa-arrow-left"></i> prev</a>
+    <a href="#" class="class-nav-btn"><i class="fas fa-arrow-right"></i> next →</a>
+  </div>
+</div>
+
+<div class="presentation-container">
+  <div class="slide-area" id="slideArea"></div>
+  <div class="nav-bar">
+    <div class="indicator-dots" id="dotsContainer"></div>
+    <div class="nav-buttons">
+      <button id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+      <span class="slide-counter" id="counterText"><i class="far fa-file-alt"></i> 1 / 12</span>
+      <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+  <footer>
+    <i class="fas fa-sync-alt"></i> useEffect · API calls · subscriptions · cleanup
+    <span style="margin-left: 1rem;">| <a href="#"><i class="fas fa-arrow-left"></i> prev</a> | <a href="#">next <i class="fas fa-arrow-right"></i></a></span>
+  </footer>
+</div>
+
+<!-- React for the useEffect demo slide -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+  // --- GitHub fetch function (async/await) ---
+  const fetchGitHubUsers = async (since = 0) => {
+    const res = await fetch(`https://api.github.com/users?since=${since}&per_page=24`);
+    if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+    return res.json();
+  };
+
+  // --- useEffect Demo component (for slide 6) ---
+  function UseEffectDemo() {
+    const [users, setUsers] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(null);
+    const [since, setSince] = React.useState(0);
+
+    React.useEffect(() => {
+      let mounted = true;
+      const loadUsers = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+          const data = await fetchGitHubUsers(since);
+          if (mounted) setUsers(data);
+        } catch (err) {
+          if (mounted) setError(err.message);
+        } finally {
+          if (mounted) setLoading(false);
+        }
+      };
+      loadUsers();
+      return () => { mounted = false; };
+    }, [since]);
+
+    let body;
+    if (loading) {
+      body = (
+        <div className="loading-spinner">
+          <i className="fas fa-spinner fa-pulse"></i>
+          <span>Loading GitHub users...</span>
+        </div>
+      );
+    } else if (error) {
+      body = (
+        <div className="error-box">
+          <i className="fas fa-exclamation-circle"></i>
+          <div><strong>Error:</strong> {error}</div>
+        </div>
+      );
+    } else {
+      body = (
+        <div className="card-grid">
+          {users.map(u => (
+            <div key={u.id} className="user-card">
+              <img src={u.avatar_url} alt={u.login} loading="lazy" />
+              <div className="login">{u.login}</div>
+              <div className="id">ID: {u.id}</div>
+              <span className="type"><i className="fas fa-user"></i> {u.type}</span>
+              <br />
+              <a href={u.html_url} target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-github"></i> profile
+              </a>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <div className="status-bar">
+          <span className="status-badge"><i className="fas fa-users"></i> {users.length} users</span>
+          <span className="status-badge"><i className="fas fa-arrow-right"></i> since={since}</span>
+          <button className="btn" onClick={() => setSince(s => s + 24)} disabled={loading}>
+            <i className="fas fa-forward"></i> next page
+          </button>
+        </div>
+        {body}
+        <div style={{ marginTop: '1.2rem', background: '#0f172a', borderRadius: '1rem', padding: '0.8rem 1.2rem', border: '1px solid #2d3a5e' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#fbbf24', marginBottom: '0.3rem' }}>
+            <i className="fas fa-code"></i> <span style={{ fontWeight: 600 }}>useEffect with async/await</span>
+          </div>
+          <div className="code-block">
+            <code>{`useEffect(() => {
+  let mounted = true;
+  const load = async () => {
+    try {
+      const data = await fetch(\`https://api.github.com/users?since=\${since}\`);
+      if (mounted) setUsers(data);
+    } catch (e) { if (mounted) setError(e.message); }
+  };
+  load();
+  return () => { mounted = false; };
+}, [since]);`}</code>
+          </div>
+          <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.3rem' }}>
+            <i className="fas fa-check-circle" style={{ color: '#4ade80' }}></i> cleanup prevents memory leaks &nbsp;|&nbsp;
+            <i className="fas fa-arrows-rotate" style={{ color: '#61dafb' }}></i> re‑runs when <code style={{ background: '#1a1f2e', padding: '0.1rem 0.4rem', borderRadius: '0.3rem' }}>since</code> changes
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // --- Slides data ---
+  const slides = [
+    {
+      title: "<i class='fas fa-water'></i> useEffect: the side‑effect hook",
+      subtitle: "Sync your component with the outside world",
+      content: `
+        <div class="content-grid">
+          <div class="concept-box"><h3><i class="fas fa-question-circle"></i> What is useEffect?</h3>
+            <p>useEffect lets you perform <span class="highlight">side effects</span> in function components: fetching data, timers, DOM updates, subscriptions.</p>
+            <p>It runs <span class="highlight">after</span> the component renders. You control when it re‑runs with the <strong>dependencies array</strong>.</p>
+          </div>
+          <div class="concept-box"><h3><i class="fas fa-cog"></i> Syntax</h3>
+            <pre><code>useEffect(() => {
+  // side effect code
+  return () => { /* cleanup */ };
+}, [dependencies]);</code></pre>
+            <p>Empty deps <code>[]</code> = run only once (mount). No deps = run after every render.</p>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-bolt"></i> <span class="tag">key insight</span> useEffect is the place for <strong>imperative</strong> code inside declarative React.</div>
+      `
+    },
+    {
+      title: "<i class='fas fa-cloud-download-alt'></i> Real‑world: Fetch data (API)",
+      subtitle: "Get posts from a public API on mount",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-code"></i> Example: fetch posts</h4>
+            <pre><code>useEffect(() => {
+  fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.json())
+    .then(data => setPosts(data));
+}, []); // empty deps → once</code></pre>
+            <p>✅ <span class="highlight">Loading</span> state + <span class="highlight">error</span> handling make it production‑ready.</p>
+          </div>
+          <div class="col"><h4><i class="fas fa-exclamation-triangle"></i> Common pitfalls</h4>
+            <ul style="margin-left:1.2rem; color:#e2e8f0;">
+              <li>❌ Forgetting dependencies → stale closure</li>
+              <li>❌ No cleanup → memory leaks</li>
+              <li>✅ Use <span class="highlight">AbortController</span> to cancel fetch</li>
+            </ul>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-globe"></i> <strong>Real‑world use:</strong> dashboard widgets, user profiles, product lists — every data‑driven app uses useEffect for fetching.</div>
+      `
+    },
+    {
+      title: "<i class='fas fa-search'></i> Search with debounce",
+      subtitle: "User typing → API call after delay (real‑world search)",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-clock"></i> Debounce pattern</h4>
+            <pre><code>useEffect(() => {
+  const timer = setTimeout(() => {
+    if (query) fetchResults(query);
+  }, 500); // wait 500ms
+  return () => clearTimeout(timer);
+}, [query]); // re-run when query changes</code></pre>
+            <p>🚀 Prevents API spam while user types. Used in search bars, autocomplete, live filters.</p>
+          </div>
+          <div class="col"><h4><i class="fas fa-play"></i> Live example</h4>
+            <p>Every keystroke clears the previous timer. Only the final value triggers the fetch.</p>
+            <p><span class="highlight">Cleanup</span> is crucial here — without it, stale requests would flood the network.</p>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: "<i class='fas fa-plug'></i> Subscriptions & event listeners",
+      subtitle: "Window resize, scroll, WebSocket, keyboard events",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-arrows-alt-h"></i> Window resize</h4>
+            <pre><code>useEffect(() => {
+  const handleResize = () => setWidth(window.innerWidth);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []); // one-time setup</code></pre>
+            <p>Cleanup prevents listeners piling up on re‑renders.</p>
+          </div>
+          <div class="col"><h4><i class="fas fa-satellite-dish"></i> WebSocket / real‑time</h4>
+            <pre><code>useEffect(() => {
+  const ws = new WebSocket('wss://api.example.com');
+  ws.onmessage = (e) => setMessages(prev => [...prev, e.data]);
+  return () => ws.close();
+}, []);</code></pre>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-headset"></i> <strong>Real apps:</strong> chat, live sports, stock tickers, collaborative editors all use subscriptions inside useEffect.</div>
+      `
+    },
+    {
+      title: "<i class='fas fa-code'></i> The Display Code: Rendering Users",
+      subtitle: "How we show the GitHub users in the UI",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-desktop"></i> JSX Display Logic</h4>
+            <pre><code>// Display the users as cards
+{users.map(u => (
+  &lt;div key={u.id} className="user-card"&gt;
+    &lt;img src={u.avatar_url} alt={u.login} /&gt;
+    &lt;div className="login"&gt;{u.login}&lt;/div&gt;
+    &lt;div className="id"&gt;ID: {u.id}&lt;/div&gt;
+    &lt;span className="type"&gt;
+      &lt;i className="fas fa-user"&gt;&lt;/i&gt; {u.type}
+    &lt;/span&gt;
+    &lt;a href={u.html_url} target="_blank"&gt;
+      &lt;i className="fab fa-github"&gt;&lt;/i&gt; profile
+    &lt;/a&gt;
+  &lt;/div&gt;
+))}</code></pre>
+          </div>
+          <div class="col"><h4><i class="fas fa-file-alt"></i> Complete Component</h4>
+            <pre><code>function UseEffectDemo() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [since, setSince] = useState(0);
+
+  useEffect(() => {
+    let mounted = true;
+    const loadUsers = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchGitHubUsers(since);
+        if (mounted) setUsers(data);
+      } catch (err) {
+        if (mounted) setError(err.message);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+    loadUsers();
+    return () => { mounted = false; };
+  }, [since]);
+
+  // Loading, Error, or User Cards
+  if (loading) return &lt;LoadingSpinner /&gt;;
+  if (error) return &lt;ErrorBox error={error} /&gt;;
+  return &lt;UserGrid users={users} /&gt;;
+}</code></pre>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Key takeaway:</strong> The display logic handles three states — <span class="highlight">loading</span>, <span class="highlight">error</span>, and <span class="highlight">success</span> — providing a smooth user experience.</div>
+      `
+    },
+    {
+      title: "<i class='fab fa-github'></i> LIVE DEMO: GitHub Users API",
+      subtitle: "Real‑world fetch with async/await + pagination",
+      content: `<div id="useEffectDemoRoot"></div>`
+    },
+    {
+      title: "<i class='fas fa-save'></i> Persist state to localStorage",
+      subtitle: "Save user preferences / draft automatically",
+      content: `
+        <div class="content-grid">
+          <div class="concept-box"><h3><i class="fas fa-database"></i> Auto‑save pattern</h3>
+            <pre><code>useEffect(() => {
+  localStorage.setItem('theme', theme);
+}, [theme]); // runs on every theme change</code></pre>
+            <p>🌙 Useful for dark mode, language, form drafts, user settings.</p>
+          </div>
+          <div class="concept-box"><h3><i class="fas fa-upload"></i> Load on mount</h3>
+            <pre><code>useEffect(() => {
+  const saved = localStorage.getItem('theme');
+  if (saved) setTheme(saved);
+}, []);</code></pre>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-memory"></i> <strong>Real‑world:</strong> Notion, VS Code, Spotify — they all persist user state locally. useEffect makes this trivial.</div>
+      `
+    },
+    {
+      title: "<i class='fas fa-timer'></i> Polling / intervals",
+      subtitle: "Live data updates every few seconds",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-sync-alt"></i> Polling pattern</h4>
+            <pre><code>useEffect(() => {
+  const interval = setInterval(() => {
+    fetchStatus(); // refresh data
+  }, 5000); // every 5s
+  return () => clearInterval(interval);
+}, []);</code></pre>
+            <p>📈 Used in dashboards, live scores, order tracking, crypto prices.</p>
+          </div>
+          <div class="col"><h4><i class="fas fa-stop"></i> Conditional polling</h4>
+            <pre><code>useEffect(() => {
+  if (!isActive) return;
+  const id = setInterval(poll, 3000);
+  return () => clearInterval(id);
+}, [isActive]); // stop when inactive</code></pre>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: "<i class='fas fa-camera'></i> Cleanup: why it matters",
+      subtitle: "Avoid memory leaks and stale data",
+      content: `
+        <div class="extensions-grid">
+          <div class="ext-card"><i class="fas fa-broom"></i> <strong>Cleanup runs:</strong> before the effect runs again, and on unmount.</div>
+          <div class="ext-card"><i class="fas fa-skull"></i> <strong>Without cleanup:</strong> multiple timers, listeners, sockets = performance disaster.</div>
+          <div class="ext-card"><i class="fas fa-check-circle"></i> <strong>Always cleanup:</strong> intervals, subscriptions, fetch abort, event listeners.</div>
+        </div>
+        <div class="concept-box"><h3><i class="fas fa-code"></i> AbortController for fetch</h3>
+          <pre><code>useEffect(() => {
+  const controller = new AbortController();
+  fetch(url, { signal: controller.signal })
+    .then(res => res.json())
+    .then(setData)
+    .catch(e => if (e.name !== 'AbortError') setError(e));
+  return () => controller.abort();
+}, [url]);</code></pre>
+          <p>⚡ Cancels pending request when dependency changes or component unmounts.</p>
+        </div>
+      `
+    },
+    {
+      title: "<i class='fas fa-cubes'></i> useEffect vs useLayoutEffect",
+      subtitle: "When to use which (real‑world difference)",
+      content: `
+        <div class="two-column-split">
+          <div class="col"><h4><i class="fas fa-paint-brush"></i> useEffect</h4>
+            <p>Runs <span class="highlight">after</span> the browser paints. Use for most side effects: data fetching, subscriptions, timers.</p>
+            <p>✅ Does <strong>not</strong> block painting → better performance.</p>
+          </div>
+          <div class="col"><h4><i class="fas fa-ruler-combined"></i> useLayoutEffect</h4>
+            <p>Runs <span class="highlight">before</span> the browser paints. Use for DOM measurements or mutations that need to be synchronous.</p>
+            <p>🔧 Examples: tooltip position, scroll position, animation measurements.</p>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-lightbulb"></i> <strong>Rule of thumb:</strong> start with useEffect. Only switch to useLayoutEffect if you see visual flicker.</div>
+      `
+    },
+    {
+      title: "<i class='fas fa-tasks'></i> Assignment: Build a GitHub Explorer",
+      subtitle: "Apply useEffect, useState, and async/await",
+      content: `
+        <div class="content-grid">
+          <div class="concept-box"><h3><i class="fas fa-check-square"></i> Basic Tasks</h3>
+            <ul style="margin-left:1.2rem;">
+              <li>✓ Use useEffect to fetch users from GitHub API</li>
+              <li>✓ Display users as cards with avatar + login</li>
+              <li>✓ Add loading + error states</li>
+              <li>✓ Add "next page" button (pagination with since)</li>
+            </ul>
+          </div>
+          <div class="concept-box"><h3><i class="fas fa-star"></i> Bonus</h3>
+            <ul style="margin-left:1.2rem;">
+              <li>⭐ Search users by login (filter)</li>
+              <li>⭐ Click a user to see their repos (nested fetch)</li>
+              <li>⭐ Save last viewed page to localStorage</li>
+            </ul>
+          </div>
+        </div>
+        <div class="insight-card"><i class="fas fa-camera"></i> <strong>Submit:</strong> Code sandbox link or GitHub repo with your explorer.</div>
+      `
+    },
+    {
+      title: "<i class='fas fa-question-circle'></i> Knowledge Check · useEffect",
+      subtitle: "Real‑world scenarios — click to reveal",
+      content: `
+        <div class="qa-section">
+          <div class="qa-title"><i class="fas fa-question-circle"></i> Toggle Q&A (real‑world useEffect)</div>
+          <div id="qa-container"></div>
+        </div>
+        <div class="insight-card"><i class="fas fa-rocket"></i> <strong>Pro tip:</strong> always think about the cleanup — your future self will thank you.</div>
+      `
+    }
+  ];
+
+  const qaData = [
+    { q: "You're building a search bar. How would you avoid making an API call on every keystroke?", a: "Use useEffect with a debounce timer (setTimeout). Cleanup clears the timer on each keystroke, so the API call only happens after the user stops typing for a set delay (e.g., 300ms)." },
+    { q: "How do you fetch data from an API when a component mounts, and handle loading/error states?", a: "Use useEffect with empty dependencies []. Inside, set loading=true, fetch the data, then set data and loading=false. Use try/catch for errors. Optionally use AbortController for cleanup." },
+    { q: "What is the purpose of the cleanup function in useEffect? Give an example.", a: "Cleanup runs before the effect re-runs and on unmount. It prevents memory leaks. Example: clearing a timer, removing an event listener, closing a WebSocket, or aborting a fetch request." },
+    { q: "How would you persist a user's theme preference in localStorage using useEffect?", a: "Use useEffect with [theme] as dependency. Inside, call localStorage.setItem('theme', theme). This saves the theme every time it changes. To load on mount, use another useEffect with [] that reads from localStorage and sets the state." },
+    { q: "When would you use useLayoutEffect instead of useEffect?", a: "useLayoutEffect runs before painting. Use it when you need to measure DOM elements or make synchronous updates to avoid visual flicker — e.g., positioning a tooltip or measuring an element's size for animation." },
+    { q: "How do you implement polling (e.g., live updates) with useEffect?", a: "Use setInterval inside useEffect. Return a cleanup that clears the interval. Optionally, conditionally start/stop based on a state (e.g., isPolling) by adding it to the dependencies array." },
+    { q: "What happens if you omit the dependencies array in useEffect?", a: "The effect runs after every render. This can cause performance issues and infinite loops if you update state inside the effect without conditions." },
+    { q: "How can you cancel a fetch request in useEffect?", a: "Use AbortController. Create a controller, pass its signal to fetch. In the cleanup function, call controller.abort(). This cancels the request if the component unmounts or dependencies change." },
+    { q: "You have a component that subscribes to a WebSocket. How do you manage the connection lifecycle with useEffect?", a: "Inside useEffect, create the WebSocket instance. Set up event listeners (onmessage, onopen). Return a cleanup that closes the WebSocket (ws.close()). Use empty deps [] to connect once on mount." }
+  ];
+
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+  const slideArea = document.getElementById('slideArea');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const counterText = document.getElementById('counterText');
+  const dotsContainer = document.getElementById('dotsContainer');
+
+  function renderQA() {
+    const container = document.getElementById('qa-container');
+    if (!container) return;
+    container.innerHTML = '';
+    qaData.forEach((item, idx) => {
+      const qaDiv = document.createElement('div');
+      qaDiv.className = 'qa-item';
+      qaDiv.innerHTML = `
+        <div class="qa-question" data-idx="${idx}">
+          <span><strong>${idx+1}.</strong> ${item.q}</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="qa-answer" id="answer-${idx}">
+          <p>${item.a}</p>
+        </div>
+      `;
+      container.appendChild(qaDiv);
+    });
+    document.querySelectorAll('.qa-question').forEach(question => {
+      question.addEventListener('click', function() {
+        const idx = this.getAttribute('data-idx');
+        const answerDiv = document.getElementById(`answer-${idx}`);
+        const icon = this.querySelector('i');
+        answerDiv.classList.toggle('show');
+        icon.style.transform = answerDiv.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+      });
+    });
+  }
+
+  function renderSlide(index) {
+    const slide = slides[index];
+    let html = `
+      <div class="slide-card">
+        <div class="slide-title">${slide.title}</div>
+        <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+        <div class="slide-content">${slide.content}</div>
+      </div>
+    `;
+    slideArea.innerHTML = html;
+
+    // If it's the useEffect demo slide, mount React component
+    if (index === 5) {
+      const demoRoot = document.getElementById('useEffectDemoRoot');
+      if (demoRoot) {
+        const root = ReactDOM.createRoot(demoRoot);
+        root.render(<UseEffectDemo />);
+      }
+    }
+
+    if (index === 11) renderQA();
+    counterText.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+    prevBtn.disabled = (index === 0);
+    nextBtn.disabled = (index === totalSlides-1);
+    updateDots(index);
+  }
+
+  function updateDots(activeIndex) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === activeIndex) dot.classList.add('active');
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+  function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+  function handleKeyDown(e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  }
+
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+  window.addEventListener('keydown', handleKeyDown);
+  renderSlide(0);
+</script>
+</body>
+</html>

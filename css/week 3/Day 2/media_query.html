@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Media Queries · Responsive Design · Live Lesson</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* ---------- base lesson styling (dark, like previous) ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+      background: #0a0e1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .presentation-wrapper {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .slide-container {
+      background: #111827;
+      border-radius: 2rem;
+      border: 1px solid #2d3a5e;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+    .slide-content {
+      padding: 2.5rem 3rem;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide-title {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #a5f3fc, #7aa9ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-left: 5px solid #f97316;
+      padding-left: 1.2rem;
+    }
+    .slide-sub {
+      color: #9ca3cf;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid #f97316;
+      padding-left: 1.2rem;
+      font-size: 0.95rem;
+    }
+    .grid-2, .grid-3 {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+    .card {
+      background: #1e293b;
+      border-radius: 1.2rem;
+      padding: 1.3rem;
+      flex: 1;
+      min-width: 200px;
+      border: 1px solid #334155;
+      transition: transform 0.2s;
+    }
+    .card h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #93c5fd;
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+    .card p, .card li {
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+    .code-block {
+      background: #0a0f1c;
+      padding: 1rem;
+      border-radius: 1rem;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      border-left: 4px solid #f97316;
+      margin: 1rem 0;
+      color: #d1d5db;
+      white-space: pre-wrap;
+    }
+    .highlight {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+    .insight {
+      background: #1e293b;
+      padding: 1rem 1.2rem;
+      border-radius: 1rem;
+      border-left: 4px solid #fbbf24;
+      margin: 1rem 0;
+      color: #e2e8f0;
+    }
+    .demo-box {
+      background: #2d3a5e;
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid #4b5a7a;
+      color: #e2e8f0;
+      margin: 0.5rem 0;
+    }
+    .responsive-demo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      background: #1e293b;
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+    .responsive-demo-grid .item {
+      background: #3b4a6a;
+      padding: 0.8rem;
+      border-radius: 0.6rem;
+      flex: 1 1 100px;
+      text-align: center;
+      color: #cbd5e6;
+    }
+    /* ---------- ADMIN DASHBOARD MOCK (from your code) ---------- */
+    .admin-mock {
+      background: #f5ede7;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      border: 1px solid #d6c9bd;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .admin-mock .parent {
+      display: flex;
+      flex-direction: row;
+      min-height: 320px;
+    }
+    /* sidebar */
+    .admin-mock .sidebar {
+      background: #a67c6b;
+      padding: 16px 12px;
+      flex: 0 0 160px;
+      border-right: 2px solid #8b6b5b;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .admin-mock .sidebar .brand {
+      color: #fcf6ed;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-left: 4px;
+      border-bottom: 2px dotted #cbad98;
+      padding-bottom: 4px;
+    }
+    .admin-mock .sidebar .nav-btn {
+      background: transparent;
+      border: none;
+      color: #e4d4c6;
+      padding: 6px 12px;
+      text-align: left;
+      border-radius: 30px 8px 30px 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .admin-mock .sidebar .nav-btn:hover {
+      background: #8f6e5d;
+      color: white;
+    }
+    .admin-mock .sidebar .nav-btn.active {
+      background: #7c5f4f;
+      color: #fcf3e6;
+      border-left: 4px solid #efd7c4;
+    }
+    .admin-mock .sidebar .logout {
+      margin-top: auto;
+      border-top: 1px solid #9b7a68;
+      padding-top: 14px;
+    }
+    .admin-mock .sidebar .logout button {
+      background: #7d604f;
+      border: none;
+      color: #efe3d7;
+      padding: 6px 16px;
+      border-radius: 30px 4px 30px 4px;
+      width: 100%;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    /* main */
+    .admin-mock .main {
+      background: #faf3ec;
+      padding: 18px 22px;
+      flex: 1;
+    }
+    .admin-mock .main .top-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      border-bottom: 2px dashed #d6c3b4;
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .admin-mock .main .top-nav button {
+      background: transparent;
+      border: none;
+      padding: 4px 14px;
+      border-radius: 30px;
+      font-size: 14px;
+      color: #3b2c22;
+      cursor: pointer;
+    }
+    .admin-mock .main .top-nav button.signup {
+      background: #493b30;
+      color: #f2e7dd;
+      padding: 4px 24px;
+      border-radius: 40px;
+    }
+    .admin-mock .main h2 {
+      font-size: 24px;
+      color: #2a1f17;
+      border-left: 6px solid #b28a78;
+      padding-left: 14px;
+      margin: 14px 0 4px 0;
+      font-weight: 500;
+    }
+    .admin-mock .main p {
+      color: #5f4b3b;
+      padding-left: 20px;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .admin-mock .stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .admin-mock .stats .stat-card {
+      background: #fcf7f0;
+      padding: 12px 16px;
+      border-radius: 24px 8px 24px 8px;
+      border: 1px solid #dac9bb;
+      flex: 1 1 100px;
+      min-width: 80px;
+    }
+    .admin-mock .stats .stat-card .num {
+      font-size: 26px;
+      font-weight: 550;
+      color: #2d1f17;
+    }
+    .admin-mock .stats .stat-card .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #6f5848;
+      letter-spacing: 0.5px;
+    }
+    .admin-mock .meta {
+      color: #907a69;
+      font-size: 13px;
+      border-top: 2px dotted #dac7b8;
+      padding-top: 14px;
+      margin-top: 14px;
+      font-style: italic;
+    }
+    /* activity */
+    .admin-mock .activity {
+      background: #ede3da;
+      padding: 16px 14px;
+      flex: 0 0 220px;
+      border-left: 2px solid #d4bfaf;
+    }
+    .admin-mock .activity .header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 3px solid #b59480;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .admin-mock .activity .header h4 {
+      font-size: 17px;
+      font-weight: 500;
+      color: #2b1e15;
+    }
+    .admin-mock .activity .header span {
+      font-size: 12px;
+      background: #dac7b8;
+      padding: 2px 12px;
+      border-radius: 40px;
+    }
+    .admin-mock .activity .log-item {
+      background: #faf1e8;
+      padding: 8px 10px;
+      border-radius: 20px 8px 20px 8px;
+      border: 1px solid #d6bfae;
+      margin-bottom: 6px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .admin-mock .activity .log-item .time {
+      font-size: 11px;
+      color: #7d6654;
+    }
+    .admin-mock .activity .footer {
+      margin-top: 12px;
+      border-top: 2px dashed #ccb8a7;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #6f5948;
+    }
+
+    /* ---------- RESPONSIVE BREAKPOINTS (from admin.css) ---------- */
+    /* 1024px: shrink sidebar & activity */
+    @media (max-width: 1024px) {
+      .admin-mock .sidebar { flex: 0 0 130px; }
+      .admin-mock .activity { flex: 0 0 170px; }
+    }
+
+    /* 820px: sidebar becomes horizontal row, activity below */
+    @media (max-width: 820px) {
+      .admin-mock .parent {
+        flex-direction: column;
+      }
+      .admin-mock .sidebar {
+        flex: 0 0 auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 10px 16px;
+        border-right: none;
+        border-bottom: 2px solid #8f6f5d;
+        gap: 4px;
+        align-items: center;
+      }
+      .admin-mock .sidebar .brand {
+        width: 100%;
+        margin-bottom: 2px;
+        border-bottom: none;
+        font-size: 16px;
+      }
+      .admin-mock .sidebar .nav-btn {
+        width: auto;
+        padding: 4px 14px;
+        border-radius: 40px;
+        font-size: 12px;
+        border-left: none !important;
+      }
+      .admin-mock .sidebar .nav-btn.active {
+        border-left: none !important;
+        background: #7c5f4f;
+        border-radius: 30px 8px 30px 8px;
+      }
+      .admin-mock .sidebar .logout {
+        display: none;
+      }
+      .admin-mock .activity {
+        flex: 0 0 auto;
+        border-left: none;
+        border-top: 2px solid #ccb6a4;
+      }
+      .admin-mock .main .stats .stat-card {
+        flex: 1 1 80px;
+        min-width: 60px;
+      }
+    }
+
+    /* 500px: stats stack, nav centered, smaller fonts */
+    @media (max-width: 500px) {
+      .admin-mock .main .stats {
+        flex-direction: column;
+      }
+      .admin-mock .main .stats .stat-card {
+        flex: 1 1 auto;
+      }
+      .admin-mock .main .top-nav {
+        justify-content: center;
+      }
+      .admin-mock .sidebar .nav-btn {
+        font-size: 11px;
+        padding: 3px 10px;
+      }
+      .admin-mock .sidebar .brand {
+        font-size: 14px;
+      }
+      .admin-mock .main h2 {
+        font-size: 20px;
+      }
+      .admin-mock .activity .log-item {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+    }
+
+    /* ---------- slide extras ---------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1e293b;
+      border-radius: 1rem;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid #334155;
+      padding: 0.7rem;
+      text-align: left;
+      color: #e2e8f0;
+    }
+    th {
+      background: #0f172a;
+      color: #fbbf24;
+    }
+    .nav-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #0f172a;
+      border-top: 1px solid #2d3a5e;
+    }
+    .nav-btn {
+      background: #2d3a5e;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: #f97316;
+      transform: scale(0.98);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .slide-counter {
+      background: #1e293b;
+      padding: 0.4rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      color: #cbd5e6;
+    }
+    .dot-indicators {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #4b5563;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+    .dot.active {
+      background: #f97316;
+      width: 24px;
+    }
+    footer {
+      font-size: 0.7rem;
+      text-align: center;
+      margin-top: 1rem;
+      color: #6b7280;
+    }
+    @media (max-width: 700px) {
+      .slide-content { padding: 1.5rem; }
+      .slide-title { font-size: 1.4rem; }
+    }
+    /* live demo indicator */
+    .resize-hint {
+      background: #1e293b;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      display: inline-block;
+      font-size: 0.75rem;
+      color: #9ca3cf;
+      border: 1px dashed #4b5a7a;
+    }
+    .device-label {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .device-desktop { background: #3b82f6; color: white; }
+    .device-tablet { background: #8b5cf6; color: white; }
+    .device-phone { background: #f59e0b; color: #1e293b; }
+  </style>
+</head>
+<body>
+<div class="presentation-wrapper">
+    <div class="slide-container">
+        <div class="slide-content" id="slideContent"></div>
+        <div class="nav-controls">
+            <div class="dot-indicators" id="dotsContainer"></div>
+            <div style="display: flex; gap: 1rem;">
+                <button class="nav-btn" id="prevSlideBtn"><i class="fas fa-chevron-left"></i> Previous</button>
+                <span class="slide-counter" id="slideCounter"></span>
+                <button class="nav-btn" id="nextSlideBtn">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+    <footer><i class="fas fa-arrow-left"></i> <i class="fas fa-arrow-right"></i> Arrow keys · 10 slides · Media Queries with live admin dashboard demo</footer>
+</div>
+
+<script>
+    // ================================================================
+    //  LESSON SLIDES – Media Queries & Responsiveness
+    //  Full admin dashboard mock with responsive breakpoints
+    // ================================================================
+    const slides = [
+        // 0: Intro
+        { title: "<i class='fas fa-mobile-alt'></i> Media Queries & Responsiveness", subtitle: "Make your layouts adapt to any screen size", content: `
+            <div class="grid-2">
+                <div class="card"><h3><i class="fas fa-question-circle"></i> What are Media Queries?</h3><p>CSS technique to apply styles based on device characteristics (width, height, orientation).</p></div>
+                <div class="card"><h3><i class="fas fa-arrows-alt-h"></i> Why responsive?</h3><p>One site works on phone, tablet, laptop, desktop. No separate mobile site needed.</p></div>
+                <div class="card"><h3><i class="fas fa-code"></i> Syntax</h3><div class="code-block">@media (max-width: 820px) {<br>  /* styles for small screens */<br>}</div></div>
+            </div>
+            <div class='insight'>We'll use a live admin dashboard mock with the exact breakpoints from your admin.css: <span class="highlight">1024px</span> (desktop), <span class="highlight">820px</span> (tablet), <span class="highlight">500px</span> (phone).</div>
+        `},
+        // 1: The admin dashboard - full view
+        { title: "<i class='fas fa-th-large'></i> Desktop: ≥1024px", subtitle: "Sidebar · Main · Activity — full layout", content: `
+            <div style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap; margin-bottom:0.8rem;">
+                <span class="device-label device-desktop"><i class="fas fa-desktop"></i> DESKTOP</span>
+                <span style="color:#9ca3cf; font-size:0.85rem;">Screens ≥ 1024px (laptops, desktops, large tablets)</span>
+            </div>
+            <div class="admin-mock">
+                <div class="parent">
+                    <div class="sidebar">
+                        <div class="brand">😀 appBrew</div>
+                        <button class="nav-btn active">Dashboard</button>
+                        <button class="nav-btn">Tenant</button>
+                        <button class="nav-btn">Patients</button>
+                        <button class="nav-btn">Users</button>
+                        <button class="nav-btn">Settings</button>
+                        <div class="logout"><button>Logout</button></div>
+                    </div>
+                    <div class="main">
+                        <div class="top-nav">
+                            <button>Home</button>
+                            <button>Contact</button>
+                            <button class="signup">Sign Up</button>
+                        </div>
+                        <h2>Welcome back, Admin</h2>
+                        <p>Here's what's happening with your platform today.</p>
+                        <div class="stats">
+                            <div class="stat-card"><div class="num">2.4k</div><div class="label">Total Users</div></div>
+                            <div class="stat-card"><div class="num">187</div><div class="label">Patients</div></div>
+                            <div class="stat-card"><div class="num">3</div><div class="label">Alerts</div></div>
+                        </div>
+                        <div class="meta">Last login: today · IP 192.168.1.4</div>
+                    </div>
+                    <div class="activity">
+                        <div class="header"><h4>Activity Logs</h4><span>today</span></div>
+                        <div class="log-item"><span>Admin created user</span><span class="time">2 min</span></div>
+                        <div class="log-item"><span>⚠️ Virus detected</span><span class="time">18 min</span></div>
+                        <div class="log-item"><span>🔐 Admin logged in</span><span class="time">1 hour</span></div>
+                        <div class="log-item"><span>📊 Grade updated</span><span class="time">3 hours</span></div>
+                        <div class="footer"><span>4 new events</span><span>view all →</span></div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:8px; text-align:right;"><span class="resize-hint"><i class="fas fa-arrows-alt-h"></i> Resize your browser to see breakpoints</span></div>
+            <div class="code-block">/* Desktop layout: sidebar (left), main (center), activity (right) */<br>#parent_div { display: flex; flex-direction: row; }</div>
+            <div class='insight'>This is the default layout for <span class="highlight">desktop screens (≥1024px)</span>. The sidebar, main, and activity panels sit side‑by‑side.</div>
+        `},
+        // 2: Tablet view (820px)
+        { title: "<i class='fas fa-tablet-alt'></i> Tablet: ≤820px", subtitle: "Sidebar → horizontal row, activity moves below", content: `
+            <div style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap; margin-bottom:0.8rem;">
+                <span class="device-label device-tablet"><i class="fas fa-tablet-alt"></i> TABLET</span>
+                <span style="color:#9ca3cf; font-size:0.85rem;">Screens ≤ 820px (iPad, small laptops, large phones)</span>
+            </div>
+            <div class="admin-mock">
+                <div class="parent">
+                    <div class="sidebar" style="flex-direction:row; flex-wrap:wrap; padding:10px 16px; border-bottom:2px solid #8f6f5d; border-right:none;">
+                        <div class="brand" style="width:100%; margin-bottom:2px; border-bottom:none; font-size:16px;">😀 appBrew</div>
+                        <button class="nav-btn active" style="width:auto; padding:4px 14px; border-radius:40px; border-left:none;">Dashboard</button>
+                        <button class="nav-btn" style="width:auto; padding:4px 14px; border-radius:40px;">Tenant</button>
+                        <button class="nav-btn" style="width:auto; padding:4px 14px; border-radius:40px;">Patients</button>
+                        <button class="nav-btn" style="width:auto; padding:4px 14px; border-radius:40px;">Users</button>
+                        <button class="nav-btn" style="width:auto; padding:4px 14px; border-radius:40px;">Settings</button>
+                        <div class="logout" style="display:none;"></div>
+                    </div>
+                    <div class="main" style="flex:1;">Main content area</div>
+                    <div class="activity" style="flex:0 0 auto; border-left:none; border-top:2px solid #ccb6a4;">Activity panel now below</div>
+                </div>
+            </div>
+            <div class="code-block">@media (max-width: 820px) { /* tablets and small screens */<br>  #parent_div { flex-direction: column; }<br>  #first_child {<br>    flex-direction: row;<br>    flex-wrap: wrap;<br>    border-right: none;<br>    border-bottom: 2px solid #8f6f5d;<br>  }<br>  #third_child_div {<br>    flex: 0 0 auto;<br>    border-left: none;<br>    border-top: 2px solid #ccb6a4;<br>  }<br>}</div>
+            <div class='insight'>On <span class="highlight">tablet screens (≤820px)</span>, the sidebar turns into a horizontal navigation bar, and the activity panel moves below the main content.</div>
+        `},
+        // 3: Phone view (500px)
+        { title: "<i class='fas fa-mobile-alt'></i> Phone: ≤500px", subtitle: "Stats stack vertically, nav centered, fonts smaller", content: `
+            <div style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap; margin-bottom:0.8rem;">
+                <span class="device-label device-phone"><i class="fas fa-mobile-alt"></i> PHONE</span>
+                <span style="color:#9ca3cf; font-size:0.85rem;">Screens ≤ 500px (iPhone, Android phones, small devices)</span>
+            </div>
+            <div class="admin-mock">
+                <div class="parent" style="flex-direction:column;">
+                    <div class="sidebar" style="flex:0 0 auto; flex-direction:row; flex-wrap:wrap; padding:8px 12px; border-bottom:2px solid #8f6f5d; border-right:none;">
+                        <div class="brand" style="width:100%; font-size:14px; margin-bottom:2px; border-bottom:none;">😀 appBrew</div>
+                        <button class="nav-btn active" style="font-size:11px; padding:3px 10px; width:auto; border-radius:40px;">Dash</button>
+                        <button class="nav-btn" style="font-size:11px; padding:3px 10px; width:auto; border-radius:40px;">Tenant</button>
+                        <button class="nav-btn" style="font-size:11px; padding:3px 10px; width:auto; border-radius:40px;">Patients</button>
+                        <button class="nav-btn" style="font-size:11px; padding:3px 10px; width:auto; border-radius:40px;">Users</button>
+                    </div>
+                    <div class="main" style="padding:12px 16px;">
+                        <div class="top-nav" style="justify-content:center; border-bottom:2px dashed #d6c3b4; padding-bottom:8px; flex-wrap:wrap;">
+                            <button style="font-size:13px;">Home</button>
+                            <button style="font-size:13px;">Contact</button>
+                            <button class="signup" style="font-size:13px; padding:3px 18px;">Sign Up</button>
+                        </div>
+                        <h2 style="font-size:20px; border-left:6px solid #b28a78; padding-left:12px;">Welcome back, Admin</h2>
+                        <div class="stats" style="flex-direction:column;">
+                            <div class="stat-card" style="flex:1 1 auto;"><div class="num">2.4k</div><div class="label">Total Users</div></div>
+                            <div class="stat-card" style="flex:1 1 auto;"><div class="num">187</div><div class="label">Patients</div></div>
+                            <div class="stat-card" style="flex:1 1 auto;"><div class="num">3</div><div class="label">Alerts</div></div>
+                        </div>
+                    </div>
+                    <div class="activity" style="flex:0 0 auto; border-left:none; border-top:2px solid #ccb6a4; padding:12px;">
+                        <div class="header"><h4 style="font-size:15px;">Activity</h4><span style="font-size:11px;">today</span></div>
+                        <div class="log-item" style="font-size:12px; padding:5px 8px;">Admin created user <span class="time">2 min</span></div>
+                        <div class="log-item" style="font-size:12px; padding:5px 8px;">⚠️ Virus detected <span class="time">18 min</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-block">@media (max-width: 500px) { /* phones */<br>  #stats_grid { flex-direction: column; }<br>  #top_actions { justify-content: center; }<br>  #brand_text { font-size: 18px; }<br>  #welcome_section h2 { font-size: 22px; }<br>}</div>
+            <div class='insight'>On <span class="highlight">phone screens (≤500px)</span>, stats cards stack vertically, the top nav centers, and fonts are slightly smaller for better mobile fit.</div>
+        `},
+        // 4: Breakpoint summary
+        { title: "<i class='fas fa-vector-square'></i> Breakpoint summary – admin dashboard", subtitle: "Three breakpoints for three device types", content: `
+            <table>
+                <tr><th>Screen type</th><th>Breakpoint</th><th>Layout changes</th><th>CSS applied</th></tr>
+                <tr><td><span class="device-label device-desktop" style="font-size:0.7rem;">DESKTOP</span></td><td><span class="highlight">≥1024px</span></td><td>Sidebar (left) · Main (center) · Activity (right)</td><td>flex-direction: row (default)</td></tr>
+                <tr><td><span class="device-label device-tablet" style="font-size:0.7rem;">TABLET</span></td><td><span class="highlight">≤820px</span></td><td>Sidebar → horizontal row; Activity moves below main</td><td>flex-direction: column; sidebar: flex-direction: row</td></tr>
+                <tr><td><span class="device-label device-phone" style="font-size:0.7rem;">PHONE</span></td><td><span class="highlight">≤500px</span></td><td>Stats stack vertically; nav centered; smaller fonts</td><td>stats: flex-direction: column; top-nav: justify-content: center</td></tr>
+            </table>
+            <div class='insight'>These three breakpoints are taken directly from your admin.css. They cover <span class="highlight">desktop (1024px+)</span>, <span class="highlight">tablet (820px and below)</span>, and <span class="highlight">phone (500px and below)</span>.</div>
+        `},
+        // 5: The @media rule – syntax
+        { title: "<i class='fas fa-hashtag'></i> @media rule – syntax & conditions", subtitle: "max-width, min-width, orientation, and more", content: `
+            <div class="code-block">/* basic structure */<br>@media (condition) {<br>  /* CSS rules */<br>}<br><br>/* examples from admin.css */<br>@media (max-width: 1024px) { ... } /* desktop */<br>@media (max-width: 820px) { ... }  /* tablet */<br>@media (max-width: 500px) { ... }  /* phone */<br><br>/* other useful conditions */<br>@media (min-width: 768px) { ... }<br>@media (orientation: landscape) { ... }<br>@media (min-width: 768px) and (max-width: 1024px) { ... }</div>
+            <div class="grid-2">
+                <div class="card"><h3><i class="fas fa-chevron-left"></i> max-width</h3><p>Styles apply when viewport is <span class='highlight'>at or below</span> the width. Used in admin.css (desktop‑first).</p></div>
+                <div class="card"><h3><i class="fas fa-chevron-right"></i> min-width</h3><p>Styles apply when viewport is <span class='highlight'>at or above</span> the width. (mobile‑first approach).</p></div>
+            </div>
+            <div class='insight'>Admin.css uses <span class="highlight">max-width</span> (desktop‑first). Both min-width and max-width are valid – choose based on your workflow.</div>
+        `},
+        // 6: Common responsive patterns
+        { title: "<i class='fas fa-th-list'></i> Common responsive patterns", subtitle: "flex-wrap, flex-direction, display: none", content: `
+            <div class="grid-2">
+                <div class="card"><h3><i class="fas fa-arrows-alt-h"></i> flex-wrap: wrap</h3><p>Allows items to wrap to next line when container shrinks. Used for sidebar buttons at 820px.</p></div>
+                <div class="card"><h3><i class="fas fa-arrows-alt-v"></i> flex-direction: column</h3><p>Switches layout from horizontal to vertical. Used on #parent_div at 820px.</p></div>
+                <div class="card"><h3><i class="fas fa-eye-slash"></i> display: none</h3><p>Hides elements on small screens. Used for #sidebar_footer at 820px.</p></div>
+            </div>
+            <div class="code-block">/* patterns from admin.css */<br>#first_child { flex-direction: row; flex-wrap: wrap; }<br>#parent_div { flex-direction: column; }<br>#sidebar_footer { display: none; }</div>
+            <div class='insight'>These three patterns are the foundation of most responsive layouts.</div>
+        `},
+        // 7: Live demo – grid that responds
+        { title: "<i class='fas fa-arrows-alt'></i> Live demo: responsive grid", subtitle: "Resize your browser to see the grid adapt", content: `
+            <div style="background:#1e293b; border-radius:1rem; padding:1.2rem; border:1px solid #334155;">
+                <div style="display:flex; flex-wrap:wrap; gap:0.6rem;">
+                    <div style="background:#3b4a6a; padding:0.8rem; border-radius:0.6rem; flex:1 1 120px; text-align:center; color:#cbd5e6;">Item 1</div>
+                    <div style="background:#3b4a6a; padding:0.8rem; border-radius:0.6rem; flex:1 1 120px; text-align:center; color:#cbd5e6;">Item 2</div>
+                    <div style="background:#3b4a6a; padding:0.8rem; border-radius:0.6rem; flex:1 1 120px; text-align:center; color:#cbd5e6;">Item 3</div>
+                    <div style="background:#3b4a6a; padding:0.8rem; border-radius:0.6rem; flex:1 1 120px; text-align:center; color:#cbd5e6;">Item 4</div>
+                </div>
+                <p style="color:#9ca3cf; margin-top:6px; font-size:0.85rem;"><i class="fas fa-arrows-alt-h"></i> At <span class="highlight">phone size (≤500px)</span>: each item takes full width.</p>
+            </div>
+            <div class="code-block">.item { flex: 1 1 120px; }<br>@media (max-width: 500px) { /* phone */<br>  .item { flex: 1 1 100%; }<br>}</div>
+            <div class='insight'>flex: 1 1 100% forces each item to take the full width of its container on phone screens.</div>
+        `},
+        // 8: Responsive images & typography
+        { title: "<i class='fas fa-image'></i> Responsive images & typography", subtitle: "max-width: 100% and relative units", content: `
+            <div class="grid-2">
+                <div class="card"><h3><i class="fas fa-image"></i> Images</h3><div class="code-block">img { max-width: 100%; height: auto; }</div><p>Prevents images from overflowing their container on any screen size.</p></div>
+                <div class="card"><h3><i class="fas fa-font"></i> Typography</h3><div class="code-block">h1 { font-size: clamp(1.5rem, 5vw, 3rem); }</div><p>clamp() sets a fluid size between min and max.</p></div>
+            </div>
+            <div style="background:#1e293b; padding:0.8rem; border-radius:0.8rem; border:1px solid #334155;">
+                <p style="color:#e2e8f0;">Example: <span style="font-size:clamp(1rem, 4vw, 2rem);">This text scales with viewport width.</span></p>
+            </div>
+            <div class='insight'>Use rem, em, %, vw, vh units for responsive typography and spacing.</div>
+        `},
+        // 9: Final – best practices
+        { title: "<i class='fas fa-check-circle'></i> Best practices & tools", subtitle: "Write maintainable responsive CSS", content: `
+            <div class="grid-2">
+                <div class="card"><h3><i class="fas fa-tools"></i> Tools</h3><ul><li>Chrome DevTools (toggle device toolbar)</li><li>Firefox Responsive Design Mode</li><li>BrowserStack / LambdaTest</li></ul></div>
+                <div class="card"><h3><i class="fas fa-lightbulb"></i> Tips</h3><ul><li>Design <span class="highlight">mobile‑first</span> (min-width) or <span class="highlight">desktop‑first</span> (max-width) – be consistent</li><li>Use relative units (rem, %, vw)</li><li>Test on real devices</li><li>Avoid fixed widths</li></ul></div>
+            </div>
+            <div class="code-block">/* Common device breakpoints */<br>/* Phone: ≤ 576px  |  Tablet: 577px – 991px  |  Desktop: ≥ 992px */</div>
+            <div class='insight'><i class="fas fa-heart" style="color:#f97316;"></i> The admin dashboard uses <span class="highlight">desktop‑first</span> (max-width) breakpoints. Both approaches work – choose what fits your project.</div>
+        `}
+    ];
+
+    // ---- navigation ----
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    const slideContentDiv = document.getElementById('slideContent');
+    const prevBtn = document.getElementById('prevSlideBtn');
+    const nextBtn = document.getElementById('nextSlideBtn');
+    const counterSpan = document.getElementById('slideCounter');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    function renderSlide(index) {
+        const slide = slides[index];
+        let contentHtml = `
+            <div class="slide-title">${slide.title}</div>
+            <div class="slide-sub"><i class="fas fa-angle-right"></i> ${slide.subtitle}</div>
+            <div>${slide.content}</div>
+        `;
+        slideContentDiv.innerHTML = contentHtml;
+        updateDots(index);
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === totalSlides - 1);
+        counterSpan.innerHTML = `<i class="far fa-file-alt"></i> ${index+1} / ${totalSlides}`;
+    }
+
+    function updateDots(activeIdx) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === activeIdx) dot.classList.add('active');
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function nextSlide() { if (currentIndex < totalSlides - 1) { currentIndex++; renderSlide(currentIndex); } }
+    function prevSlide() { if (currentIndex > 0) { currentIndex--; renderSlide(currentIndex); } }
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    });
+
+    renderSlide(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="admin.css">
+  <title>Admin · Brew</title>
+ 
+</head>
+<body>
+<div id="parent_div">
+
+  <!-- SIDEBAR – slightly irregular -->
+  <div id="first_child">
+    <div id="sidebar_brand">
+      <span id="brand_symbol">😀</span>
+      <span id="brand_text">appBrew</span>
+    </div>
+
+    <button>Dashboard</button>
+    <button>Tenant</button>
+    <button>Patients</button>
+    <button>Users</button>
+    <button>Settings</button>
+    <button>Support</button>
+
+    <div id="sidebar_footer">
+      <button>Logout</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="second_child_div">
+    <div id="top_actions">
+      <button>Home</button>
+      <button>Contact</button>
+      <button id="signup">Sign Up</button>
+    </div>
+
+    <div id="welcome_section">
+      <h2>Welcome back, Admin</h2>
+      <p>Here's what's happening with your platform today.</p>
+    </div>
+
+    <div id="stats_grid">
+      <div class="stat_card">
+        <div><span class="stat_prefix">Emojie</span><span class="stat_number">2.4k</span></div>
+        <div class="stat_label">Total Users</div>
+      </div>
+      <div class="stat_card">
+        <div><span class="stat_prefix">Emojie</span><span class="stat_number">187</span></div>
+        <div class="stat_label">Patients</div>
+      </div>
+      <div class="stat_card">
+        <div><span class="stat_prefix">Emojie</span><span class="stat_number">3</span></div>
+        <div class="stat_label">Alerts</div>
+      </div>
+    </div>
+
+    <div id="meta_line">Last login: <span id="login_time"></span> · IP 192.168.1.4</div>
+
+  </div>
+
+  <!-- ACTIVITY LOGS – human touches -->
+  <div id="third_child_div">
+    <div id="activity_header">
+      <h4>Activity Logs</h4>
+      <span>today</span>
+    </div>
+
+    <div id="log_list">
+      <div class="log_item">
+        <span class="log_label">user</span>
+        <div class="log_content">
+          <div class="log_title">Admin created user</div>
+          <div class="log_time">2 min ago</div>
+        </div>
+        <span class="log_badge success">new</span>
+      </div>
+
+      <div class="log_item">
+        <span class="log_label" style="background:#f0d4b0; color:#8a5c2e;">!</span>
+        <div class="log_content">
+          <div class="log_title">Virus detected</div>
+          <div class="log_time">18 min ago</div>
+        </div>
+        <span class="log_badge warning">critical</span>
+      </div>
+
+      <div class="log_item">
+        <span class="log_label" style="background:#cbdae8; color:#1f4970;">in</span>
+        <div class="log_content">
+          <div class="log_title">Admin logged in</div>
+          <div class="log_time">1 hour ago</div>
+        </div>
+        <span class="log_badge info">auth</span>
+      </div>
+
+      <div class="log_item">
+        <span class="log_label" style="background:#dfd0e8; color:#563b7a;">gr</span>
+        <div class="log_content">
+          <div class="log_title">User grade updated</div>
+          <div class="log_time">3 hours ago</div>
+        </div>
+        <span class="log_badge" style="background:#dac5b2;">grade</span>
+      </div>
+
+      <div class="log_item">
+        <span class="log_label" style="background:#d6cbc0; color:#3d332a;">sys</span>
+        <div class="log_content">
+          <div class="log_title">System health check</div>
+          <div class="log_time">5 hours ago</div>
+        </div>
+        <span class="log_badge info">OK</span>
+      </div>
+    </div>
+
+    <div id="activity_footer">
+      <span>4 new events</span>
+      <span>view all</span>
+    </div>
+  </div>
+
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
